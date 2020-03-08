@@ -25,7 +25,7 @@ fn generate_rest() -> Result<(), std::io::Error> {
     let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
     let (enums, structs, type_registry) = read_types_info(&document)?;
     let methods = read_methods_info(&document, &type_registry)?;
-    write_rest(&enums, &structs, &type_registry);
+    write_rest(&enums, &structs, &type_registry, &methods);
     Ok(())
 }
 
@@ -165,7 +165,6 @@ fn read_methods_info(
     let mut methods = vec![];
     for resource in resources_html {
         let resource_name = text(&resource, "h3");
-        eprintln!("{}", resource_name);
 
         let methods_selector = Selector::parse("div.sect3").unwrap();
 
@@ -176,17 +175,15 @@ fn read_methods_info(
             let mut path_parts = path.split(" ");
             let method_http = path_parts.next().unwrap();
             let path = path_parts.next().unwrap();
-            eprintln!("{}", method_name);
-            eprintln!("{:?}", path);
 
             let blocks_selector = Selector::parse("div.sect4").unwrap();
             let blocks_html = method.select(&blocks_selector);
 
             let mut parameters = vec![];
             let mut response = None;
+            let mut description = None;
             for block in blocks_html {
                 let block_name = text(&block, "h5");
-                eprintln!("{}", block_name);
 
                 match block_name.as_str() {
                     "Parameters" => {
@@ -195,17 +192,13 @@ fn read_methods_info(
 
                         for parameter in parameters_html {
                             let parameter_kind = text(&parameter, "td:nth-child(1) > p > strong");
-                            eprintln!("{}", parameter_kind);
                             let name = text(&parameter, "td:nth-child(2) > p > strong");
-                            eprintln!("{}", name);
                             let optional_required = text(&parameter, "td:nth-child(2) > p > em");
-                            eprintln!("{}", optional_required);
                             let comment = text_opt(&parameter, "td:nth-child(3) > p");
                             let parameter_type = text_opt(&parameter, "td:nth-child(4) > p")
                                 .unwrap_or_else(|| {
                                     text_opt(&parameter, "td:last-child > p").unwrap()
                                 });
-                            eprintln!("{}", parameter_type);
 
                             let array = check_array(&parameter_type);
 
@@ -227,7 +220,6 @@ fn read_methods_info(
                     }
                     "Responses" => {
                         let response_type = text(&block, "tbody > tr > td:nth-child(3) > p");
-                        eprintln!("{}", response_type);
                         let array = check_array(&response_type);
                         response = Some(ResponseType {
                             is_array: array.is_some(),
@@ -238,7 +230,11 @@ fn read_methods_info(
                                 .unwrap(),
                         });
                     }
-                    "Produces" => {}
+                    "Consumes" | "Produces" => {}
+                    "Description" => {
+                        let description_text = text(&block, "div.paragraph > p");
+                        description = Some(description_text)
+                    }
                     _ => eprintln!("Unsupported block {}", block_name),
                 }
             }
@@ -250,6 +246,7 @@ fn read_methods_info(
                 path: path.into(),
                 method: method_http.into(),
                 response: response.unwrap(),
+                description,
             };
             methods.push(method);
         }
@@ -316,9 +313,101 @@ fn write_rest(
     enums: &[EnumType],
     structs: &[Rc<StructType>],
     type_registry: &HashMap<String, Rc<StructType>>,
+    methods: &[MethodStruct],
 ) {
+    let mut rename_methods_table = HashMap::new();
+    rename_methods_table.insert(
+        (
+            "/{realm}/attack-detection/brute-force/users/{userId}",
+            "DELETE",
+        ),
+        "attack_detection_brute_force_user_delete".to_string(),
+    );
+    rename_methods_table.insert(
+        ("/{realm}/client-scopes/{id}", "GET"),
+        "client_scope_get".to_string(),
+    );
+    rename_methods_table.insert(("/{realm}/clients/{id}", "GET"), "client_get".to_string());
+    rename_methods_table.insert(
+        ("/{realm}/components/{id}", "GET"),
+        "component_get".to_string(),
+    );
+    rename_methods_table.insert(("/{realm}/groups/{id}", "GET"), "group_get".to_string());
+    rename_methods_table.insert(
+        ("/{realm}/identity-provider/instances/{alias}", "GET"),
+        "identity_provider_instance_get".to_string(),
+    );
+    rename_methods_table.insert(
+        (
+            "/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+            "GET",
+        ),
+        "identity_provider_instances_mapper_get".to_string(),
+    );
+    rename_methods_table.insert(
+        (
+            "/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+            "GET",
+        ),
+        "client_scopes_protocol_mappers_model_get".to_string(),
+    );
+    rename_methods_table.insert(
+        ("/{realm}/clients/{id}/protocol-mappers/models/{id}", "GET"),
+        "clients_protocol_mappers_model_get".to_string(),
+    );
+    rename_methods_table.insert(
+        ("/{realm}/clients/{id}/roles/{role-name}", "GET"),
+        "clients_role_get".to_string(),
+    );
+    rename_methods_table.insert(
+        ("/{realm}/roles/{role-name}", "GET"),
+        "role_get".to_string(),
+    );
+    rename_methods_table.insert(("/{realm}/users/{id}", "GET"), "user_get".to_string());
+    rename_methods_table.insert(("/", "GET"), "root_get".to_string());
+
+    rename_methods_table.insert(
+        ("/{realm}/authentication/required-actions/{alias}", "GET"),
+        "authentication_required_action_get".to_string(),
+    );
+    rename_methods_table.insert(
+        ("/{realm}/authentication/flows/{id}", "GET"),
+        "authentication_flow_get".to_string(),
+    );
+
     println!("use super::*;\n");
     println!("impl<'a> KeycloakAdmin<'a> {{");
+
+    for method in methods {
+        let mut method_name = method.path.clone();
+        eprintln!("{}", method_name);
+        if let Some(redefined_method_name) =
+            rename_methods_table.get(&(method_name.as_str(), method.method.as_str()))
+        {
+            method_name = redefined_method_name.clone()
+        } else {
+            for parameter in &method.parameters {
+                if let ParameterKind::Path = parameter.kind {
+                    method_name = method_name.replace(&format!("{{{}}}", parameter.name), "");
+                }
+            }
+            method_name = (method_name + &method.method).to_snake_case();
+        }
+        let rest_comment = format!("{} {}", method.method, method.path);
+        if method.name != rest_comment {
+            println!("    /// {}", method.name);
+        }
+        if let Some(description) = method.description.as_ref().map(|x| x.replace("\n", " ")) {
+            println!("    /// {}", description);
+        }
+        println!("    /// {}", rest_comment);
+        println!("    pub async fn {}(", method_name);
+        println!("        &self,");
+        println!("    ) -> Result<(), KeycloakError> {{");
+        println!("        Ok(())");
+        println!("    }}\n");
+    }
+
     println!("}}");
 }
 
@@ -434,6 +523,7 @@ struct MethodStruct {
     parameters: Vec<Parameter>,
     method: String,
     response: ResponseType,
+    description: Option<String>,
 }
 
 struct ResponseType {
