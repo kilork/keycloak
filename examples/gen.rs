@@ -27,7 +27,17 @@ fn generate_rest() -> Result<(), std::io::Error> {
 
 fn generate_types() -> Result<(), std::io::Error> {
     let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
+    let (enums, structs, type_registry) = read_types_info(&document)?;
+    write_output(&enums, &structs, &type_registry);
+    Ok(())
+}
 
+type TypeTrio = (
+    Vec<EnumType>,
+    Vec<Rc<StructType>>,
+    HashMap<String, Rc<StructType>>,
+);
+fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error> {
     let definitions_selector =
         Selector::parse("#_definitions ~ div.sectionbody > div.sect2").unwrap();
 
@@ -126,6 +136,14 @@ fn generate_types() -> Result<(), std::io::Error> {
         structs.push(struct_);
     }
 
+    Ok((enums, structs, type_registry))
+}
+
+fn write_output(
+    enums: &Vec<EnumType>,
+    structs: &Vec<Rc<StructType>>,
+    type_registry: &HashMap<String, Rc<StructType>>,
+) {
     println!("use serde::{{Deserialize, Serialize}};");
     println!("use serde_json::Value;");
     println!("use std::{{borrow::Cow, collections::HashMap}};\n");
@@ -138,7 +156,7 @@ fn generate_types() -> Result<(), std::io::Error> {
 
         println!("pub enum {} {{", e.name);
 
-        for field in e.fields {
+        for field in &e.fields {
             println!("    {},", field);
         }
 
@@ -173,8 +191,6 @@ fn generate_types() -> Result<(), std::io::Error> {
 
         println!("}}\n");
     }
-
-    Ok(())
 }
 
 fn text(element: &ElementRef, selector: &str) -> String {
