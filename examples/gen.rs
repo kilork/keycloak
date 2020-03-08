@@ -140,8 +140,8 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
 }
 
 fn write_output(
-    enums: &Vec<EnumType>,
-    structs: &Vec<Rc<StructType>>,
+    enums: &[EnumType],
+    structs: &[Rc<StructType>],
     type_registry: &HashMap<String, Rc<StructType>>,
 ) {
     println!("use serde::{{Deserialize, Serialize}};");
