@@ -36,12 +36,9 @@ fn generate_types() -> Result<(), std::io::Error> {
     let mut rename_table = HashMap::new();
     rename_table.insert("Userinfo", "UserInfo".to_string());
 
-    println!("use serde::{{Serialize, Deserialize}};");
-    println!("use serde_json::Value;");
-    println!("use std::{{borrow::Cow, collections::HashMap}};\n");
-
     let mut structs = vec![];
     let mut type_registry = HashMap::new();
+    let mut enums = vec![];
     for definition in definitions {
         let struct_name = text(&definition, "h3").replace("-", "");
 
@@ -75,26 +72,25 @@ fn generate_types() -> Result<(), std::io::Error> {
                 Ok(field_type) => field_type,
                 Err(ConvertTypeFail::Enum(enum_fields)) => {
                     let enum_name = format!("{}{}", struct_name, field_name.to_camel_case());
-                    println!("#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]");
 
                     let is_upper_case = enum_fields
                         .split(", ")
                         .all(|x| x.chars().all(|x| x.is_uppercase()));
-                    if is_upper_case {
-                        println!(r#"#[serde(rename_all = "UPPERCASE")]"#);
-                    }
-
-                    println!("pub enum {} {{", enum_name);
-                    for enum_field in enum_fields.split(", ") {
-                        let enum_field = enum_field.to_camel_case();
-                        println!(
-                            "    {},",
-                            rename_table
-                                .get(enum_field.as_str())
-                                .unwrap_or_else(|| &enum_field)
-                        );
-                    }
-                    println!("}}\n");
+                    let enum_ = EnumType {
+                        name: enum_name.clone(),
+                        is_upper_case,
+                        fields: enum_fields
+                            .split(", ")
+                            .map(|enum_field| {
+                                let enum_field = enum_field.to_camel_case();
+                                rename_table
+                                    .get(enum_field.as_str())
+                                    .unwrap_or_else(|| &enum_field)
+                                    .clone()
+                            })
+                            .collect(),
+                    };
+                    enums.push(enum_);
                     FieldType::Simple(enum_name.into())
                 }
                 Err(err) => panic!("err: {:?}", err),
@@ -128,6 +124,25 @@ fn generate_types() -> Result<(), std::io::Error> {
         });
         type_registry.insert(struct_name, struct_.clone());
         structs.push(struct_);
+    }
+
+    println!("use serde::{{Deserialize, Serialize}};");
+    println!("use serde_json::Value;");
+    println!("use std::{{borrow::Cow, collections::HashMap}};\n");
+
+    for e in enums {
+        println!("#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]");
+        if e.is_upper_case {
+            println!(r#"#[serde(rename_all = "UPPERCASE")]"#);
+        }
+
+        println!("pub enum {} {{", e.name);
+
+        for field in e.fields {
+            println!("    {},", field);
+        }
+
+        println!("}}\n");
     }
 
     for s in structs {
@@ -176,6 +191,12 @@ struct StructType {
     name: String,
     is_camel_case: bool,
     fields: Vec<Field>,
+}
+
+struct EnumType {
+    name: String,
+    is_upper_case: bool,
+    fields: Vec<String>,
 }
 
 impl StructType {
