@@ -1,6 +1,8 @@
-use keycloak::types::*;
-use keycloak::{KeycloakAdmin, KeycloakAdminToken};
-use serde_json::{json, Value};
+use keycloak::{
+    types::*,
+    {KeycloakAdmin, KeycloakAdminToken},
+};
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let url = "http://localhost:9080";
@@ -12,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let admin = KeycloakAdmin::new(url, admin_token, client);
 
     let user = admin
-        .users_create(
+        .users_post(
             "test",
             UserRepresentation {
                 ..Default::default()

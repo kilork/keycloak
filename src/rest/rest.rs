@@ -764,7 +764,7 @@ impl<'a> KeycloakAdmin<'a> {
         attr: &str,
         id: &str,
         realm: &str,
-        input: Value,
+        input: &[u8],
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -785,7 +785,7 @@ impl<'a> KeycloakAdmin<'a> {
         attr: &str,
         id: &str,
         realm: &str,
-        input: Value,
+        input: &[u8],
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2110,7 +2110,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn identity_provider_import_config_post(
         &self,
         realm: &str,
-        input: Value,
+        input: &[u8],
     ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
         let builder = self
             .client
