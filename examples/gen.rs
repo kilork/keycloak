@@ -1,6 +1,6 @@
 use heck::*;
 use scraper::{ElementRef, Html, Selector};
-use std::{collections::HashMap, fs::read_to_string, rc::Rc};
+use std::{collections::HashMap, fs::read_to_string, rc::Rc, str::FromStr};
 use structopt::StructOpt;
 
 #[derive(StructOpt)]
@@ -22,14 +22,30 @@ fn main() -> Result<(), std::io::Error> {
 }
 
 fn generate_rest() -> Result<(), std::io::Error> {
+    let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
+    let (enums, structs, type_registry) = read_types_info(&document)?;
+    let methods = read_methods_info(&document, &type_registry)?;
+    write_rest(&enums, &structs, &type_registry);
     Ok(())
 }
 
 fn generate_types() -> Result<(), std::io::Error> {
     let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
     let (enums, structs, type_registry) = read_types_info(&document)?;
-    write_output(&enums, &structs, &type_registry);
+    write_types(&enums, &structs, &type_registry);
     Ok(())
+}
+
+fn check_array(value: &str) -> Option<&str> {
+    if value.starts_with("< ") && value.ends_with(" > array") {
+        Some(&value[2..value.len() - 8])
+    } else {
+        None
+    }
+}
+
+fn check_optional(value: &str) -> bool {
+    "optional" == value
 }
 
 type TypeTrio = (
@@ -71,11 +87,11 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
 
             let original_field_type = text(&field, "td ~ td p").replace("-", "");
 
-            let is_array =
-                original_field_type.starts_with("< ") && original_field_type.ends_with(" > array");
+            let array_field = check_array(&original_field_type);
+            let is_array = array_field.is_some();
 
             let field_type = match if is_array {
-                convert_type(&original_field_type[2..original_field_type.len() - 8])
+                convert_type(array_field.unwrap())
             } else {
                 convert_type(&original_field_type)
             } {
@@ -108,7 +124,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
 
             let optional_required = text(&field, "em");
 
-            let is_optional = "optional" == optional_required;
+            let is_optional = check_optional(&optional_required);
 
             if field_name == "type" || field_name == "self" {
                 is_rename = true;
@@ -139,7 +155,110 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
     Ok((enums, structs, type_registry))
 }
 
-fn write_output(
+fn read_methods_info(
+    document: &scraper::Html,
+    type_registry: &HashMap<String, Rc<StructType>>,
+) -> Result<Vec<MethodStruct>, std::io::Error> {
+    let resources_selector = Selector::parse("#_paths ~ div.sectionbody > div.sect2").unwrap();
+
+    let resources_html = document.select(&resources_selector);
+    let mut methods = vec![];
+    for resource in resources_html {
+        let resource_name = text(&resource, "h3");
+        eprintln!("{}", resource_name);
+
+        let methods_selector = Selector::parse("div.sect3").unwrap();
+
+        let methods_html = resource.select(&methods_selector);
+        for method in methods_html {
+            let method_name = text(&method, "h4");
+            let path = text_opt(&method, "pre").unwrap_or_else(|| method_name.clone());
+            let mut path_parts = path.split(" ");
+            let method_http = path_parts.next().unwrap();
+            let path = path_parts.next().unwrap();
+            eprintln!("{}", method_name);
+            eprintln!("{:?}", path);
+
+            let blocks_selector = Selector::parse("div.sect4").unwrap();
+            let blocks_html = method.select(&blocks_selector);
+
+            let mut parameters = vec![];
+            let mut response = None;
+            for block in blocks_html {
+                let block_name = text(&block, "h5");
+                eprintln!("{}", block_name);
+
+                match block_name.as_str() {
+                    "Parameters" => {
+                        let parameters_selector = Selector::parse("tbody > tr").unwrap();
+                        let parameters_html = block.select(&parameters_selector);
+
+                        for parameter in parameters_html {
+                            let parameter_kind = text(&parameter, "td:nth-child(1) > p > strong");
+                            eprintln!("{}", parameter_kind);
+                            let name = text(&parameter, "td:nth-child(2) > p > strong");
+                            eprintln!("{}", name);
+                            let optional_required = text(&parameter, "td:nth-child(2) > p > em");
+                            eprintln!("{}", optional_required);
+                            let comment = text_opt(&parameter, "td:nth-child(3) > p");
+                            let parameter_type = text_opt(&parameter, "td:nth-child(4) > p")
+                                .unwrap_or_else(|| {
+                                    text_opt(&parameter, "td:last-child > p").unwrap()
+                                });
+                            eprintln!("{}", parameter_type);
+
+                            let array = check_array(&parameter_type);
+
+                            let is_optional = check_optional(&optional_required);
+                            let parameter_ = Parameter {
+                                name,
+                                comment,
+                                is_optional,
+                                is_array: array.is_some(),
+                                kind: parameter_kind.parse().unwrap(),
+                                parameter_type: array
+                                    .or_else(|| Some(parameter_type.as_str()))
+                                    .map(convert_type)
+                                    .unwrap()
+                                    .unwrap(),
+                            };
+                            parameters.push(parameter_);
+                        }
+                    }
+                    "Responses" => {
+                        let response_type = text(&block, "tbody > tr > td:nth-child(3) > p");
+                        eprintln!("{}", response_type);
+                        let array = check_array(&response_type);
+                        response = Some(ResponseType {
+                            is_array: array.is_some(),
+                            return_type: array
+                                .or_else(|| Some(response_type.as_str()))
+                                .map(convert_type)
+                                .unwrap()
+                                .unwrap(),
+                        });
+                    }
+                    "Produces" => {}
+                    _ => eprintln!("Unsupported block {}", block_name),
+                }
+            }
+
+            let method = MethodStruct {
+                comment: resource_name.clone(),
+                name: method_name,
+                parameters,
+                path: path.into(),
+                method: method_http.into(),
+                response: response.unwrap(),
+            };
+            methods.push(method);
+        }
+    }
+
+    Ok(methods)
+}
+
+fn write_types(
     enums: &[EnumType],
     structs: &[Rc<StructType>],
     type_registry: &HashMap<String, Rc<StructType>>,
@@ -193,10 +312,23 @@ fn write_output(
     }
 }
 
-fn text(element: &ElementRef, selector: &str) -> String {
+fn write_rest(
+    enums: &[EnumType],
+    structs: &[Rc<StructType>],
+    type_registry: &HashMap<String, Rc<StructType>>,
+) {
+    println!("use super::*;\n");
+    println!("impl<'a> KeycloakAdmin<'a> {{");
+    println!("}}");
+}
+
+fn text_opt(element: &ElementRef, selector: &str) -> Option<String> {
     let selector = Selector::parse(selector).unwrap();
-    let element = element.select(&selector).next().unwrap();
-    element_text(&element)
+    element.select(&selector).next().map(|x| element_text(&x))
+}
+
+fn text(element: &ElementRef, selector: &str) -> String {
+    text_opt(element, selector).unwrap()
 }
 
 fn element_text(element: &ElementRef) -> String {
@@ -266,15 +398,60 @@ impl FieldType {
     }
 }
 
+struct Parameter {
+    name: String,
+    is_optional: bool,
+    comment: Option<String>,
+    kind: ParameterKind,
+    is_array: bool,
+    parameter_type: FieldType,
+}
+
+enum ParameterKind {
+    Path,
+    Query,
+    Body,
+    FormData,
+}
+
+impl FromStr for ParameterKind {
+    type Err = String;
+    fn from_str(value: &str) -> std::result::Result<Self, <Self as std::str::FromStr>::Err> {
+        match value {
+            "Path" => Ok(ParameterKind::Path),
+            "Query" => Ok(ParameterKind::Query),
+            "Body" => Ok(ParameterKind::Body),
+            "FormData" => Ok(ParameterKind::FormData),
+            _ => Err(format!("Unknown parameter kind: {}", value)),
+        }
+    }
+}
+
+struct MethodStruct {
+    name: String,
+    comment: String,
+    path: String,
+    parameters: Vec<Parameter>,
+    method: String,
+    response: ResponseType,
+}
+
+struct ResponseType {
+    is_array: bool,
+    return_type: FieldType,
+}
+
 fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
     Ok(match original {
-        "string" => FieldType::WithLifetime("Cow<'a, str>".into()),
+        "No Content" => FieldType::Simple("()".into()),
+        "string" | "< string > array(csv)" => FieldType::WithLifetime("Cow<'a, str>".into()),
+        "string(byte)" => FieldType::Simple("u8".into()),
         "integer(int32)" => FieldType::Simple("i32".into()),
         "integer(int64)" => FieldType::Simple("i64".into()),
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
         "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Cow<'a, str>>".into()),
-        "Object" => FieldType::Simple("Value".into()),
+        "file" | "Object" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
                 return Err(ConvertTypeFail::Enum(
