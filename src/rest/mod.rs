@@ -1,6 +1,6 @@
 use crate::{types::*, KeycloakError};
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::json;
 use std::borrow::Cow;
 
 mod rest;
@@ -25,6 +25,10 @@ pub struct KeycloakAdminToken<'a> {
 }
 
 impl<'a> KeycloakAdminToken<'a> {
+    pub async fn get(&self, _url: &str) -> Result<Cow<'_, str>, KeycloakError> {
+        Ok(self.access_token.clone())
+    }
+
     pub async fn acquire(
         url: &str,
         username: &str,

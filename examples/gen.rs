@@ -23,9 +23,9 @@ fn main() -> Result<(), std::io::Error> {
 
 fn generate_rest() -> Result<(), std::io::Error> {
     let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
-    let (enums, structs, type_registry) = read_types_info(&document)?;
-    let methods = read_methods_info(&document, &type_registry)?;
-    write_rest(&enums, &structs, &type_registry, &methods);
+    let (_, _, type_registry) = read_types_info(&document)?;
+    let methods = read_methods_info(&document)?;
+    write_rest(&type_registry, &methods);
     Ok(())
 }
 
@@ -155,10 +155,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
     Ok((enums, structs, type_registry))
 }
 
-fn read_methods_info(
-    document: &scraper::Html,
-    type_registry: &HashMap<String, Rc<StructType>>,
-) -> Result<Vec<MethodStruct>, std::io::Error> {
+fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std::io::Error> {
     let resources_selector = Selector::parse("#_paths ~ div.sectionbody > div.sect2").unwrap();
 
     let resources_html = document.select(&resources_selector);
@@ -225,7 +222,7 @@ fn read_methods_info(
                             is_array: array.is_some(),
                             return_type: array
                                 .or_else(|| Some(response_type.as_str()))
-                                .map(convert_type)
+                                .map(|x| convert_type(&x.replace("-", "")))
                                 .unwrap()
                                 .unwrap(),
                         });
@@ -309,12 +306,7 @@ fn write_types(
     }
 }
 
-fn write_rest(
-    enums: &[EnumType],
-    structs: &[Rc<StructType>],
-    type_registry: &HashMap<String, Rc<StructType>>,
-    methods: &[MethodStruct],
-) {
+fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[MethodStruct]) {
     let mut rename_methods_table = HashMap::new();
     rename_methods_table.insert(
         (
@@ -375,12 +367,13 @@ fn write_rest(
         "authentication_flow_get".to_string(),
     );
 
+    println!("use serde_json::Value;");
+    println!("use std::{{borrow::Cow, collections::HashMap}};\n");
     println!("use super::*;\n");
     println!("impl<'a> KeycloakAdmin<'a> {{");
 
     for method in methods {
         let mut method_name = method.path.clone();
-        eprintln!("{}", method_name);
         if let Some(redefined_method_name) =
             rename_methods_table.get(&(method_name.as_str(), method.method.as_str()))
         {
@@ -394,6 +387,7 @@ fn write_rest(
             method_name = (method_name + &method.method).to_snake_case();
         }
         let rest_comment = format!("{} {}", method.method, method.path);
+
         if method.name != rest_comment {
             println!("    /// {}", method.name);
         }
@@ -401,10 +395,133 @@ fn write_rest(
             println!("    /// {}", description);
         }
         println!("    /// {}", rest_comment);
+
         println!("    pub async fn {}(", method_name);
         println!("        &self,");
-        println!("    ) -> Result<(), KeycloakError> {{");
-        println!("        Ok(())");
+
+        let mut mapping = HashMap::new();
+        let mut body_parameter = None;
+        let mut has_query_params = false;
+        for parameter in &method.parameters {
+            let mut name = parameter.name.to_snake_case();
+            if ["ref", "type"].contains(&name.as_str()) {
+                name += "_";
+            }
+
+            let mut parameter_type = parameter
+                .parameter_type
+                .name(&type_registry)
+                .replace("'a", "'_")
+                .replace("Cow<'_, str>", "&str");
+            if parameter.is_array {
+                parameter_type = format!("Vec<{}>", parameter_type);
+            }
+            if parameter.is_optional {
+                parameter_type = format!("Option<{}>", parameter_type);
+            }
+            println!("        {}: {},", name, parameter_type);
+            mapping.insert(parameter.name.as_str(), (name.clone(), parameter));
+            match parameter.kind {
+                ParameterKind::Body | ParameterKind::FormData => {
+                    body_parameter = Some((name, parameter))
+                }
+                ParameterKind::Query => has_query_params = true,
+                _ => (),
+            }
+        }
+
+        let mut response_type = method
+            .response
+            .return_type
+            .name(type_registry)
+            .replace("'a", "'_");
+        if method.response.is_array {
+            response_type = format!("Vec<{}>", response_type);
+        }
+        println!("    ) -> Result<{}, KeycloakError> {{", response_type);
+        println!(
+            "        let {}builder = self",
+            if has_query_params { "mut " } else { "" }
+        );
+        println!("            .client");
+
+        let method_http = match method.method.as_str() {
+            "OPTIONS" => "request(reqwest::Method::OPTIONS, ".to_string(),
+            _ => method.method.to_lowercase() + "(",
+        };
+        let mut path = method.path.clone();
+        let mut path_params = vec![];
+        let path_parts = method
+            .path
+            .split('/')
+            .filter(|x| x.starts_with('{') && x.ends_with('}'));
+        for path_part in path_parts {
+            if let Some((s, _)) = mapping.get(&path_part[1..path_part.len() - 1]) {
+                path_params.push(s.as_str());
+            }
+            path = path.replace(
+                path_part,
+                if method.parameters.is_empty() {
+                    ""
+                } else {
+                    "{}"
+                },
+            );
+        }
+        println!(
+            r#"            .{}&format!("{{}}/auth/admin/realms{}", self.url, {}))"#,
+            method_http,
+            path,
+            path_params.join(", ")
+        );
+
+        if let Some((name, parameter)) = body_parameter {
+            println!(
+                "            .{}(&{})",
+                match parameter.kind {
+                    ParameterKind::Body => "json",
+                    ParameterKind::FormData => "form",
+                    _ => "text",
+                },
+                name
+            );
+        }
+
+        println!("            .bearer_auth(self.admin_token.get(&self.url).await?);");
+
+        for parameter in &method.parameters {
+            if let ParameterKind::Query = parameter.kind {
+                println!(
+                    "        if let Some(v) = {} {{",
+                    mapping.get(parameter.name.as_str()).unwrap().0
+                );
+                println!(
+                    r#"            builder = builder.query(&("{}", v));"#,
+                    parameter.name
+                );
+                println!("        }}");
+            }
+        }
+
+        println!("        let response = builder.send().await?;");
+
+        match response_type.as_str() {
+            "()" => {
+                println!("        error_check(response).await?;");
+                println!("        Ok(())");
+            }
+            typ => {
+                let (des, postfix) = match typ {
+                    "Vec<u8>" => ("bytes", ".to_vec()"),
+                    _ => ("json", ""),
+                };
+                println!(
+                    "        Ok(error_check(response).await?.{}().await?{})",
+                    des, postfix
+                );
+            }
+        }
+
         println!("    }}\n");
     }
 
@@ -541,7 +658,7 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
         "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Cow<'a, str>>".into()),
-        "file" | "Object" => FieldType::Simple("Value".into()),
+        "file" | "Object" | "Response" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
                 return Err(ConvertTypeFail::Enum(
