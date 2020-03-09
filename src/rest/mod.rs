@@ -35,7 +35,7 @@ impl<'a> KeycloakAdminToken<'a> {
         password: &str,
         client: &reqwest::Client,
     ) -> Result<KeycloakAdminToken<'a>, KeycloakError> {
-        Ok(client
+        let response = client
             .post(&format!(
                 "{}/auth/realms/master/protocol/openid-connect/token",
                 url
@@ -47,9 +47,8 @@ impl<'a> KeycloakAdminToken<'a> {
                 "grant_type": "password"
             }))
             .send()
-            .await?
-            .json()
-            .await?)
+            .await?;
+        Ok(error_check(response).await?.json().await?)
     }
 }
 
