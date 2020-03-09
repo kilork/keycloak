@@ -1,6 +1,6 @@
 [package]
 name = "keycloak"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Alexander Korolev <kilork@yandex.ru>"]
 edition = "2018"
 categories = []

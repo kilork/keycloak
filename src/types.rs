@@ -81,7 +81,7 @@ pub struct AccessToken<'a> {
     pub name: Option<Cow<'a, str>>,
     pub nickname: Option<Cow<'a, str>>,
     pub nonce: Option<Cow<'a, str>>,
-    pub other_claims: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub other_claims: Option<HashMap<Cow<'a, str>, Value>>,
     pub phone_number: Option<Cow<'a, str>>,
     pub phone_number_verified: Option<bool>,
     pub picture: Option<Cow<'a, str>>,
@@ -217,7 +217,7 @@ pub struct AuthenticatorConfigInfoRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AuthenticatorConfigRepresentation<'a> {
     pub alias: Option<Cow<'a, str>>,
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub id: Option<Cow<'a, str>>,
 }
 
@@ -257,11 +257,11 @@ pub struct ClientMappingsRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientRepresentation<'a> {
-    pub access: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub access: Option<HashMap<Cow<'a, str>, Value>>,
     pub admin_url: Option<Cow<'a, str>>,
     pub always_display_in_console: Option<bool>,
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub authentication_flow_binding_overrides: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
+    pub authentication_flow_binding_overrides: Option<HashMap<Cow<'a, str>, Value>>,
     pub authorization_services_enabled: Option<bool>,
     pub authorization_settings: Option<ResourceServerRepresentation<'a>>,
     pub base_url: Option<Cow<'a, str>>,
@@ -287,7 +287,7 @@ pub struct ClientRepresentation<'a> {
     pub protocol_mappers: Option<Vec<ProtocolMapperRepresentation<'a>>>,
     pub public_client: Option<bool>,
     pub redirect_uris: Option<Vec<Cow<'a, str>>>,
-    pub registered_nodes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub registered_nodes: Option<HashMap<Cow<'a, str>, Value>>,
     pub registration_access_token: Option<Cow<'a, str>>,
     pub root_url: Option<Cow<'a, str>>,
     pub secret: Option<Cow<'a, str>>,
@@ -311,7 +311,7 @@ pub struct ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation<'a>
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientScopeRepresentation<'a> {
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
     pub description: Option<Cow<'a, str>>,
     pub id: Option<Cow<'a, str>>,
     pub name: Option<Cow<'a, str>>,
@@ -347,7 +347,7 @@ pub struct ComponentRepresentation<'a> {
 pub struct ComponentTypeRepresentation<'a> {
     pub help_text: Option<Cow<'a, str>>,
     pub id: Option<Cow<'a, str>>,
-    pub metadata: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub metadata: Option<HashMap<Cow<'a, str>, Value>>,
     pub properties: Option<Vec<ConfigPropertyRepresentation<'a>>>,
 }
 
@@ -383,7 +383,7 @@ pub struct CredentialRepresentation<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct EventRepresentation<'a> {
     pub client_id: Option<Cow<'a, str>>,
-    pub details: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub details: Option<HashMap<Cow<'a, str>, Value>>,
     pub error: Option<Cow<'a, str>>,
     pub ip_address: Option<Cow<'a, str>>,
     pub realm_id: Option<Cow<'a, str>>,
@@ -412,9 +412,9 @@ pub struct GlobalRequestResult<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GroupRepresentation<'a> {
-    pub access: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub client_roles: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub access: Option<HashMap<Cow<'a, str>, Value>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
+    pub client_roles: Option<HashMap<Cow<'a, str>, Value>>,
     pub id: Option<Cow<'a, str>>,
     pub name: Option<Cow<'a, str>>,
     pub path: Option<Cow<'a, str>>,
@@ -425,7 +425,7 @@ pub struct GroupRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IdentityProviderMapperRepresentation<'a> {
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub id: Option<Cow<'a, str>>,
     pub identity_provider_alias: Option<Cow<'a, str>>,
     pub identity_provider_mapper: Option<Cow<'a, str>>,
@@ -437,7 +437,7 @@ pub struct IdentityProviderMapperRepresentation<'a> {
 pub struct IdentityProviderRepresentation<'a> {
     pub add_read_token_role_on_create: Option<bool>,
     pub alias: Option<Cow<'a, str>>,
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub display_name: Option<Cow<'a, str>>,
     pub enabled: Option<bool>,
     pub first_broker_login_flow_alias: Option<Cow<'a, str>>,
@@ -462,7 +462,7 @@ pub struct KeyStoreConfig<'a> {
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct KeysMetadataRepresentation<'a> {
-    pub active: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub active: Option<HashMap<Cow<'a, str>, Value>>,
     pub keys: Option<Vec<KeysMetadataRepresentationKeyMetadataRepresentation<'a>>>,
 }
 
@@ -485,13 +485,13 @@ pub struct KeysMetadataRepresentationKeyMetadataRepresentation<'a> {
 pub struct ManagementPermissionReference<'a> {
     pub enabled: Option<bool>,
     pub resource: Option<Cow<'a, str>>,
-    pub scope_permissions: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub scope_permissions: Option<HashMap<Cow<'a, str>, Value>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MappingsRepresentation<'a> {
-    pub client_mappings: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub client_mappings: Option<HashMap<Cow<'a, str>, Value>>,
     pub realm_mappings: Option<Vec<RoleRepresentation<'a>>>,
 }
 
@@ -539,7 +539,7 @@ pub struct PasswordPolicyTypeRepresentation<'a> {
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct Permission<'a> {
-    pub claims: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub claims: Option<HashMap<Cow<'a, str>, Value>>,
     pub rsid: Option<Cow<'a, str>>,
     pub rsname: Option<Cow<'a, str>>,
     pub scopes: Option<Vec<Cow<'a, str>>>,
@@ -548,7 +548,7 @@ pub struct Permission<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PolicyRepresentation<'a> {
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub decision_strategy: Option<PolicyRepresentationDecisionStrategy>,
     pub description: Option<Cow<'a, str>>,
     pub id: Option<Cow<'a, str>>,
@@ -576,7 +576,7 @@ pub struct ProfileInfoRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProtocolMapperRepresentation<'a> {
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub id: Option<Cow<'a, str>>,
     pub name: Option<Cow<'a, str>>,
     pub protocol: Option<Cow<'a, str>>,
@@ -586,7 +586,7 @@ pub struct ProtocolMapperRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProviderRepresentation<'a> {
-    pub operational_info: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub operational_info: Option<HashMap<Cow<'a, str>, Value>>,
     pub order: Option<i32>,
 }
 
@@ -615,14 +615,14 @@ pub struct RealmRepresentation<'a> {
     pub admin_events_details_enabled: Option<bool>,
     pub admin_events_enabled: Option<bool>,
     pub admin_theme: Option<Cow<'a, str>>,
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
     pub authentication_flows: Option<Vec<AuthenticationFlowRepresentation<'a>>>,
     pub authenticator_config: Option<Vec<AuthenticatorConfigRepresentation<'a>>>,
     pub browser_flow: Option<Cow<'a, str>>,
-    pub browser_security_headers: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub browser_security_headers: Option<HashMap<Cow<'a, str>, Value>>,
     pub brute_force_protected: Option<bool>,
     pub client_authentication_flow: Option<Cow<'a, str>>,
-    pub client_scope_mappings: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub client_scope_mappings: Option<HashMap<Cow<'a, str>, Value>>,
     pub client_scopes: Option<Vec<ClientScopeRepresentation<'a>>>,
     pub clients: Option<Vec<ClientRepresentation<'a>>>,
     pub components: Option<MultivaluedHashMap>,
@@ -684,7 +684,7 @@ pub struct RealmRepresentation<'a> {
     pub revoke_refresh_token: Option<bool>,
     pub roles: Option<RolesRepresentation<'a>>,
     pub scope_mappings: Option<Vec<ScopeMappingRepresentation<'a>>>,
-    pub smtp_server: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub smtp_server: Option<HashMap<Cow<'a, str>, Value>>,
     pub ssl_required: Option<Cow<'a, str>>,
     pub sso_session_idle_timeout: Option<i32>,
     pub sso_session_idle_timeout_remember_me: Option<i32>,
@@ -723,7 +723,7 @@ pub struct RealmRepresentation<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct RequiredActionProviderRepresentation<'a> {
     pub alias: Option<Cow<'a, str>>,
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub default_action: Option<bool>,
     pub enabled: Option<bool>,
     pub name: Option<Cow<'a, str>>,
@@ -735,7 +735,7 @@ pub struct RequiredActionProviderRepresentation<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct ResourceRepresentation<'a> {
     pub id: Cow<'a, str>,
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
     pub display_name: Option<Cow<'a, str>>,
     pub icon_uri: Option<Cow<'a, str>>,
     pub name: Option<Cow<'a, str>>,
@@ -763,7 +763,7 @@ pub struct ResourceServerRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RoleRepresentation<'a> {
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
     pub client_role: Option<bool>,
     pub composite: Option<bool>,
     pub composites: Option<RoleRepresentationComposites<'a>>,
@@ -775,13 +775,13 @@ pub struct RoleRepresentation<'a> {
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct RoleRepresentationComposites<'a> {
-    pub client: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub client: Option<HashMap<Cow<'a, str>, Value>>,
     pub realm: Option<Vec<Cow<'a, str>>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct RolesRepresentation<'a> {
-    pub client: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub client: Option<HashMap<Cow<'a, str>, Value>>,
     pub realm: Option<Vec<RoleRepresentation<'a>>>,
 }
 
@@ -809,26 +809,26 @@ pub struct ScopeRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ServerInfoRepresentation<'a> {
-    pub builtin_protocol_mappers: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub client_importers: Option<Vec<HashMap<Cow<'a, str>, Cow<'a, str>>>>,
-    pub client_installations: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub component_types: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub enums: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub identity_providers: Option<Vec<HashMap<Cow<'a, str>, Cow<'a, str>>>>,
+    pub builtin_protocol_mappers: Option<HashMap<Cow<'a, str>, Value>>,
+    pub client_importers: Option<Vec<HashMap<Cow<'a, str>, Value>>>,
+    pub client_installations: Option<HashMap<Cow<'a, str>, Value>>,
+    pub component_types: Option<HashMap<Cow<'a, str>, Value>>,
+    pub enums: Option<HashMap<Cow<'a, str>, Value>>,
+    pub identity_providers: Option<Vec<HashMap<Cow<'a, str>, Value>>>,
     pub memory_info: Option<MemoryInfoRepresentation<'a>>,
     pub password_policies: Option<Vec<PasswordPolicyTypeRepresentation<'a>>>,
     pub profile_info: Option<ProfileInfoRepresentation<'a>>,
-    pub protocol_mapper_types: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub providers: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub social_providers: Option<Vec<HashMap<Cow<'a, str>, Cow<'a, str>>>>,
+    pub protocol_mapper_types: Option<HashMap<Cow<'a, str>, Value>>,
+    pub providers: Option<HashMap<Cow<'a, str>, Value>>,
+    pub social_providers: Option<Vec<HashMap<Cow<'a, str>, Value>>>,
     pub system_info: Option<SystemInfoRepresentation<'a>>,
-    pub themes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub themes: Option<HashMap<Cow<'a, str>, Value>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct SpiInfoRepresentation<'a> {
     pub internal: Option<bool>,
-    pub providers: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub providers: Option<HashMap<Cow<'a, str>, Value>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -876,7 +876,7 @@ pub struct UserConsentRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserFederationMapperRepresentation<'a> {
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub federation_mapper_type: Option<Cow<'a, str>>,
     pub federation_provider_display_name: Option<Cow<'a, str>>,
     pub id: Option<Cow<'a, str>>,
@@ -887,7 +887,7 @@ pub struct UserFederationMapperRepresentation<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct UserFederationProviderRepresentation<'a> {
     pub changed_sync_period: Option<i32>,
-    pub config: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub config: Option<HashMap<Cow<'a, str>, Value>>,
     pub display_name: Option<Cow<'a, str>>,
     pub full_sync_period: Option<i32>,
     pub id: Option<Cow<'a, str>>,
@@ -899,10 +899,10 @@ pub struct UserFederationProviderRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserRepresentation<'a> {
-    pub access: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
-    pub attributes: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub access: Option<HashMap<Cow<'a, str>, Value>>,
+    pub attributes: Option<HashMap<Cow<'a, str>, Value>>,
     pub client_consents: Option<Vec<UserConsentRepresentation<'a>>>,
-    pub client_roles: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub client_roles: Option<HashMap<Cow<'a, str>, Value>>,
     pub created_timestamp: Option<i64>,
     pub credentials: Option<Vec<CredentialRepresentation<'a>>>,
     pub disableable_credential_types: Option<Vec<Cow<'a, str>>>,
@@ -928,7 +928,7 @@ pub struct UserRepresentation<'a> {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserSessionRepresentation<'a> {
-    pub clients: Option<HashMap<Cow<'a, str>, Cow<'a, str>>>,
+    pub clients: Option<HashMap<Cow<'a, str>, Value>>,
     pub id: Option<Cow<'a, str>>,
     pub ip_address: Option<Cow<'a, str>>,
     pub last_access: Option<i64>,

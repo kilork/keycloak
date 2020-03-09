@@ -650,7 +650,7 @@ struct ResponseType {
 
 fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
     Ok(match original {
-        "No Content" => FieldType::Simple("()".into()),
+        "No Content" | "Response" => FieldType::Simple("()".into()),
         "file" => FieldType::Simple("&[u8]".into()),
         "string" | "< string > array(csv)" => FieldType::WithLifetime("Cow<'a, str>".into()),
         "string(byte)" => FieldType::Simple("u8".into()),
@@ -658,8 +658,8 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
         "integer(int64)" => FieldType::Simple("i64".into()),
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
-        "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Cow<'a, str>>".into()),
-        "Object" | "Response" => FieldType::Simple("Value".into()),
+        "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Value>".into()),
+        "Object" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
                 return Err(ConvertTypeFail::Enum(

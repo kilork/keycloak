@@ -28,7 +28,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         user_id: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -64,7 +64,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -81,7 +81,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_client_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -175,7 +175,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         execution: AuthenticationExecutionRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -185,7 +185,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&execution)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get Single Execution
@@ -194,7 +195,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         execution_id: &str,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -203,7 +204,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete execution
@@ -232,7 +234,7 @@ impl<'a> KeycloakAdmin<'a> {
         execution_id: &str,
         realm: &str,
         json: AuthenticatorConfigRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -242,7 +244,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&json)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Lower execution’s priority
@@ -289,7 +292,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         flow: AuthenticationFlowRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -299,7 +302,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&flow)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get authentication flows   Returns a list of authentication flows.
@@ -325,8 +329,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         flow_alias: &str,
         realm: &str,
-        data: HashMap<&str, &str>,
-    ) -> Result<Value, KeycloakError> {
+        data: HashMap<&str, Value>,
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -336,7 +340,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&data)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get authentication executions for a flow
@@ -345,7 +350,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         flow_alias: &str,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -354,7 +359,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Update authentication executions of a flow
@@ -384,8 +390,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         flow_alias: &str,
         realm: &str,
-        data: HashMap<&str, &str>,
-    ) -> Result<Value, KeycloakError> {
+        data: HashMap<&str, Value>,
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -395,7 +401,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&data)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Add new flow with new execution to existing flow
@@ -404,8 +411,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         flow_alias: &str,
         realm: &str,
-        data: HashMap<&str, &str>,
-    ) -> Result<Value, KeycloakError> {
+        data: HashMap<&str, Value>,
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -415,7 +422,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&data)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get authentication flow for id
@@ -443,7 +451,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         flow: AuthenticationFlowRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -453,7 +461,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&flow)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete an authentication flow
@@ -480,7 +489,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_form_action_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -497,7 +506,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_form_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -514,7 +523,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_per_client_config_description_get(
         &self,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -531,7 +540,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_register_required_action_post(
         &self,
         realm: &str,
-        data: HashMap<&str, &str>,
+        data: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -664,7 +673,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn authentication_unregistered_required_actions_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1077,7 +1086,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: ClientScopeRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1087,7 +1096,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get client scopes belonging to the realm   Returns a list of client scopes belonging to the realm
@@ -1132,7 +1142,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: ClientScopeRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -1142,16 +1152,13 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete the client scope
     /// DELETE /{realm}/client-scopes/{id}
-    pub async fn client_scopes_delete(
-        &self,
-        id: &str,
-        realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    pub async fn client_scopes_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -1160,7 +1167,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Create a new client   Client’s client_id must be unique!
@@ -1169,14 +1177,15 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: ClientRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/{}/clients", self.url, realm))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get clients belonging to the realm   Returns a list of clients belonging to the realm
@@ -1238,7 +1247,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: ClientRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -1248,7 +1257,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete the client
@@ -1465,7 +1475,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         provider_id: &str,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1474,7 +1484,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -1521,7 +1532,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-        form_params: HashMap<&str, &str>,
+        form_params: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1562,7 +1573,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1717,7 +1728,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1778,7 +1789,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: ComponentRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1788,7 +1799,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// GET /{realm}/components
@@ -1842,7 +1854,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: ComponentRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -1852,7 +1864,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// DELETE /{realm}/components/{id}
@@ -1898,14 +1911,15 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: GroupRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/{}/groups", self.url, realm))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get group hierarchy.
@@ -1946,7 +1960,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         search: Option<&str>,
         top: Option<bool>,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2024,7 +2038,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: GroupRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2034,7 +2048,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -2111,7 +2126,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         input: &[u8],
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2130,7 +2145,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         representation: IdentityProviderRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2140,7 +2155,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&representation)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get identity providers
@@ -2185,7 +2201,7 @@ impl<'a> KeycloakAdmin<'a> {
         alias: &str,
         realm: &str,
         provider_rep: IdentityProviderRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -2195,7 +2211,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&provider_rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete the identity provider
@@ -2204,7 +2221,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         alias: &str,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -2213,7 +2230,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Export public broker configuration for identity provider
@@ -2223,7 +2241,7 @@ impl<'a> KeycloakAdmin<'a> {
         alias: &str,
         realm: &str,
         format: Option<&str>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2235,7 +2253,8 @@ impl<'a> KeycloakAdmin<'a> {
             builder = builder.query(&("format", v));
         }
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -2282,7 +2301,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         alias: &str,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2301,7 +2320,7 @@ impl<'a> KeycloakAdmin<'a> {
         alias: &str,
         realm: &str,
         mapper: IdentityProviderMapperRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2311,7 +2330,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&mapper)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get mappers for identity provider
@@ -2399,7 +2419,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         provider_id: &str,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2408,7 +2428,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// GET /{realm}/keys
@@ -2452,7 +2473,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: ProtocolMapperRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2462,7 +2483,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get mappers
@@ -2588,7 +2610,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: ProtocolMapperRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2598,7 +2620,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get mappers
@@ -2699,14 +2722,15 @@ impl<'a> KeycloakAdmin<'a> {
     /// Import a realm   Imports a realm from a full representation of that realm.
     /// Realm name must be unique.
     /// POST /
-    pub async fn post(&self, rep: RealmRepresentation<'_>) -> Result<Value, KeycloakError> {
+    pub async fn post(&self, rep: RealmRepresentation<'_>) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/", self.url,))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get the top-level representation of the realm   It will not include nested information like User and Client representations.
@@ -2727,14 +2751,15 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: RealmRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!("{}/auth/admin/realms/{}", self.url, realm))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete the realm
@@ -2895,7 +2920,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn client_session_stats_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3246,7 +3271,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: PartialImportRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3256,7 +3281,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Push the realm’s revocation policy to any client that has an admin url associated with it.
@@ -3305,7 +3331,7 @@ impl<'a> KeycloakAdmin<'a> {
         connection_url: Option<&str>,
         start_tls: Option<&str>,
         use_truststore_spi: Option<&str>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3315,7 +3341,8 @@ impl<'a> KeycloakAdmin<'a> {
             .form(&use_truststore_spi)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Test SMTP connection with current logged in user
@@ -3324,7 +3351,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         config: Option<&str>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3334,7 +3361,8 @@ impl<'a> KeycloakAdmin<'a> {
             .form(&config)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// GET /{realm}/users-management-permissions
@@ -3606,7 +3634,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: RoleRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3616,7 +3644,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get all roles for the realm or client
@@ -3680,7 +3709,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         role_name: &str,
         rep: RoleRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -3690,7 +3719,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete a role by name
@@ -3919,14 +3949,15 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: RoleRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/{}/roles", self.url, realm))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get all roles for the realm or client
@@ -3984,7 +4015,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         role_name: &str,
         rep: RoleRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -3994,7 +4025,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete a role by name
@@ -4830,10 +4862,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Need this for admin console to display simple name of provider when displaying client detail   KEYCLOAK-4328
     /// GET /{id}/name
-    pub async fn name_get(
-        &self,
-        id: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    pub async fn name_get(&self, id: &str) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/name", self.url, id))
@@ -4848,7 +4877,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4949,14 +4978,15 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         rep: UserRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/{}/users", self.url, realm))
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get users   Returns a list of users, filtered according to query parameters
@@ -5068,7 +5098,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         rep: UserRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -5078,12 +5108,13 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Delete the user
     /// DELETE /{realm}/users/{id}
-    pub async fn users_delete(&self, id: &str, realm: &str) -> Result<Value, KeycloakError> {
+    pub async fn users_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -5092,7 +5123,8 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Return credential types, which are provided by the user storage where user is stored.
@@ -5120,7 +5152,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'_, str>, Cow<'_, str>>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5284,7 +5316,7 @@ impl<'a> KeycloakAdmin<'a> {
         lifespan: Option<i32>,
         redirect_uri: Option<&str>,
         actions: Vec<&str>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
             .put(&format!(
@@ -5303,7 +5335,8 @@ impl<'a> KeycloakAdmin<'a> {
             builder = builder.query(&("redirect_uri", v));
         }
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get social logins associated with the user
@@ -5332,7 +5365,7 @@ impl<'a> KeycloakAdmin<'a> {
         provider: &str,
         realm: &str,
         rep: FederatedIdentityRepresentation<'_>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -5342,7 +5375,8 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&rep)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Remove a social login provider from user
@@ -5404,7 +5438,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         realm: &str,
         search: Option<&str>,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -5463,7 +5497,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         id: &str,
         realm: &str,
-    ) -> Result<HashMap<Cow<'_, str>, Cow<'_, str>>, KeycloakError> {
+    ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -5539,7 +5573,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         client_id: Option<&str>,
         redirect_uri: Option<&str>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
             .put(&format!(
@@ -5554,7 +5588,8 @@ impl<'a> KeycloakAdmin<'a> {
             builder = builder.query(&("redirect_uri", v));
         }
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get sessions associated with the user
@@ -5588,7 +5623,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// CORS preflight
     /// OPTIONS /{any}
-    pub async fn any_options(&self) -> Result<Value, KeycloakError> {
+    pub async fn any_options(&self) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .request(
@@ -5597,6 +5632,7 @@ impl<'a> KeycloakAdmin<'a> {
             )
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
+        error_check(response).await?;
+        Ok(())
     }
 }
