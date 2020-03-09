@@ -1,4 +1,4 @@
-use serde_json::Value;
+use serde_json::{json, Value};
 use std::{borrow::Cow, collections::HashMap};
 
 use super::*;
@@ -781,7 +781,9 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/clients/{}/certificates/{}/upload",
                 self.url, realm, id, attr
             ))
-            .form(&input)
+            .form(&json!({
+                "input": input,
+            }))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -802,7 +804,9 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/clients/{}/certificates/{}/upload-certificate",
                 self.url, realm, id, attr
             ))
-            .form(&input)
+            .form(&json!({
+                "input": input,
+            }))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2133,7 +2137,9 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/identity-provider/import-config",
                 self.url, realm
             ))
-            .form(&input)
+            .form(&json!({
+                "input": input,
+            }))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3338,7 +3344,16 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/testLDAPConnection",
                 self.url, realm
             ))
-            .form(&use_truststore_spi)
+            .form(&json!({
+                "action": action,
+                "bindCredential": bind_credential,
+                "bindDn": bind_dn,
+                "componentId": component_id,
+                "connectionTimeout": connection_timeout,
+                "connectionUrl": connection_url,
+                "startTls": start_tls,
+                "useTruststoreSpi": use_truststore_spi,
+            }))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3358,7 +3373,9 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/testSMTPConnection",
                 self.url, realm
             ))
-            .form(&config)
+            .form(&json!({
+                "config": config,
+            }))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;

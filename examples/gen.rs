@@ -367,7 +367,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
         "authentication_flow_get".to_string(),
     );
 
-    println!("use serde_json::Value;");
+    println!("use serde_json::{{json, Value}};");
     println!("use std::{{borrow::Cow, collections::HashMap}};\n");
     println!("use super::*;\n");
     println!("impl<'a> KeycloakAdmin<'a> {{");
@@ -402,6 +402,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
         let mut mapping = HashMap::new();
         let mut body_parameter = None;
         let mut has_query_params = false;
+        let mut is_form = false;
         for parameter in &method.parameters {
             let mut name = parameter.name.to_snake_case();
             if ["ref", "type"].contains(&name.as_str()) {
@@ -421,9 +422,20 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
             }
             println!("        {}: {},", name, parameter_type);
             mapping.insert(parameter.name.as_str(), (name.clone(), parameter));
+            if let ParameterKind::FormData = parameter.kind {
+                is_form = true;
+            }
             match parameter.kind {
                 ParameterKind::Body | ParameterKind::FormData => {
-                    body_parameter = Some((name, parameter))
+                    if body_parameter.is_none() {
+                        body_parameter = Some(vec![(name, parameter)]);
+                    } else {
+                        body_parameter
+                            .iter_mut()
+                            .next()
+                            .unwrap()
+                            .push((name, parameter));
+                    }
                 }
                 ParameterKind::Query => has_query_params = true,
                 _ => (),
@@ -475,16 +487,18 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
             path_params.join(", ")
         );
 
-        if let Some((name, parameter)) = body_parameter {
-            println!(
-                "            .{}(&{})",
-                match parameter.kind {
-                    ParameterKind::Body => "json",
-                    ParameterKind::FormData => "form",
-                    _ => "text",
-                },
-                name
-            );
+        if let Some(x) = body_parameter {
+            if is_form {
+                println!("            .form(&json!({{",);
+                for (name, parameter) in x {
+                    println!(r#"                "{}": {},"#, parameter.name, name);
+                }
+                println!("            }}))",);
+            } else {
+                if let Some((name, parameter)) = x.iter().next() {
+                    println!("            .json(&{})", name);
+                }
+            }
         }
 
         println!("            .bearer_auth(self.admin_token.get(&self.url).await?);");
