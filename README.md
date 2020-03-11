@@ -12,7 +12,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "0.1"
+keycloak = "0.2"
 ```
 
 ```rust
