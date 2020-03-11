@@ -97,8 +97,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/config-description/{providerId}
     pub async fn authentication_config_description_get(
         &self,
-        provider_id: &str,
         realm: &str,
+        provider_id: &str,
     ) -> Result<AuthenticatorConfigInfoRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -115,8 +115,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/config/{id}
     pub async fn authentication_config_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<AuthenticatorConfigRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -133,8 +133,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/authentication/config/{id}
     pub async fn authentication_config_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: AuthenticatorConfigRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -154,8 +154,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/authentication/config/{id}
     pub async fn authentication_config_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -193,8 +193,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/executions/{executionId}
     pub async fn authentication_executions_get(
         &self,
-        execution_id: &str,
         realm: &str,
+        execution_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -212,8 +212,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/authentication/executions/{executionId}
     pub async fn authentication_executions_delete(
         &self,
-        execution_id: &str,
         realm: &str,
+        execution_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -231,8 +231,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/executions/{executionId}/config
     pub async fn authentication_executions_config_post(
         &self,
-        execution_id: &str,
         realm: &str,
+        execution_id: &str,
         json: AuthenticatorConfigRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -252,8 +252,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/executions/{executionId}/lower-priority
     pub async fn authentication_executions_lower_priority_post(
         &self,
-        execution_id: &str,
         realm: &str,
+        execution_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -271,8 +271,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/executions/{executionId}/raise-priority
     pub async fn authentication_executions_raise_priority_post(
         &self,
-        execution_id: &str,
         realm: &str,
+        execution_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -327,8 +327,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/flows/{flowAlias}/copy
     pub async fn authentication_flows_copy_post(
         &self,
-        flow_alias: &str,
         realm: &str,
+        flow_alias: &str,
         data: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -348,8 +348,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/flows/{flowAlias}/executions
     pub async fn authentication_flows_executions_get(
         &self,
-        flow_alias: &str,
         realm: &str,
+        flow_alias: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -367,8 +367,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/authentication/flows/{flowAlias}/executions
     pub async fn authentication_flows_executions_put(
         &self,
-        flow_alias: &str,
         realm: &str,
+        flow_alias: &str,
         rep: AuthenticationExecutionInfoRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -388,8 +388,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/flows/{flowAlias}/executions/execution
     pub async fn authentication_flows_executions_execution_post(
         &self,
-        flow_alias: &str,
         realm: &str,
+        flow_alias: &str,
         data: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -409,8 +409,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/flows/{flowAlias}/executions/flow
     pub async fn authentication_flows_executions_flow_post(
         &self,
-        flow_alias: &str,
         realm: &str,
+        flow_alias: &str,
         data: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -430,8 +430,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/flows/{id}
     pub async fn authentication_flow_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<AuthenticationFlowRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -448,8 +448,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/authentication/flows/{id}
     pub async fn authentication_flows_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         flow: AuthenticationFlowRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -469,8 +469,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/authentication/flows/{id}
     pub async fn authentication_flows_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -576,8 +576,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/authentication/required-actions/{alias}
     pub async fn authentication_required_action_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<RequiredActionProviderRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -594,8 +594,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/authentication/required-actions/{alias}
     pub async fn authentication_required_actions_put(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
         rep: RequiredActionProviderRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -615,8 +615,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/authentication/required-actions/{alias}
     pub async fn authentication_required_actions_delete(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -634,8 +634,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/required-actions/{alias}/lower-priority
     pub async fn authentication_required_actions_lower_priority_post(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -653,8 +653,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/authentication/required-actions/{alias}/raise-priority
     pub async fn authentication_required_actions_raise_priority_post(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -689,9 +689,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/certificates/{attr}
     pub async fn clients_certificates_get(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -708,9 +708,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/certificates/{attr}/download
     pub async fn clients_certificates_download_post(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
         config: KeyStoreConfig<'_>,
     ) -> Result<Vec<u8>, KeycloakError> {
         let builder = self
@@ -729,9 +729,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/certificates/{attr}/generate
     pub async fn clients_certificates_generate_post(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -749,9 +749,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/certificates/{attr}/generate-and-download
     pub async fn clients_certificates_generate_and_download_post(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
         config: KeyStoreConfig<'_>,
     ) -> Result<Vec<u8>, KeycloakError> {
         let builder = self
@@ -770,9 +770,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/certificates/{attr}/upload
     pub async fn clients_certificates_upload_post(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
         input: &[u8],
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
@@ -793,9 +793,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/certificates/{attr}/upload-certificate
     pub async fn clients_certificates_upload_certificate_post(
         &self,
-        attr: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        attr: &str,
         input: &[u8],
     ) -> Result<CertificateRepresentation<'_>, KeycloakError> {
         let builder = self
@@ -850,8 +850,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients-initial-access/{id}
     pub async fn clients_initial_access_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -886,9 +886,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn groups_role_mappings_clients_post(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -908,9 +908,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn groups_role_mappings_clients_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -927,9 +927,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn groups_role_mappings_clients_delete(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -949,9 +949,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}/available
     pub async fn groups_role_mappings_clients_available_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -968,9 +968,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}/composite
     pub async fn groups_role_mappings_clients_composite_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -987,9 +987,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn users_role_mappings_clients_post(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1009,9 +1009,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn users_role_mappings_clients_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -1028,9 +1028,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn users_role_mappings_clients_delete(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1050,9 +1050,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}/available
     pub async fn users_role_mappings_clients_available_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -1069,9 +1069,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}/composite
     pub async fn users_role_mappings_clients_composite_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -1125,8 +1125,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}
     pub async fn client_scope_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ClientScopeRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1143,8 +1143,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/client-scopes/{id}
     pub async fn client_scopes_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ClientScopeRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1162,7 +1162,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Delete the client scope
     /// DELETE /{realm}/client-scopes/{id}
-    pub async fn client_scopes_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn client_scopes_delete(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -1230,8 +1230,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}
     pub async fn client_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ClientRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1248,8 +1248,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}
     pub async fn clients_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ClientRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1267,7 +1267,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Delete the client
     /// DELETE /{realm}/clients/{id}
-    pub async fn clients_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn clients_delete(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -1284,8 +1284,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/client-secret
     pub async fn clients_client_secret_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<CredentialRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1302,8 +1302,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/client-secret
     pub async fn clients_client_secret_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<CredentialRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1321,8 +1321,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/default-client-scopes
     pub async fn clients_default_client_scopes_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<ClientScopeRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -1338,9 +1338,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/default-client-scopes/{clientScopeId}
     pub async fn clients_default_client_scopes_put(
         &self,
-        client_scope_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1357,9 +1357,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/default-client-scopes/{clientScopeId}
     pub async fn clients_default_client_scopes_delete(
         &self,
-        client_scope_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1377,8 +1377,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-access-token
     pub async fn clients_evaluate_scopes_generate_example_access_token_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         scope: Option<&str>,
         user_id: Option<&str>,
     ) -> Result<AccessToken<'_>, KeycloakError> {
@@ -1404,8 +1404,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/evaluate-scopes/protocol-mappers
     pub async fn clients_evaluate_scopes_protocol_mappers_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         scope: Option<&str>,
     ) -> Result<
         Vec<ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation<'_>>,
@@ -1430,8 +1430,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted
     pub async fn clients_evaluate_scopes_scope_mappings_granted_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_container_id: &str,
         scope: Option<&str>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
@@ -1454,8 +1454,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted
     pub async fn clients_evaluate_scopes_scope_mappings_not_granted_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_container_id: &str,
         scope: Option<&str>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
@@ -1476,9 +1476,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/installation/providers/{providerId}
     pub async fn clients_installation_providers_get(
         &self,
+        realm: &str,
         id: &str,
         provider_id: &str,
-        realm: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1496,8 +1496,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/management/permissions
     pub async fn clients_management_permissions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1514,8 +1514,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/management/permissions
     pub async fn clients_management_permissions_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         ref_: ManagementPermissionReference<'_>,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
@@ -1534,8 +1534,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/nodes
     pub async fn clients_nodes_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         form_params: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1555,9 +1555,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/nodes/{node}
     pub async fn clients_nodes_delete(
         &self,
+        realm: &str,
         id: &str,
         node: &str,
-        realm: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1575,8 +1575,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/offline-session-count
     pub async fn clients_offline_session_count_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
@@ -1593,8 +1593,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/offline-sessions
     pub async fn clients_offline_sessions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<Vec<UserSessionRepresentation<'_>>, KeycloakError> {
@@ -1620,8 +1620,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/optional-client-scopes
     pub async fn clients_optional_client_scopes_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<ClientScopeRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -1637,9 +1637,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/optional-client-scopes/{clientScopeId}
     pub async fn clients_optional_client_scopes_put(
         &self,
-        client_scope_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1656,9 +1656,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/optional-client-scopes/{clientScopeId}
     pub async fn clients_optional_client_scopes_delete(
         &self,
-        client_scope_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1676,8 +1676,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/push-revocation
     pub async fn clients_push_revocation_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<GlobalRequestResult<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1694,8 +1694,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/registration-access-token
     pub async fn clients_registration_access_token_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ClientRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1712,8 +1712,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/service-account-user
     pub async fn clients_service_account_user_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<UserRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1730,8 +1730,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/session-count
     pub async fn clients_session_count_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
@@ -1748,8 +1748,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/test-nodes-available
     pub async fn clients_test_nodes_available_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<GlobalRequestResult<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1766,8 +1766,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/user-sessions
     pub async fn clients_user_sessions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<Vec<UserSessionRepresentation<'_>>, KeycloakError> {
@@ -1838,8 +1838,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/components/{id}
     pub async fn component_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ComponentRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -1855,8 +1855,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/components/{id}
     pub async fn components_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ComponentRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -1873,7 +1873,7 @@ impl<'a> KeycloakAdmin<'a> {
     }
 
     /// DELETE /{realm}/components/{id}
-    pub async fn components_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn components_delete(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -1890,8 +1890,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/components/{id}/sub-component-types
     pub async fn components_sub_component_types_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         type_: Option<&str>,
     ) -> Result<Vec<ComponentTypeRepresentation<'_>>, KeycloakError> {
         let mut builder = self
@@ -1985,8 +1985,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}
     pub async fn group_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<GroupRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2003,8 +2003,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/groups/{id}
     pub async fn groups_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: GroupRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2021,7 +2021,7 @@ impl<'a> KeycloakAdmin<'a> {
     }
 
     /// DELETE /{realm}/groups/{id}
-    pub async fn groups_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn groups_delete(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -2039,8 +2039,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/groups/{id}/children
     pub async fn groups_children_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: GroupRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2060,8 +2060,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/management/permissions
     pub async fn groups_management_permissions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2078,8 +2078,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/groups/{id}/management/permissions
     pub async fn groups_management_permissions_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         ref_: ManagementPermissionReference<'_>,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
@@ -2098,8 +2098,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/members
     pub async fn groups_members_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -2186,8 +2186,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}
     pub async fn identity_provider_instance_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<IdentityProviderRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2204,8 +2204,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/identity-provider/instances/{alias}
     pub async fn identity_provider_instances_put(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
         provider_rep: IdentityProviderRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2225,8 +2225,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/identity-provider/instances/{alias}
     pub async fn identity_provider_instances_delete(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2244,8 +2244,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}/export
     pub async fn identity_provider_instances_export_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
         format: Option<&str>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
@@ -2267,8 +2267,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}/management/permissions
     pub async fn identity_provider_instances_management_permissions_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2285,8 +2285,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/identity-provider/instances/{alias}/management/permissions
     pub async fn identity_provider_instances_management_permissions_put(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
         ref_: ManagementPermissionReference<'_>,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
@@ -2305,8 +2305,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}/mapper-types
     pub async fn identity_provider_instances_mapper_types_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
@@ -2323,8 +2323,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/identity-provider/instances/{alias}/mappers
     pub async fn identity_provider_instances_mappers_post(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
         mapper: IdentityProviderMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2344,8 +2344,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}/mappers
     pub async fn identity_provider_instances_mappers_get(
         &self,
-        alias: &str,
         realm: &str,
+        alias: &str,
     ) -> Result<Vec<IdentityProviderMapperRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -2362,9 +2362,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn identity_provider_instances_mapper_get(
         &self,
+        realm: &str,
         alias: &str,
         id: &str,
-        realm: &str,
     ) -> Result<IdentityProviderMapperRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2381,9 +2381,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn identity_provider_instances_mappers_put(
         &self,
+        realm: &str,
         alias: &str,
         id: &str,
-        realm: &str,
         rep: IdentityProviderMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2403,9 +2403,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn identity_provider_instances_mappers_delete(
         &self,
+        realm: &str,
         alias: &str,
         id: &str,
-        realm: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2423,8 +2423,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/identity-provider/providers/{provider_id}
     pub async fn identity_provider_providers_get(
         &self,
-        provider_id: &str,
         realm: &str,
+        provider_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2455,8 +2455,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/client-scopes/{id}/protocol-mappers/add-models
     pub async fn client_scopes_protocol_mappers_add_models_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         reps: Vec<ProtocolMapperRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2476,8 +2476,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/client-scopes/{id}/protocol-mappers/models
     pub async fn client_scopes_protocol_mappers_models_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ProtocolMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2497,8 +2497,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/models
     pub async fn client_scopes_protocol_mappers_models_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<ProtocolMapperRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -2515,8 +2515,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn client_scopes_protocol_mappers_model_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ProtocolMapperRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2533,8 +2533,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn client_scopes_protocol_mappers_models_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ProtocolMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2554,8 +2554,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn client_scopes_protocol_mappers_models_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2573,9 +2573,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}
     pub async fn client_scopes_protocol_mappers_protocol_get(
         &self,
+        realm: &str,
         id: &str,
         protocol: &str,
-        realm: &str,
     ) -> Result<Vec<ProtocolMapperRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -2592,8 +2592,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/protocol-mappers/add-models
     pub async fn clients_protocol_mappers_add_models_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         reps: Vec<ProtocolMapperRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2613,8 +2613,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/protocol-mappers/models
     pub async fn clients_protocol_mappers_models_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ProtocolMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2634,8 +2634,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/protocol-mappers/models
     pub async fn clients_protocol_mappers_models_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<ProtocolMapperRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -2652,8 +2652,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn clients_protocol_mappers_model_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<ProtocolMapperRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -2670,8 +2670,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn clients_protocol_mappers_models_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: ProtocolMapperRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -2691,8 +2691,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn clients_protocol_mappers_models_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2710,9 +2710,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/protocol-mappers/protocol/{protocol}
     pub async fn clients_protocol_mappers_protocol_get(
         &self,
+        realm: &str,
         id: &str,
         protocol: &str,
-        realm: &str,
     ) -> Result<Vec<ProtocolMapperRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -2975,8 +2975,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/default-default-client-scopes/{clientScopeId}
     pub async fn default_default_client_scopes_put(
         &self,
-        client_scope_id: &str,
         realm: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2993,8 +2993,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/default-default-client-scopes/{clientScopeId}
     pub async fn default_default_client_scopes_delete(
         &self,
-        client_scope_id: &str,
         realm: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3029,8 +3029,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/default-groups/{groupId}
     pub async fn default_groups_put(
         &self,
-        group_id: &str,
         realm: &str,
+        group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3047,8 +3047,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/default-groups/{groupId}
     pub async fn default_groups_delete(
         &self,
-        group_id: &str,
         realm: &str,
+        group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3083,8 +3083,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/default-optional-client-scopes/{clientScopeId}
     pub async fn default_optional_client_scopes_put(
         &self,
-        client_scope_id: &str,
         realm: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3101,8 +3101,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/default-optional-client-scopes/{clientScopeId}
     pub async fn default_optional_client_scopes_delete(
         &self,
-        client_scope_id: &str,
         realm: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3214,8 +3214,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/group-by-path/{path}
     pub async fn group_by_path_get(
         &self,
-        path: &str,
         realm: &str,
+        path: &str,
     ) -> Result<GroupRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -3420,8 +3420,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings
     pub async fn groups_role_mappings_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<MappingsRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -3438,8 +3438,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/groups/{id}/role-mappings/realm
     pub async fn groups_role_mappings_realm_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3459,8 +3459,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/realm
     pub async fn groups_role_mappings_realm_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3477,8 +3477,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/groups/{id}/role-mappings/realm
     pub async fn groups_role_mappings_realm_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3498,8 +3498,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/realm/available
     pub async fn groups_role_mappings_realm_available_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3516,8 +3516,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/groups/{id}/role-mappings/realm/composite
     pub async fn groups_role_mappings_realm_composite_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3534,8 +3534,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings
     pub async fn users_role_mappings_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<MappingsRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -3552,8 +3552,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/role-mappings/realm
     pub async fn users_role_mappings_realm_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3573,8 +3573,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/realm
     pub async fn users_role_mappings_realm_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3591,8 +3591,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/role-mappings/realm
     pub async fn users_role_mappings_realm_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3612,8 +3612,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/realm/available
     pub async fn users_role_mappings_realm_available_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3630,8 +3630,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/role-mappings/realm/composite
     pub async fn users_role_mappings_realm_composite_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3648,8 +3648,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/roles
     pub async fn clients_roles_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: RoleRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3669,8 +3669,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles
     pub async fn clients_roles_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -3703,8 +3703,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}
     pub async fn clients_role_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
     ) -> Result<RoleRepresentation<'_>, KeycloakError> {
         let builder = self
@@ -3722,8 +3722,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/roles/{role-name}
     pub async fn clients_roles_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         rep: RoleRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
@@ -3744,8 +3744,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/roles/{role-name}
     pub async fn clients_roles_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -3764,8 +3764,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn clients_roles_composites_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
@@ -3786,8 +3786,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn clients_roles_composites_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
@@ -3805,8 +3805,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn clients_roles_composites_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
@@ -3827,10 +3827,10 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites/clients/{client}
     pub async fn clients_roles_composites_clients_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -3847,8 +3847,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites/realm
     pub async fn clients_roles_composites_realm_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
@@ -3866,8 +3866,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/groups
     pub async fn clients_roles_groups_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
@@ -3897,8 +3897,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/management/permissions
     pub async fn clients_roles_management_permissions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
         let builder = self
@@ -3916,8 +3916,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/clients/{id}/roles/{role-name}/management/permissions
     pub async fn clients_roles_management_permissions_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         ref_: ManagementPermissionReference<'_>,
     ) -> Result<ManagementPermissionReference<'_>, KeycloakError> {
@@ -3937,8 +3937,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/roles/{role-name}/users
     pub async fn clients_roles_users_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         role_name: &str,
         first: Option<i32>,
         max: Option<i32>,
@@ -4125,9 +4125,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/roles/{role-name}/composites/clients/{client}
     pub async fn roles_composites_clients_get(
         &self,
-        client: &str,
         realm: &str,
         role_name: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4374,9 +4374,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/roles-by-id/{role-id}/composites/clients/{client}
     pub async fn roles_by_id_composites_clients_get(
         &self,
-        client: &str,
         realm: &str,
         role_id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4449,8 +4449,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings
     pub async fn client_scopes_scope_mappings_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<MappingsRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -4467,9 +4467,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn client_scopes_scope_mappings_clients_post(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4489,9 +4489,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn client_scopes_scope_mappings_clients_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4508,9 +4508,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn client_scopes_scope_mappings_clients_delete(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4530,9 +4530,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available
     pub async fn client_scopes_scope_mappings_clients_available_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4549,9 +4549,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite
     pub async fn client_scopes_scope_mappings_clients_composite_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4568,8 +4568,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn client_scopes_scope_mappings_realm_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4589,8 +4589,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn client_scopes_scope_mappings_realm_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4607,8 +4607,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn client_scopes_scope_mappings_realm_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4628,8 +4628,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm/available
     pub async fn client_scopes_scope_mappings_realm_available_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4647,8 +4647,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm/composite
     pub async fn client_scopes_scope_mappings_realm_composite_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4665,8 +4665,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings
     pub async fn clients_scope_mappings_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<MappingsRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -4683,9 +4683,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn clients_scope_mappings_clients_post(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4705,9 +4705,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn clients_scope_mappings_clients_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4724,9 +4724,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn clients_scope_mappings_clients_delete(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4746,9 +4746,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}/available
     pub async fn clients_scope_mappings_clients_available_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4765,9 +4765,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}/composite
     pub async fn clients_scope_mappings_clients_composite_get(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4784,8 +4784,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/clients/{id}/scope-mappings/realm
     pub async fn clients_scope_mappings_realm_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4805,8 +4805,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/realm
     pub async fn clients_scope_mappings_realm_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4823,8 +4823,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/clients/{id}/scope-mappings/realm
     pub async fn clients_scope_mappings_realm_delete(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         roles: Vec<RoleRepresentation<'_>>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -4844,8 +4844,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/realm/available
     pub async fn clients_scope_mappings_realm_available_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4863,8 +4863,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/clients/{id}/scope-mappings/realm/composite
     pub async fn clients_scope_mappings_realm_composite_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -4892,8 +4892,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/user-storage/{id}/name
     pub async fn user_storage_name_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
@@ -4910,8 +4910,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/user-storage/{id}/remove-imported-users
     pub async fn user_storage_remove_imported_users_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4929,8 +4929,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/user-storage/{id}/sync
     pub async fn user_storage_sync_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         action: Option<&str>,
     ) -> Result<SynchronizationResult<'_>, KeycloakError> {
         let mut builder = self
@@ -4951,8 +4951,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/user-storage/{id}/unlink-users
     pub async fn user_storage_unlink_users_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4970,9 +4970,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/user-storage/{parentId}/mappers/{id}/sync
     pub async fn user_storage_mappers_sync_post(
         &self,
-        id: &str,
-        parent_id: &str,
         realm: &str,
+        parent_id: &str,
+        id: &str,
         direction: Option<&str>,
     ) -> Result<SynchronizationResult<'_>, KeycloakError> {
         let mut builder = self
@@ -5094,8 +5094,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}
     pub async fn user_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<UserRepresentation<'_>, KeycloakError> {
         let builder = self
             .client
@@ -5112,8 +5112,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}
     pub async fn users_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         rep: UserRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -5131,7 +5131,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Delete the user
     /// DELETE /{realm}/users/{id}
-    pub async fn users_delete(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn users_delete(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
@@ -5149,8 +5149,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/configured-user-storage-credential-types
     pub async fn users_configured_user_storage_credential_types_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<Cow<'_, str>>, KeycloakError> {
         let builder = self
             .client
@@ -5167,8 +5167,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/consents
     pub async fn users_consents_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<HashMap<Cow<'_, str>, Value>>, KeycloakError> {
         let builder = self
             .client
@@ -5185,9 +5185,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/consents/{client}
     pub async fn users_consents_delete(
         &self,
-        client: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5204,8 +5204,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/credentials
     pub async fn users_credentials_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<CredentialRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -5222,9 +5222,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/credentials/{credentialId}
     pub async fn users_credentials_delete(
         &self,
-        credential_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5242,10 +5242,10 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}
     pub async fn users_credentials_move_after_post(
         &self,
-        credential_id: &str,
-        id: &str,
-        new_previous_credential_id: &str,
         realm: &str,
+        id: &str,
+        credential_id: &str,
+        new_previous_credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5263,9 +5263,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/credentials/{credentialId}/moveToFirst
     pub async fn users_credentials_move_to_first_post(
         &self,
-        credential_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5283,9 +5283,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/credentials/{credentialId}/userLabel
     pub async fn users_credentials_user_label_put(
         &self,
-        credential_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        credential_id: &str,
         user_label: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -5305,8 +5305,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/disable-credential-types
     pub async fn users_disable_credential_types_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         credential_types: Vec<&str>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -5327,8 +5327,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/execute-actions-email
     pub async fn users_execute_actions_email_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         client_id: Option<&str>,
         lifespan: Option<i32>,
         redirect_uri: Option<&str>,
@@ -5360,8 +5360,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/federated-identity
     pub async fn users_federated_identity_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<FederatedIdentityRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -5378,9 +5378,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/federated-identity/{provider}
     pub async fn users_federated_identity_post(
         &self,
+        realm: &str,
         id: &str,
         provider: &str,
-        realm: &str,
         rep: FederatedIdentityRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -5400,9 +5400,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/federated-identity/{provider}
     pub async fn users_federated_identity_delete(
         &self,
+        realm: &str,
         id: &str,
         provider: &str,
-        realm: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5419,8 +5419,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/groups
     pub async fn users_groups_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -5452,8 +5452,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/groups/count
     pub async fn users_groups_count_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         search: Option<&str>,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let mut builder = self
@@ -5473,9 +5473,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/groups/{groupId}
     pub async fn users_groups_put(
         &self,
-        group_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5492,9 +5492,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// DELETE /{realm}/users/{id}/groups/{groupId}
     pub async fn users_groups_delete(
         &self,
-        group_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5512,8 +5512,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// POST /{realm}/users/{id}/impersonation
     pub async fn users_impersonation_post(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<HashMap<Cow<'_, str>, Value>, KeycloakError> {
         let builder = self
             .client
@@ -5528,7 +5528,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Remove all user sessions associated with the user   Also send notification to all clients that have an admin URL to invalidate the sessions for the particular user.
     /// POST /{realm}/users/{id}/logout
-    pub async fn users_logout_post(&self, id: &str, realm: &str) -> Result<(), KeycloakError> {
+    pub async fn users_logout_post(&self, realm: &str, id: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -5545,9 +5545,9 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/offline-sessions/{clientId}
     pub async fn users_offline_sessions_get(
         &self,
-        client_id: &str,
-        id: &str,
         realm: &str,
+        id: &str,
+        client_id: &str,
     ) -> Result<Vec<UserSessionRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
@@ -5564,8 +5564,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/reset-password
     pub async fn users_reset_password_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         cred: CredentialRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
@@ -5586,8 +5586,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// PUT /{realm}/users/{id}/send-verify-email
     pub async fn users_send_verify_email_put(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
         client_id: Option<&str>,
         redirect_uri: Option<&str>,
     ) -> Result<(), KeycloakError> {
@@ -5613,8 +5613,8 @@ impl<'a> KeycloakAdmin<'a> {
     /// GET /{realm}/users/{id}/sessions
     pub async fn users_sessions_get(
         &self,
-        id: &str,
         realm: &str,
+        id: &str,
     ) -> Result<Vec<UserSessionRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client

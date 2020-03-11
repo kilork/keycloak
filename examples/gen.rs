@@ -212,7 +212,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
                                     .unwrap()
                                     .unwrap(),
                             };
-                            parameters.push(parameter_);
+                            parameters.push(Rc::new(parameter_));
                         }
                     }
                     "Responses" => {
@@ -306,7 +306,7 @@ fn write_types(
     }
 }
 
-fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[MethodStruct]) {
+fn renames() -> HashMap<(&'static str, &'static str), String> {
     let mut rename_methods_table = HashMap::new();
     rename_methods_table.insert(
         (
@@ -366,6 +366,79 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
         ("/{realm}/authentication/flows/{id}", "GET"),
         "authentication_flow_get".to_string(),
     );
+    rename_methods_table
+}
+
+fn process_method_parameters(
+    type_registry: &HashMap<String, Rc<StructType>>,
+    method: &MethodStruct,
+    mapping: &mut HashMap<String, (String, Rc<Parameter>)>,
+    body_parameter: &mut Option<Vec<(String, Rc<Parameter>)>>,
+    has_query_params: &mut bool,
+    is_form: &mut bool,
+) {
+    let mut parameters = vec![];
+    for parameter in &method.parameters {
+        let mut name = parameter.name.to_snake_case();
+        if ["ref", "type"].contains(&name.as_str()) {
+            name += "_";
+        }
+        mapping.insert(parameter.name.clone(), (name.clone(), parameter.clone()));
+        parameters.push((name, parameter.clone()));
+    }
+
+    let mut path_params = vec![];
+    let path_parts = method
+        .path
+        .split('/')
+        .filter(|x| x.starts_with('{') && x.ends_with('}'));
+    for path_part in path_parts {
+        let parameter_name = &path_part[1..path_part.len() - 1];
+        if let Some(parameter_position) = parameters
+            .iter()
+            .position(|(_, p)| p.name == parameter_name)
+        {
+            let p = parameters.remove(parameter_position);
+            path_params.push(p);
+        }
+    }
+
+    for (name, parameter) in path_params.iter().chain(parameters.iter()) {
+        let mut parameter_type = parameter
+            .parameter_type
+            .name(&type_registry)
+            .replace("'a", "'_")
+            .replace("Cow<'_, str>", "&str");
+        if parameter.is_array {
+            parameter_type = format!("Vec<{}>", parameter_type);
+        }
+        if parameter.is_optional {
+            parameter_type = format!("Option<{}>", parameter_type);
+        }
+        println!("        {}: {},", name, parameter_type);
+        if let ParameterKind::FormData = parameter.kind {
+            *is_form = true;
+        }
+        match parameter.kind {
+            ParameterKind::Body | ParameterKind::FormData => {
+                if body_parameter.is_none() {
+                    *body_parameter = Some(vec![(name.clone(), parameter.clone())]);
+                } else {
+                    body_parameter
+                        .iter_mut()
+                        .next()
+                        .unwrap()
+                        .push((name.clone(), parameter.clone()));
+                }
+            }
+            ParameterKind::Query => *has_query_params = true,
+            _ => (),
+        }
+    }
+}
+
+fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[MethodStruct]) {
+    let rename_methods_table = renames();
 
     println!("use serde_json::{{json, Value}};");
     println!("use std::{{borrow::Cow, collections::HashMap}};\n");
@@ -403,44 +476,14 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
         let mut body_parameter = None;
         let mut has_query_params = false;
         let mut is_form = false;
-        for parameter in &method.parameters {
-            let mut name = parameter.name.to_snake_case();
-            if ["ref", "type"].contains(&name.as_str()) {
-                name += "_";
-            }
-
-            let mut parameter_type = parameter
-                .parameter_type
-                .name(&type_registry)
-                .replace("'a", "'_")
-                .replace("Cow<'_, str>", "&str");
-            if parameter.is_array {
-                parameter_type = format!("Vec<{}>", parameter_type);
-            }
-            if parameter.is_optional {
-                parameter_type = format!("Option<{}>", parameter_type);
-            }
-            println!("        {}: {},", name, parameter_type);
-            mapping.insert(parameter.name.as_str(), (name.clone(), parameter));
-            if let ParameterKind::FormData = parameter.kind {
-                is_form = true;
-            }
-            match parameter.kind {
-                ParameterKind::Body | ParameterKind::FormData => {
-                    if body_parameter.is_none() {
-                        body_parameter = Some(vec![(name, parameter)]);
-                    } else {
-                        body_parameter
-                            .iter_mut()
-                            .next()
-                            .unwrap()
-                            .push((name, parameter));
-                    }
-                }
-                ParameterKind::Query => has_query_params = true,
-                _ => (),
-            }
-        }
+        process_method_parameters(
+            type_registry,
+            method,
+            &mut mapping,
+            &mut body_parameter,
+            &mut has_query_params,
+            &mut is_form,
+        );
 
         let mut response_type = method
             .response
@@ -494,10 +537,8 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
                     println!(r#"                "{}": {},"#, parameter.name, name);
                 }
                 println!("            }}))",);
-            } else {
-                if let Some((name, parameter)) = x.iter().next() {
-                    println!("            .json(&{})", name);
-                }
+            } else if let Some((name, _parameter)) = x.iter().next() {
+                println!("            .json(&{})", name);
             }
         }
 
@@ -651,7 +692,7 @@ struct MethodStruct {
     name: String,
     comment: String,
     path: String,
-    parameters: Vec<Parameter>,
+    parameters: Vec<Rc<Parameter>>,
     method: String,
     response: ResponseType,
     description: Option<String>,

@@ -55,7 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin.users_delete(id.as_str(), "test").await?;
+    admin.users_delete("test", id.as_str()).await?;
 
     Ok(())
 }
