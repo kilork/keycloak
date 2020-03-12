@@ -1,5 +1,5 @@
 /*!
-# keycloak description
+# Keycloak Admin REST API
 
 ## Features
 
