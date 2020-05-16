@@ -14,6 +14,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let admin = KeycloakAdmin::new(url, admin_token, client);
 
     admin
+        .post(RealmRepresentation {
+            realm: Some("test".into()),
+            ..Default::default()
+        })
+        .await?;
+
+    admin
         .users_post(
             "test",
             UserRepresentation {
@@ -39,6 +46,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .to_string();
 
     admin.users_delete("test", id.as_str()).await?;
+
+    admin.delete("test").await?;
 
     Ok(())
 }

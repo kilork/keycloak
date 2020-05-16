@@ -1,6 +1,6 @@
 [package]
 name = "keycloak"
-version = "0.2.2"
+version = "9.0.0"
 authors = ["Alexander Korolev <kilork@yandex.ru>"]
 edition = "2018"
 categories = ["api-bindings", "asynchronous"]
@@ -20,6 +20,6 @@ serde = { version = "1", features = [ "derive" ] }
 
 [dev-dependencies]
 tokio = { version = "0.2", features = [ "full" ] }
-scraper = "0.11"
+scraper = "0.12"
 heck = "0.3"
 structopt = "0.3"
