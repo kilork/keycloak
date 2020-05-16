@@ -9,7 +9,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "0.2"
+keycloak = "10"
 ```
 
 ```rust#ignore

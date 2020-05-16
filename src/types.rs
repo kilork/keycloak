@@ -59,7 +59,7 @@ pub struct AccessToken<'a> {
     #[serde(rename = "allowed-origins")]
     pub allowed_origins: Option<Vec<Cow<'a, str>>>,
     pub at_hash: Option<Cow<'a, str>>,
-    pub auth_time: Option<i32>,
+    pub auth_time: Option<i64>,
     pub authorization: Option<AccessTokenAuthorization<'a>>,
     pub azp: Option<Cow<'a, str>>,
     pub birthdate: Option<Cow<'a, str>>,
@@ -69,16 +69,17 @@ pub struct AccessToken<'a> {
     pub cnf: Option<AccessTokenCertConf<'a>>,
     pub email: Option<Cow<'a, str>>,
     pub email_verified: Option<bool>,
-    pub exp: Option<i32>,
+    pub exp: Option<i64>,
     pub family_name: Option<Cow<'a, str>>,
     pub gender: Option<Cow<'a, str>>,
     pub given_name: Option<Cow<'a, str>>,
-    pub iat: Option<i32>,
+    pub iat: Option<i64>,
     pub iss: Option<Cow<'a, str>>,
     pub jti: Option<Cow<'a, str>>,
     pub locale: Option<Cow<'a, str>>,
     pub middle_name: Option<Cow<'a, str>>,
     pub name: Option<Cow<'a, str>>,
+    pub nbf: Option<i64>,
     pub nickname: Option<Cow<'a, str>>,
     pub nonce: Option<Cow<'a, str>>,
     pub other_claims: Option<HashMap<Cow<'a, str>, Value>>,
@@ -624,6 +625,8 @@ pub struct RealmRepresentation<'a> {
     pub client_authentication_flow: Option<Cow<'a, str>>,
     pub client_scope_mappings: Option<HashMap<Cow<'a, str>, Value>>,
     pub client_scopes: Option<Vec<ClientScopeRepresentation<'a>>>,
+    pub client_session_idle_timeout: Option<i32>,
+    pub client_session_max_lifespan: Option<i32>,
     pub clients: Option<Vec<ClientRepresentation<'a>>>,
     pub components: Option<MultivaluedHashMap>,
     pub default_default_client_scopes: Option<Vec<Cow<'a, str>>>,
@@ -862,6 +865,19 @@ pub struct SystemInfoRepresentation<'a> {
     pub user_name: Option<Cow<'a, str>>,
     pub user_timezone: Option<Cow<'a, str>>,
     pub version: Option<Cow<'a, str>>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct TestLdapConnectionRepresentation<'a> {
+    pub action: Option<Cow<'a, str>>,
+    pub bind_credential: Option<Cow<'a, str>>,
+    pub bind_dn: Option<Cow<'a, str>>,
+    pub component_id: Option<Cow<'a, str>>,
+    pub connection_timeout: Option<Cow<'a, str>>,
+    pub connection_url: Option<Cow<'a, str>>,
+    pub start_tls: Option<Cow<'a, str>>,
+    pub use_truststore_spi: Option<Cow<'a, str>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]

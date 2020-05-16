@@ -3329,14 +3329,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn test_ldap_connection_post(
         &self,
         realm: &str,
-        action: Option<&str>,
-        bind_credential: Option<&str>,
-        bind_dn: Option<&str>,
-        component_id: Option<&str>,
-        connection_timeout: Option<&str>,
-        connection_url: Option<&str>,
-        start_tls: Option<&str>,
-        use_truststore_spi: Option<&str>,
+        config: TestLdapConnectionRepresentation<'_>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3344,28 +3337,18 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/testLDAPConnection",
                 self.url, realm
             ))
-            .form(&json!({
-                "action": action,
-                "bindCredential": bind_credential,
-                "bindDn": bind_dn,
-                "componentId": component_id,
-                "connectionTimeout": connection_timeout,
-                "connectionUrl": connection_url,
-                "startTls": start_tls,
-                "useTruststoreSpi": use_truststore_spi,
-            }))
+            .json(&config)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
     }
 
-    /// Test SMTP connection with current logged in user
     /// POST /{realm}/testSMTPConnection
     pub async fn test_smtp_connection_post(
         &self,
         realm: &str,
-        config: Option<&str>,
+        settings: HashMap<&str, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3373,9 +3356,7 @@ impl<'a> KeycloakAdmin<'a> {
                 "{}/auth/admin/realms/{}/testSMTPConnection",
                 self.url, realm
             ))
-            .form(&json!({
-                "config": config,
-            }))
+            .json(&settings)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;

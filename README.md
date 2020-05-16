@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements Keycloak Admin REST API version 9.
+Implements Keycloak Admin REST API version 10.
 
 ## Usage
 
@@ -14,7 +14,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "9"
+keycloak = "10"
 ```
 
 ```rust

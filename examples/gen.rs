@@ -21,8 +21,14 @@ fn main() -> Result<(), std::io::Error> {
     Ok(())
 }
 
+fn parse_document() -> Result<Html, std::io::Error> {
+    Ok(Html::parse_document(&read_to_string(
+        "./docs/rest-api-10.html",
+    )?))
+}
+
 fn generate_rest() -> Result<(), std::io::Error> {
-    let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
+    let document = parse_document()?;
     let (_, _, type_registry) = read_types_info(&document)?;
     let methods = read_methods_info(&document)?;
     write_rest(&type_registry, &methods);
@@ -30,7 +36,7 @@ fn generate_rest() -> Result<(), std::io::Error> {
 }
 
 fn generate_types() -> Result<(), std::io::Error> {
-    let document = Html::parse_document(&read_to_string("./docs/rest-api-9.html")?);
+    let document = parse_document()?;
     let (enums, structs, type_registry) = read_types_info(&document)?;
     write_types(&enums, &structs, &type_registry);
     Ok(())
