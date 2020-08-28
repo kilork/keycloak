@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements Keycloak Admin REST API version 10.
+Implements Keycloak Admin REST API version 11.
 
 ## Usage
 
@@ -14,7 +14,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "10"
+keycloak = "11"
 ```
 
 ```rust
@@ -43,7 +43,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     let users = admin
-        .users_get("test", None, None, None, None, None, None, None, None)
+        .users_get(
+            "test", None, None, None, None, None, None, None, None, None, None,
+        )
         .await?;
 
     eprintln!("{:?}", users);

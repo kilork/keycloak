@@ -31,7 +31,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     let users = admin
-        .users_get("test", None, None, None, None, None, None, None, None)
+        .users_get(
+            "test", None, None, None, None, None, None, None, None, None, None,
+        )
         .await?;
 
     eprintln!("{:?}", users);

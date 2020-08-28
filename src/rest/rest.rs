@@ -363,7 +363,7 @@ impl<'a> KeycloakAdmin<'a> {
         Ok(())
     }
 
-    /// Update authentication executions of a flow
+    /// Update authentication executions of a Flow
     /// PUT /{realm}/authentication/flows/{flowAlias}/executions
     pub async fn authentication_flows_executions_put(
         &self,
@@ -971,14 +971,18 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/groups/{}/role-mappings/clients/{}/composite",
                 self.url, realm, id, client
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1072,14 +1076,18 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/users/{}/role-mappings/clients/{}/composite",
                 self.url, realm, id, client
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3228,6 +3236,26 @@ impl<'a> KeycloakAdmin<'a> {
         Ok(error_check(response).await?.json().await?)
     }
 
+    /// Get LDAP supported extensions.
+    /// POST /{realm}/ldap-server-capabilities
+    pub async fn ldap_server_capabilities_post(
+        &self,
+        realm: &str,
+        config: TestLdapConnectionRepresentation<'_>,
+    ) -> Result<(), KeycloakError> {
+        let builder = self
+            .client
+            .post(&format!(
+                "{}/auth/admin/realms/{}/ldap-server-capabilities",
+                self.url, realm
+            ))
+            .json(&config)
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await?;
+        Ok(())
+    }
+
     /// Removes all user sessions.
     /// Any client that has an admin url will also be told to invalidate any sessions  they have.
     /// POST /{realm}/logout-all
@@ -3499,14 +3527,18 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/groups/{}/role-mappings/realm/composite",
                 self.url, realm, id
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3613,14 +3645,18 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/users/{}/role-mappings/realm/composite",
                 self.url, realm, id
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3804,20 +3840,20 @@ impl<'a> KeycloakAdmin<'a> {
         Ok(())
     }
 
-    /// An app-level roles for the specified app for the role’s composite
-    /// GET /{realm}/clients/{id}/roles/{role-name}/composites/clients/{client}
+    /// Get client-level roles for the client that are in the role’s composite
+    /// GET /{realm}/clients/{id}/roles/{role-name}/composites/clients/{clientUuid}
     pub async fn clients_roles_composites_clients_get(
         &self,
         realm: &str,
         id: &str,
         role_name: &str,
-        client: &str,
+        client_uuid: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/clients/{}/roles/{}/composites/clients/{}",
-                self.url, realm, id, role_name, client
+                self.url, realm, id, role_name, client_uuid
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4102,19 +4138,19 @@ impl<'a> KeycloakAdmin<'a> {
         Ok(())
     }
 
-    /// An app-level roles for the specified app for the role’s composite
-    /// GET /{realm}/roles/{role-name}/composites/clients/{client}
+    /// Get client-level roles for the client that are in the role’s composite
+    /// GET /{realm}/roles/{role-name}/composites/clients/{clientUuid}
     pub async fn roles_composites_clients_get(
         &self,
         realm: &str,
         role_name: &str,
-        client: &str,
+        client_uuid: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/roles/{}/composites/clients/{}",
-                self.url, realm, role_name, client
+                self.url, realm, role_name, client_uuid
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4352,18 +4388,18 @@ impl<'a> KeycloakAdmin<'a> {
     }
 
     /// Get client-level roles for the client that are in the role’s composite
-    /// GET /{realm}/roles-by-id/{role-id}/composites/clients/{client}
+    /// GET /{realm}/roles-by-id/{role-id}/composites/clients/{clientUuid}
     pub async fn roles_by_id_composites_clients_get(
         &self,
         realm: &str,
         role_id: &str,
-        client: &str,
+        client_uuid: &str,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/roles-by-id/{}/composites/clients/{}",
-                self.url, realm, role_id, client
+                self.url, realm, role_id, client_uuid
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4533,14 +4569,18 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/client-scopes/{}/scope-mappings/clients/{}/composite",
                 self.url, realm, id, client
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4630,14 +4670,18 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/client-scopes/{}/scope-mappings/realm/composite",
                 self.url, realm, id
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4749,14 +4793,18 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/clients/{}/scope-mappings/clients/{}/composite",
                 self.url, realm, id, client
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4846,14 +4894,18 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
+        brief_representation: Option<bool>,
     ) -> Result<Vec<RoleRepresentation<'_>>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/clients/{}/scope-mappings/realm/composite",
                 self.url, realm, id
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&("briefRepresentation", v));
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4994,6 +5046,8 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         brief_representation: Option<bool>,
         email: Option<&str>,
+        enabled: Option<bool>,
+        exact: Option<bool>,
         first: Option<i32>,
         first_name: Option<&str>,
         last_name: Option<&str>,
@@ -5010,6 +5064,12 @@ impl<'a> KeycloakAdmin<'a> {
         }
         if let Some(v) = email {
             builder = builder.query(&("email", v));
+        }
+        if let Some(v) = enabled {
+            builder = builder.query(&("enabled", v));
+        }
+        if let Some(v) = exact {
+            builder = builder.query(&("exact", v));
         }
         if let Some(v) = first {
             builder = builder.query(&("first", v));
@@ -5523,18 +5583,18 @@ impl<'a> KeycloakAdmin<'a> {
     }
 
     /// Get offline sessions associated with the user and client
-    /// GET /{realm}/users/{id}/offline-sessions/{clientId}
+    /// GET /{realm}/users/{id}/offline-sessions/{clientUuid}
     pub async fn users_offline_sessions_get(
         &self,
         realm: &str,
         id: &str,
-        client_id: &str,
+        client_uuid: &str,
     ) -> Result<Vec<UserSessionRepresentation<'_>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/users/{}/offline-sessions/{}",
-                self.url, realm, id, client_id
+                self.url, realm, id, client_uuid
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;

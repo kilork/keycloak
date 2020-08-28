@@ -1,7 +1,7 @@
 version: '3.6'
 services:
     keycloak:
-        image: jboss/keycloak:10.0.1
+        image: jboss/keycloak:11.0.1
         environment:
             KEYCLOAK_USER: admin
             KEYCLOAK_PASSWORD: password

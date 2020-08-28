@@ -170,6 +170,7 @@ pub struct AuthenticationExecutionInfoRepresentation<'a> {
     pub authentication_config: Option<Cow<'a, str>>,
     pub authentication_flow: Option<bool>,
     pub configurable: Option<bool>,
+    pub description: Option<Cow<'a, str>>,
     pub display_name: Option<Cow<'a, str>>,
     pub flow_id: Option<Cow<'a, str>>,
     pub id: Option<Cow<'a, str>>,
@@ -623,6 +624,8 @@ pub struct RealmRepresentation<'a> {
     pub browser_security_headers: Option<HashMap<Cow<'a, str>, Value>>,
     pub brute_force_protected: Option<bool>,
     pub client_authentication_flow: Option<Cow<'a, str>>,
+    pub client_offline_session_idle_timeout: Option<i32>,
+    pub client_offline_session_max_lifespan: Option<i32>,
     pub client_scope_mappings: Option<HashMap<Cow<'a, str>, Value>>,
     pub client_scopes: Option<Vec<ClientScopeRepresentation<'a>>>,
     pub client_session_idle_timeout: Option<i32>,
@@ -871,6 +874,7 @@ pub struct SystemInfoRepresentation<'a> {
 #[serde(rename_all = "camelCase")]
 pub struct TestLdapConnectionRepresentation<'a> {
     pub action: Option<Cow<'a, str>>,
+    pub auth_type: Option<Cow<'a, str>>,
     pub bind_credential: Option<Cow<'a, str>>,
     pub bind_dn: Option<Cow<'a, str>>,
     pub component_id: Option<Cow<'a, str>>,
