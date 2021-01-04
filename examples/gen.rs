@@ -23,7 +23,7 @@ fn main() -> Result<(), std::io::Error> {
 
 fn parse_document() -> Result<Html, std::io::Error> {
     Ok(Html::parse_document(&read_to_string(
-        "./docs/rest-api-11.html",
+        "./docs/rest-api.html",
     )?))
 }
 
