@@ -557,7 +557,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
                     mapping.get(parameter.name.as_str()).unwrap().0
                 );
                 println!(
-                    r#"            builder = builder.query(&("{}", v));"#,
+                    r#"            builder = builder.query(&[("{}", v)]);"#,
                     parameter.name
                 );
                 println!("        }}");
