@@ -981,7 +981,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1086,7 +1086,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1216,19 +1216,19 @@ impl<'a> KeycloakAdmin<'a> {
             .get(&format!("{}/auth/admin/realms/{}/clients", self.url, realm))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = client_id {
-            builder = builder.query(&("clientId", v));
+            builder = builder.query(&[("clientId", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         if let Some(v) = viewable_only {
-            builder = builder.query(&("viewableOnly", v));
+            builder = builder.query(&[("viewableOnly", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1398,10 +1398,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = scope {
-            builder = builder.query(&("scope", v));
+            builder = builder.query(&[("scope", v)]);
         }
         if let Some(v) = user_id {
-            builder = builder.query(&("userId", v));
+            builder = builder.query(&[("userId", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1427,7 +1427,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = scope {
-            builder = builder.query(&("scope", v));
+            builder = builder.query(&[("scope", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1451,7 +1451,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = scope {
-            builder = builder.query(&("scope", v));
+            builder = builder.query(&[("scope", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1475,7 +1475,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = scope {
-            builder = builder.query(&("scope", v));
+            builder = builder.query(&[("scope", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1614,10 +1614,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1787,10 +1787,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1831,13 +1831,13 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = name {
-            builder = builder.query(&("name", v));
+            builder = builder.query(&[("name", v)]);
         }
         if let Some(v) = parent {
-            builder = builder.query(&("parent", v));
+            builder = builder.query(&[("parent", v)]);
         }
         if let Some(v) = type_ {
-            builder = builder.query(&("type", v));
+            builder = builder.query(&[("type", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1910,7 +1910,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = type_ {
-            builder = builder.query(&("type", v));
+            builder = builder.query(&[("type", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1950,16 +1950,16 @@ impl<'a> KeycloakAdmin<'a> {
             .get(&format!("{}/auth/admin/realms/{}/groups", self.url, realm))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1981,10 +1981,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         if let Some(v) = top {
-            builder = builder.query(&("top", v));
+            builder = builder.query(&[("top", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2120,13 +2120,13 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2264,7 +2264,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = format {
-            builder = builder.query(&("format", v));
+            builder = builder.query(&[("format", v)]);
         }
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2813,37 +2813,37 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = auth_client {
-            builder = builder.query(&("authClient", v));
+            builder = builder.query(&[("authClient", v)]);
         }
         if let Some(v) = auth_ip_address {
-            builder = builder.query(&("authIpAddress", v));
+            builder = builder.query(&[("authIpAddress", v)]);
         }
         if let Some(v) = auth_realm {
-            builder = builder.query(&("authRealm", v));
+            builder = builder.query(&[("authRealm", v)]);
         }
         if let Some(v) = auth_user {
-            builder = builder.query(&("authUser", v));
+            builder = builder.query(&[("authUser", v)]);
         }
         if let Some(v) = date_from {
-            builder = builder.query(&("dateFrom", v));
+            builder = builder.query(&[("dateFrom", v)]);
         }
         if let Some(v) = date_to {
-            builder = builder.query(&("dateTo", v));
+            builder = builder.query(&[("dateTo", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = operation_types {
-            builder = builder.query(&("operationTypes", v));
+            builder = builder.query(&[("operationTypes", v)]);
         }
         if let Some(v) = resource_path {
-            builder = builder.query(&("resourcePath", v));
+            builder = builder.query(&[("resourcePath", v)]);
         }
         if let Some(v) = resource_types {
-            builder = builder.query(&("resourceTypes", v));
+            builder = builder.query(&[("resourceTypes", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3143,28 +3143,28 @@ impl<'a> KeycloakAdmin<'a> {
             .get(&format!("{}/auth/admin/realms/{}/events", self.url, realm))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = client {
-            builder = builder.query(&("client", v));
+            builder = builder.query(&[("client", v)]);
         }
         if let Some(v) = date_from {
-            builder = builder.query(&("dateFrom", v));
+            builder = builder.query(&[("dateFrom", v)]);
         }
         if let Some(v) = date_to {
-            builder = builder.query(&("dateTo", v));
+            builder = builder.query(&[("dateTo", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = ip_address {
-            builder = builder.query(&("ipAddress", v));
+            builder = builder.query(&[("ipAddress", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = type_ {
-            builder = builder.query(&("type", v));
+            builder = builder.query(&[("type", v)]);
         }
         if let Some(v) = user {
-            builder = builder.query(&("user", v));
+            builder = builder.query(&[("user", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3290,10 +3290,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = export_clients {
-            builder = builder.query(&("exportClients", v));
+            builder = builder.query(&[("exportClients", v)]);
         }
         if let Some(v) = export_groups_and_roles {
-            builder = builder.query(&("exportGroupsAndRoles", v));
+            builder = builder.query(&[("exportGroupsAndRoles", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3537,7 +3537,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3655,7 +3655,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3701,16 +3701,16 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3898,13 +3898,13 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3968,10 +3968,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4009,16 +4009,16 @@ impl<'a> KeycloakAdmin<'a> {
             .get(&format!("{}/auth/admin/realms/{}/roles", self.url, realm))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4193,13 +4193,13 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4260,10 +4260,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4579,7 +4579,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4680,7 +4680,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4803,7 +4803,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4904,7 +4904,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4974,7 +4974,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = action {
-            builder = builder.query(&("action", v));
+            builder = builder.query(&[("action", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5016,7 +5016,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = direction {
-            builder = builder.query(&("direction", v));
+            builder = builder.query(&[("direction", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5060,34 +5060,34 @@ impl<'a> KeycloakAdmin<'a> {
             .get(&format!("{}/auth/admin/realms/{}/users", self.url, realm))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = email {
-            builder = builder.query(&("email", v));
+            builder = builder.query(&[("email", v)]);
         }
         if let Some(v) = enabled {
-            builder = builder.query(&("enabled", v));
+            builder = builder.query(&[("enabled", v)]);
         }
         if let Some(v) = exact {
-            builder = builder.query(&("exact", v));
+            builder = builder.query(&[("exact", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = first_name {
-            builder = builder.query(&("firstName", v));
+            builder = builder.query(&[("firstName", v)]);
         }
         if let Some(v) = last_name {
-            builder = builder.query(&("lastName", v));
+            builder = builder.query(&[("lastName", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         if let Some(v) = username {
-            builder = builder.query(&("username", v));
+            builder = builder.query(&[("username", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5113,19 +5113,19 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = email {
-            builder = builder.query(&("email", v));
+            builder = builder.query(&[("email", v)]);
         }
         if let Some(v) = first_name {
-            builder = builder.query(&("firstName", v));
+            builder = builder.query(&[("firstName", v)]);
         }
         if let Some(v) = last_name {
-            builder = builder.query(&("lastName", v));
+            builder = builder.query(&[("lastName", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         if let Some(v) = username {
-            builder = builder.query(&("username", v));
+            builder = builder.query(&[("username", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5384,13 +5384,13 @@ impl<'a> KeycloakAdmin<'a> {
             .json(&actions)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = client_id {
-            builder = builder.query(&("client_id", v));
+            builder = builder.query(&[("client_id", v)]);
         }
         if let Some(v) = lifespan {
-            builder = builder.query(&("lifespan", v));
+            builder = builder.query(&[("lifespan", v)]);
         }
         if let Some(v) = redirect_uri {
-            builder = builder.query(&("redirect_uri", v));
+            builder = builder.query(&[("redirect_uri", v)]);
         }
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5475,16 +5475,16 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = brief_representation {
-            builder = builder.query(&("briefRepresentation", v));
+            builder = builder.query(&[("briefRepresentation", v)]);
         }
         if let Some(v) = first {
-            builder = builder.query(&("first", v));
+            builder = builder.query(&[("first", v)]);
         }
         if let Some(v) = max {
-            builder = builder.query(&("max", v));
+            builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5505,7 +5505,7 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = search {
-            builder = builder.query(&("search", v));
+            builder = builder.query(&[("search", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5640,10 +5640,10 @@ impl<'a> KeycloakAdmin<'a> {
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
         if let Some(v) = client_id {
-            builder = builder.query(&("client_id", v));
+            builder = builder.query(&[("client_id", v)]);
         }
         if let Some(v) = redirect_uri {
-            builder = builder.query(&("redirect_uri", v));
+            builder = builder.query(&[("redirect_uri", v)]);
         }
         let response = builder.send().await?;
         error_check(response).await?;
