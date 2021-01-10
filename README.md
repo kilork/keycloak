@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements Keycloak Admin REST API version 11.
+Implements [Keycloak Admin REST API version 12](https://www.keycloak.org/docs-api/12.0/rest-api/index.html).
 
 ## Usage
 
@@ -14,7 +14,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "11"
+keycloak = "12"
 ```
 
 ```rust
@@ -33,7 +33,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let admin = KeycloakAdmin::new(url, admin_token, client);
 
     admin
-        .users_post(
+        .realm_users_post(
             "test",
             UserRepresentation {
                 username: Some("user".into()),
@@ -43,8 +43,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     let users = admin
-        .users_get(
-            "test", None, None, None, None, None, None, None, None, None, None,
+        .realm_users_get(
+            "test", None, None, None, None, None, None, None, None, None, None, None, None, None,
         )
         .await?;
 
@@ -59,7 +59,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin.users_delete("test", id.as_str()).await?;
+    admin.realm_users_with_id_delete("test", id.as_str()).await?;
 
     Ok(())
 }

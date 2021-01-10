@@ -10,6 +10,7 @@ pub enum AccessTokenCategory {
     Id,
     Admin,
     UserInfo,
+    Logout,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -126,28 +127,6 @@ pub struct AddressClaimSet<'a> {
     pub postal_code: Option<Cow<'a, str>>,
     pub region: Option<Cow<'a, str>>,
     pub street_address: Option<Cow<'a, str>>,
-}
-
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct AdminEventRepresentation<'a> {
-    pub auth_details: Option<AuthDetailsRepresentation<'a>>,
-    pub error: Option<Cow<'a, str>>,
-    pub operation_type: Option<Cow<'a, str>>,
-    pub realm_id: Option<Cow<'a, str>>,
-    pub representation: Option<Cow<'a, str>>,
-    pub resource_path: Option<Cow<'a, str>>,
-    pub resource_type: Option<Cow<'a, str>>,
-    pub time: Option<i64>,
-}
-
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct AuthDetailsRepresentation<'a> {
-    pub client_id: Option<Cow<'a, str>>,
-    pub ip_address: Option<Cow<'a, str>>,
-    pub realm_id: Option<Cow<'a, str>>,
-    pub user_id: Option<Cow<'a, str>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -379,21 +358,6 @@ pub struct CredentialRepresentation<'a> {
     pub type_: Option<Cow<'a, str>>,
     pub user_label: Option<Cow<'a, str>>,
     pub value: Option<Cow<'a, str>>,
-}
-
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct EventRepresentation<'a> {
-    pub client_id: Option<Cow<'a, str>>,
-    pub details: Option<HashMap<Cow<'a, str>, Value>>,
-    pub error: Option<Cow<'a, str>>,
-    pub ip_address: Option<Cow<'a, str>>,
-    pub realm_id: Option<Cow<'a, str>>,
-    pub session_id: Option<Cow<'a, str>>,
-    pub time: Option<i64>,
-    #[serde(rename = "type")]
-    pub type_: Option<Cow<'a, str>>,
-    pub user_id: Option<Cow<'a, str>>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -942,17 +906,5 @@ pub struct UserRepresentation<'a> {
     #[serde(rename = "self")]
     pub self_: Option<Cow<'a, str>>,
     pub service_account_client_id: Option<Cow<'a, str>>,
-    pub username: Option<Cow<'a, str>>,
-}
-
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct UserSessionRepresentation<'a> {
-    pub clients: Option<HashMap<Cow<'a, str>, Value>>,
-    pub id: Option<Cow<'a, str>>,
-    pub ip_address: Option<Cow<'a, str>>,
-    pub last_access: Option<i64>,
-    pub start: Option<i64>,
-    pub user_id: Option<Cow<'a, str>>,
     pub username: Option<Cow<'a, str>>,
 }

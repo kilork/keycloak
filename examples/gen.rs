@@ -1,3 +1,4 @@
+use core::panic;
 use heck::*;
 use scraper::{ElementRef, Html, Selector};
 use std::{collections::HashMap, fs::read_to_string, rc::Rc, str::FromStr};
@@ -312,69 +313,6 @@ fn write_types(
     }
 }
 
-fn renames() -> HashMap<(&'static str, &'static str), String> {
-    let mut rename_methods_table = HashMap::new();
-    rename_methods_table.insert(
-        (
-            "/{realm}/attack-detection/brute-force/users/{userId}",
-            "DELETE",
-        ),
-        "attack_detection_brute_force_user_delete".to_string(),
-    );
-    rename_methods_table.insert(
-        ("/{realm}/client-scopes/{id}", "GET"),
-        "client_scope_get".to_string(),
-    );
-    rename_methods_table.insert(("/{realm}/clients/{id}", "GET"), "client_get".to_string());
-    rename_methods_table.insert(
-        ("/{realm}/components/{id}", "GET"),
-        "component_get".to_string(),
-    );
-    rename_methods_table.insert(("/{realm}/groups/{id}", "GET"), "group_get".to_string());
-    rename_methods_table.insert(
-        ("/{realm}/identity-provider/instances/{alias}", "GET"),
-        "identity_provider_instance_get".to_string(),
-    );
-    rename_methods_table.insert(
-        (
-            "/{realm}/identity-provider/instances/{alias}/mappers/{id}",
-            "GET",
-        ),
-        "identity_provider_instances_mapper_get".to_string(),
-    );
-    rename_methods_table.insert(
-        (
-            "/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
-            "GET",
-        ),
-        "client_scopes_protocol_mappers_model_get".to_string(),
-    );
-    rename_methods_table.insert(
-        ("/{realm}/clients/{id}/protocol-mappers/models/{id}", "GET"),
-        "clients_protocol_mappers_model_get".to_string(),
-    );
-    rename_methods_table.insert(
-        ("/{realm}/clients/{id}/roles/{role-name}", "GET"),
-        "clients_role_get".to_string(),
-    );
-    rename_methods_table.insert(
-        ("/{realm}/roles/{role-name}", "GET"),
-        "role_get".to_string(),
-    );
-    rename_methods_table.insert(("/{realm}/users/{id}", "GET"), "user_get".to_string());
-    rename_methods_table.insert(("/", "GET"), "root_get".to_string());
-
-    rename_methods_table.insert(
-        ("/{realm}/authentication/required-actions/{alias}", "GET"),
-        "authentication_required_action_get".to_string(),
-    );
-    rename_methods_table.insert(
-        ("/{realm}/authentication/flows/{id}", "GET"),
-        "authentication_flow_get".to_string(),
-    );
-    rename_methods_table
-}
-
 fn process_method_parameters(
     type_registry: &HashMap<String, Rc<StructType>>,
     method: &MethodStruct,
@@ -444,27 +382,32 @@ fn process_method_parameters(
 }
 
 fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[MethodStruct]) {
-    let rename_methods_table = renames();
-
     println!("use serde_json::{{json, Value}};");
     println!("use std::{{borrow::Cow, collections::HashMap}};\n");
     println!("use super::*;\n");
     println!("impl<'a> KeycloakAdmin<'a> {{");
 
+    let stream_mapping: HashMap<String, String> =
+        toml::from_str(include_str!("stream.toml")).unwrap();
+
     for method in methods {
         let mut method_name = method.path.clone();
-        if let Some(redefined_method_name) =
-            rename_methods_table.get(&(method_name.as_str(), method.method.as_str()))
-        {
-            method_name = redefined_method_name.clone()
-        } else {
-            for parameter in &method.parameters {
-                if let ParameterKind::Path = parameter.kind {
-                    method_name = method_name.replace(&format!("{{{}}}", parameter.name), "");
-                }
+
+        for parameter in &method.parameters {
+            if let ParameterKind::Path = parameter.kind {
+                let parameter_with = (if parameter.name == "realm" {
+                    ""
+                } else {
+                    "with_"
+                })
+                .to_string()
+                    + parameter.name.to_snake_case().as_str();
+                method_name = method_name
+                    .replace(&format!("{{{}}}", parameter.name), parameter_with.as_str());
             }
-            method_name = (method_name + &method.method).to_snake_case();
         }
+        method_name = (method_name + &method.method).to_snake_case();
+
         let rest_comment = format!("{} {}", method.method, method.path);
 
         if method.name != rest_comment {
@@ -498,6 +441,20 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
             .replace("'a", "'_");
         if method.response.is_array {
             response_type = format!("Vec<{}>", response_type);
+        }
+        if response_type == "Stream" {
+            let stream_type = stream_mapping
+                .get(&method.path)
+                .map(|f| {
+                    FieldType::Registry(f.clone())
+                        .name(type_registry)
+                        .replace("'a", "'_")
+                })
+                .map(|x| format!("Vec<{}>", x));
+            if stream_type.is_none() {
+                panic!("Stream for {} not found", method.path);
+            }
+            response_type = stream_type.expect("stream not found");
         }
         println!("    ) -> Result<{}, KeycloakError> {{", response_type);
         println!(
@@ -631,6 +588,7 @@ struct Field {
     field_type: FieldType,
 }
 
+#[derive(Debug)]
 enum FieldType {
     Simple(String),
     WithLifetime(String),
@@ -665,6 +623,7 @@ impl FieldType {
     }
 }
 
+#[derive(Debug)]
 struct Parameter {
     name: String,
     is_optional: bool,
@@ -674,6 +633,7 @@ struct Parameter {
     parameter_type: FieldType,
 }
 
+#[derive(Debug)]
 enum ParameterKind {
     Path,
     Query,
@@ -694,6 +654,7 @@ impl FromStr for ParameterKind {
     }
 }
 
+#[derive(Debug)]
 struct MethodStruct {
     name: String,
     comment: String,
@@ -704,6 +665,7 @@ struct MethodStruct {
     description: Option<String>,
 }
 
+#[derive(Debug)]
 struct ResponseType {
     is_array: bool,
     return_type: FieldType,

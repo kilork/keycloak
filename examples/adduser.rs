@@ -21,7 +21,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     admin
-        .users_post(
+        .realm_users_post(
             "test",
             UserRepresentation {
                 username: Some("user".into()),
@@ -31,8 +31,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?;
 
     let users = admin
-        .users_get(
-            "test", None, None, None, None, None, None, None, None, None, None,
+        .realm_users_get(
+            "test", None, None, None, None, None, None, None, None, None, None, None, None, None,
         )
         .await?;
 
@@ -47,9 +47,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin.users_delete("test", id.as_str()).await?;
+    admin
+        .realm_users_with_id_delete("test", id.as_str())
+        .await?;
 
-    admin.delete("test").await?;
+    admin.realm_delete("test").await?;
 
     Ok(())
 }
