@@ -448,7 +448,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
                 .map(|f| {
                     FieldType::Registry(f.clone())
                         .name(type_registry)
-                        .replace("'a", "'_")
+                        .replace("'a", "'static")
                 })
                 .map(|x| format!("Vec<{}>", x));
             if stream_type.is_none() {
