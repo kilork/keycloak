@@ -438,7 +438,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
             .response
             .return_type
             .name(type_registry)
-            .replace("'a", "'_");
+            .replace("'a", "'static");
         if method.response.is_array {
             response_type = format!("Vec<{}>", response_type);
         }
@@ -448,7 +448,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
                 .map(|f| {
                     FieldType::Registry(f.clone())
                         .name(type_registry)
-                        .replace("'a", "'_")
+                        .replace("'a", "'static")
                 })
                 .map(|x| format!("Vec<{}>", x));
             if stream_type.is_none() {
