@@ -3,7 +3,7 @@ use std::{borrow::Cow, collections::HashMap};
 
 use super::*;
 
-impl<'a> KeycloakAdmin<'a> {
+impl KeycloakAdmin {
     /// Clear any user login failures for all users   This can release temporary disabled users
     /// DELETE /{realm}/attack-detection/brute-force/users
     pub async fn realm_attack_detection_brute_force_users_delete(
