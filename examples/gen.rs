@@ -675,13 +675,13 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
     Ok(match original {
         "No Content" | "Response" => FieldType::Simple("()".into()),
         "file" => FieldType::Simple("&[u8]".into()),
-        "string" | "< string > array(csv)" => FieldType::WithLifetime("Cow<'a, str>".into()),
+        "string" | "< string > array(csv)" => FieldType::Simple("String".into()),
         "string(byte)" => FieldType::Simple("u8".into()),
         "integer(int32)" => FieldType::Simple("i32".into()),
         "integer(int64)" => FieldType::Simple("i64".into()),
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
-        "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Value>".into()),
+        "Map" => FieldType::Simple("HashMap<String, Value>".into()),
         "Object" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
