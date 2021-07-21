@@ -1,13 +1,20 @@
+use async_trait::async_trait;
+
 use crate::{types::*, KeycloakError};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
 mod rest;
 
-pub struct KeycloakAdmin {
+pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
-    admin_token: KeycloakAdminToken,
+    admin_token: TS,
+}
+
+#[async_trait]
+pub trait KeycloakTokenSupplier {
+    async fn get(&self, url: &str) -> Result<String, KeycloakError>;
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -23,27 +30,51 @@ pub struct KeycloakAdminToken {
     token_type: String,
 }
 
-impl KeycloakAdminToken {
-    pub async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
+#[async_trait]
+impl KeycloakTokenSupplier for KeycloakAdminToken {
+    async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
         Ok(self.access_token.clone())
     }
+}
 
+impl KeycloakAdminToken {
     pub async fn acquire(
         url: &str,
         username: &str,
         password: &str,
         client: &reqwest::Client,
     ) -> Result<KeycloakAdminToken, KeycloakError> {
+        Self::acquire_custom_realm(
+            url,
+            username,
+            password,
+            "master",
+            "admin-cli",
+            "password",
+            client,
+        )
+        .await
+    }
+
+    pub async fn acquire_custom_realm(
+        url: &str,
+        username: &str,
+        password: &str,
+        realm: &str,
+        client_id: &str,
+        grant_type: &str,
+        client: &reqwest::Client,
+    ) -> Result<KeycloakAdminToken, KeycloakError> {
         let response = client
             .post(&format!(
-                "{}/auth/realms/master/protocol/openid-connect/token",
-                url
+                "{}/auth/realms/{}/protocol/openid-connect/token",
+                url, realm
             ))
             .form(&json!({
                 "username": username,
                 "password": password,
-                "client_id": "admin-cli",
-                "grant_type": "password"
+                "client_id": client_id,
+                "grant_type": grant_type
             }))
             .send()
             .await?;
