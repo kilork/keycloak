@@ -1,31 +1,30 @@
 use crate::{types::*, KeycloakError};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use std::borrow::Cow;
 
 mod rest;
 
-pub struct KeycloakAdmin<'a> {
+pub struct KeycloakAdmin {
     url: String,
     client: reqwest::Client,
-    admin_token: KeycloakAdminToken<'a>,
+    admin_token: KeycloakAdminToken,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct KeycloakAdminToken<'a> {
-    access_token: Cow<'a, str>,
+pub struct KeycloakAdminToken {
+    access_token: String,
     expires_in: usize,
     #[serde(rename = "not-before-policy")]
     not_before_policy: Option<usize>,
     refresh_expires_in: Option<usize>,
-    refresh_token: Option<Cow<'a, str>>,
-    scope: Cow<'a, str>,
-    session_state: Option<Cow<'a, str>>,
-    token_type: Cow<'a, str>,
+    refresh_token: Option<String>,
+    scope: String,
+    session_state: Option<String>,
+    token_type: String,
 }
 
-impl<'a> KeycloakAdminToken<'a> {
-    pub async fn get(&self, _url: &str) -> Result<Cow<'_, str>, KeycloakError> {
+impl KeycloakAdminToken {
+    pub async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
         Ok(self.access_token.clone())
     }
 
@@ -34,7 +33,7 @@ impl<'a> KeycloakAdminToken<'a> {
         username: &str,
         password: &str,
         client: &reqwest::Client,
-    ) -> Result<KeycloakAdminToken<'a>, KeycloakError> {
+    ) -> Result<KeycloakAdminToken, KeycloakError> {
         let response = client
             .post(&format!(
                 "{}/auth/realms/master/protocol/openid-connect/token",
@@ -66,8 +65,8 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
-impl<'a> KeycloakAdmin<'a> {
-    pub fn new(url: &str, admin_token: KeycloakAdminToken<'a>, client: reqwest::Client) -> Self {
+impl KeycloakAdmin {
+    pub fn new(url: &str, admin_token: KeycloakAdminToken, client: reqwest::Client) -> Self {
         Self {
             url: url.into(),
             client,

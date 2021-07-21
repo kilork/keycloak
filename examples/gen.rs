@@ -30,16 +30,15 @@ fn parse_document() -> Result<Html, std::io::Error> {
 
 fn generate_rest() -> Result<(), std::io::Error> {
     let document = parse_document()?;
-    let (_, _, type_registry) = read_types_info(&document)?;
     let methods = read_methods_info(&document)?;
-    write_rest(&type_registry, &methods);
+    write_rest(&methods);
     Ok(())
 }
 
 fn generate_types() -> Result<(), std::io::Error> {
     let document = parse_document()?;
-    let (enums, structs, type_registry) = read_types_info(&document)?;
-    write_types(&enums, &structs, &type_registry);
+    let (enums, structs) = read_types_info(&document)?;
+    write_types(&enums, &structs);
     Ok(())
 }
 
@@ -55,12 +54,8 @@ fn check_optional(value: &str) -> bool {
     "optional" == value
 }
 
-type TypeTrio = (
-    Vec<EnumType>,
-    Vec<Rc<StructType>>,
-    HashMap<String, Rc<StructType>>,
-);
-fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error> {
+type TypeDuo = (Vec<EnumType>, Vec<Rc<StructType>>);
+fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> {
     let definitions_selector =
         Selector::parse("#_definitions ~ div.sectionbody > div.sect2").unwrap();
 
@@ -70,7 +65,6 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
     rename_table.insert("Userinfo", "UserInfo".to_string());
 
     let mut structs = vec![];
-    let mut type_registry = HashMap::new();
     let mut enums = vec![];
     for definition in definitions {
         let struct_name = text(&definition, "h3").replace("-", "");
@@ -155,11 +149,10 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeTrio, std::io::Error>
             is_camel_case,
             fields: result_fields,
         });
-        type_registry.insert(struct_name, struct_.clone());
         structs.push(struct_);
     }
 
-    Ok((enums, structs, type_registry))
+    Ok((enums, structs))
 }
 
 fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std::io::Error> {
@@ -259,14 +252,10 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
     Ok(methods)
 }
 
-fn write_types(
-    enums: &[EnumType],
-    structs: &[Rc<StructType>],
-    type_registry: &HashMap<String, Rc<StructType>>,
-) {
+fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
     println!("use serde::{{Deserialize, Serialize}};");
     println!("use serde_json::Value;");
-    println!("use std::{{borrow::Cow, collections::HashMap}};\n");
+    println!("use std::collections::HashMap;\n");
 
     for e in enums {
         println!("#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]");
@@ -284,22 +273,17 @@ fn write_types(
     }
 
     for s in structs {
-        let is_lifetime = s.is_lifetime(&type_registry);
         println!("#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]");
         if s.is_camel_case {
             println!(r#"#[serde(rename_all = "camelCase")]"#);
         }
-        println!(
-            "pub struct {}{} {{",
-            s.name,
-            if is_lifetime { "<'a>" } else { "" }
-        );
+        println!("pub struct {} {{", s.name,);
 
         for field in &s.fields {
             if field.is_rename {
                 println!(r#"    #[serde(rename = "{}")]"#, field.original_field);
             }
-            let mut field_type = field.field_type.name(&type_registry);
+            let mut field_type = field.field_type.name();
             if field.is_array {
                 field_type = format!("Vec<{}>", field_type);
             }
@@ -314,7 +298,6 @@ fn write_types(
 }
 
 fn process_method_parameters(
-    type_registry: &HashMap<String, Rc<StructType>>,
     method: &MethodStruct,
     mapping: &mut HashMap<String, (String, Rc<Parameter>)>,
     body_parameter: &mut Option<Vec<(String, Rc<Parameter>)>>,
@@ -348,16 +331,15 @@ fn process_method_parameters(
     }
 
     for (name, parameter) in path_params.iter().chain(parameters.iter()) {
-        let mut parameter_type = parameter
-            .parameter_type
-            .name(&type_registry)
-            .replace("'a", "'_")
-            .replace("Cow<'_, str>", "&str");
+        let mut parameter_type = parameter.parameter_type.name();
         if parameter.is_array {
             parameter_type = format!("Vec<{}>", parameter_type);
         }
         if parameter.is_optional {
             parameter_type = format!("Option<{}>", parameter_type);
+        }
+        if !parameter.is_array && !parameter.is_optional && parameter_type == "String" {
+            parameter_type = "&str".into();
         }
         println!("        {}: {},", name, parameter_type);
         if let ParameterKind::FormData = parameter.kind {
@@ -381,11 +363,11 @@ fn process_method_parameters(
     }
 }
 
-fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[MethodStruct]) {
+fn write_rest(methods: &[MethodStruct]) {
     println!("use serde_json::{{json, Value}};");
-    println!("use std::{{borrow::Cow, collections::HashMap}};\n");
+    println!("use std::collections::HashMap;\n");
     println!("use super::*;\n");
-    println!("impl<'a> KeycloakAdmin<'a> {{");
+    println!("impl KeycloakAdmin {{");
 
     let stream_mapping: HashMap<String, String> =
         toml::from_str(include_str!("stream.toml")).unwrap();
@@ -426,7 +408,6 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
         let mut has_query_params = false;
         let mut is_form = false;
         process_method_parameters(
-            type_registry,
             method,
             &mut mapping,
             &mut body_parameter,
@@ -434,11 +415,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
             &mut is_form,
         );
 
-        let mut response_type = method
-            .response
-            .return_type
-            .name(type_registry)
-            .replace("'a", "'static");
+        let mut response_type = method.response.return_type.name().replace("'a", "'static");
         if method.response.is_array {
             response_type = format!("Vec<{}>", response_type);
         }
@@ -447,7 +424,7 @@ fn write_rest(type_registry: &HashMap<String, Rc<StructType>>, methods: &[Method
                 .get(&method.path)
                 .map(|f| {
                     FieldType::Registry(f.clone())
-                        .name(type_registry)
+                        .name()
                         .replace("'a", "'static")
                 })
                 .map(|x| format!("Vec<{}>", x));
@@ -571,14 +548,6 @@ struct EnumType {
     fields: Vec<String>,
 }
 
-impl StructType {
-    fn is_lifetime(&self, type_registry: &HashMap<String, Rc<StructType>>) -> bool {
-        self.fields
-            .iter()
-            .any(|x| x.field_type.is_lifetime(type_registry))
-    }
-}
-
 struct Field {
     field_name: String,
     original_field: String,
@@ -591,34 +560,13 @@ struct Field {
 #[derive(Debug)]
 enum FieldType {
     Simple(String),
-    WithLifetime(String),
     Registry(String),
 }
 
 impl FieldType {
-    fn is_lifetime(&self, type_registry: &HashMap<String, Rc<StructType>>) -> bool {
+    fn name(&self) -> String {
         match self {
-            FieldType::WithLifetime(_) => true,
-            FieldType::Registry(t) => type_registry
-                .get(t)
-                .map(|s| s.is_lifetime(type_registry))
-                .unwrap_or_default(),
-            FieldType::Simple(_) => false,
-        }
-    }
-
-    fn name(&self, type_registry: &HashMap<String, Rc<StructType>>) -> String {
-        match self {
-            FieldType::Registry(name) => format!(
-                "{}{}",
-                name,
-                if self.is_lifetime(type_registry) {
-                    "<'a>"
-                } else {
-                    ""
-                }
-            ),
-            FieldType::WithLifetime(name) | FieldType::Simple(name) => name.clone(),
+            FieldType::Registry(name) | FieldType::Simple(name) => name.clone(),
         }
     }
 }
@@ -675,13 +623,13 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
     Ok(match original {
         "No Content" | "Response" => FieldType::Simple("()".into()),
         "file" => FieldType::Simple("&[u8]".into()),
-        "string" | "< string > array(csv)" => FieldType::WithLifetime("Cow<'a, str>".into()),
+        "string" | "< string > array(csv)" => FieldType::Simple("String".into()),
         "string(byte)" => FieldType::Simple("u8".into()),
         "integer(int32)" => FieldType::Simple("i32".into()),
         "integer(int64)" => FieldType::Simple("i64".into()),
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
-        "Map" => FieldType::WithLifetime("HashMap<Cow<'a, str>, Value>".into()),
+        "Map" => FieldType::Simple("HashMap<String, Value>".into()),
         "Object" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {

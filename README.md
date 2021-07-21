@@ -18,12 +18,13 @@ keycloak = "12"
 ```
 
 ```rust
-use keycloak::{KeycloakAdmin, KeycloakAdminToken};
-use keycloak::types::*;
+use keycloak::{
+    types::*,
+    {KeycloakAdmin, KeycloakAdminToken},
+};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-
     let url = "http://localhost:9080";
     let client = reqwest::Client::new();
     let admin_token = KeycloakAdminToken::acquire(url, "admin", "password", &client).await?;
@@ -31,6 +32,13 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!("{:?}", admin_token);
 
     let admin = KeycloakAdmin::new(url, admin_token, client);
+
+    admin
+        .post(RealmRepresentation {
+            realm: Some("test".into()),
+            ..Default::default()
+        })
+        .await?;
 
     admin
         .realm_users_post(
@@ -59,7 +67,11 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin.realm_users_with_id_delete("test", id.as_str()).await?;
+    admin
+        .realm_users_with_id_delete("test", id.as_str())
+        .await?;
+
+    admin.realm_delete("test").await?;
 
     Ok(())
 }

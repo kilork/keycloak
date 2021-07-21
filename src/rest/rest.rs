@@ -1,9 +1,9 @@
 use serde_json::{json, Value};
-use std::{borrow::Cow, collections::HashMap};
+use std::collections::HashMap;
 
 use super::*;
 
-impl<'a> KeycloakAdmin<'a> {
+impl KeycloakAdmin {
     /// Clear any user login failures for all users   This can release temporary disabled users
     /// DELETE /{realm}/attack-detection/brute-force/users
     pub async fn realm_attack_detection_brute_force_users_delete(
@@ -28,7 +28,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         user_id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -64,7 +64,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -81,7 +81,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -99,7 +99,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         provider_id: &str,
-    ) -> Result<AuthenticatorConfigInfoRepresentation<'static>, KeycloakError> {
+    ) -> Result<AuthenticatorConfigInfoRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -117,7 +117,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<AuthenticatorConfigRepresentation<'static>, KeycloakError> {
+    ) -> Result<AuthenticatorConfigRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -135,7 +135,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: AuthenticatorConfigRepresentation<'_>,
+        rep: AuthenticatorConfigRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -174,7 +174,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_executions_post(
         &self,
         realm: &str,
-        execution: AuthenticationExecutionRepresentation<'_>,
+        execution: AuthenticationExecutionRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -233,7 +233,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         execution_id: &str,
-        json: AuthenticatorConfigRepresentation<'_>,
+        json: AuthenticatorConfigRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -291,7 +291,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_flows_post(
         &self,
         realm: &str,
-        flow: AuthenticationFlowRepresentation<'_>,
+        flow: AuthenticationFlowRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -311,7 +311,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_flows_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<AuthenticationFlowRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<AuthenticationFlowRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -329,7 +329,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         flow_alias: &str,
-        data: HashMap<&str, Value>,
+        data: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -369,7 +369,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         flow_alias: &str,
-        rep: AuthenticationExecutionInfoRepresentation<'_>,
+        rep: AuthenticationExecutionInfoRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -390,7 +390,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         flow_alias: &str,
-        data: HashMap<&str, Value>,
+        data: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -411,7 +411,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         flow_alias: &str,
-        data: HashMap<&str, Value>,
+        data: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -432,7 +432,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<AuthenticationFlowRepresentation<'static>, KeycloakError> {
+    ) -> Result<AuthenticationFlowRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -450,7 +450,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        flow: AuthenticationFlowRepresentation<'_>,
+        flow: AuthenticationFlowRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -489,7 +489,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_form_action_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -506,7 +506,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_form_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -523,7 +523,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_per_client_config_description_get(
         &self,
         realm: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -540,7 +540,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_register_required_action_post(
         &self,
         realm: &str,
-        data: HashMap<&str, Value>,
+        data: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -560,7 +560,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_required_actions_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<RequiredActionProviderRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RequiredActionProviderRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -578,7 +578,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<RequiredActionProviderRepresentation<'static>, KeycloakError> {
+    ) -> Result<RequiredActionProviderRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -596,7 +596,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-        rep: RequiredActionProviderRepresentation<'_>,
+        rep: RequiredActionProviderRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -673,7 +673,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -692,7 +692,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         attr: &str,
-    ) -> Result<CertificateRepresentation<'static>, KeycloakError> {
+    ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -711,7 +711,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         attr: &str,
-        config: KeyStoreConfig<'_>,
+        config: KeyStoreConfig,
     ) -> Result<Vec<u8>, KeycloakError> {
         let builder = self
             .client
@@ -732,7 +732,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         attr: &str,
-    ) -> Result<CertificateRepresentation<'static>, KeycloakError> {
+    ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -752,7 +752,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         attr: &str,
-        config: KeyStoreConfig<'_>,
+        config: KeyStoreConfig,
     ) -> Result<Vec<u8>, KeycloakError> {
         let builder = self
             .client
@@ -774,7 +774,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         attr: &str,
         input: &[u8],
-    ) -> Result<CertificateRepresentation<'static>, KeycloakError> {
+    ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -797,7 +797,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         attr: &str,
         input: &[u8],
-    ) -> Result<CertificateRepresentation<'static>, KeycloakError> {
+    ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -818,7 +818,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         config: ClientInitialAccessCreatePresentation,
-    ) -> Result<ClientInitialAccessPresentation<'static>, KeycloakError> {
+    ) -> Result<ClientInitialAccessPresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -835,7 +835,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_clients_initial_access_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ClientInitialAccessPresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientInitialAccessPresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -870,7 +870,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_client_registration_policy_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ComponentTypeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ComponentTypeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -889,7 +889,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -911,7 +911,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -930,7 +930,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -952,7 +952,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -972,7 +972,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -994,7 +994,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1016,7 +1016,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1035,7 +1035,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1057,7 +1057,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1077,7 +1077,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1097,7 +1097,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_client_scopes_post(
         &self,
         realm: &str,
-        rep: ClientScopeRepresentation<'_>,
+        rep: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1117,7 +1117,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_client_scopes_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ClientScopeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1135,7 +1135,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ClientScopeRepresentation<'static>, KeycloakError> {
+    ) -> Result<ClientScopeRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1153,7 +1153,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ClientScopeRepresentation<'_>,
+        rep: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1192,7 +1192,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_clients_post(
         &self,
         realm: &str,
-        rep: ClientRepresentation<'_>,
+        rep: ClientRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1209,12 +1209,12 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_clients_get(
         &self,
         realm: &str,
-        client_id: Option<&str>,
+        client_id: Option<String>,
         first: Option<i32>,
         max: Option<i32>,
         search: Option<bool>,
         viewable_only: Option<bool>,
-    ) -> Result<Vec<ClientRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/clients", self.url, realm))
@@ -1244,7 +1244,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ClientRepresentation<'static>, KeycloakError> {
+    ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1262,7 +1262,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ClientRepresentation<'_>,
+        rep: ClientRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1302,7 +1302,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<CredentialRepresentation<'static>, KeycloakError> {
+    ) -> Result<CredentialRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1320,7 +1320,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<CredentialRepresentation<'static>, KeycloakError> {
+    ) -> Result<CredentialRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1339,7 +1339,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<ClientScopeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1395,9 +1395,9 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        scope: Option<&str>,
-        user_id: Option<&str>,
-    ) -> Result<AccessToken<'static>, KeycloakError> {
+        scope: Option<String>,
+        user_id: Option<String>,
+    ) -> Result<AccessToken, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1422,11 +1422,9 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        scope: Option<&str>,
-    ) -> Result<
-        Vec<ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation<'static>>,
-        KeycloakError,
-    > {
+        scope: Option<String>,
+    ) -> Result<Vec<ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation>, KeycloakError>
+    {
         let mut builder = self
             .client
             .get(&format!(
@@ -1449,8 +1447,8 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_container_id: &str,
-        scope: Option<&str>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+        scope: Option<String>,
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1473,8 +1471,8 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_container_id: &str,
-        scope: Option<&str>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+        scope: Option<String>,
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1514,7 +1512,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1532,8 +1530,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -1552,7 +1550,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        form_params: HashMap<&str, Value>,
+        form_params: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1593,7 +1591,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1613,7 +1611,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1638,7 +1636,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<ClientScopeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1694,7 +1692,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<GlobalRequestResult<'static>, KeycloakError> {
+    ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1712,7 +1710,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ClientRepresentation<'static>, KeycloakError> {
+    ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1730,7 +1728,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<UserRepresentation<'static>, KeycloakError> {
+    ) -> Result<UserRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1748,7 +1746,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1766,7 +1764,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<GlobalRequestResult<'static>, KeycloakError> {
+    ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1786,7 +1784,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1808,7 +1806,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_components_post(
         &self,
         realm: &str,
-        rep: ComponentRepresentation<'_>,
+        rep: ComponentRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1827,10 +1825,10 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_components_get(
         &self,
         realm: &str,
-        name: Option<&str>,
-        parent: Option<&str>,
-        type_: Option<&str>,
-    ) -> Result<Vec<ComponentRepresentation<'static>>, KeycloakError> {
+        name: Option<String>,
+        parent: Option<String>,
+        type_: Option<String>,
+    ) -> Result<Vec<ComponentRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1856,7 +1854,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ComponentRepresentation<'static>, KeycloakError> {
+    ) -> Result<ComponentRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1873,7 +1871,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ComponentRepresentation<'_>,
+        rep: ComponentRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1912,8 +1910,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        type_: Option<&str>,
-    ) -> Result<Vec<ComponentTypeRepresentation<'static>>, KeycloakError> {
+        type_: Option<String>,
+    ) -> Result<Vec<ComponentTypeRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1934,7 +1932,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_groups_post(
         &self,
         realm: &str,
-        rep: GroupRepresentation<'_>,
+        rep: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -1955,8 +1953,8 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-        search: Option<&str>,
-    ) -> Result<Vec<GroupRepresentation<'static>>, KeycloakError> {
+        search: Option<String>,
+    ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/groups", self.url, realm))
@@ -1982,9 +1980,9 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_groups_count_get(
         &self,
         realm: &str,
-        search: Option<&str>,
+        search: Option<String>,
         top: Option<bool>,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2007,7 +2005,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<GroupRepresentation<'static>, KeycloakError> {
+    ) -> Result<GroupRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2025,7 +2023,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: GroupRepresentation<'_>,
+        rep: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2065,7 +2063,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: GroupRepresentation<'_>,
+        rep: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2086,7 +2084,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2104,8 +2102,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -2127,7 +2125,7 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<UserRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2154,7 +2152,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         input: &[u8],
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2174,7 +2172,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_identity_provider_instances_post(
         &self,
         realm: &str,
-        representation: IdentityProviderRepresentation<'_>,
+        representation: IdentityProviderRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2194,7 +2192,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_identity_provider_instances_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<IdentityProviderRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<IdentityProviderRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2212,7 +2210,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<IdentityProviderRepresentation<'static>, KeycloakError> {
+    ) -> Result<IdentityProviderRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2230,7 +2228,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-        provider_rep: IdentityProviderRepresentation<'_>,
+        provider_rep: IdentityProviderRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2270,7 +2268,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-        format: Option<&str>,
+        format: Option<String>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
@@ -2293,7 +2291,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2311,8 +2309,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -2331,7 +2329,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2349,7 +2347,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-        mapper: IdentityProviderMapperRepresentation<'_>,
+        mapper: IdentityProviderMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2370,7 +2368,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<Vec<IdentityProviderMapperRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<IdentityProviderMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2389,7 +2387,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         alias: &str,
         id: &str,
-    ) -> Result<IdentityProviderMapperRepresentation<'static>, KeycloakError> {
+    ) -> Result<IdentityProviderMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2408,7 +2406,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         alias: &str,
         id: &str,
-        rep: IdentityProviderMapperRepresentation<'_>,
+        rep: IdentityProviderMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2466,7 +2464,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_keys_get(
         &self,
         realm: &str,
-    ) -> Result<KeysMetadataRepresentation<'static>, KeycloakError> {
+    ) -> Result<KeysMetadataRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/keys", self.url, realm))
@@ -2481,7 +2479,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        reps: Vec<ProtocolMapperRepresentation<'_>>,
+        reps: Vec<ProtocolMapperRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2502,7 +2500,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ProtocolMapperRepresentation<'_>,
+        rep: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2523,7 +2521,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<ProtocolMapperRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2541,7 +2539,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ProtocolMapperRepresentation<'static>, KeycloakError> {
+    ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2559,7 +2557,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ProtocolMapperRepresentation<'_>,
+        rep: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2600,7 +2598,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         protocol: &str,
-    ) -> Result<Vec<ProtocolMapperRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2618,7 +2616,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        reps: Vec<ProtocolMapperRepresentation<'_>>,
+        reps: Vec<ProtocolMapperRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2639,7 +2637,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ProtocolMapperRepresentation<'_>,
+        rep: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2660,7 +2658,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<ProtocolMapperRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2678,7 +2676,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<ProtocolMapperRepresentation<'static>, KeycloakError> {
+    ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2696,7 +2694,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: ProtocolMapperRepresentation<'_>,
+        rep: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2737,7 +2735,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         protocol: &str,
-    ) -> Result<Vec<ProtocolMapperRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2752,7 +2750,7 @@ impl<'a> KeycloakAdmin<'a> {
     /// Import a realm   Imports a realm from a full representation of that realm.
     /// Realm name must be unique.
     /// POST /
-    pub async fn post(&self, rep: RealmRepresentation<'_>) -> Result<(), KeycloakError> {
+    pub async fn post(&self, rep: RealmRepresentation) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/auth/admin/realms/", self.url,))
@@ -2765,10 +2763,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Get the top-level representation of the realm   It will not include nested information like User and Client representations.
     /// GET /{realm}
-    pub async fn realm_get(
-        &self,
-        realm: &str,
-    ) -> Result<RealmRepresentation<'static>, KeycloakError> {
+    pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}", self.url, realm))
@@ -2783,7 +2778,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_put(
         &self,
         realm: &str,
-        rep: RealmRepresentation<'_>,
+        rep: RealmRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -2812,18 +2807,18 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_admin_events_get(
         &self,
         realm: &str,
-        auth_client: Option<&str>,
-        auth_ip_address: Option<&str>,
-        auth_realm: Option<&str>,
-        auth_user: Option<&str>,
-        date_from: Option<&str>,
-        date_to: Option<&str>,
+        auth_client: Option<String>,
+        auth_ip_address: Option<String>,
+        auth_realm: Option<String>,
+        auth_user: Option<String>,
+        date_from: Option<String>,
+        date_to: Option<String>,
         first: Option<i32>,
         max: Option<i32>,
-        operation_types: Option<&str>,
-        resource_path: Option<&str>,
-        resource_types: Option<&str>,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+        operation_types: Option<String>,
+        resource_path: Option<String>,
+        resource_types: Option<String>,
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2934,7 +2929,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         description: &str,
-    ) -> Result<ClientRepresentation<'static>, KeycloakError> {
+    ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -2953,7 +2948,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_client_session_stats_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2969,7 +2964,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_credential_registrators_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<Cow<'static, str>>, KeycloakError> {
+    ) -> Result<Vec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -2987,7 +2982,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_default_default_client_scopes_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ClientScopeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3041,7 +3036,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_default_groups_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<GroupRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3095,7 +3090,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_default_optional_client_scopes_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ClientScopeRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3148,15 +3143,15 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_events_get(
         &self,
         realm: &str,
-        client: Option<&str>,
-        date_from: Option<&str>,
-        date_to: Option<&str>,
+        client: Option<String>,
+        date_from: Option<String>,
+        date_to: Option<String>,
         first: Option<i32>,
-        ip_address: Option<&str>,
+        ip_address: Option<String>,
         max: Option<i32>,
-        type_: Option<&str>,
-        user: Option<&str>,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+        type_: Option<String>,
+        user: Option<String>,
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/events", self.url, realm))
@@ -3206,7 +3201,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_events_config_get(
         &self,
         realm: &str,
-    ) -> Result<RealmEventsConfigRepresentation<'static>, KeycloakError> {
+    ) -> Result<RealmEventsConfigRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3223,7 +3218,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_events_config_put(
         &self,
         realm: &str,
-        rep: RealmEventsConfigRepresentation<'_>,
+        rep: RealmEventsConfigRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3243,7 +3238,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         path: &str,
-    ) -> Result<GroupRepresentation<'static>, KeycloakError> {
+    ) -> Result<GroupRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3260,7 +3255,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_ldap_server_capabilities_post(
         &self,
         realm: &str,
-        config: TestLdapConnectionRepresentation<'_>,
+        config: TestLdapConnectionRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3276,10 +3271,7 @@ impl<'a> KeycloakAdmin<'a> {
     }
 
     /// GET /{realm}/localization
-    pub async fn realm_localization_get(
-        &self,
-        realm: &str,
-    ) -> Result<Vec<Cow<'static, str>>, KeycloakError> {
+    pub async fn realm_localization_get(&self, realm: &str) -> Result<Vec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3319,7 +3311,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         locale: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3354,7 +3346,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         locale: &str,
-        loclization_texts: HashMap<&str, Value>,
+        loclization_texts: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3375,7 +3367,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         locale: &str,
         key: &str,
-    ) -> Result<Cow<'static, str>, KeycloakError> {
+    ) -> Result<String, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3433,7 +3425,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_logout_all_post(
         &self,
         realm: &str,
-    ) -> Result<GlobalRequestResult<'static>, KeycloakError> {
+    ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3452,7 +3444,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         export_clients: Option<bool>,
         export_groups_and_roles: Option<bool>,
-    ) -> Result<RealmRepresentation<'static>, KeycloakError> {
+    ) -> Result<RealmRepresentation, KeycloakError> {
         let mut builder = self
             .client
             .post(&format!(
@@ -3475,7 +3467,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_partial_import_post(
         &self,
         realm: &str,
-        rep: PartialImportRepresentation<'_>,
+        rep: PartialImportRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3495,7 +3487,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_push_revocation_post(
         &self,
         realm: &str,
-    ) -> Result<GlobalRequestResult<'static>, KeycloakError> {
+    ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3532,7 +3524,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_test_ldap_connection_post(
         &self,
         realm: &str,
-        config: TestLdapConnectionRepresentation<'_>,
+        config: TestLdapConnectionRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3551,7 +3543,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_test_smtp_connection_post(
         &self,
         realm: &str,
-        settings: HashMap<&str, Value>,
+        settings: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3570,7 +3562,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_users_management_permissions_get(
         &self,
         realm: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3586,8 +3578,8 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_users_management_permissions_put(
         &self,
         realm: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -3606,7 +3598,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<MappingsRepresentation<'static>, KeycloakError> {
+    ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3624,7 +3616,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3645,7 +3637,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3663,7 +3655,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3684,7 +3676,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3703,7 +3695,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -3724,7 +3716,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<MappingsRepresentation<'static>, KeycloakError> {
+    ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3742,7 +3734,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3763,7 +3755,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3781,7 +3773,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3802,7 +3794,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3821,7 +3813,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -3842,7 +3834,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: RoleRepresentation<'_>,
+        rep: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3866,8 +3858,8 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-        search: Option<&str>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+        search: Option<String>,
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -3898,7 +3890,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-    ) -> Result<RoleRepresentation<'static>, KeycloakError> {
+    ) -> Result<RoleRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3917,7 +3909,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-        rep: RoleRepresentation<'_>,
+        rep: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3959,7 +3951,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3981,7 +3973,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4000,7 +3992,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4023,7 +4015,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         role_name: &str,
         client_uuid: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4042,7 +4034,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4064,7 +4056,7 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<GroupRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4092,7 +4084,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4111,8 +4103,8 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         role_name: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -4134,7 +4126,7 @@ impl<'a> KeycloakAdmin<'a> {
         role_name: &str,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<UserRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4157,7 +4149,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_roles_post(
         &self,
         realm: &str,
-        rep: RoleRepresentation<'_>,
+        rep: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4177,8 +4169,8 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-        search: Option<&str>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+        search: Option<String>,
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/roles", self.url, realm))
@@ -4205,7 +4197,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-    ) -> Result<RoleRepresentation<'static>, KeycloakError> {
+    ) -> Result<RoleRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4223,7 +4215,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-        rep: RoleRepresentation<'_>,
+        rep: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4263,7 +4255,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4284,7 +4276,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4302,7 +4294,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4324,7 +4316,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         role_name: &str,
         client_uuid: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4342,7 +4334,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4363,7 +4355,7 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<GroupRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4390,7 +4382,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4408,8 +4400,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_name: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -4430,7 +4422,7 @@ impl<'a> KeycloakAdmin<'a> {
         role_name: &str,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<Vec<UserRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4454,7 +4446,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-    ) -> Result<RoleRepresentation<'static>, KeycloakError> {
+    ) -> Result<RoleRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4472,7 +4464,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-        rep: RoleRepresentation<'_>,
+        rep: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4512,7 +4504,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4533,7 +4525,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4551,7 +4543,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4573,7 +4565,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         role_id: &str,
         client_uuid: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4591,7 +4583,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4609,7 +4601,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4627,8 +4619,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         role_id: &str,
-        ref_: ManagementPermissionReference<'_>,
-    ) -> Result<ManagementPermissionReference<'static>, KeycloakError> {
+        ref_: ManagementPermissionReference,
+    ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
@@ -4647,7 +4639,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<MappingsRepresentation<'static>, KeycloakError> {
+    ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4666,7 +4658,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4688,7 +4680,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4707,7 +4699,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4729,7 +4721,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4749,7 +4741,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4770,7 +4762,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4791,7 +4783,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4809,7 +4801,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4830,7 +4822,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4850,7 +4842,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4871,7 +4863,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<MappingsRepresentation<'static>, KeycloakError> {
+    ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4890,7 +4882,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4912,7 +4904,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4931,7 +4923,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -4953,7 +4945,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4973,7 +4965,7 @@ impl<'a> KeycloakAdmin<'a> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -4994,7 +4986,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5015,7 +5007,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5033,7 +5025,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        roles: Vec<RoleRepresentation<'_>>,
+        roles: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5054,7 +5046,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5074,7 +5066,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Vec<RoleRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -5094,7 +5086,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn with_id_name_get(
         &self,
         id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/name", self.url, id))
@@ -5109,7 +5101,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5146,8 +5138,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        action: Option<&str>,
-    ) -> Result<SynchronizationResult<'static>, KeycloakError> {
+        action: Option<String>,
+    ) -> Result<SynchronizationResult, KeycloakError> {
         let mut builder = self
             .client
             .post(&format!(
@@ -5188,8 +5180,8 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         parent_id: &str,
         id: &str,
-        direction: Option<&str>,
-    ) -> Result<SynchronizationResult<'static>, KeycloakError> {
+        direction: Option<String>,
+    ) -> Result<SynchronizationResult, KeycloakError> {
         let mut builder = self
             .client
             .post(&format!(
@@ -5209,7 +5201,7 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_users_post(
         &self,
         realm: &str,
-        rep: UserRepresentation<'_>,
+        rep: UserRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5227,19 +5219,19 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         brief_representation: Option<bool>,
-        email: Option<&str>,
+        email: Option<String>,
         email_verified: Option<bool>,
         enabled: Option<bool>,
         exact: Option<bool>,
         first: Option<i32>,
-        first_name: Option<&str>,
-        idp_alias: Option<&str>,
-        idp_user_id: Option<&str>,
-        last_name: Option<&str>,
+        first_name: Option<String>,
+        idp_alias: Option<String>,
+        idp_user_id: Option<String>,
+        last_name: Option<String>,
         max: Option<i32>,
-        search: Option<&str>,
-        username: Option<&str>,
-    ) -> Result<Vec<UserRepresentation<'static>>, KeycloakError> {
+        search: Option<String>,
+        username: Option<String>,
+    ) -> Result<Vec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/auth/admin/realms/{}/users", self.url, realm))
@@ -5293,12 +5285,12 @@ impl<'a> KeycloakAdmin<'a> {
     pub async fn realm_users_count_get(
         &self,
         realm: &str,
-        email: Option<&str>,
+        email: Option<String>,
         email_verified: Option<bool>,
-        first_name: Option<&str>,
-        last_name: Option<&str>,
-        search: Option<&str>,
-        username: Option<&str>,
+        first_name: Option<String>,
+        last_name: Option<String>,
+        search: Option<String>,
+        username: Option<String>,
     ) -> Result<i32, KeycloakError> {
         let mut builder = self
             .client
@@ -5335,7 +5327,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<UserRepresentation<'static>, KeycloakError> {
+    ) -> Result<UserRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5353,7 +5345,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        rep: UserRepresentation<'_>,
+        rep: UserRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5394,7 +5386,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<Cow<'static, str>>, KeycloakError> {
+    ) -> Result<Vec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5412,7 +5404,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5449,7 +5441,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<CredentialRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<CredentialRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5550,7 +5542,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        credential_types: Vec<&str>,
+        credential_types: Vec<String>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5572,10 +5564,10 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        client_id: Option<&str>,
+        client_id: Option<String>,
         lifespan: Option<i32>,
-        redirect_uri: Option<&str>,
-        actions: Vec<&str>,
+        redirect_uri: Option<String>,
+        actions: Vec<String>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
@@ -5605,7 +5597,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<FederatedIdentityRepresentation<'static>>, KeycloakError> {
+    ) -> Result<Vec<FederatedIdentityRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5624,7 +5616,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         provider: &str,
-        rep: FederatedIdentityRepresentation<'_>,
+        rep: FederatedIdentityRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5667,8 +5659,8 @@ impl<'a> KeycloakAdmin<'a> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-        search: Option<&str>,
-    ) -> Result<Vec<GroupRepresentation<'static>>, KeycloakError> {
+        search: Option<String>,
+    ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -5697,8 +5689,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        search: Option<&str>,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+        search: Option<String>,
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -5757,7 +5749,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<HashMap<Cow<'static, str>, Value>, KeycloakError> {
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -5795,7 +5787,7 @@ impl<'a> KeycloakAdmin<'a> {
         realm: &str,
         id: &str,
         client_uuid: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5813,7 +5805,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        cred: CredentialRepresentation<'_>,
+        cred: CredentialRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -5835,8 +5827,8 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-        client_id: Option<&str>,
-        redirect_uri: Option<&str>,
+        client_id: Option<String>,
+        redirect_uri: Option<String>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
@@ -5862,7 +5854,7 @@ impl<'a> KeycloakAdmin<'a> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Vec<HashMap<Cow<'static, str>, Value>>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5876,7 +5868,7 @@ impl<'a> KeycloakAdmin<'a> {
 
     /// Get themes, social providers, auth providers, and event listeners available on this server
     /// GET /
-    pub async fn get(&self) -> Result<ServerInfoRepresentation<'static>, KeycloakError> {
+    pub async fn get(&self) -> Result<ServerInfoRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/auth/admin/realms/", self.url,))
