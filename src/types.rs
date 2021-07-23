@@ -15,6 +15,17 @@ pub enum AccessTokenCategory {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "UPPERCASE")]
+pub enum IDTokenCategory {
+    Internal,
+    Access,
+    Id,
+    Admin,
+    UserInfo,
+    Logout,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum PartialImportRepresentationPolicy {
     Skip,
     Overwrite,
@@ -135,7 +146,6 @@ pub struct AuthenticationExecutionExportRepresentation {
     pub authenticator: Option<String>,
     pub authenticator_config: Option<String>,
     pub authenticator_flow: Option<bool>,
-    pub autheticator_flow: Option<bool>,
     pub flow_alias: Option<String>,
     pub priority: Option<i32>,
     pub requirement: Option<String>,
@@ -166,7 +176,6 @@ pub struct AuthenticationExecutionRepresentation {
     pub authenticator: Option<String>,
     pub authenticator_config: Option<String>,
     pub authenticator_flow: Option<bool>,
-    pub autheticator_flow: Option<bool>,
     pub flow_id: Option<String>,
     pub id: Option<String>,
     pub parent_flow: Option<String>,
@@ -236,6 +245,34 @@ pub struct ClientMappingsRepresentation {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientPoliciesRepresentation {
+    pub policies: Option<Vec<ClientPolicyRepresentation>>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientPolicyRepresentation {
+    pub builtin: Option<bool>,
+    pub conditions: Option<Vec<Value>>,
+    pub description: Option<String>,
+    pub enable: Option<bool>,
+    pub name: Option<String>,
+    pub profiles: Option<Vec<String>>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientProfileRepresentation {
+    pub builtin: Option<bool>,
+    pub description: Option<String>,
+    pub executors: Option<Vec<Value>>,
+    pub name: Option<String>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientProfilesRepresentation {
+    pub profiles: Option<Vec<ClientProfileRepresentation>>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientRepresentation {
     pub access: Option<HashMap<String, Value>>,
@@ -251,7 +288,6 @@ pub struct ClientRepresentation {
     pub client_id: Option<String>,
     pub consent_required: Option<bool>,
     pub default_client_scopes: Option<Vec<String>>,
-    pub default_roles: Option<Vec<String>>,
     pub description: Option<String>,
     pub direct_access_grants_enabled: Option<bool>,
     pub enabled: Option<bool>,
@@ -262,6 +298,7 @@ pub struct ClientRepresentation {
     pub name: Option<String>,
     pub node_re_registration_timeout: Option<i32>,
     pub not_before: Option<i32>,
+    pub oauth2_device_authorization_grant_enabled: Option<bool>,
     pub optional_client_scopes: Option<Vec<String>>,
     pub origin: Option<String>,
     pub protocol: Option<String>,
@@ -325,15 +362,6 @@ pub struct ComponentRepresentation {
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct ComponentTypeRepresentation {
-    pub help_text: Option<String>,
-    pub id: Option<String>,
-    pub metadata: Option<HashMap<String, Value>>,
-    pub properties: Option<Vec<ConfigPropertyRepresentation>>,
-}
-
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct ConfigPropertyRepresentation {
     pub default_value: Option<Value>,
     pub help_text: Option<String>,
@@ -386,6 +414,48 @@ pub struct GroupRepresentation {
     pub path: Option<String>,
     pub realm_roles: Option<Vec<String>>,
     pub sub_groups: Option<Vec<GroupRepresentation>>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct IDToken {
+    pub acr: Option<String>,
+    pub address: Option<AddressClaimSet>,
+    pub at_hash: Option<String>,
+    pub auth_time: Option<i64>,
+    pub azp: Option<String>,
+    pub birthdate: Option<String>,
+    pub c_hash: Option<String>,
+    pub category: Option<IDTokenCategory>,
+    pub claims_locales: Option<String>,
+    pub email: Option<String>,
+    pub email_verified: Option<bool>,
+    pub exp: Option<i64>,
+    pub family_name: Option<String>,
+    pub gender: Option<String>,
+    pub given_name: Option<String>,
+    pub iat: Option<i64>,
+    pub iss: Option<String>,
+    pub jti: Option<String>,
+    pub locale: Option<String>,
+    pub middle_name: Option<String>,
+    pub name: Option<String>,
+    pub nbf: Option<i64>,
+    pub nickname: Option<String>,
+    pub nonce: Option<String>,
+    pub other_claims: Option<HashMap<String, Value>>,
+    pub phone_number: Option<String>,
+    pub phone_number_verified: Option<bool>,
+    pub picture: Option<String>,
+    pub preferred_username: Option<String>,
+    pub profile: Option<String>,
+    pub s_hash: Option<String>,
+    pub session_state: Option<String>,
+    pub sub: Option<String>,
+    pub typ: Option<String>,
+    pub updated_at: Option<i64>,
+    pub website: Option<String>,
+    pub zoneinfo: Option<String>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -590,6 +660,8 @@ pub struct RealmRepresentation {
     pub client_authentication_flow: Option<String>,
     pub client_offline_session_idle_timeout: Option<i32>,
     pub client_offline_session_max_lifespan: Option<i32>,
+    pub client_policies: Option<ClientPoliciesRepresentation>,
+    pub client_profiles: Option<ClientProfilesRepresentation>,
     pub client_scope_mappings: Option<HashMap<String, Value>>,
     pub client_scopes: Option<Vec<ClientScopeRepresentation>>,
     pub client_session_idle_timeout: Option<i32>,
@@ -600,7 +672,7 @@ pub struct RealmRepresentation {
     pub default_groups: Option<Vec<String>>,
     pub default_locale: Option<String>,
     pub default_optional_client_scopes: Option<Vec<String>>,
-    pub default_roles: Option<Vec<String>>,
+    pub default_role: Option<RoleRepresentation>,
     pub default_signature_algorithm: Option<String>,
     pub direct_grant_flow: Option<String>,
     pub display_name: Option<String>,
@@ -628,6 +700,10 @@ pub struct RealmRepresentation {
     pub max_failure_wait_seconds: Option<i32>,
     pub minimum_quick_login_wait_seconds: Option<i32>,
     pub not_before: Option<i32>,
+    pub o_auth2_device_code_lifespan: Option<i32>,
+    pub o_auth2_device_polling_interval: Option<i32>,
+    pub oauth2_device_code_lifespan: Option<i32>,
+    pub oauth2_device_polling_interval: Option<i32>,
     pub offline_session_idle_timeout: Option<i32>,
     pub offline_session_max_lifespan: Option<i32>,
     pub offline_session_max_lifespan_enabled: Option<bool>,

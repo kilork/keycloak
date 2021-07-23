@@ -59,7 +59,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get authenticator providers   Returns a list of authenticator providers.
+    /// Get authenticator providers   Returns a stream of authenticator providers.
     /// GET /{realm}/authentication/authenticator-providers
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
@@ -76,7 +76,7 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get client authenticator providers   Returns a list of client authenticator providers.
+    /// Get client authenticator providers   Returns a stream of client authenticator providers.
     /// GET /{realm}/authentication/client-authenticator-providers
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
@@ -306,7 +306,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get authentication flows   Returns a list of authentication flows.
+    /// Get authentication flows   Returns a stream of authentication flows.
     /// GET /{realm}/authentication/flows
     pub async fn realm_authentication_flows_get(
         &self,
@@ -484,7 +484,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get form action providers   Returns a list of form action providers.
+    /// Get form action providers   Returns a stream of form action providers.
     /// GET /{realm}/authentication/form-action-providers
     pub async fn realm_authentication_form_action_providers_get(
         &self,
@@ -501,7 +501,7 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get form providers   Returns a list of form providers.
+    /// Get form providers   Returns a stream of form providers.
     /// GET /{realm}/authentication/form-providers
     pub async fn realm_authentication_form_providers_get(
         &self,
@@ -555,7 +555,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get required actions   Returns a list of required actions.
+    /// Get required actions   Returns a stream of required actions.
     /// GET /{realm}/authentication/required-actions
     pub async fn realm_authentication_required_actions_get(
         &self,
@@ -668,7 +668,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get unregistered required actions   Returns a list of unregistered required actions.
+    /// Get unregistered required actions   Returns a stream of unregistered required actions.
     /// GET /{realm}/authentication/unregistered-required-actions
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
@@ -870,7 +870,7 @@ impl KeycloakAdmin {
     pub async fn realm_client_registration_policy_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Vec<ComponentTypeRepresentation>, KeycloakError> {
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1415,6 +1415,58 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
+    /// Create JSON with payload of example id token
+    /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-id-token
+    pub async fn realm_clients_with_id_evaluate_scopes_generate_example_id_token_get(
+        &self,
+        realm: &str,
+        id: &str,
+        scope: Option<String>,
+        user_id: Option<String>,
+    ) -> Result<IDToken, KeycloakError> {
+        let mut builder = self
+            .client
+            .get(&format!(
+                "{}/auth/admin/realms/{}/clients/{}/evaluate-scopes/generate-example-id-token",
+                self.url, realm, id
+            ))
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = scope {
+            builder = builder.query(&[("scope", v)]);
+        }
+        if let Some(v) = user_id {
+            builder = builder.query(&[("userId", v)]);
+        }
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
+    /// Create JSON with payload of example user info
+    /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo
+    pub async fn realm_clients_with_id_evaluate_scopes_generate_example_userinfo_get(
+        &self,
+        realm: &str,
+        id: &str,
+        scope: Option<String>,
+        user_id: Option<String>,
+    ) -> Result<HashMap<String, Value>, KeycloakError> {
+        let mut builder = self
+            .client
+            .get(&format!(
+                "{}/auth/admin/realms/{}/clients/{}/evaluate-scopes/generate-example-userinfo",
+                self.url, realm, id
+            ))
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = scope {
+            builder = builder.query(&[("scope", v)]);
+        }
+        if let Some(v) = user_id {
+            builder = builder.query(&[("userId", v)]);
+        }
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
     /// Return list of all protocol mappers, which will be used when generating tokens issued for particular client.
     /// This means  protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.
     /// GET /{realm}/clients/{id}/evaluate-scopes/protocol-mappers
@@ -1911,7 +1963,7 @@ impl KeycloakAdmin {
         realm: &str,
         id: &str,
         type_: Option<String>,
-    ) -> Result<Vec<ComponentTypeRepresentation>, KeycloakError> {
+    ) -> Result<Vec<ComponentRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -2942,6 +2994,76 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
+    /// GET /{realm}/client-policies/policies
+    pub async fn realm_client_policies_policies_get(
+        &self,
+        realm: &str,
+    ) -> Result<String, KeycloakError> {
+        let builder = self
+            .client
+            .get(&format!(
+                "{}/auth/admin/realms/{}/client-policies/policies",
+                self.url, realm
+            ))
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
+    /// PUT /{realm}/client-policies/policies
+    pub async fn realm_client_policies_policies_put(
+        &self,
+        realm: &str,
+        json: &str,
+    ) -> Result<(), KeycloakError> {
+        let builder = self
+            .client
+            .put(&format!(
+                "{}/auth/admin/realms/{}/client-policies/policies",
+                self.url, realm
+            ))
+            .json(&json)
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await?;
+        Ok(())
+    }
+
+    /// GET /{realm}/client-policies/profiles
+    pub async fn realm_client_policies_profiles_get(
+        &self,
+        realm: &str,
+    ) -> Result<String, KeycloakError> {
+        let builder = self
+            .client
+            .get(&format!(
+                "{}/auth/admin/realms/{}/client-policies/profiles",
+                self.url, realm
+            ))
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
+    /// PUT /{realm}/client-policies/profiles
+    pub async fn realm_client_policies_profiles_put(
+        &self,
+        realm: &str,
+        json: &str,
+    ) -> Result<(), KeycloakError> {
+        let builder = self
+            .client
+            .put(&format!(
+                "{}/auth/admin/realms/{}/client-policies/profiles",
+                self.url, realm
+            ))
+            .json(&json)
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await?;
+        Ok(())
+    }
+
     /// Get client session stats   Returns a JSON map.
     /// The key is the client id, the value is the number of sessions that currently are active  with that client. Only clients that actually have a session associated with them will be in this map.
     /// GET /{realm}/client-session-stats
@@ -3271,7 +3393,10 @@ impl KeycloakAdmin {
     }
 
     /// GET /{realm}/localization
-    pub async fn realm_localization_get(&self, realm: &str) -> Result<Vec<String>, KeycloakError> {
+    pub async fn realm_localization_get(
+        &self,
+        realm: &str,
+    ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
