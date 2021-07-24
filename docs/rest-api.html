@@ -472,6 +472,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_clientinitialaccesspresentation">ClientInitialAccessPresentation</a></li>
 <li><a href="#_clientmappingsrepresentation">ClientMappingsRepresentation</a></li>
 <li><a href="#_clientpoliciesrepresentation">ClientPoliciesRepresentation</a></li>
+<li><a href="#_clientpolicyconditionrepresentation">ClientPolicyConditionRepresentation</a></li>
+<li><a href="#_clientpolicyexecutorrepresentation">ClientPolicyExecutorRepresentation</a></li>
 <li><a href="#_clientpolicyrepresentation">ClientPolicyRepresentation</a></li>
 <li><a href="#_clientprofilerepresentation">ClientProfileRepresentation</a></li>
 <li><a href="#_clientprofilesrepresentation">ClientProfilesRepresentation</a></li>
@@ -488,6 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_idtoken">IDToken</a></li>
 <li><a href="#_identityprovidermapperrepresentation">IdentityProviderMapperRepresentation</a></li>
 <li><a href="#_identityproviderrepresentation">IdentityProviderRepresentation</a></li>
+<li><a href="#_jsonnode">JsonNode</a></li>
 <li><a href="#_keystoreconfig">KeyStoreConfig</a></li>
 <li><a href="#_keysmetadatarepresentation">KeysMetadataRepresentation</a></li>
 <li><a href="#_keysmetadatarepresentation-keymetadatarepresentation">KeysMetadataRepresentation-KeyMetadataRepresentation</a></li>
@@ -5525,6 +5528,14 @@ Schemes: HTTP</p>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">the max results to return</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+<td class="tableblock halign-left valign-middle"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>q</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-middle"></td>
 </tr>
 <tr>
@@ -12632,7 +12643,7 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientpoliciesrepresentation">ClientPoliciesRepresentation</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -12677,10 +12688,10 @@ Schemes: HTTP</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>json</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>clientPolicies</strong><br>
 <em>required</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientpoliciesrepresentation">ClientPoliciesRepresentation</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -12747,6 +12758,13 @@ Schemes: HTTP</p>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>include-global-profiles</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -12769,7 +12787,7 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientprofilesrepresentation">ClientProfilesRepresentation</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -12814,10 +12832,10 @@ Schemes: HTTP</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>json</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>clientProfiles</strong><br>
 <em>required</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientprofilesrepresentation">ClientProfilesRepresentation</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -19605,83 +19623,6 @@ Schemes: HTTP</p>
 <div class="sect2">
 <h3 id="_scope_mappings_resource">Scope Mappings</h3>
 <div class="sect3">
-<h4 id="_getscopemappings">Get all scope mappings for the client</h4>
-<div class="literalblock">
-<div class="content">
-<pre>GET /{realm}/client-scopes/{id}/scope-mappings</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_239">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client scope (not name)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_239">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_mappingsrepresentation">MappingsRepresentation</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_134">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_addclientscopemapping">Add client-level roles to the client&#8217;s scope</h4>
 <div class="literalblock">
 <div class="content">
@@ -19689,7 +19630,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_240">Parameters</h5>
+<h5 id="_parameters_239">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -19738,7 +19679,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_240">Responses</h5>
+<h5 id="_responses_239">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -19780,7 +19721,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_241">Parameters</h5>
+<h5 id="_parameters_240">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -19822,7 +19763,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_241">Responses</h5>
+<h5 id="_responses_240">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -19846,7 +19787,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_135">Produces</h5>
+<h5 id="_produces_134">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19864,7 +19805,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_242">Parameters</h5>
+<h5 id="_parameters_241">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -19913,7 +19854,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_242">Responses</h5>
+<h5 id="_responses_241">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -19955,7 +19896,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_243">Parameters</h5>
+<h5 id="_parameters_242">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -19997,7 +19938,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_243">Responses</h5>
+<h5 id="_responses_242">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20021,7 +19962,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_136">Produces</h5>
+<h5 id="_produces_135">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20039,7 +19980,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_244">Parameters</h5>
+<h5 id="_parameters_243">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20094,7 +20035,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_244">Responses</h5>
+<h5 id="_responses_243">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20118,7 +20059,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_137">Produces</h5>
+<h5 id="_produces_136">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20136,7 +20077,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_245">Parameters</h5>
+<h5 id="_parameters_244">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -20178,7 +20119,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_245">Responses</h5>
+<h5 id="_responses_244">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20220,7 +20161,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_246">Parameters</h5>
+<h5 id="_parameters_245">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -20255,7 +20196,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_246">Responses</h5>
+<h5 id="_responses_245">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20279,7 +20220,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_138">Produces</h5>
+<h5 id="_produces_137">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20297,7 +20238,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_247">Parameters</h5>
+<h5 id="_parameters_246">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -20339,7 +20280,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_247">Responses</h5>
+<h5 id="_responses_246">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20381,7 +20322,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_248">Parameters</h5>
+<h5 id="_parameters_247">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -20416,7 +20357,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_248">Responses</h5>
+<h5 id="_responses_247">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20440,7 +20381,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_139">Produces</h5>
+<h5 id="_produces_138">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20465,7 +20406,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_249">Parameters</h5>
+<h5 id="_parameters_248">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20512,7 +20453,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_249">Responses</h5>
+<h5 id="_responses_248">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -20536,7 +20477,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_140">Produces</h5>
+<h5 id="_produces_139">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20547,10 +20488,101 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getscopemappings">Get all scope mappings for the client</h4>
+<h4 id="_addclientscopemapping">Add client-level roles to the client&#8217;s scope</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /{realm}/clients/{id}/scope-mappings</pre>
+<pre>POST /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_249">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>client</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>roles</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_rolerepresentation">RoleRepresentation</a> &gt; array</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_249">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_consumes_83">Consumes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getclientscopemappings">Get the roles associated with a client&#8217;s scope   Returns roles for the client.</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
 </div>
 </div>
 <div class="sect4">
@@ -20571,6 +20603,13 @@ Schemes: HTTP</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>client</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
@@ -20607,13 +20646,13 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_mappingsrepresentation">MappingsRepresentation</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_stream">Stream</a></p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_141">Produces</h5>
+<h5 id="_produces_140">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20624,10 +20663,10 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_addclientscopemapping">Add client-level roles to the client&#8217;s scope</h4>
+<h4 id="_deleteclientscopemapping">Remove client-level roles from the client&#8217;s scope.</h4>
 <div class="literalblock">
 <div class="content">
-<pre>POST /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
+<pre>DELETE /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
 </div>
 </div>
 <div class="sect4">
@@ -20704,7 +20743,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_83">Consumes</h5>
+<h5 id="_consumes_84">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20715,10 +20754,10 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getclientscopemappings">Get the roles associated with a client&#8217;s scope   Returns roles for the client.</h4>
+<h4 id="_getavailableclientscopemappings">The available client-level roles   Returns the roles for the client that can be associated with the client&#8217;s scope</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
+<pre>GET /{realm}/clients/{id}/scope-mappings/clients/{client}/available</pre>
 </div>
 </div>
 <div class="sect4">
@@ -20788,182 +20827,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_142">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_deleteclientscopemapping">Remove client-level roles from the client&#8217;s scope.</h4>
-<div class="literalblock">
-<div class="content">
-<pre>DELETE /{realm}/clients/{id}/scope-mappings/clients/{client}</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_253">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>client</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>roles</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_rolerepresentation">RoleRepresentation</a> &gt; array</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_253">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_84">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_getavailableclientscopemappings">The available client-level roles   Returns the roles for the client that can be associated with the client&#8217;s scope</h4>
-<div class="literalblock">
-<div class="content">
-<pre>GET /{realm}/clients/{id}/scope-mappings/clients/{client}/available</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_254">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>client</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_254">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_stream">Stream</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_143">Produces</h5>
+<h5 id="_produces_141">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20981,7 +20845,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_255">Parameters</h5>
+<h5 id="_parameters_253">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21036,6 +20900,167 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
+<h5 id="_responses_253">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_stream">Stream</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_142">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_addrealmscopemappings">Add a set of realm-level roles to the client&#8217;s scope</h4>
+<div class="literalblock">
+<div class="content">
+<pre>POST /{realm}/clients/{id}/scope-mappings/realm</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_254">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>roles</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_rolerepresentation">RoleRepresentation</a> &gt; array</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_254">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_consumes_85">Consumes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getrealmscopemappings">Get realm-level roles associated with the client&#8217;s scope</h4>
+<div class="literalblock">
+<div class="content">
+<pre>GET /{realm}/clients/{id}/scope-mappings/realm</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_255">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
 <h5 id="_responses_255">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -21060,7 +21085,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_144">Produces</h5>
+<h5 id="_produces_143">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21071,10 +21096,10 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_addrealmscopemappings">Add a set of realm-level roles to the client&#8217;s scope</h4>
+<h4 id="_deleterealmscopemappings">Remove a set of realm-level roles from the client&#8217;s scope</h4>
 <div class="literalblock">
 <div class="content">
-<pre>POST /{realm}/clients/{id}/scope-mappings/realm</pre>
+<pre>DELETE /{realm}/clients/{id}/scope-mappings/realm</pre>
 </div>
 </div>
 <div class="sect4">
@@ -21144,7 +21169,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_85">Consumes</h5>
+<h5 id="_consumes_86">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21155,10 +21180,10 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getrealmscopemappings">Get realm-level roles associated with the client&#8217;s scope</h4>
+<h4 id="_getavailablerealmscopemappings">Get realm-level roles that are available to attach to this client&#8217;s scope</h4>
 <div class="literalblock">
 <div class="content">
-<pre>GET /{realm}/clients/{id}/scope-mappings/realm</pre>
+<pre>GET /{realm}/clients/{id}/scope-mappings/realm/available</pre>
 </div>
 </div>
 <div class="sect4">
@@ -21221,168 +21246,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_145">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_deleterealmscopemappings">Remove a set of realm-level roles from the client&#8217;s scope</h4>
-<div class="literalblock">
-<div class="content">
-<pre>DELETE /{realm}/clients/{id}/scope-mappings/realm</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_258">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>roles</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_rolerepresentation">RoleRepresentation</a> &gt; array</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_258">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_consumes_86">Consumes</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_getavailablerealmscopemappings">Get realm-level roles that are available to attach to this client&#8217;s scope</h4>
-<div class="literalblock">
-<div class="content">
-<pre>GET /{realm}/clients/{id}/scope-mappings/realm/available</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_259">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">id of client (not client-id)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_259">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_stream">Stream</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_146">Produces</h5>
+<h5 id="_produces_144">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21407,7 +21271,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_260">Parameters</h5>
+<h5 id="_parameters_258">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21454,7 +21318,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_260">Responses</h5>
+<h5 id="_responses_258">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21478,7 +21342,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_147">Produces</h5>
+<h5 id="_produces_145">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21499,7 +21363,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_261">Parameters</h5>
+<h5 id="_parameters_259">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 22%;">
@@ -21524,7 +21388,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_261">Responses</h5>
+<h5 id="_responses_259">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21548,7 +21412,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_148">Produces</h5>
+<h5 id="_produces_146">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21566,7 +21430,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_262">Parameters</h5>
+<h5 id="_parameters_260">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -21601,7 +21465,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_262">Responses</h5>
+<h5 id="_responses_260">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21625,7 +21489,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_149">Produces</h5>
+<h5 id="_produces_147">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21640,6 +21504,157 @@ Schemes: HTTP</p>
 <div class="literalblock">
 <div class="content">
 <pre>POST /{realm}/user-storage/{id}/remove-imported-users</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_261">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_261">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_syncusers">Trigger sync of users   Action can be "triggerFullSync" or "triggerChangedUsersSync"</h4>
+<div class="literalblock">
+<div class="content">
+<pre>POST /{realm}/user-storage/{id}/sync</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_parameters_262">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>action</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_262">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_synchronizationresult">SynchronizationResult</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_148">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unlinkusers">Unlink imported users from a storage provider</h4>
+<div class="literalblock">
+<div class="content">
+<pre>POST /{realm}/user-storage/{id}/unlink-users</pre>
 </div>
 </div>
 <div class="sect4">
@@ -21703,157 +21718,6 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_syncusers">Trigger sync of users   Action can be "triggerFullSync" or "triggerChangedUsersSync"</h4>
-<div class="literalblock">
-<div class="content">
-<pre>POST /{realm}/user-storage/{id}/sync</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_264">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>action</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_264">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_synchronizationresult">SynchronizationResult</a></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_produces_150">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_unlinkusers">Unlink imported users from a storage provider</h4>
-<div class="literalblock">
-<div class="content">
-<pre>POST /{realm}/user-storage/{id}/unlink-users</pre>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_parameters_265">Parameters</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
-<col style="width: 22%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">Type</th>
-<th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>id</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
-<em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect4">
-<h5 id="_responses_265">Responses</h5>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 10%;">
-<col style="width: 70%;">
-<col style="width: 20%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-middle">HTTP Code</th>
-<th class="tableblock halign-left valign-middle">Description</th>
-<th class="tableblock halign-left valign-middle">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">No Content</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="sect3">
 <h4 id="_syncmapperdata">Trigger sync of mapper data related to ldap mapper (roles, groups, &#8230;&#8203;)   direction is "fedToKeycloak" or "keycloakToFed"</h4>
 <div class="literalblock">
 <div class="content">
@@ -21861,7 +21725,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_266">Parameters</h5>
+<h5 id="_parameters_264">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -21910,7 +21774,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_266">Responses</h5>
+<h5 id="_responses_264">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -21934,7 +21798,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_151">Produces</h5>
+<h5 id="_produces_149">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21955,7 +21819,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_267">Parameters</h5>
+<h5 id="_parameters_265">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -21990,7 +21854,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_267">Responses</h5>
+<h5 id="_responses_265">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -22032,7 +21896,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_268">Parameters</h5>
+<h5 id="_parameters_266">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -22151,7 +22015,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_268">Responses</h5>
+<h5 id="_responses_266">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -22175,7 +22039,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_152">Produces</h5>
+<h5 id="_produces_150">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22210,7 +22074,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_parameters_269">Parameters</h5>
+<h5 id="_parameters_267">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 11%;">
@@ -22280,7 +22144,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_responses_269">Responses</h5>
+<h5 id="_responses_267">Responses</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 10%;">
@@ -22304,7 +22168,144 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_153">Produces</h5>
+<h5 id="_produces_151">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_getconfiguration">GET /{realm}/users/profile</h4>
+<div class="sect4">
+<h5 id="_parameters_268">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_268">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_produces_152">Produces</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_update">PUT /{realm}/users/profile</h4>
+<div class="sect4">
+<h5 id="_parameters_269">Parameters</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 11%;">
+<col style="width: 16%;">
+<col style="width: 50%;">
+<col style="width: 22%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Type</th>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Path</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>text</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_responses_269">Responses</h5>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 70%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">HTTP Code</th>
+<th class="tableblock halign-left valign-middle">Description</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_response">Response</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_consumes_88">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22381,7 +22382,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_154">Produces</h5>
+<h5 id="_produces_153">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22465,7 +22466,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_88">Consumes</h5>
+<h5 id="_consumes_89">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22616,7 +22617,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_155">Produces</h5>
+<h5 id="_produces_154">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22693,7 +22694,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_156">Produces</h5>
+<h5 id="_produces_155">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22839,7 +22840,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_157">Produces</h5>
+<h5 id="_produces_156">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23159,7 +23160,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_89">Consumes</h5>
+<h5 id="_consumes_90">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23243,7 +23244,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_90">Consumes</h5>
+<h5 id="_consumes_91">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23356,7 +23357,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_91">Consumes</h5>
+<h5 id="_consumes_92">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23433,7 +23434,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_158">Produces</h5>
+<h5 id="_produces_157">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23696,7 +23697,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_159">Produces</h5>
+<h5 id="_produces_158">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23775,7 +23776,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_160">Produces</h5>
+<h5 id="_produces_159">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23990,7 +23991,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_161">Produces</h5>
+<h5 id="_produces_160">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -24141,7 +24142,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_162">Produces</h5>
+<h5 id="_produces_161">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -24225,7 +24226,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_92">Consumes</h5>
+<h5 id="_consumes_93">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -24323,7 +24324,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_consumes_93">Consumes</h5>
+<h5 id="_consumes_94">Consumes</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -24400,7 +24401,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_163">Produces</h5>
+<h5 id="_produces_162">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -24445,7 +24446,7 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_164">Produces</h5>
+<h5 id="_produces_163">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -25321,6 +25322,60 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect2">
+<h3 id="_clientpolicyconditionrepresentation">ClientPolicyConditionRepresentation</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 42%;">
+<col style="width: 57%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>condition</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>configuration</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_jsonnode">JsonNode</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_clientpolicyexecutorrepresentation">ClientPolicyExecutorRepresentation</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 42%;">
+<col style="width: 57%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>configuration</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_jsonnode">JsonNode</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>executor</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_clientpolicyrepresentation">ClientPolicyRepresentation</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -25335,14 +25390,9 @@ Schemes: HTTP</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>builtin</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>conditions</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_object">Object</a> &gt; array</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_clientpolicyconditionrepresentation">ClientPolicyConditionRepresentation</a> &gt; array</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>description</strong><br>
@@ -25350,7 +25400,7 @@ Schemes: HTTP</p>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>enable</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>enabled</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
 </tr>
@@ -25382,11 +25432,6 @@ Schemes: HTTP</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>builtin</strong><br>
-<em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>description</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
@@ -25394,7 +25439,7 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>executors</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_object">Object</a> &gt; array</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_clientpolicyexecutorrepresentation">ClientPolicyExecutorRepresentation</a> &gt; array</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>name</strong><br>
@@ -25418,6 +25463,11 @@ Schemes: HTTP</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>globalProfiles</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; <a href="#_clientprofilerepresentation">ClientProfileRepresentation</a> &gt; array</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>profiles</strong><br>
 <em>optional</em></p></td>
@@ -26378,6 +26428,133 @@ Schemes: HTTP</p>
 </table>
 </div>
 <div class="sect2">
+<h3 id="_jsonnode">JsonNode</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 42%;">
+<col style="width: 57%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>array</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>bigDecimal</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>bigInteger</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>binary</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>boolean</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>containerNode</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>double</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>empty</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>float</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>floatingPointNumber</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>int</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>integralNumber</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>long</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>missingNode</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>nodeType</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (ARRAY, BINARY, BOOLEAN, MISSING, NULL, NUMBER, OBJECT, POJO, STRING)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>null</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>number</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>object</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>pojo</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>short</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>textual</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>valueNode</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_keystoreconfig">KeyStoreConfig</h3>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -27134,12 +27311,12 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>clientPolicies</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientpoliciesrepresentation">ClientPoliciesRepresentation</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_jsonnode">JsonNode</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>clientProfiles</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_clientprofilesrepresentation">ClientProfilesRepresentation</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_jsonnode">JsonNode</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>clientScopeMappings</strong><br>
@@ -28623,7 +28800,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-25 08:27:33 UTC
+Last updated 2021-06-18 07:12:22 UTC
 </div>
 </div>
 </body>

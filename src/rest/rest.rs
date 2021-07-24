@@ -1212,6 +1212,7 @@ impl KeycloakAdmin {
         client_id: Option<String>,
         first: Option<i32>,
         max: Option<i32>,
+        q: Option<String>,
         search: Option<bool>,
         viewable_only: Option<bool>,
     ) -> Result<Vec<ClientRepresentation>, KeycloakError> {
@@ -1227,6 +1228,9 @@ impl KeycloakAdmin {
         }
         if let Some(v) = max {
             builder = builder.query(&[("max", v)]);
+        }
+        if let Some(v) = q {
+            builder = builder.query(&[("q", v)]);
         }
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
@@ -2998,7 +3002,7 @@ impl KeycloakAdmin {
     pub async fn realm_client_policies_policies_get(
         &self,
         realm: &str,
-    ) -> Result<String, KeycloakError> {
+    ) -> Result<ClientPoliciesRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -3014,7 +3018,7 @@ impl KeycloakAdmin {
     pub async fn realm_client_policies_policies_put(
         &self,
         realm: &str,
-        json: &str,
+        client_policies: ClientPoliciesRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3022,7 +3026,7 @@ impl KeycloakAdmin {
                 "{}/auth/admin/realms/{}/client-policies/policies",
                 self.url, realm
             ))
-            .json(&json)
+            .json(&client_policies)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3033,14 +3037,18 @@ impl KeycloakAdmin {
     pub async fn realm_client_policies_profiles_get(
         &self,
         realm: &str,
-    ) -> Result<String, KeycloakError> {
-        let builder = self
+        include_global_profiles: Option<bool>,
+    ) -> Result<ClientProfilesRepresentation, KeycloakError> {
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/client-policies/profiles",
                 self.url, realm
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = include_global_profiles {
+            builder = builder.query(&[("include-global-profiles", v)]);
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3049,7 +3057,7 @@ impl KeycloakAdmin {
     pub async fn realm_client_policies_profiles_put(
         &self,
         realm: &str,
-        json: &str,
+        client_profiles: ClientProfilesRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3057,7 +3065,7 @@ impl KeycloakAdmin {
                 "{}/auth/admin/realms/{}/client-policies/profiles",
                 self.url, realm
             ))
-            .json(&json)
+            .json(&client_profiles)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -4758,24 +4766,6 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get all scope mappings for the client
-    /// GET /{realm}/client-scopes/{id}/scope-mappings
-    pub async fn realm_client_scopes_with_id_scope_mappings_get(
-        &self,
-        realm: &str,
-        id: &str,
-    ) -> Result<MappingsRepresentation, KeycloakError> {
-        let builder = self
-            .client
-            .get(&format!(
-                "{}/auth/admin/realms/{}/client-scopes/{}/scope-mappings",
-                self.url, realm, id
-            ))
-            .bearer_auth(self.admin_token.get(&self.url).await?);
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
     /// Add client-level roles to the client’s scope
     /// POST /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_post(
@@ -4978,24 +4968,6 @@ impl KeycloakAdmin {
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
-    /// Get all scope mappings for the client
-    /// GET /{realm}/clients/{id}/scope-mappings
-    pub async fn realm_clients_with_id_scope_mappings_get(
-        &self,
-        realm: &str,
-        id: &str,
-    ) -> Result<MappingsRepresentation, KeycloakError> {
-        let builder = self
-            .client
-            .get(&format!(
-                "{}/auth/admin/realms/{}/clients/{}/scope-mappings",
-                self.url, realm, id
-            ))
-            .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5444,6 +5416,38 @@ impl KeycloakAdmin {
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
+    }
+
+    /// GET /{realm}/users/profile
+    pub async fn realm_users_profile_get(&self, realm: &str) -> Result<String, KeycloakError> {
+        let builder = self
+            .client
+            .get(&format!(
+                "{}/auth/admin/realms/{}/users/profile",
+                self.url, realm
+            ))
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
+    /// PUT /{realm}/users/profile
+    pub async fn realm_users_profile_put(
+        &self,
+        realm: &str,
+        text: &str,
+    ) -> Result<(), KeycloakError> {
+        let builder = self
+            .client
+            .put(&format!(
+                "{}/auth/admin/realms/{}/users/profile",
+                self.url, realm
+            ))
+            .json(&text)
+            .bearer_auth(self.admin_token.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get representation of the user
