@@ -27,6 +27,20 @@ pub enum IDTokenCategory {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "UPPERCASE")]
+pub enum JsonNodeNodeType {
+    Array,
+    Binary,
+    Boolean,
+    Missing,
+    Null,
+    Number,
+    Object,
+    Pojo,
+    String,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum PartialImportRepresentationPolicy {
     Skip,
     Overwrite,
@@ -268,11 +282,24 @@ pub struct ClientPoliciesRepresentation {
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientPolicyConditionRepresentation {
+    pub condition: Option<String>,
+    pub configuration: Option<JsonNode>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct ClientPolicyExecutorRepresentation {
+    pub configuration: Option<JsonNode>,
+    pub executor: Option<String>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientPolicyRepresentation {
-    pub builtin: Option<bool>,
-    pub conditions: Option<Vec<Value>>,
+    pub conditions: Option<Vec<ClientPolicyConditionRepresentation>>,
     pub description: Option<String>,
-    pub enable: Option<bool>,
+    pub enabled: Option<bool>,
     pub name: Option<String>,
     pub profiles: Option<Vec<String>>,
 }
@@ -280,15 +307,16 @@ pub struct ClientPolicyRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientProfileRepresentation {
-    pub builtin: Option<bool>,
     pub description: Option<String>,
-    pub executors: Option<Vec<Value>>,
+    pub executors: Option<Vec<ClientPolicyExecutorRepresentation>>,
     pub name: Option<String>,
 }
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ClientProfilesRepresentation {
+    pub global_profiles: Option<Vec<ClientProfileRepresentation>>,
     pub profiles: Option<Vec<ClientProfileRepresentation>>,
 }
 
@@ -521,6 +549,34 @@ pub struct IdentityProviderRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct JsonNode {
+    pub array: Option<bool>,
+    pub big_decimal: Option<bool>,
+    pub big_integer: Option<bool>,
+    pub binary: Option<bool>,
+    pub boolean: Option<bool>,
+    pub container_node: Option<bool>,
+    pub double: Option<bool>,
+    pub empty: Option<bool>,
+    pub float: Option<bool>,
+    pub floating_point_number: Option<bool>,
+    pub int: Option<bool>,
+    pub integral_number: Option<bool>,
+    pub long: Option<bool>,
+    pub missing_node: Option<bool>,
+    pub node_type: Option<JsonNodeNodeType>,
+    pub null: Option<bool>,
+    pub number: Option<bool>,
+    pub object: Option<bool>,
+    pub pojo: Option<bool>,
+    pub short: Option<bool>,
+    pub textual: Option<bool>,
+    pub value_node: Option<bool>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct KeyStoreConfig {
     pub format: Option<String>,
     pub key_alias: Option<String>,
@@ -709,8 +765,8 @@ pub struct RealmRepresentation {
     pub client_authentication_flow: Option<String>,
     pub client_offline_session_idle_timeout: Option<i32>,
     pub client_offline_session_max_lifespan: Option<i32>,
-    pub client_policies: Option<ClientPoliciesRepresentation>,
-    pub client_profiles: Option<ClientProfilesRepresentation>,
+    pub client_policies: Option<JsonNode>,
+    pub client_profiles: Option<JsonNode>,
     pub client_scope_mappings: Option<HashMap<String, Value>>,
     pub client_scopes: Option<Vec<ClientScopeRepresentation>>,
     pub client_session_idle_timeout: Option<i32>,
