@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 12](https://www.keycloak.org/docs-api/12.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version 13](https://www.keycloak.org/docs-api/13.0/rest-api/index.html).
 
 ## Usage
 
