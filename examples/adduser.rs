@@ -5,13 +5,15 @@ use keycloak::{
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let url = "http://localhost:9080";
+    let url = std::env::var("KEYCLOAK_ADDR").unwrap_or_else(|_| "http://localhost:9080".into());
+    let user = std::env::var("KEYCLOAK_USER").unwrap_or_else(|_| "admin".into());
+    let password = std::env::var("KEYCLOAK_PASSWORD").unwrap_or_else(|_| "password".into());
     let client = reqwest::Client::new();
-    let admin_token = KeycloakAdminToken::acquire(url, "admin", "password", &client).await?;
+    let admin_token = KeycloakAdminToken::acquire(&url, &user, &password, &client).await?;
 
     eprintln!("{:?}", admin_token);
 
-    let admin = KeycloakAdmin::new(url, admin_token, client);
+    let admin = KeycloakAdmin::new(&url, admin_token, client);
 
     admin
         .post(RealmRepresentation {

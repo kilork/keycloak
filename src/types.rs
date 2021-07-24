@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use serde_with::skip_serializing_none;
 use std::collections::HashMap;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -63,6 +64,7 @@ pub enum ResourceServerRepresentationPolicyEnforcementMode {
     Disabled,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AccessToken {
@@ -113,23 +115,27 @@ pub struct AccessToken {
     pub zoneinfo: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AccessTokenAccess {
     pub roles: Option<Vec<String>>,
     pub verify_caller: Option<bool>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AccessTokenAuthorization {
     pub permissions: Option<Vec<Permission>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AccessTokenCertConf {
     #[serde(rename = "x5t#S256")]
     pub x5t_s256: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AddressClaimSet {
     pub country: Option<String>,
@@ -140,6 +146,7 @@ pub struct AddressClaimSet {
     pub street_address: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthenticationExecutionExportRepresentation {
@@ -152,6 +159,7 @@ pub struct AuthenticationExecutionExportRepresentation {
     pub user_setup_allowed: Option<bool>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthenticationExecutionInfoRepresentation {
@@ -170,6 +178,7 @@ pub struct AuthenticationExecutionInfoRepresentation {
     pub requirement_choices: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthenticationExecutionRepresentation {
@@ -183,6 +192,7 @@ pub struct AuthenticationExecutionRepresentation {
     pub requirement: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthenticationFlowRepresentation {
@@ -195,6 +205,7 @@ pub struct AuthenticationFlowRepresentation {
     pub top_level: Option<bool>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthenticatorConfigInfoRepresentation {
@@ -204,6 +215,7 @@ pub struct AuthenticatorConfigInfoRepresentation {
     pub provider_id: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct AuthenticatorConfigRepresentation {
     pub alias: Option<String>,
@@ -211,6 +223,7 @@ pub struct AuthenticatorConfigRepresentation {
     pub id: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CertificateRepresentation {
@@ -220,12 +233,14 @@ pub struct CertificateRepresentation {
     pub public_key: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientInitialAccessCreatePresentation {
     pub count: Option<i32>,
     pub expiration: Option<i32>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientInitialAccessPresentation {
@@ -237,6 +252,7 @@ pub struct ClientInitialAccessPresentation {
     pub token: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientMappingsRepresentation {
     pub client: Option<String>,
@@ -244,11 +260,13 @@ pub struct ClientMappingsRepresentation {
     pub mappings: Option<Vec<RoleRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientPoliciesRepresentation {
     pub policies: Option<Vec<ClientPolicyRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientPolicyRepresentation {
     pub builtin: Option<bool>,
@@ -259,6 +277,7 @@ pub struct ClientPolicyRepresentation {
     pub profiles: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientProfileRepresentation {
     pub builtin: Option<bool>,
@@ -267,11 +286,13 @@ pub struct ClientProfileRepresentation {
     pub name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct ClientProfilesRepresentation {
     pub profiles: Option<Vec<ClientProfileRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientRepresentation {
@@ -315,6 +336,7 @@ pub struct ClientRepresentation {
     pub web_origins: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation {
@@ -326,6 +348,7 @@ pub struct ClientScopeEvaluateResourceProtocolMapperEvaluationRepresentation {
     pub protocol_mapper: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClientScopeRepresentation {
@@ -337,6 +360,7 @@ pub struct ClientScopeRepresentation {
     pub protocol_mappers: Option<Vec<ProtocolMapperRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentExportRepresentation {
@@ -348,6 +372,7 @@ pub struct ComponentExportRepresentation {
     pub sub_type: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentRepresentation {
@@ -360,6 +385,7 @@ pub struct ComponentRepresentation {
     pub sub_type: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ConfigPropertyRepresentation {
@@ -373,6 +399,7 @@ pub struct ConfigPropertyRepresentation {
     pub type_: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CredentialRepresentation {
@@ -388,6 +415,7 @@ pub struct CredentialRepresentation {
     pub value: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FederatedIdentityRepresentation {
@@ -396,6 +424,7 @@ pub struct FederatedIdentityRepresentation {
     pub user_name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GlobalRequestResult {
@@ -403,6 +432,7 @@ pub struct GlobalRequestResult {
     pub success_requests: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GroupRepresentation {
@@ -416,6 +446,7 @@ pub struct GroupRepresentation {
     pub sub_groups: Option<Vec<GroupRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IDToken {
@@ -458,6 +489,7 @@ pub struct IDToken {
     pub zoneinfo: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IdentityProviderMapperRepresentation {
@@ -468,6 +500,7 @@ pub struct IdentityProviderMapperRepresentation {
     pub name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct IdentityProviderRepresentation {
@@ -485,6 +518,7 @@ pub struct IdentityProviderRepresentation {
     pub trust_email: Option<bool>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct KeyStoreConfig {
@@ -496,12 +530,14 @@ pub struct KeyStoreConfig {
     pub store_password: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct KeysMetadataRepresentation {
     pub active: Option<HashMap<String, Value>>,
     pub keys: Option<Vec<KeysMetadataRepresentationKeyMetadataRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct KeysMetadataRepresentationKeyMetadataRepresentation {
@@ -516,6 +552,7 @@ pub struct KeysMetadataRepresentationKeyMetadataRepresentation {
     pub type_: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ManagementPermissionReference {
@@ -524,6 +561,7 @@ pub struct ManagementPermissionReference {
     pub scope_permissions: Option<HashMap<String, Value>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MappingsRepresentation {
@@ -531,6 +569,7 @@ pub struct MappingsRepresentation {
     pub realm_mappings: Option<Vec<RoleRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MemoryInfoRepresentation {
@@ -543,6 +582,7 @@ pub struct MemoryInfoRepresentation {
     pub used_formated: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MultivaluedHashMap {
@@ -551,6 +591,7 @@ pub struct MultivaluedHashMap {
     pub threshold: Option<i32>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PartialImportRepresentation {
@@ -563,6 +604,7 @@ pub struct PartialImportRepresentation {
     pub users: Option<Vec<UserRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PasswordPolicyTypeRepresentation {
@@ -573,6 +615,7 @@ pub struct PasswordPolicyTypeRepresentation {
     pub multiple_supported: Option<bool>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct Permission {
     pub claims: Option<HashMap<String, Value>>,
@@ -581,6 +624,7 @@ pub struct Permission {
     pub scopes: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PolicyRepresentation {
@@ -600,6 +644,7 @@ pub struct PolicyRepresentation {
     pub type_: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProfileInfoRepresentation {
@@ -609,6 +654,7 @@ pub struct ProfileInfoRepresentation {
     pub preview_features: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProtocolMapperRepresentation {
@@ -619,6 +665,7 @@ pub struct ProtocolMapperRepresentation {
     pub protocol_mapper: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ProviderRepresentation {
@@ -626,6 +673,7 @@ pub struct ProviderRepresentation {
     pub order: Option<i32>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RealmEventsConfigRepresentation {
@@ -637,6 +685,7 @@ pub struct RealmEventsConfigRepresentation {
     pub events_listeners: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RealmRepresentation {
@@ -765,6 +814,7 @@ pub struct RealmRepresentation {
     pub web_authn_policy_user_verification_requirement: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RequiredActionProviderRepresentation {
@@ -777,6 +827,7 @@ pub struct RequiredActionProviderRepresentation {
     pub provider_id: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ResourceRepresentation {
@@ -792,6 +843,7 @@ pub struct ResourceRepresentation {
     pub uris: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ResourceServerRepresentation {
@@ -806,6 +858,7 @@ pub struct ResourceServerRepresentation {
     pub scopes: Option<Vec<ScopeRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RoleRepresentation {
@@ -819,18 +872,21 @@ pub struct RoleRepresentation {
     pub name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct RoleRepresentationComposites {
     pub client: Option<HashMap<String, Value>>,
     pub realm: Option<Vec<String>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct RolesRepresentation {
     pub client: Option<HashMap<String, Value>>,
     pub realm: Option<Vec<RoleRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ScopeMappingRepresentation {
@@ -841,6 +897,7 @@ pub struct ScopeMappingRepresentation {
     pub self_: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ScopeRepresentation {
@@ -852,6 +909,7 @@ pub struct ScopeRepresentation {
     pub resources: Option<Vec<ResourceRepresentation>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ServerInfoRepresentation {
@@ -871,12 +929,14 @@ pub struct ServerInfoRepresentation {
     pub themes: Option<HashMap<String, Value>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct SpiInfoRepresentation {
     pub internal: Option<bool>,
     pub providers: Option<HashMap<String, Value>>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct SynchronizationResult {
     pub added: Option<i32>,
@@ -887,6 +947,7 @@ pub struct SynchronizationResult {
     pub updated: Option<i32>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SystemInfoRepresentation {
@@ -910,6 +971,7 @@ pub struct SystemInfoRepresentation {
     pub version: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TestLdapConnectionRepresentation {
@@ -924,6 +986,7 @@ pub struct TestLdapConnectionRepresentation {
     pub use_truststore_spi: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserConsentRepresentation {
@@ -933,6 +996,7 @@ pub struct UserConsentRepresentation {
     pub last_updated_date: Option<i64>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserFederationMapperRepresentation {
@@ -943,6 +1007,7 @@ pub struct UserFederationMapperRepresentation {
     pub name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserFederationProviderRepresentation {
@@ -956,6 +1021,7 @@ pub struct UserFederationProviderRepresentation {
     pub provider_name: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct UserRepresentation {

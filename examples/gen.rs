@@ -255,6 +255,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
 fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
     println!("use serde::{{Deserialize, Serialize}};");
     println!("use serde_json::Value;");
+    println!("use serde_with::skip_serializing_none;");
     println!("use std::collections::HashMap;\n");
 
     for e in enums {
@@ -273,6 +274,7 @@ fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
     }
 
     for s in structs {
+        println!("#[skip_serializing_none]");
         println!("#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]");
         if s.is_camel_case {
             println!(r#"#[serde(rename_all = "camelCase")]"#);
