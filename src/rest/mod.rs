@@ -74,6 +74,7 @@ impl KeycloakAdminToken {
                 "username": username,
                 "password": password,
                 "client_id": client_id,
+                "client_secret": password,
                 "grant_type": grant_type
             }))
             .send()
