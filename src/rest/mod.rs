@@ -18,7 +18,7 @@ pub trait KeycloakTokenSupplier {
     async fn get(&self, url: &str) -> Result<String, KeycloakError>;
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct KeycloakAdminToken {
     access_token: String,
     expires_in: usize,
