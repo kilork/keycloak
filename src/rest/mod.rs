@@ -6,6 +6,7 @@ use serde_json::json;
 
 mod rest;
 
+#[derive(Clone)]
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
