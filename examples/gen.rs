@@ -81,7 +81,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
             let mut field_name = original_field.to_snake_case();
             let mut is_rename = false;
             if original_field != field_name {
-                if field_name.to_mixed_case() == original_field {
+                if field_name.to_lower_camel_case() == original_field {
                     is_camel_case = true;
                 } else {
                     is_rename = true;
@@ -100,7 +100,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
             } {
                 Ok(field_type) => field_type,
                 Err(ConvertTypeFail::Enum(enum_fields)) => {
-                    let enum_name = format!("{}{}", struct_name, field_name.to_camel_case());
+                    let enum_name = format!("{}{}", struct_name, field_name.to_upper_camel_case());
 
                     let is_upper_case = enum_fields
                         .split(", ")
@@ -111,7 +111,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
                         fields: enum_fields
                             .split(", ")
                             .map(|enum_field| {
-                                let enum_field = enum_field.to_camel_case();
+                                let enum_field = enum_field.to_upper_camel_case();
                                 rename_table
                                     .get(enum_field.as_str())
                                     .unwrap_or(&enum_field)
@@ -399,7 +399,7 @@ fn write_rest(methods: &[MethodStruct]) {
         if method.name != rest_comment {
             println!("    /// {}", method.name);
         }
-        if let Some(description) = method.description.as_ref().map(|x| x.replace("\n", " ")) {
+        if let Some(description) = method.description.as_ref().map(|x| x.replace('\n', " ")) {
             println!("    /// {}", description);
         }
         println!("    /// {}", rest_comment);
