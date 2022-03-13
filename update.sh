@@ -82,7 +82,7 @@ esac
 
 git add .
 git commit -am"Keycloak Admin REST API v${KEYCLOAK_VERSION}"
-git tag -a -m"Release ${KEYCLOAK_RUST_VERSION}\n\nChanges:\n\n- Keycloak Admin REST API v${KEYCLOAK_VERSION} #${GITHUB_ISSUE}" v${KEYCLOAK_RUST_VERSION}
+git tag -f -a -m "Release ${KEYCLOAK_RUST_VERSION}" -m "" -m "Changes:" -m "" -m "- Keycloak Admin REST API v${KEYCLOAK_VERSION} #${GITHUB_ISSUE}" v${KEYCLOAK_RUST_VERSION}
 
 git log
 git tag --list -n10 v${KEYCLOAK_RUST_VERSION}
