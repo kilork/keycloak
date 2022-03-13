@@ -4,6 +4,8 @@ use scraper::{ElementRef, Html, Selector};
 use std::{collections::HashMap, fs::read_to_string, rc::Rc, str::FromStr};
 use structopt::StructOpt;
 
+const RESERVED_WORDS: &[&str] = &["type", "self", "use"];
+
 #[derive(StructOpt)]
 /// Generate Rust code from Keycloak REST Description in HTML
 enum Cli {
@@ -67,7 +69,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
     let mut structs = vec![];
     let mut enums = vec![];
     for definition in definitions {
-        let struct_name = text(&definition, "h3").replace("-", "");
+        let struct_name = text(&definition, "h3").replace('-', "");
 
         let fields_selector = Selector::parse("tbody tr").unwrap();
 
@@ -86,7 +88,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
                 }
             }
 
-            let original_field_type = text(&field, "td ~ td p").replace("-", "");
+            let original_field_type = text(&field, "td ~ td p").replace('-', "");
 
             let array_field = check_array(&original_field_type);
             let is_array = array_field.is_some();
@@ -112,13 +114,13 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
                                 let enum_field = enum_field.to_camel_case();
                                 rename_table
                                     .get(enum_field.as_str())
-                                    .unwrap_or_else(|| &enum_field)
+                                    .unwrap_or(&enum_field)
                                     .clone()
                             })
                             .collect(),
                     };
                     enums.push(enum_);
-                    FieldType::Simple(enum_name.into())
+                    FieldType::Simple(enum_name)
                 }
                 Err(err) => panic!("err: {:?}", err),
             };
@@ -127,7 +129,7 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
 
             let is_optional = check_optional(&optional_required);
 
-            if field_name == "type" || field_name == "self" {
+            if RESERVED_WORDS.contains(&field_name.as_str()) {
                 is_rename = true;
                 field_name = format!("{}_", field_name);
             }
@@ -169,7 +171,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
         for method in methods_html {
             let method_name = text(&method, "h4");
             let path = text_opt(&method, "pre").unwrap_or_else(|| method_name.clone());
-            let mut path_parts = path.split(" ");
+            let mut path_parts = path.split(' ');
             let method_http = path_parts.next().unwrap();
             let path = path_parts.next().unwrap();
 
@@ -207,7 +209,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
                                 is_array: array.is_some(),
                                 kind: parameter_kind.parse().unwrap(),
                                 parameter_type: array
-                                    .or_else(|| Some(parameter_type.as_str()))
+                                    .or(Some(parameter_type.as_str()))
                                     .map(convert_type)
                                     .unwrap()
                                     .unwrap(),
@@ -221,8 +223,8 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
                         response = Some(ResponseType {
                             is_array: array.is_some(),
                             return_type: array
-                                .or_else(|| Some(response_type.as_str()))
-                                .map(|x| convert_type(&x.replace("-", "")))
+                                .or(Some(response_type.as_str()))
+                                .map(|x| convert_type(&x.replace('-', "")))
                                 .unwrap()
                                 .unwrap(),
                         });
@@ -479,7 +481,7 @@ fn write_rest(methods: &[MethodStruct]) {
                     println!(r#"                "{}": {},"#, parameter.name, name);
                 }
                 println!("            }}))",);
-            } else if let Some((name, _parameter)) = x.iter().next() {
+            } else if let Some((name, _parameter)) = x.get(0) {
                 println!("            .json(&{})", name);
             }
         }

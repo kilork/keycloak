@@ -24556,7 +24556,7 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>category</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (INTERNAL, ACCESS, ID, ADMIN, USERINFO, LOGOUT)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (INTERNAL, ACCESS, ID, ADMIN, USERINFO, LOGOUT, AUTHORIZATION_RESPONSE)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>claims_locales</strong><br>
@@ -24690,6 +24690,11 @@ Schemes: HTTP</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>session_state</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>sid</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
@@ -26158,7 +26163,7 @@ Schemes: HTTP</p>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>category</strong><br>
 <em>optional</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (INTERNAL, ACCESS, ID, ADMIN, USERINFO, LOGOUT)</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (INTERNAL, ACCESS, ID, ADMIN, USERINFO, LOGOUT, AUTHORIZATION_RESPONSE)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>claims_locales</strong><br>
@@ -26277,6 +26282,11 @@ Schemes: HTTP</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>session_state</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>sid</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
@@ -26681,6 +26691,11 @@ Schemes: HTTP</p>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>type</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>use</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">enum (SIG, ENC)</p></td>
 </tr>
 </tbody>
 </table>
@@ -28800,7 +28815,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-06-18 07:12:22 UTC
+Last updated 2021-08-20 07:20:55 UTC
 </div>
 </div>
 </body>

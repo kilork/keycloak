@@ -4,7 +4,6 @@ use serde_with::skip_serializing_none;
 use std::collections::HashMap;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum AccessTokenCategory {
     Internal,
     Access,
@@ -12,10 +11,10 @@ pub enum AccessTokenCategory {
     Admin,
     UserInfo,
     Logout,
+    AuthorizationResponse,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "UPPERCASE")]
 pub enum IDTokenCategory {
     Internal,
     Access,
@@ -23,6 +22,7 @@ pub enum IDTokenCategory {
     Admin,
     UserInfo,
     Logout,
+    AuthorizationResponse,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -37,6 +37,13 @@ pub enum JsonNodeNodeType {
     Object,
     Pojo,
     String,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "UPPERCASE")]
+pub enum KeysMetadataRepresentationKeyMetadataRepresentationUse {
+    Sig,
+    Enc,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
@@ -120,6 +127,7 @@ pub struct AccessToken {
     pub s_hash: Option<String>,
     pub scope: Option<String>,
     pub session_state: Option<String>,
+    pub sid: Option<String>,
     pub sub: Option<String>,
     #[serde(rename = "trusted-certs")]
     pub trusted_certs: Option<Vec<String>>,
@@ -510,6 +518,7 @@ pub struct IDToken {
     pub profile: Option<String>,
     pub s_hash: Option<String>,
     pub session_state: Option<String>,
+    pub sid: Option<String>,
     pub sub: Option<String>,
     pub typ: Option<String>,
     pub updated_at: Option<i64>,
@@ -606,6 +615,8 @@ pub struct KeysMetadataRepresentationKeyMetadataRepresentation {
     pub status: Option<String>,
     #[serde(rename = "type")]
     pub type_: Option<String>,
+    #[serde(rename = "use")]
+    pub use_: Option<KeysMetadataRepresentationKeyMetadataRepresentationUse>,
 }
 
 #[skip_serializing_none]
