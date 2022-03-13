@@ -5472,10 +5472,18 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_getclients">Get clients belonging to the realm   Returns a list of clients belonging to the realm</h4>
+<h4 id="_getclients">Get clients belonging to the realm.</h4>
 <div class="literalblock">
 <div class="content">
 <pre>GET /{realm}/clients</pre>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_description_2">Description</h5>
+<div class="paragraph">
+<p>If a client can&#8217;t be retrieved from the storage due to a problem with the underlying storage,
+ it is silently removed from the returned list.
+ This ensures that concurrent modifications to the list don&#8217;t prevent callers from retrieving this list.</p>
 </div>
 </div>
 <div class="sect4">
@@ -5992,7 +6000,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_2">Description</h5>
+<h5 id="_description_3">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -6486,7 +6494,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_3">Description</h5>
+<h5 id="_description_4">Description</h5>
 <div class="paragraph">
 <p>This means
  protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.</p>
@@ -6577,7 +6585,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_4">Description</h5>
+<h5 id="_description_5">Description</h5>
 <div class="paragraph">
 <p>This contains scope mappings, which this client has directly, as well as scope mappings, which are granted to all client scopes,
  which are linked with this client.</p>
@@ -6675,7 +6683,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_5">Description</h5>
+<h5 id="_description_6">Description</h5>
 <div class="paragraph">
 <p>Defacto all the
  other roles of particular role container, which are not in {@link #getGrantedScopeMappings()}</p>
@@ -7339,7 +7347,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_6">Description</h5>
+<h5 id="_description_7">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -8507,7 +8515,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_7">Description</h5>
+<h5 id="_description_8">Description</h5>
 <div class="paragraph">
 <p>This will update the group and set the parent if it exists. Create it and set the parent
  if the group doesn&#8217;t exist.</p>
@@ -8591,7 +8599,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_8">Description</h5>
+<h5 id="_description_9">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -9009,7 +9017,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_9">Description</h5>
+<h5 id="_description_10">Description</h5>
 <div class="paragraph">
 <p>This will just set the parent if it exists. Create it and set the parent
  if the group doesn&#8217;t exist.</p>
@@ -11833,7 +11841,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_10">Description</h5>
+<h5 id="_description_11">Description</h5>
 <div class="paragraph">
 <p>Realm name must be unique.</p>
 </div>
@@ -11979,7 +11987,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_11">Description</h5>
+<h5 id="_description_12">Description</h5>
 <div class="paragraph">
 <p>This will only update top-level attributes of the realm.</p>
 </div>
@@ -12883,7 +12891,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_12">Description</h5>
+<h5 id="_description_13">Description</h5>
 <div class="paragraph">
 <p>The key is the client id, the value is the number of sessions that currently are active
  with that client. Only clients that actually have a session associated with them will be in this map.</p>
@@ -13025,7 +13033,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_13">Description</h5>
+<h5 id="_description_14">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -13225,7 +13233,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_14">Description</h5>
+<h5 id="_description_15">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -13425,7 +13433,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_15">Description</h5>
+<h5 id="_description_16">Description</h5>
 <div class="paragraph">
 <p>Only name and ids are returned.</p>
 </div>
@@ -14629,7 +14637,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_16">Description</h5>
+<h5 id="_description_17">Description</h5>
 <div class="paragraph">
 <p>Any client that has an admin url will also be told to invalidate any sessions
  they have.</p>
@@ -14927,7 +14935,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_17">Description</h5>
+<h5 id="_description_18">Description</h5>
 <div class="paragraph">
 <p>Any client that has an admin url will also be told to invalidate this
  particular session.</p>
@@ -20346,7 +20354,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_18">Description</h5>
+<h5 id="_description_19">Description</h5>
 <div class="paragraph">
 <p>The method is really
  to show a comprehensive total view of realm-level roles associated with the client.</p>
@@ -21211,7 +21219,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_19">Description</h5>
+<h5 id="_description_20">Description</h5>
 <div class="paragraph">
 <p>The method is really
  to show a comprehensive total view of realm-level roles associated with the client.</p>
@@ -22011,7 +22019,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_20">Description</h5>
+<h5 id="_description_21">Description</h5>
 <div class="paragraph">
 <p>It can be called in three different ways.
  1. Don&#8217;t specify any criteria and pass {@code null}. The number of all
@@ -22505,7 +22513,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_21">Description</h5>
+<h5 id="_description_22">Description</h5>
 <div class="paragraph">
 <p>Returned values can contain for example "password", "otp" etc.
  This will always return empty list for "local" users, which are not backed by any user storage</p>
@@ -23216,7 +23224,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_22">Description</h5>
+<h5 id="_description_23">Description</h5>
 <div class="paragraph">
 <p>The redirectUri and clientId parameters are optional. If no redirect is given, then there will
  be no link back to click after actions have completed. Redirect uri must be a valid uri for the
@@ -24198,7 +24206,7 @@ Schemes: HTTP</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_description_23">Description</h5>
+<h5 id="_description_24">Description</h5>
 <div class="paragraph">
 <p>The redirectUri and clientId parameters are optional. The default for the
  redirect is the account client.</p>
@@ -28769,7 +28777,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-01-25 08:52:02 UTC
+Last updated 2022-02-11 20:08:18 CET
 </div>
 </div>
 </body>

@@ -1204,7 +1204,8 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get clients belonging to the realm   Returns a list of clients belonging to the realm
+    /// Get clients belonging to the realm.
+    /// If a client can’t be retrieved from the storage due to a problem with the underlying storage,  it is silently removed from the returned list.  This ensures that concurrent modifications to the list don’t prevent callers from retrieving this list.
     /// GET /{realm}/clients
     pub async fn realm_clients_get(
         &self,

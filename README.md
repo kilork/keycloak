@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 16.1](https://www.keycloak.org/docs-api/16.1/rest-api/index.html).
+Implements [Keycloak Admin REST API version 17.0](https://www.keycloak.org/docs-api/17.0/rest-api/index.html).
 
 ## Usage
 
@@ -14,7 +14,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "16.1"
+keycloak = "17.0"
 ```
 
 ```rust
