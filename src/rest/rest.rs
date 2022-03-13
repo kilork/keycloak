@@ -3416,13 +3416,12 @@ impl KeycloakAdmin {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Import localization from uploaded JSON file
     /// POST /{realm}/localization/{locale}
     pub async fn realm_localization_with_locale_post(
         &self,
         realm: &str,
         locale: &str,
-        input: &[u8],
+        localization_texts: HashMap<String, Value>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -3430,9 +3429,7 @@ impl KeycloakAdmin {
                 "{}/auth/admin/realms/{}/localization/{}",
                 self.url, realm, locale
             ))
-            .form(&json!({
-                "input": input,
-            }))
+            .json(&localization_texts)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3468,26 +3465,6 @@ impl KeycloakAdmin {
                 "{}/auth/admin/realms/{}/localization/{}",
                 self.url, realm, locale
             ))
-            .bearer_auth(self.admin_token.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// PATCH /{realm}/localization/{locale}
-    pub async fn realm_localization_with_locale_patch(
-        &self,
-        realm: &str,
-        locale: &str,
-        loclization_texts: HashMap<String, Value>,
-    ) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .patch(&format!(
-                "{}/auth/admin/realms/{}/localization/{}",
-                self.url, realm, locale
-            ))
-            .json(&loclization_texts)
             .bearer_auth(self.admin_token.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -4658,14 +4635,26 @@ impl KeycloakAdmin {
         &self,
         realm: &str,
         role_id: &str,
+        first: Option<i32>,
+        max: Option<i32>,
+        search: Option<String>,
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/auth/admin/realms/{}/roles-by-id/{}/composites",
                 self.url, realm, role_id
             ))
             .bearer_auth(self.admin_token.get(&self.url).await?);
+        if let Some(v) = first {
+            builder = builder.query(&[("first", v)]);
+        }
+        if let Some(v) = max {
+            builder = builder.query(&[("max", v)]);
+        }
+        if let Some(v) = search {
+            builder = builder.query(&[("search", v)]);
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5310,7 +5299,7 @@ impl KeycloakAdmin {
         Ok(())
     }
 
-    /// Get users   Returns a stream of users, filtered according to query parameters
+    /// Get users   Returns a stream of users, filtered according to query parameters.
     /// GET /{realm}/users
     pub async fn realm_users_get(
         &self,
@@ -5326,6 +5315,7 @@ impl KeycloakAdmin {
         idp_user_id: Option<String>,
         last_name: Option<String>,
         max: Option<i32>,
+        q: Option<String>,
         search: Option<String>,
         username: Option<String>,
     ) -> Result<Vec<UserRepresentation>, KeycloakError> {
@@ -5365,6 +5355,9 @@ impl KeycloakAdmin {
         }
         if let Some(v) = max {
             builder = builder.query(&[("max", v)]);
+        }
+        if let Some(v) = q {
+            builder = builder.query(&[("q", v)]);
         }
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);

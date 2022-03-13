@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 15](https://www.keycloak.org/docs-api/15.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version {{ env_var "KEYCLOAK_VERSION" }}](https://www.keycloak.org/docs-api/{{ env_var "KEYCLOAK_VERSION" }}/rest-api/index.html).
 
 ## Usage
 
@@ -14,7 +14,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "15.0"
+keycloak = "{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
 ```
 
 {{ codeblock "rust" ( read_to_str "examples/adduser.rs" ) }}
