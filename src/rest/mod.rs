@@ -67,7 +67,7 @@ impl KeycloakAdminToken {
     ) -> Result<KeycloakAdminToken, KeycloakError> {
         let response = client
             .post(&format!(
-                "{}/auth/realms/{}/protocol/openid-connect/token",
+                "{}/realms/{}/protocol/openid-connect/token",
                 url, realm
             ))
             .form(&json!({
