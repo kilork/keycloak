@@ -94,4 +94,4 @@ mod error;
 mod rest;
 
 pub use error::KeycloakError;
-pub use rest::{KeycloakAdmin, KeycloakAdminToken, KeycloakTokenSupplier};
+pub use rest::{KeycloakAdmin, KeycloakAdminToken, KeycloakTokenSupplier, KeycloakServiceAccountAdminToken};

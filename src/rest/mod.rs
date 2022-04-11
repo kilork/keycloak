@@ -18,6 +18,57 @@ pub trait KeycloakTokenSupplier {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+pub struct KeycloakServiceAccountAdminToken {
+    access_token: String,
+    expires_in: usize,
+    #[serde(rename = "not-before-policy")]
+    not_before_policy: Option<usize>,
+    refresh_expires_in: Option<usize>,
+    refresh_token: Option<String>,
+    scope: String,
+    session_state: Option<String>,
+    token_type: String,
+}
+
+#[async_trait]
+impl KeycloakTokenSupplier for KeycloakServiceAccountAdminToken {
+    async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
+        Ok(self.access_token.clone())
+    }
+}
+
+impl KeycloakServiceAccountAdminToken {
+    /// Acquire a token for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticate-with-a-service-account)
+    /// * `url` - Protocol, hostname, and port of Keycloak such as `http://localhost:8080`
+    /// * `client_id` - The client id of a client with the following characteristics:
+    ///                  1. Exists in the **master** realm
+    ///                  2. `confidential` access type
+    ///                  3. `Service Accounts` option is enabled
+    /// * `client_secret` - The secret credential assigned to the given `client_id`
+    /// * `client` - A reqwest Client to perform the token retrieval call
+    pub async fn acquire(
+        url: &str,
+        client_id: &str,
+        client_secret: &str,
+        client: &reqwest::Client,
+    ) -> Result<KeycloakAdminToken, KeycloakError> {
+        let response = client
+            .post(&format!(
+                "{}/auth/realms/master/protocol/openid-connect/token",
+                url,
+            ))
+            .form(&json!({
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "grant_type": "client_credentials"
+            }))
+            .send()
+            .await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
 pub struct KeycloakAdminToken {
     access_token: String,
     expires_in: usize,
