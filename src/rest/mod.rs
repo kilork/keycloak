@@ -9,7 +9,7 @@ mod rest;
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
-    admin_token: TS,
+    token_supplier: TS,
 }
 
 #[async_trait]
@@ -149,12 +149,12 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
-impl KeycloakAdmin {
-    pub fn new(url: &str, admin_token: KeycloakAdminToken, client: reqwest::Client) -> Self {
+impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
+    pub fn new(url: &str, token_supplier: TS, client: reqwest::Client) -> Self {
         Self {
             url: url.into(),
             client,
-            admin_token,
+            token_supplier,
         }
     }
 }
