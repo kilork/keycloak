@@ -9,12 +9,65 @@ mod rest;
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
-    admin_token: TS,
+    token_supplier: TS,
 }
 
 #[async_trait]
 pub trait KeycloakTokenSupplier {
     async fn get(&self, url: &str) -> Result<String, KeycloakError>;
+}
+
+pub struct KeycloakServiceAccountAdminTokenRetriever {
+    client_id: String,
+    client_secret: String,
+    reqwest_client: reqwest::Client,
+}
+
+#[async_trait]
+impl KeycloakTokenSupplier for KeycloakServiceAccountAdminTokenRetriever {
+    async fn get(&self, url: &str) -> Result<String, KeycloakError> {
+        //For simplicity for now, just get a token per call, Keycloak by default only gives a lifetime of 60 seconds
+        //and no refresh tokens for the master realm.
+        //Since this is for Service Accounts it's assumed the process would last for much longer than 60 seconds.
+        //Ideally in the future we could inspect a response and check for a refresh token and inspect the given
+        //access token for its time of expiration
+        let admin_token = self.acquire(url).await?;
+        Ok(admin_token.access_token)
+    }
+}
+
+impl KeycloakServiceAccountAdminTokenRetriever {
+    /// Creates a token retriever for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticate-with-a-service-account)
+    /// * `client_id` - The client id of a client with the following characteristics:
+    ///                  1. Exists in the **master** realm
+    ///                  2. `confidential` access type
+    ///                  3. `Service Accounts` option is enabled
+    /// * `client_secret` - The secret credential assigned to the given `client_id`
+    /// * `client` - A reqwest Client to perform the token retrieval call
+    pub fn create(client_id: &str, client_secret: &str, client: reqwest::Client) -> Self {
+        Self {
+            client_id: client_id.into(),
+            client_secret: client_secret.into(),
+            reqwest_client: client,
+        }
+    }
+
+    async fn acquire(&self, url: &str) -> Result<KeycloakAdminToken, KeycloakError> {
+        let response = self
+            .reqwest_client
+            .post(&format!(
+                "{}/auth/realms/master/protocol/openid-connect/token",
+                url,
+            ))
+            .form(&json!({
+                "client_id": &self.client_id,
+                "client_secret":  &self.client_secret,
+                "grant_type": "client_credentials"
+            }))
+            .send()
+            .await?;
+        Ok(error_check(response).await?.json().await?)
+    }
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -96,12 +149,12 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
-impl KeycloakAdmin {
-    pub fn new(url: &str, admin_token: KeycloakAdminToken, client: reqwest::Client) -> Self {
+impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
+    pub fn new(url: &str, token_supplier: TS, client: reqwest::Client) -> Self {
         Self {
             url: url.into(),
             client,
-            admin_token,
+            token_supplier,
         }
     }
 }

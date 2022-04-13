@@ -371,7 +371,7 @@ fn write_rest(methods: &[MethodStruct]) {
     println!("use serde_json::{{json, Value}};");
     println!("use std::collections::HashMap;\n");
     println!("use super::*;\n");
-    println!("impl KeycloakAdmin {{");
+    println!("impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{");
 
     let stream_mapping: HashMap<String, String> =
         toml::from_str(include_str!("stream.toml")).unwrap();
@@ -486,7 +486,7 @@ fn write_rest(methods: &[MethodStruct]) {
             }
         }
 
-        println!("            .bearer_auth(self.admin_token.get(&self.url).await?);");
+        println!("            .bearer_auth(self.token_supplier.get(&self.url).await?);");
 
         for parameter in &method.parameters {
             if let ParameterKind::Query = parameter.kind {
