@@ -35,6 +35,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let users = admin
         .realm_users_get(
             "test", None, None, None, None, None, None, None, None, None, None, None, None, None,
+            None,
         )
         .await?;
 
