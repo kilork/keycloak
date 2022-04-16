@@ -449,29 +449,24 @@ fn write_rest(methods: &[MethodStruct]) {
             _ => method.method.to_lowercase() + "(",
         };
         let mut path = method.path.clone();
-        let mut path_params = vec![];
         let path_parts = method
             .path
             .split('/')
             .filter(|x| x.starts_with('{') && x.ends_with('}'));
-        for path_part in path_parts {
-            if let Some((s, _)) = mapping.get(&path_part[1..path_part.len() - 1]) {
-                path_params.push(s.as_str());
+        if method.parameters.is_empty() {
+            for path_part in path_parts {
+                path = path.replace(path_part, "");
             }
-            path = path.replace(
-                path_part,
-                if method.parameters.is_empty() {
-                    ""
-                } else {
-                    "{}"
-                },
-            );
+        } else {
+            for path_part in path_parts {
+                if let Some((s, _)) = mapping.get(&path_part[1..path_part.len() - 1]) {
+                    path = path.replace(path_part, &format!("{{{s}}}"));
+                }
+            }
         }
         println!(
-            r#"            .{}&format!("{{}}/auth/admin/realms{}", self.url, {}))"#,
-            method_http,
-            path,
-            path_params.join(", ")
+            r#"            .{}&format!("{{}}/{{AUTH_SEG}}admin/realms{}", self.url))"#,
+            method_http, path,
         );
 
         if let Some(x) = body_parameter {
@@ -575,7 +570,6 @@ impl FieldType {
     }
 }
 
-#[derive(Debug)]
 struct Parameter {
     name: String,
     is_optional: bool,
@@ -606,7 +600,6 @@ impl FromStr for ParameterKind {
     }
 }
 
-#[derive(Debug)]
 struct MethodStruct {
     name: String,
     comment: String,

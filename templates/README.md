@@ -10,11 +10,20 @@ Implements [Keycloak Admin REST API version {{ env_var "KEYCLOAK_VERSION" }}](ht
 
 ## Usage
 
+Requires Rust version >= `1.58.0`.
+
 Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
 keycloak = "{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
+```
+
+If you are using new [Quarkus distribution of Keycloak](https://www.keycloak.org/migration/migrating-to-quarkus) enable `quarkus` feature:
+
+```toml
+[dependencies]
+keycloak = { version = "{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}", features = [ "quarkus" ] }
 ```
 
 {{ codeblock "rust" ( read_to_str "examples/adduser.rs" ) }}
