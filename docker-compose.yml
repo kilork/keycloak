@@ -8,4 +8,5 @@ services:
             KC_PROXY: edge
         ports:
             - "9080:8080"
+# comment line below for default quarkus settings
         command: --http-relative-path /auth
