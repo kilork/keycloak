@@ -11,11 +11,20 @@ Implements [Keycloak Admin REST API version 17.0](https://www.keycloak.org/docs-
 
 ## Usage
 
+Requires Rust version >= `1.58.0`.
+
 Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
 keycloak = "17.0"
+```
+
+If you are using new [Quarkus distribution of Keycloak](https://www.keycloak.org/migration/migrating-to-quarkus) enable `quarkus` feature:
+
+```toml
+[dependencies]
+keycloak = { version = "17.0", features = [ "quarkus" ] }
 ```
 
 ```rust#ignore

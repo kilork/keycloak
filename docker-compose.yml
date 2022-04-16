@@ -1,10 +1,11 @@
 version: '3.6'
 services:
     keycloak:
-        image: jboss/keycloak:13.0.1
+        build: docker
         environment:
-            KEYCLOAK_USER: admin
-            KEYCLOAK_PASSWORD: password
-            DB_VENDOR: h2
+            KEYCLOAK_ADMIN: admin
+            KEYCLOAK_ADMIN_PASSWORD: password
+            KC_PROXY: edge
         ports:
             - "9080:8080"
+        command: --http-relative-path /auth
