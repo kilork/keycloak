@@ -430,6 +430,7 @@ pub struct ConfigPropertyRepresentation {
     pub label: Option<String>,
     pub name: Option<String>,
     pub options: Option<Vec<String>>,
+    pub read_only: Option<bool>,
     pub secret: Option<bool>,
     #[serde(rename = "type")]
     pub type_: Option<String>,

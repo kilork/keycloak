@@ -7,7 +7,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 17.0](https://www.keycloak.org/docs-api/17.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version 18.0](https://www.keycloak.org/docs-api/18.0/rest-api/index.html).
 
 ## Usage
 
@@ -17,14 +17,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "17.0"
-```
-
-If you are using new [Quarkus distribution of Keycloak](https://www.keycloak.org/migration/migrating-to-quarkus) enable `quarkus` feature:
-
-```toml
-[dependencies]
-keycloak = { version = "17.0", features = [ "quarkus" ] }
+keycloak = "18.0"
 ```
 
 ```rust#ignore

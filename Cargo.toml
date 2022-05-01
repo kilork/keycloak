@@ -1,8 +1,8 @@
 [package]
 name = "keycloak"
-version = "17.0.2"
+version = "18.0.0"
 authors = ["Alexander Korolev <alexander.korolev.germany@gmail.com>"]
-edition = "2018"
+edition = "2021"
 categories = ["api-bindings", "asynchronous"]
 description = """
 Keycloak Admin REST API.
