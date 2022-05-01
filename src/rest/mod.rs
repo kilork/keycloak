@@ -6,11 +6,6 @@ use serde_json::json;
 
 mod rest;
 
-#[cfg(feature = "quarkus")]
-const AUTH_SEG: &str = "";
-#[cfg(not(feature = "quarkus"))]
-const AUTH_SEG: &str = "auth/";
-
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
@@ -61,7 +56,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         let response = self
             .reqwest_client
             .post(&format!(
-                "{url}/{AUTH_SEG}realms/master/protocol/openid-connect/token",
+                "{url}/realms/master/protocol/openid-connect/token",
             ))
             .form(&json!({
                 "client_id": &self.client_id,
@@ -124,7 +119,7 @@ impl KeycloakAdminToken {
     ) -> Result<KeycloakAdminToken, KeycloakError> {
         let response = client
             .post(&format!(
-                "{url}/{AUTH_SEG}realms/{realm}/protocol/openid-connect/token",
+                "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
             .form(&json!({
                 "username": username,

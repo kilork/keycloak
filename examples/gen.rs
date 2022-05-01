@@ -465,7 +465,7 @@ fn write_rest(methods: &[MethodStruct]) {
             }
         }
         println!(
-            r#"            .{}&format!("{{}}/{{AUTH_SEG}}admin/realms{}", self.url))"#,
+            r#"            .{}&format!("{{}}/admin/realms{}", self.url))"#,
             method_http, path,
         );
 
