@@ -13,7 +13,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/attack-detection/brute-force/users",
+                "{}/admin/realms/{realm}/attack-detection/brute-force/users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -32,7 +32,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
+                "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -50,7 +50,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
+                "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -68,7 +68,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/authenticator-providers",
+                "{}/admin/realms/{realm}/authentication/authenticator-providers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -85,7 +85,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/client-authenticator-providers",
+                "{}/admin/realms/{realm}/authentication/client-authenticator-providers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -103,7 +103,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/config-description/{provider_id}",
+                "{}/admin/realms/{realm}/authentication/config-description/{provider_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -121,7 +121,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/config/{id}",
+                "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -140,7 +140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/config/{id}",
+                "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
             .json(&rep)
@@ -160,7 +160,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/config/{id}",
+                "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -179,7 +179,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions",
+                "{}/admin/realms/{realm}/authentication/executions",
                 self.url
             ))
             .json(&execution)
@@ -199,7 +199,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions/{execution_id}",
+                "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -218,7 +218,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions/{execution_id}",
+                "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -238,7 +238,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions/{execution_id}/config",
+                "{}/admin/realms/{realm}/authentication/executions/{execution_id}/config",
                 self.url
             ))
             .json(&json)
@@ -257,7 +257,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -273,7 +276,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -290,7 +296,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows",
+                "{}/admin/realms/{realm}/authentication/flows",
                 self.url
             ))
             .json(&flow)
@@ -309,7 +315,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows",
+                "{}/admin/realms/{realm}/authentication/flows",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -328,7 +334,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{flow_alias}/copy",
+                "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/copy",
                 self.url
             ))
             .json(&data)
@@ -348,7 +354,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
+                "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -368,7 +374,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
+                "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
                 self.url
             ))
             .json(&rep)
@@ -388,7 +394,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{flow_alias}/executions/execution", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions/execution",
+                self.url
+            ))
             .json(&data)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -406,7 +415,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{flow_alias}/executions/flow", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions/flow",
+                self.url
+            ))
             .json(&data)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -424,7 +436,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{id}",
+                "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -443,7 +455,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{id}",
+                "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
             .json(&flow)
@@ -463,7 +475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/flows/{id}",
+                "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -481,7 +493,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/form-action-providers",
+                "{}/admin/realms/{realm}/authentication/form-action-providers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -498,7 +510,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/form-providers",
+                "{}/admin/realms/{realm}/authentication/form-providers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -515,7 +527,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/per-client-config-description",
+                "{}/admin/realms/{realm}/authentication/per-client-config-description",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -533,7 +545,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/register-required-action",
+                "{}/admin/realms/{realm}/authentication/register-required-action",
                 self.url
             ))
             .json(&data)
@@ -552,7 +564,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions",
+                "{}/admin/realms/{realm}/authentication/required-actions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -570,7 +582,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions/{alias}",
+                "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -589,7 +601,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions/{alias}",
+                "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
             .json(&rep)
@@ -609,7 +621,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions/{alias}",
+                "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -627,7 +639,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -643,7 +658,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -659,7 +677,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/authentication/unregistered-required-actions",
+                "{}/admin/realms/{realm}/authentication/unregistered-required-actions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -678,7 +696,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}",
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -698,7 +716,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}/download",
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/download",
                 self.url
             ))
             .json(&config)
@@ -718,7 +736,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}/generate",
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -738,7 +756,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<u8>, KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}/generate-and-download", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate-and-download",
+                self.url
+            ))
             .json(&config)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -757,7 +778,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}/upload",
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload",
                 self.url
             ))
             .form(&json!({
@@ -779,7 +800,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/certificates/{attr}/upload-certificate", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload-certificate",
+                self.url
+            ))
             .form(&json!({
                 "input": input,
             }))
@@ -798,7 +822,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients-initial-access",
+                "{}/admin/realms/{realm}/clients-initial-access",
                 self.url
             ))
             .json(&config)
@@ -815,7 +839,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients-initial-access",
+                "{}/admin/realms/{realm}/clients-initial-access",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -832,7 +856,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients-initial-access/{id}",
+                "{}/admin/realms/{realm}/clients-initial-access/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -850,7 +874,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-registration-policy/providers",
+                "{}/admin/realms/{realm}/client-registration-policy/providers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -870,7 +894,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -891,7 +915,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -911,7 +935,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -931,7 +955,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/available", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/available",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -948,7 +975,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/composite", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/composite",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -969,7 +999,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -990,7 +1020,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1010,7 +1040,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -1030,7 +1060,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/available", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/available",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1047,7 +1080,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/composite", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/composite",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -1065,10 +1101,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1084,10 +1117,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1103,7 +1133,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1122,7 +1152,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}",
                 self.url
             ))
             .json(&rep)
@@ -1142,7 +1172,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1160,10 +1190,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/clients", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1186,10 +1213,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<ClientRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/clients", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("clientId", v)]);
@@ -1222,10 +1246,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -1241,10 +1262,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}",
-                self.url
-            ))
+            .put(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1261,10 +1279,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}",
-                self.url
-            ))
+            .delete(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1281,7 +1296,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/client-secret",
+                "{}/admin/realms/{realm}/clients/{id}/client-secret",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1299,12 +1314,49 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/client-secret",
+                "{}/admin/realms/{realm}/clients/{id}/client-secret",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
+    }
+
+    /// Get the rotated client secret
+    /// GET /{realm}/clients/{id}/client-secret/rotated
+    pub async fn realm_clients_with_id_client_secret_rotated_get(
+        &self,
+        realm: &str,
+        id: &str,
+    ) -> Result<CredentialRepresentation, KeycloakError> {
+        let builder = self
+            .client
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/client-secret/rotated",
+                self.url
+            ))
+            .bearer_auth(self.token_supplier.get(&self.url).await?);
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
+    /// Invalidate the rotated secret for the client
+    /// DELETE /{realm}/clients/{id}/client-secret/rotated
+    pub async fn realm_clients_with_id_client_secret_rotated_delete(
+        &self,
+        realm: &str,
+        id: &str,
+    ) -> Result<(), KeycloakError> {
+        let builder = self
+            .client
+            .delete(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/client-secret/rotated",
+                self.url
+            ))
+            .bearer_auth(self.token_supplier.get(&self.url).await?);
+        let response = builder.send().await?;
+        error_check(response).await?;
+        Ok(())
     }
 
     /// Get default client scopes.
@@ -1318,7 +1370,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/default-client-scopes",
+                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1335,7 +1387,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1351,7 +1406,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1369,7 +1427,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<AccessToken, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token", self.url))
+            .get(&format!("{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
@@ -1392,7 +1450,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<IDToken, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-id-token", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-id-token",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
@@ -1415,7 +1476,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<HashMap<String, Value>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
@@ -1440,7 +1504,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/protocol-mappers",
+                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/protocol-mappers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1463,7 +1527,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/granted", self.url))
+            .get(&format!("{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/granted", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
@@ -1484,7 +1548,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted", self.url))
+            .get(&format!("{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
@@ -1502,7 +1566,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/installation/providers/{provider_id}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/installation/providers/{provider_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1519,7 +1586,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{id}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1538,7 +1605,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{id}/management/permissions",
                 self.url
             ))
             .json(&ref_)
@@ -1558,7 +1625,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/nodes",
+                "{}/admin/realms/{realm}/clients/{id}/nodes",
                 self.url
             ))
             .json(&form_params)
@@ -1579,7 +1646,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/nodes/{node}",
+                "{}/admin/realms/{realm}/clients/{id}/nodes/{node}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1598,7 +1665,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/offline-session-count",
+                "{}/admin/realms/{realm}/clients/{id}/offline-session-count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1618,7 +1685,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/offline-sessions",
+                "{}/admin/realms/{realm}/clients/{id}/offline-sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1643,7 +1710,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/optional-client-scopes",
+                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1660,7 +1727,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1676,7 +1746,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -1693,7 +1766,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/push-revocation",
+                "{}/admin/realms/{realm}/clients/{id}/push-revocation",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1711,7 +1784,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/registration-access-token",
+                "{}/admin/realms/{realm}/clients/{id}/registration-access-token",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1729,7 +1802,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/service-account-user",
+                "{}/admin/realms/{realm}/clients/{id}/service-account-user",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1747,7 +1820,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/session-count",
+                "{}/admin/realms/{realm}/clients/{id}/session-count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1765,7 +1838,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/test-nodes-available",
+                "{}/admin/realms/{realm}/clients/{id}/test-nodes-available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1785,7 +1858,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/user-sessions",
+                "{}/admin/realms/{realm}/clients/{id}/user-sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1807,10 +1880,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/components", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1828,10 +1898,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<ComponentRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/components", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = name {
             builder = builder.query(&[("name", v)]);
@@ -1855,7 +1922,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components/{id}",
+                "{}/admin/realms/{realm}/components/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1873,7 +1940,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components/{id}",
+                "{}/admin/realms/{realm}/components/{id}",
                 self.url
             ))
             .json(&rep)
@@ -1892,7 +1959,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components/{id}",
+                "{}/admin/realms/{realm}/components/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1912,7 +1979,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/components/{id}/sub-component-types",
+                "{}/admin/realms/{realm}/components/{id}/sub-component-types",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1933,10 +2000,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/groups", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -1957,10 +2021,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/groups", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -1988,10 +2049,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<HashMap<String, Value>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/count",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/groups/count", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
@@ -2011,10 +2069,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<GroupRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2030,10 +2085,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}",
-                self.url
-            ))
+            .put(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2049,10 +2101,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}",
-                self.url
-            ))
+            .delete(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2071,7 +2120,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/children",
+                "{}/admin/realms/{realm}/groups/{id}/children",
                 self.url
             ))
             .json(&rep)
@@ -2091,7 +2140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/management/permissions",
+                "{}/admin/realms/{realm}/groups/{id}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2110,7 +2159,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/management/permissions",
+                "{}/admin/realms/{realm}/groups/{id}/management/permissions",
                 self.url
             ))
             .json(&ref_)
@@ -2132,7 +2181,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/members",
+                "{}/admin/realms/{realm}/groups/{id}/members",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2159,7 +2208,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/import-config",
+                "{}/admin/realms/{realm}/identity-provider/import-config",
                 self.url
             ))
             .form(&json!({
@@ -2180,7 +2229,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances",
+                "{}/admin/realms/{realm}/identity-provider/instances",
                 self.url
             ))
             .json(&representation)
@@ -2199,7 +2248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances",
+                "{}/admin/realms/{realm}/identity-provider/instances",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2217,7 +2266,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2236,7 +2285,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
             .json(&provider_rep)
@@ -2256,7 +2305,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2276,7 +2325,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/export",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/export",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2297,7 +2346,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions", self.url))
+            .get(&format!("{}/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2313,7 +2362,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions", self.url))
+            .put(&format!("{}/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions", self.url))
             .json(&ref_)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2329,7 +2378,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2346,7 +2398,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
                 self.url
             ))
             .json(&mapper)
@@ -2366,7 +2418,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2384,7 +2436,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<IdentityProviderMapperRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2401,7 +2456,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+                self.url
+            ))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2419,7 +2477,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2436,7 +2497,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/identity-provider/providers/{provider_id}",
+                "{}/admin/realms/{realm}/identity-provider/providers/{provider_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2452,7 +2513,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<KeysMetadataRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/keys", self.url))
+            .get(&format!("{}/admin/realms/{realm}/keys", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2469,7 +2530,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/add-models",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/add-models",
                 self.url
             ))
             .json(&reps)
@@ -2490,7 +2551,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
                 self.url
             ))
             .json(&rep)
@@ -2510,7 +2571,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2528,7 +2589,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2547,7 +2608,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .json(&rep)
@@ -2567,7 +2628,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2586,7 +2647,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2603,7 +2667,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/add-models",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/add-models",
                 self.url
             ))
             .json(&reps)
@@ -2624,7 +2688,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models",
                 self.url
             ))
             .json(&rep)
@@ -2644,7 +2708,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2662,7 +2726,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2681,7 +2745,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .json(&rep)
@@ -2701,7 +2765,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2720,7 +2784,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2732,7 +2799,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn post(&self, rep: RealmRepresentation) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/", self.url))
+            .post(&format!("{}/admin/realms/", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2745,7 +2812,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}", self.url))
+            .get(&format!("{}/admin/realms/{realm}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2761,7 +2828,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}", self.url))
+            .put(&format!("{}/admin/realms/{realm}", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2774,7 +2841,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}", self.url))
+            .delete(&format!("{}/admin/realms/{realm}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2800,10 +2867,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/admin-events",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/admin-events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = auth_client {
             builder = builder.query(&[("authClient", v)]);
@@ -2847,10 +2911,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_admin_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/admin-events",
-                self.url
-            ))
+            .delete(&format!("{}/admin/realms/{realm}/admin-events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2863,7 +2924,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clear-keys-cache",
+                "{}/admin/realms/{realm}/clear-keys-cache",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2878,7 +2939,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clear-realm-cache",
+                "{}/admin/realms/{realm}/clear-realm-cache",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2893,7 +2954,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clear-user-cache",
+                "{}/admin/realms/{realm}/clear-user-cache",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2912,7 +2973,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-description-converter",
+                "{}/admin/realms/{realm}/client-description-converter",
                 self.url
             ))
             .json(&description)
@@ -2929,7 +2990,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-policies/policies",
+                "{}/admin/realms/{realm}/client-policies/policies",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2946,7 +3007,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-policies/policies",
+                "{}/admin/realms/{realm}/client-policies/policies",
                 self.url
             ))
             .json(&client_policies)
@@ -2965,7 +3026,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-policies/profiles",
+                "{}/admin/realms/{realm}/client-policies/profiles",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2985,7 +3046,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-policies/profiles",
+                "{}/admin/realms/{realm}/client-policies/profiles",
                 self.url
             ))
             .json(&client_profiles)
@@ -3005,7 +3066,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-session-stats",
+                "{}/admin/realms/{realm}/client-session-stats",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3021,7 +3082,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/credential-registrators",
+                "{}/admin/realms/{realm}/credential-registrators",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3039,7 +3100,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-default-client-scopes",
+                "{}/admin/realms/{realm}/default-default-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3056,7 +3117,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3074,7 +3135,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3092,10 +3153,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<GroupRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-groups",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/default-groups", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3110,7 +3168,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-groups/{group_id}",
+                "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3128,7 +3186,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-groups/{group_id}",
+                "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3147,7 +3205,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/default-optional-client-scopes",
+                "{}/admin/realms/{realm}/default-optional-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3163,7 +3221,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3178,7 +3239,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3201,10 +3265,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/events",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client {
             builder = builder.query(&[("client", v)]);
@@ -3239,10 +3300,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/events",
-                self.url
-            ))
+            .delete(&format!("{}/admin/realms/{realm}/events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3257,10 +3315,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<RealmEventsConfigRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/events/config",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/events/config", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3275,10 +3330,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/events/config",
-                self.url
-            ))
+            .put(&format!("{}/admin/realms/{realm}/events/config", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3295,7 +3347,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/group-by-path/{path}",
+                "{}/admin/realms/{realm}/group-by-path/{path}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3313,7 +3365,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/ldap-server-capabilities",
+                "{}/admin/realms/{realm}/ldap-server-capabilities",
                 self.url
             ))
             .json(&config)
@@ -3330,10 +3382,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<HashMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/localization", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3349,7 +3398,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}",
+                "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
             .json(&localization_texts)
@@ -3368,7 +3417,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}",
+                "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3385,7 +3434,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}",
+                "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3404,7 +3453,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}/{key}",
+                "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3423,7 +3472,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}/{key}",
+                "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
             .json(&text)
@@ -3443,7 +3492,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/localization/{locale}/{key}",
+                "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3461,10 +3510,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/logout-all",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/logout-all", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3480,10 +3526,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<RealmRepresentation, KeycloakError> {
         let mut builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/partial-export",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/partial-export", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = export_clients {
             builder = builder.query(&[("exportClients", v)]);
@@ -3504,10 +3547,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/partialImport",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/partialImport", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3524,7 +3564,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/push-revocation",
+                "{}/admin/realms/{realm}/push-revocation",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3543,7 +3583,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/sessions/{session}",
+                "{}/admin/realms/{realm}/sessions/{session}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3562,7 +3602,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/testLDAPConnection",
+                "{}/admin/realms/{realm}/testLDAPConnection",
                 self.url
             ))
             .json(&config)
@@ -3581,7 +3621,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/testSMTPConnection",
+                "{}/admin/realms/{realm}/testSMTPConnection",
                 self.url
             ))
             .json(&settings)
@@ -3599,7 +3639,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users-management-permissions",
+                "{}/admin/realms/{realm}/users-management-permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3616,7 +3656,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users-management-permissions",
+                "{}/admin/realms/{realm}/users-management-permissions",
                 self.url
             ))
             .json(&ref_)
@@ -3635,7 +3675,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3654,7 +3694,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -3674,7 +3714,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3693,7 +3733,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -3713,7 +3753,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/realm/available",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3732,7 +3772,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/groups/{id}/role-mappings/realm/composite",
+                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3753,7 +3793,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3772,7 +3812,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -3792,7 +3832,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3811,7 +3851,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -3831,7 +3871,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/realm/available",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3850,7 +3890,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/role-mappings/realm/composite",
+                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3872,7 +3912,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles",
+                "{}/admin/realms/{realm}/clients/{id}/roles",
                 self.url
             ))
             .json(&rep)
@@ -3896,7 +3936,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles",
+                "{}/admin/realms/{realm}/clients/{id}/roles",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3927,7 +3967,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3947,7 +3987,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
                 self.url
             ))
             .json(&rep)
@@ -3968,7 +4008,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3989,7 +4029,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4010,7 +4050,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4030,7 +4070,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4051,7 +4091,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/clients/{client_uuid}", self.url))
+            .get(&format!("{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/clients/{client_uuid}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4068,7 +4108,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/realm",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4090,7 +4130,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/groups",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/groups",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4117,7 +4157,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4134,7 +4177,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions",
+                self.url
+            ))
             .json(&ref_)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4154,7 +4200,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/roles/{role_name}/users",
+                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4177,10 +4223,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/roles", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4200,10 +4243,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/roles", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -4231,7 +4271,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}",
+                "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4250,7 +4290,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}",
+                "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
             .json(&rep)
@@ -4270,7 +4310,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}",
+                "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4290,7 +4330,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4310,7 +4350,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4329,7 +4369,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4349,7 +4389,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4365,7 +4408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/composites/realm",
+                "{}/admin/realms/{realm}/roles/{role_name}/composites/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4386,7 +4429,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/groups",
+                "{}/admin/realms/{realm}/roles/{role_name}/groups",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4413,7 +4456,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/management/permissions",
+                "{}/admin/realms/{realm}/roles/{role_name}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4432,7 +4475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/management/permissions",
+                "{}/admin/realms/{realm}/roles/{role_name}/management/permissions",
                 self.url
             ))
             .json(&ref_)
@@ -4453,7 +4496,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles/{role_name}/users",
+                "{}/admin/realms/{realm}/roles/{role_name}/users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4477,7 +4520,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4496,7 +4539,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
             .json(&rep)
@@ -4516,7 +4559,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4536,7 +4579,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/composites",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4559,7 +4602,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/composites",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4587,7 +4630,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/composites",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
             .json(&roles)
@@ -4607,7 +4650,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4623,7 +4669,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/composites/realm",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4641,7 +4687,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4660,7 +4706,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
+                "{}/admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
                 self.url
             ))
             .json(&ref_)
@@ -4680,7 +4726,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                self.url
+            ))
             .json(&roles)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4698,7 +4747,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4715,7 +4767,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                self.url
+            ))
             .json(&roles)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -4733,7 +4788,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available", self.url))
+            .get(&format!("{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4750,7 +4805,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite", self.url))
+            .get(&format!("{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -4770,7 +4825,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -4790,7 +4845,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4809,7 +4864,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -4828,7 +4883,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4845,7 +4903,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -4866,7 +4927,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -4887,7 +4948,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4907,7 +4968,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&roles)
@@ -4927,7 +4988,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4944,7 +5008,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -4964,7 +5031,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -4984,7 +5051,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5003,7 +5070,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
                 self.url
             ))
             .json(&roles)
@@ -5023,7 +5090,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/realm/available",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5043,7 +5110,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite",
+                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5062,7 +5129,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<HashMap<String, Value>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{id}/name", self.url))
+            .get(&format!("{}/admin/realms/{id}/name", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5078,7 +5145,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/user-storage/{id}/name",
+                "{}/admin/realms/{realm}/user-storage/{id}/name",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5096,7 +5163,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/user-storage/{id}/remove-imported-users",
+                "{}/admin/realms/{realm}/user-storage/{id}/remove-imported-users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5116,7 +5183,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/user-storage/{id}/sync",
+                "{}/admin/realms/{realm}/user-storage/{id}/sync",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5137,7 +5204,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/user-storage/{id}/unlink-users",
+                "{}/admin/realms/{realm}/user-storage/{id}/unlink-users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5158,7 +5225,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/user-storage/{parent_id}/mappers/{id}/sync",
+                "{}/admin/realms/{realm}/user-storage/{parent_id}/mappers/{id}/sync",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5178,10 +5245,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users",
-                self.url
-            ))
+            .post(&format!("{}/admin/realms/{realm}/users", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5211,10 +5275,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/users", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -5270,6 +5331,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         email: Option<String>,
         email_verified: Option<bool>,
+        enabled: Option<bool>,
         first_name: Option<String>,
         last_name: Option<String>,
         search: Option<String>,
@@ -5277,16 +5339,16 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<i32, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/count",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/users/count", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = email {
             builder = builder.query(&[("email", v)]);
         }
         if let Some(v) = email_verified {
             builder = builder.query(&[("emailVerified", v)]);
+        }
+        if let Some(v) = enabled {
+            builder = builder.query(&[("enabled", v)]);
         }
         if let Some(v) = first_name {
             builder = builder.query(&[("firstName", v)]);
@@ -5308,10 +5370,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_users_profile_get(&self, realm: &str) -> Result<String, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/profile",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/users/profile", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5325,10 +5384,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/profile",
-                self.url
-            ))
+            .put(&format!("{}/admin/realms/{realm}/users/profile", self.url))
             .json(&text)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5345,10 +5401,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<UserRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}",
-                self.url
-            ))
+            .get(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5364,10 +5417,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}",
-                self.url
-            ))
+            .put(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
             .json(&rep)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5384,10 +5434,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}",
-                self.url
-            ))
+            .delete(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5404,7 +5451,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Vec<String>, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/configured-user-storage-credential-types", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5420,7 +5470,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/consents",
+                "{}/admin/realms/{realm}/users/{id}/consents",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5439,7 +5489,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/consents/{client}",
+                "{}/admin/realms/{realm}/users/{id}/consents/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5457,7 +5507,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/credentials",
+                "{}/admin/realms/{realm}/users/{id}/credentials",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5476,7 +5526,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/credentials/{credential_id}",
+                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5496,7 +5546,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}", self.url))
+            .post(&format!("{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5513,7 +5563,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveToFirst", self.url))
+            .post(&format!(
+                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveToFirst",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5531,7 +5584,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/credentials/{credential_id}/userLabel", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/userLabel",
+                self.url
+            ))
             .json(&user_label)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5550,7 +5606,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/disable-credential-types",
+                "{}/admin/realms/{realm}/users/{id}/disable-credential-types",
                 self.url
             ))
             .json(&credential_types)
@@ -5575,7 +5631,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/execute-actions-email",
+                "{}/admin/realms/{realm}/users/{id}/execute-actions-email",
                 self.url
             ))
             .json(&actions)
@@ -5604,7 +5660,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/federated-identity",
+                "{}/admin/realms/{realm}/users/{id}/federated-identity",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5624,7 +5680,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/federated-identity/{provider}",
+                "{}/admin/realms/{realm}/users/{id}/federated-identity/{provider}",
                 self.url
             ))
             .json(&rep)
@@ -5645,7 +5701,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/federated-identity/{provider}",
+                "{}/admin/realms/{realm}/users/{id}/federated-identity/{provider}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5667,7 +5723,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/groups",
+                "{}/admin/realms/{realm}/users/{id}/groups",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5697,7 +5753,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/groups/count",
+                "{}/admin/realms/{realm}/users/{id}/groups/count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5718,7 +5774,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/groups/{group_id}",
+                "{}/admin/realms/{realm}/users/{id}/groups/{group_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5737,7 +5793,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/groups/{group_id}",
+                "{}/admin/realms/{realm}/users/{id}/groups/{group_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5756,7 +5812,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/impersonation",
+                "{}/admin/realms/{realm}/users/{id}/impersonation",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5774,7 +5830,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/logout",
+                "{}/admin/realms/{realm}/users/{id}/logout",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5794,7 +5850,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/offline-sessions/{client_uuid}",
+                "{}/admin/realms/{realm}/users/{id}/offline-sessions/{client_uuid}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5813,7 +5869,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/reset-password",
+                "{}/admin/realms/{realm}/users/{id}/reset-password",
                 self.url
             ))
             .json(&cred)
@@ -5836,7 +5892,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .put(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/send-verify-email",
+                "{}/admin/realms/{realm}/users/{id}/send-verify-email",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5861,7 +5917,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(&format!(
-                "{}/{AUTH_SEG}admin/realms/{realm}/users/{id}/sessions",
+                "{}/admin/realms/{realm}/users/{id}/sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5874,7 +5930,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn get(&self) -> Result<ServerInfoRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/{AUTH_SEG}admin/realms/", self.url))
+            .get(&format!("{}/admin/realms/", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5887,7 +5943,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .request(
                 reqwest::Method::OPTIONS,
-                &format!("{}/{AUTH_SEG}admin/realms/", self.url),
+                &format!("{}/admin/realms/", self.url),
             )
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
