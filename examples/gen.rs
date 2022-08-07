@@ -379,7 +379,9 @@ fn write_rest(methods: &[MethodStruct]) {
     for method in methods {
         let mut method_name = method.path.clone();
 
-        for parameter in &method.parameters {
+        let parameters = &method.parameters;
+
+        for parameter in parameters {
             if let ParameterKind::Path = parameter.kind {
                 let parameter_with = (if parameter.name == "realm" {
                     ""
@@ -396,13 +398,20 @@ fn write_rest(methods: &[MethodStruct]) {
 
         let rest_comment = format!("{} {}", method.method, method.path);
 
+        let mut comments = vec![];
         if method.name != rest_comment {
-            println!("    /// {}", method.name);
+            comments.push(method.name.to_string());
         }
         if let Some(description) = method.description.as_ref().map(|x| x.replace('\n', " ")) {
-            println!("    /// {}", description);
+            comments.push(description);
         }
-        println!("    /// {}", rest_comment);
+        comments.push(rest_comment);
+        let comments = comments
+            .into_iter()
+            .map(|c| format!("    /// {}\n", c))
+            .collect::<Vec<_>>()
+            .join("    ///\n");
+        print!("{}", comments);
 
         println!("    pub async fn {}(", method_name);
         println!("        &self,");
@@ -483,7 +492,7 @@ fn write_rest(methods: &[MethodStruct]) {
 
         println!("            .bearer_auth(self.token_supplier.get(&self.url).await?);");
 
-        for parameter in &method.parameters {
+        for parameter in parameters {
             if let ParameterKind::Query = parameter.kind {
                 println!(
                     "        if let Some(v) = {} {{",

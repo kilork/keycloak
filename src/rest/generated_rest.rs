@@ -5,6 +5,7 @@ use super::*;
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Clear any user login failures for all users   This can release temporary disabled users
+    ///
     /// DELETE /{realm}/attack-detection/brute-force/users
     pub async fn realm_attack_detection_brute_force_users_delete(
         &self,
@@ -23,6 +24,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get status of a username in brute force detection
+    ///
     /// GET /{realm}/attack-detection/brute-force/users/{userId}
     pub async fn realm_attack_detection_brute_force_users_with_user_id_get(
         &self,
@@ -41,6 +43,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Clear any user login failures for the user   This can release temporary disabled user
+    ///
     /// DELETE /{realm}/attack-detection/brute-force/users/{userId}
     pub async fn realm_attack_detection_brute_force_users_with_user_id_delete(
         &self,
@@ -60,6 +63,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authenticator providers   Returns a stream of authenticator providers.
+    ///
     /// GET /{realm}/authentication/authenticator-providers
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
@@ -77,6 +81,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client authenticator providers   Returns a stream of client authenticator providers.
+    ///
     /// GET /{realm}/authentication/client-authenticator-providers
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
@@ -94,6 +99,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authenticator provider’s configuration description
+    ///
     /// GET /{realm}/authentication/config-description/{providerId}
     pub async fn realm_authentication_config_description_with_provider_id_get(
         &self,
@@ -112,6 +118,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authenticator configuration
+    ///
     /// GET /{realm}/authentication/config/{id}
     pub async fn realm_authentication_config_with_id_get(
         &self,
@@ -130,6 +137,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update authenticator configuration
+    ///
     /// PUT /{realm}/authentication/config/{id}
     pub async fn realm_authentication_config_with_id_put(
         &self,
@@ -151,6 +159,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete authenticator configuration
+    ///
     /// DELETE /{realm}/authentication/config/{id}
     pub async fn realm_authentication_config_with_id_delete(
         &self,
@@ -170,6 +179,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add new authentication execution
+    ///
     /// POST /{realm}/authentication/executions
     pub async fn realm_authentication_executions_post(
         &self,
@@ -190,6 +200,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get Single Execution
+    ///
     /// GET /{realm}/authentication/executions/{executionId}
     pub async fn realm_authentication_executions_with_execution_id_get(
         &self,
@@ -209,6 +220,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete execution
+    ///
     /// DELETE /{realm}/authentication/executions/{executionId}
     pub async fn realm_authentication_executions_with_execution_id_delete(
         &self,
@@ -228,6 +240,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update execution with new configuration
+    ///
     /// POST /{realm}/authentication/executions/{executionId}/config
     pub async fn realm_authentication_executions_with_execution_id_config_post(
         &self,
@@ -249,6 +262,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Lower execution’s priority
+    ///
     /// POST /{realm}/authentication/executions/{executionId}/lower-priority
     pub async fn realm_authentication_executions_with_execution_id_lower_priority_post(
         &self,
@@ -268,6 +282,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Raise execution’s priority
+    ///
     /// POST /{realm}/authentication/executions/{executionId}/raise-priority
     pub async fn realm_authentication_executions_with_execution_id_raise_priority_post(
         &self,
@@ -287,6 +302,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new authentication flow
+    ///
     /// POST /{realm}/authentication/flows
     pub async fn realm_authentication_flows_post(
         &self,
@@ -307,6 +323,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authentication flows   Returns a stream of authentication flows.
+    ///
     /// GET /{realm}/authentication/flows
     pub async fn realm_authentication_flows_get(
         &self,
@@ -324,6 +341,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Copy existing authentication flow under a new name   The new name is given as 'newName' attribute of the passed JSON object
+    ///
     /// POST /{realm}/authentication/flows/{flowAlias}/copy
     pub async fn realm_authentication_flows_with_flow_alias_copy_post(
         &self,
@@ -345,6 +363,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authentication executions for a flow
+    ///
     /// GET /{realm}/authentication/flows/{flowAlias}/executions
     pub async fn realm_authentication_flows_with_flow_alias_executions_get(
         &self,
@@ -364,6 +383,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update authentication executions of a Flow
+    ///
     /// PUT /{realm}/authentication/flows/{flowAlias}/executions
     pub async fn realm_authentication_flows_with_flow_alias_executions_put(
         &self,
@@ -385,6 +405,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add new authentication execution to a flow
+    ///
     /// POST /{realm}/authentication/flows/{flowAlias}/executions/execution
     pub async fn realm_authentication_flows_with_flow_alias_executions_execution_post(
         &self,
@@ -406,6 +427,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add new flow with new execution to existing flow
+    ///
     /// POST /{realm}/authentication/flows/{flowAlias}/executions/flow
     pub async fn realm_authentication_flows_with_flow_alias_executions_flow_post(
         &self,
@@ -427,6 +449,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get authentication flow for id
+    ///
     /// GET /{realm}/authentication/flows/{id}
     pub async fn realm_authentication_flows_with_id_get(
         &self,
@@ -445,6 +468,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update an authentication flow
+    ///
     /// PUT /{realm}/authentication/flows/{id}
     pub async fn realm_authentication_flows_with_id_put(
         &self,
@@ -466,6 +490,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete an authentication flow
+    ///
     /// DELETE /{realm}/authentication/flows/{id}
     pub async fn realm_authentication_flows_with_id_delete(
         &self,
@@ -485,6 +510,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get form action providers   Returns a stream of form action providers.
+    ///
     /// GET /{realm}/authentication/form-action-providers
     pub async fn realm_authentication_form_action_providers_get(
         &self,
@@ -502,6 +528,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get form providers   Returns a stream of form providers.
+    ///
     /// GET /{realm}/authentication/form-providers
     pub async fn realm_authentication_form_providers_get(
         &self,
@@ -519,6 +546,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get configuration descriptions for all clients
+    ///
     /// GET /{realm}/authentication/per-client-config-description
     pub async fn realm_authentication_per_client_config_description_get(
         &self,
@@ -536,6 +564,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Register a new required actions
+    ///
     /// POST /{realm}/authentication/register-required-action
     pub async fn realm_authentication_register_required_action_post(
         &self,
@@ -556,6 +585,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get required actions   Returns a stream of required actions.
+    ///
     /// GET /{realm}/authentication/required-actions
     pub async fn realm_authentication_required_actions_get(
         &self,
@@ -573,6 +603,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get required action for alias
+    ///
     /// GET /{realm}/authentication/required-actions/{alias}
     pub async fn realm_authentication_required_actions_with_alias_get(
         &self,
@@ -591,6 +622,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update required action
+    ///
     /// PUT /{realm}/authentication/required-actions/{alias}
     pub async fn realm_authentication_required_actions_with_alias_put(
         &self,
@@ -612,6 +644,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete required action
+    ///
     /// DELETE /{realm}/authentication/required-actions/{alias}
     pub async fn realm_authentication_required_actions_with_alias_delete(
         &self,
@@ -631,6 +664,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Lower required action’s priority
+    ///
     /// POST /{realm}/authentication/required-actions/{alias}/lower-priority
     pub async fn realm_authentication_required_actions_with_alias_lower_priority_post(
         &self,
@@ -650,6 +684,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Raise required action’s priority
+    ///
     /// POST /{realm}/authentication/required-actions/{alias}/raise-priority
     pub async fn realm_authentication_required_actions_with_alias_raise_priority_post(
         &self,
@@ -669,6 +704,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get unregistered required actions   Returns a stream of unregistered required actions.
+    ///
     /// GET /{realm}/authentication/unregistered-required-actions
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
@@ -686,6 +722,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get key info
+    ///
     /// GET /{realm}/clients/{id}/certificates/{attr}
     pub async fn realm_clients_with_id_certificates_with_attr_get(
         &self,
@@ -705,6 +742,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get a keystore file for the client, containing private key and public certificate
+    ///
     /// POST /{realm}/clients/{id}/certificates/{attr}/download
     pub async fn realm_clients_with_id_certificates_with_attr_download_post(
         &self,
@@ -726,6 +764,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Generate a new certificate with new key pair
+    ///
     /// POST /{realm}/clients/{id}/certificates/{attr}/generate
     pub async fn realm_clients_with_id_certificates_with_attr_generate_post(
         &self,
@@ -745,7 +784,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Generate a new keypair and certificate, and get the private key file   Generates a keypair and certificate and serves the private key in a specified keystore format.
+    ///
     /// Only generated public certificate is saved in Keycloak DB - the private key is not.
+    ///
     /// POST /{realm}/clients/{id}/certificates/{attr}/generate-and-download
     pub async fn realm_clients_with_id_certificates_with_attr_generate_and_download_post(
         &self,
@@ -767,6 +808,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Upload certificate and eventually private key
+    ///
     /// POST /{realm}/clients/{id}/certificates/{attr}/upload
     pub async fn realm_clients_with_id_certificates_with_attr_upload_post(
         &self,
@@ -790,6 +832,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Upload only certificate, not private key
+    ///
     /// POST /{realm}/clients/{id}/certificates/{attr}/upload-certificate
     pub async fn realm_clients_with_id_certificates_with_attr_upload_certificate_post(
         &self,
@@ -813,6 +856,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new initial access token.
+    ///
     /// POST /{realm}/clients-initial-access
     pub async fn realm_clients_initial_access_post(
         &self,
@@ -866,6 +910,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Base path for retrieve providers with the configProperties properly filled
+    ///
     /// GET /{realm}/client-registration-policy/providers
     pub async fn realm_client_registration_policy_providers_get(
         &self,
@@ -883,6 +928,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add client-level roles to the user role mapping
+    ///
     /// POST /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn realm_groups_with_id_role_mappings_clients_with_client_post(
         &self,
@@ -905,6 +951,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client-level role mappings for the user, and the app
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn realm_groups_with_id_role_mappings_clients_with_client_get(
         &self,
@@ -924,6 +971,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete client-level roles from user role mapping
+    ///
     /// DELETE /{realm}/groups/{id}/role-mappings/clients/{client}
     pub async fn realm_groups_with_id_role_mappings_clients_with_client_delete(
         &self,
@@ -946,6 +994,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get available client-level roles that can be mapped to the user
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}/available
     pub async fn realm_groups_with_id_role_mappings_clients_with_client_available_get(
         &self,
@@ -965,6 +1014,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective client-level role mappings   This recurses any composite roles
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/clients/{client}/composite
     pub async fn realm_groups_with_id_role_mappings_clients_with_client_composite_get(
         &self,
@@ -988,6 +1038,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add client-level roles to the user role mapping
+    ///
     /// POST /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn realm_users_with_id_role_mappings_clients_with_client_post(
         &self,
@@ -1010,6 +1061,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client-level role mappings for the user, and the app
+    ///
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn realm_users_with_id_role_mappings_clients_with_client_get(
         &self,
@@ -1029,6 +1081,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete client-level roles from user role mapping
+    ///
     /// DELETE /{realm}/users/{id}/role-mappings/clients/{client}
     pub async fn realm_users_with_id_role_mappings_clients_with_client_delete(
         &self,
@@ -1051,6 +1104,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get available client-level roles that can be mapped to the user
+    ///
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}/available
     pub async fn realm_users_with_id_role_mappings_clients_with_client_available_get(
         &self,
@@ -1070,6 +1124,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective client-level role mappings   This recurses any composite roles
+    ///
     /// GET /{realm}/users/{id}/role-mappings/clients/{client}/composite
     pub async fn realm_users_with_id_role_mappings_clients_with_client_composite_get(
         &self,
@@ -1093,6 +1148,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new client scope   Client Scope’s name must be unique!
+    ///
     /// POST /{realm}/client-scopes
     pub async fn realm_client_scopes_post(
         &self,
@@ -1110,6 +1166,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client scopes belonging to the realm   Returns a list of client scopes belonging to the realm
+    ///
     /// GET /{realm}/client-scopes
     pub async fn realm_client_scopes_get(
         &self,
@@ -1124,6 +1181,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get representation of the client scope
+    ///
     /// GET /{realm}/client-scopes/{id}
     pub async fn realm_client_scopes_with_id_get(
         &self,
@@ -1142,6 +1200,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the client scope
+    ///
     /// PUT /{realm}/client-scopes/{id}
     pub async fn realm_client_scopes_with_id_put(
         &self,
@@ -1163,6 +1222,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the client scope
+    ///
     /// DELETE /{realm}/client-scopes/{id}
     pub async fn realm_client_scopes_with_id_delete(
         &self,
@@ -1182,6 +1242,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new client   Client’s client_id must be unique!
+    ///
     /// POST /{realm}/clients
     pub async fn realm_clients_post(
         &self,
@@ -1199,7 +1260,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get clients belonging to the realm.
+    ///
     /// If a client can’t be retrieved from the storage due to a problem with the underlying storage,  it is silently removed from the returned list.  This ensures that concurrent modifications to the list don’t prevent callers from retrieving this list.
+    ///
     /// GET /{realm}/clients
     pub async fn realm_clients_get(
         &self,
@@ -1238,6 +1301,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get representation of the client
+    ///
     /// GET /{realm}/clients/{id}
     pub async fn realm_clients_with_id_get(
         &self,
@@ -1253,6 +1317,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the client
+    ///
     /// PUT /{realm}/clients/{id}
     pub async fn realm_clients_with_id_put(
         &self,
@@ -1271,6 +1336,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the client
+    ///
     /// DELETE /{realm}/clients/{id}
     pub async fn realm_clients_with_id_delete(
         &self,
@@ -1287,6 +1353,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Generate a new secret for the client
+    ///
     /// POST /{realm}/clients/{id}/client-secret
     pub async fn realm_clients_with_id_client_secret_post(
         &self,
@@ -1305,6 +1372,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the client secret
+    ///
     /// GET /{realm}/clients/{id}/client-secret
     pub async fn realm_clients_with_id_client_secret_get(
         &self,
@@ -1323,6 +1391,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the rotated client secret
+    ///
     /// GET /{realm}/clients/{id}/client-secret/rotated
     pub async fn realm_clients_with_id_client_secret_rotated_get(
         &self,
@@ -1341,6 +1410,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Invalidate the rotated secret for the client
+    ///
     /// DELETE /{realm}/clients/{id}/client-secret/rotated
     pub async fn realm_clients_with_id_client_secret_rotated_delete(
         &self,
@@ -1360,7 +1430,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get default client scopes.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/clients/{id}/default-client-scopes
     pub async fn realm_clients_with_id_default_client_scopes_get(
         &self,
@@ -1417,6 +1489,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create JSON with payload of example access token
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-access-token
     pub async fn realm_clients_with_id_evaluate_scopes_generate_example_access_token_get(
         &self,
@@ -1440,6 +1513,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create JSON with payload of example id token
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-id-token
     pub async fn realm_clients_with_id_evaluate_scopes_generate_example_id_token_get(
         &self,
@@ -1466,6 +1540,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create JSON with payload of example user info
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo
     pub async fn realm_clients_with_id_evaluate_scopes_generate_example_userinfo_get(
         &self,
@@ -1492,7 +1567,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return list of all protocol mappers, which will be used when generating tokens issued for particular client.
+    ///
     /// This means  protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/protocol-mappers
     pub async fn realm_clients_with_id_evaluate_scopes_protocol_mappers_get(
         &self,
@@ -1516,7 +1593,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective scope mapping of all roles of particular role container, which this client is defacto allowed to have in the accessToken issued for him.
+    ///
     /// This contains scope mappings, which this client has directly, as well as scope mappings, which are granted to all client scopes,  which are linked with this client.
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted
     pub async fn realm_clients_with_id_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
         &self,
@@ -1537,7 +1616,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get roles, which this client doesn’t have scope for and can’t have them in the accessToken issued for him.
+    ///
     /// Defacto all the  other roles of particular role container, which are not in {@link #getGrantedScopeMappings()}
+    ///
     /// GET /{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted
     pub async fn realm_clients_with_id_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
         &self,
@@ -1577,6 +1658,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/clients/{id}/management/permissions
     pub async fn realm_clients_with_id_management_permissions_get(
         &self,
@@ -1595,6 +1677,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/clients/{id}/management/permissions
     pub async fn realm_clients_with_id_management_permissions_put(
         &self,
@@ -1615,6 +1698,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Register a cluster node with the client   Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle  by sending registration request to Keycloak
+    ///
     /// POST /{realm}/clients/{id}/nodes
     pub async fn realm_clients_with_id_nodes_post(
         &self,
@@ -1636,6 +1720,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Unregister a cluster node from the client
+    ///
     /// DELETE /{realm}/clients/{id}/nodes/{node}
     pub async fn realm_clients_with_id_nodes_with_node_delete(
         &self,
@@ -1656,6 +1741,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get application offline session count   Returns a number of offline user sessions associated with this client   {      "count": number  }
+    ///
     /// GET /{realm}/clients/{id}/offline-session-count
     pub async fn realm_clients_with_id_offline_session_count_get(
         &self,
@@ -1674,6 +1760,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get offline sessions for client   Returns a list of offline user sessions associated with this client
+    ///
     /// GET /{realm}/clients/{id}/offline-sessions
     pub async fn realm_clients_with_id_offline_sessions_get(
         &self,
@@ -1700,7 +1787,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get optional client scopes.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/clients/{id}/optional-client-scopes
     pub async fn realm_clients_with_id_optional_client_scopes_get(
         &self,
@@ -1757,6 +1846,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Push the client’s revocation policy to its admin URL   If the client has an admin URL, push revocation policy to it.
+    ///
     /// POST /{realm}/clients/{id}/push-revocation
     pub async fn realm_clients_with_id_push_revocation_post(
         &self,
@@ -1775,6 +1865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Generate a new registration access token for the client
+    ///
     /// POST /{realm}/clients/{id}/registration-access-token
     pub async fn realm_clients_with_id_registration_access_token_post(
         &self,
@@ -1793,6 +1884,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get a user dedicated to the service account
+    ///
     /// GET /{realm}/clients/{id}/service-account-user
     pub async fn realm_clients_with_id_service_account_user_get(
         &self,
@@ -1811,6 +1903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get application session count   Returns a number of user sessions associated with this client   {      "count": number  }
+    ///
     /// GET /{realm}/clients/{id}/session-count
     pub async fn realm_clients_with_id_session_count_get(
         &self,
@@ -1829,6 +1922,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Test if registered cluster nodes are available   Tests availability by sending 'ping' request to all cluster nodes.
+    ///
     /// GET /{realm}/clients/{id}/test-nodes-available
     pub async fn realm_clients_with_id_test_nodes_available_get(
         &self,
@@ -1847,6 +1941,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get user sessions for client   Returns a list of user sessions associated with this client
+    ///
     /// GET /{realm}/clients/{id}/user-sessions
     pub async fn realm_clients_with_id_user_sessions_get(
         &self,
@@ -1969,6 +2064,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// List of subcomponent types that are available to configure for a particular parent component.
+    ///
     /// GET /{realm}/components/{id}/sub-component-types
     pub async fn realm_components_with_id_sub_component_types_get(
         &self,
@@ -1991,7 +2087,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// create or add a top level realm groupSet or create child.
+    ///
     /// This will update the group and set the parent if it exists. Create it and set the parent  if the group doesn’t exist.
+    ///
     /// POST /{realm}/groups
     pub async fn realm_groups_post(
         &self,
@@ -2009,7 +2107,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get group hierarchy.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/groups
     pub async fn realm_groups_get(
         &self,
@@ -2040,6 +2140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns the groups counts.
+    ///
     /// GET /{realm}/groups/count
     pub async fn realm_groups_count_get(
         &self,
@@ -2076,6 +2177,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update group, ignores subgroups.
+    ///
     /// PUT /{realm}/groups/{id}
     pub async fn realm_groups_with_id_put(
         &self,
@@ -2109,7 +2211,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Set or create child.
+    ///
     /// This will just set the parent if it exists. Create it and set the parent  if the group doesn’t exist.
+    ///
     /// POST /{realm}/groups/{id}/children
     pub async fn realm_groups_with_id_children_post(
         &self,
@@ -2131,6 +2235,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/groups/{id}/management/permissions
     pub async fn realm_groups_with_id_management_permissions_get(
         &self,
@@ -2149,6 +2254,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/groups/{id}/management/permissions
     pub async fn realm_groups_with_id_management_permissions_put(
         &self,
@@ -2169,6 +2275,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get users   Returns a stream of users, filtered according to query parameters
+    ///
     /// GET /{realm}/groups/{id}/members
     pub async fn realm_groups_with_id_members_get(
         &self,
@@ -2199,6 +2306,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Import identity provider from uploaded JSON file
+    ///
     /// POST /{realm}/identity-provider/import-config
     pub async fn realm_identity_provider_import_config_post(
         &self,
@@ -2220,6 +2328,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new identity provider
+    ///
     /// POST /{realm}/identity-provider/instances
     pub async fn realm_identity_provider_instances_post(
         &self,
@@ -2240,6 +2349,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get identity providers
+    ///
     /// GET /{realm}/identity-provider/instances
     pub async fn realm_identity_provider_instances_get(
         &self,
@@ -2257,6 +2367,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the identity provider
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}
     pub async fn realm_identity_provider_instances_with_alias_get(
         &self,
@@ -2275,6 +2386,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the identity provider
+    ///
     /// PUT /{realm}/identity-provider/instances/{alias}
     pub async fn realm_identity_provider_instances_with_alias_put(
         &self,
@@ -2296,6 +2408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the identity provider
+    ///
     /// DELETE /{realm}/identity-provider/instances/{alias}
     pub async fn realm_identity_provider_instances_with_alias_delete(
         &self,
@@ -2315,6 +2428,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Export public broker configuration for identity provider
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}/export
     pub async fn realm_identity_provider_instances_with_alias_export_get(
         &self,
@@ -2338,6 +2452,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}/management/permissions
     pub async fn realm_identity_provider_instances_with_alias_management_permissions_get(
         &self,
@@ -2353,6 +2468,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/identity-provider/instances/{alias}/management/permissions
     pub async fn realm_identity_provider_instances_with_alias_management_permissions_put(
         &self,
@@ -2370,6 +2486,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mapper types for identity provider
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}/mapper-types
     pub async fn realm_identity_provider_instances_with_alias_mapper_types_get(
         &self,
@@ -2388,6 +2505,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a mapper to identity provider
+    ///
     /// POST /{realm}/identity-provider/instances/{alias}/mappers
     pub async fn realm_identity_provider_instances_with_alias_mappers_post(
         &self,
@@ -2409,6 +2527,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mappers for identity provider
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}/mappers
     pub async fn realm_identity_provider_instances_with_alias_mappers_get(
         &self,
@@ -2427,6 +2546,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mapper by id for the identity provider
+    ///
     /// GET /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_get(
         &self,
@@ -2446,6 +2566,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update a mapper for the identity provider
+    ///
     /// PUT /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_put(
         &self,
@@ -2468,6 +2589,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete a mapper for the identity provider
+    ///
     /// DELETE /{realm}/identity-provider/instances/{alias}/mappers/{id}
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_delete(
         &self,
@@ -2488,6 +2610,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get identity providers
+    ///
     /// GET /{realm}/identity-provider/providers/{provider_id}
     pub async fn realm_identity_provider_providers_with_provider_id_get(
         &self,
@@ -2520,6 +2643,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create multiple mappers
+    ///
     /// POST /{realm}/client-scopes/{id}/protocol-mappers/add-models
     pub async fn realm_client_scopes_with_id_protocol_mappers_add_models_post(
         &self,
@@ -2541,6 +2665,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a mapper
+    ///
     /// POST /{realm}/client-scopes/{id}/protocol-mappers/models
     pub async fn realm_client_scopes_with_id_protocol_mappers_models_post(
         &self,
@@ -2562,6 +2687,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mappers
+    ///
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/models
     pub async fn realm_client_scopes_with_id_protocol_mappers_models_get(
         &self,
@@ -2580,6 +2706,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mapper by id
+    ///
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_get(
         &self,
@@ -2598,6 +2725,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the mapper
+    ///
     /// PUT /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_put(
         &self,
@@ -2619,6 +2747,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the mapper
+    ///
     /// DELETE /{realm}/client-scopes/{id}/protocol-mappers/models/{id}
     pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_delete(
         &self,
@@ -2638,6 +2767,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mappers by name for a specific protocol
+    ///
     /// GET /{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}
     pub async fn realm_client_scopes_with_id_protocol_mappers_protocol_with_protocol_get(
         &self,
@@ -2657,6 +2787,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create multiple mappers
+    ///
     /// POST /{realm}/clients/{id}/protocol-mappers/add-models
     pub async fn realm_clients_with_id_protocol_mappers_add_models_post(
         &self,
@@ -2678,6 +2809,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a mapper
+    ///
     /// POST /{realm}/clients/{id}/protocol-mappers/models
     pub async fn realm_clients_with_id_protocol_mappers_models_post(
         &self,
@@ -2699,6 +2831,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mappers
+    ///
     /// GET /{realm}/clients/{id}/protocol-mappers/models
     pub async fn realm_clients_with_id_protocol_mappers_models_get(
         &self,
@@ -2717,6 +2850,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mapper by id
+    ///
     /// GET /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn realm_clients_with_id_protocol_mappers_models_with_id_get(
         &self,
@@ -2735,6 +2869,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the mapper
+    ///
     /// PUT /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn realm_clients_with_id_protocol_mappers_models_with_id_put(
         &self,
@@ -2756,6 +2891,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the mapper
+    ///
     /// DELETE /{realm}/clients/{id}/protocol-mappers/models/{id}
     pub async fn realm_clients_with_id_protocol_mappers_models_with_id_delete(
         &self,
@@ -2775,6 +2911,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get mappers by name for a specific protocol
+    ///
     /// GET /{realm}/clients/{id}/protocol-mappers/protocol/{protocol}
     pub async fn realm_clients_with_id_protocol_mappers_protocol_with_protocol_get(
         &self,
@@ -2794,7 +2931,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Import a realm   Imports a realm from a full representation of that realm.
+    ///
     /// Realm name must be unique.
+    ///
     /// POST /
     pub async fn post(&self, rep: RealmRepresentation) -> Result<(), KeycloakError> {
         let builder = self
@@ -2808,6 +2947,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the top-level representation of the realm   It will not include nested information like User and Client representations.
+    ///
     /// GET /{realm}
     pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
         let builder = self
@@ -2819,7 +2959,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the top-level information of the realm   Any user, roles or client information in the representation  will be ignored.
+    ///
     /// This will only update top-level attributes of the realm.
+    ///
     /// PUT /{realm}
     pub async fn realm_put(
         &self,
@@ -2837,6 +2979,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the realm
+    ///
     /// DELETE /{realm}
     pub async fn realm_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -2849,6 +2992,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get admin events   Returns all admin events, or filters events based on URL query parameters listed here
+    ///
     /// GET /{realm}/admin-events
     pub async fn realm_admin_events_get(
         &self,
@@ -2907,6 +3051,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete all admin events
+    ///
     /// DELETE /{realm}/admin-events
     pub async fn realm_admin_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -2919,6 +3064,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Base path for importing clients under this realm.
+    ///
     /// POST /{realm}/client-description-converter
     pub async fn realm_client_description_converter_post(
         &self,
@@ -3012,7 +3158,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client session stats   Returns a JSON map.
+    ///
     /// The key is the client id, the value is the number of sessions that currently are active  with that client. Only clients that actually have a session associated with them will be in this map.
+    ///
     /// GET /{realm}/client-session-stats
     pub async fn realm_client_session_stats_get(
         &self,
@@ -3046,7 +3194,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm default client scopes.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/default-default-client-scopes
     pub async fn realm_default_default_client_scopes_get(
         &self,
@@ -3100,7 +3250,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get group hierarchy.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/default-groups
     pub async fn realm_default_groups_get(
         &self,
@@ -3151,7 +3303,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm optional client scopes.
+    ///
     /// Only name and ids are returned.
+    ///
     /// GET /{realm}/default-optional-client-scopes
     pub async fn realm_default_optional_client_scopes_get(
         &self,
@@ -3205,6 +3359,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get events   Returns all events, or filters them based on URL query parameters listed here
+    ///
     /// GET /{realm}/events
     pub async fn realm_events_get(
         &self,
@@ -3251,6 +3406,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete all events
+    ///
     /// DELETE /{realm}/events
     pub async fn realm_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -3263,6 +3419,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the events provider configuration   Returns JSON object with events provider configuration
+    ///
     /// GET /{realm}/events/config
     pub async fn realm_events_config_get(
         &self,
@@ -3277,6 +3434,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the events provider   Change the events provider and/or its configuration
+    ///
     /// PUT /{realm}/events/config
     pub async fn realm_events_config_put(
         &self,
@@ -3441,7 +3599,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Removes all user sessions.
+    ///
     /// Any client that has an admin url will also be told to invalidate any sessions  they have.
+    ///
     /// POST /{realm}/logout-all
     pub async fn realm_logout_all_post(
         &self,
@@ -3456,6 +3616,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Partial export of existing realm into a JSON file.
+    ///
     /// POST /{realm}/partial-export
     pub async fn realm_partial_export_post(
         &self,
@@ -3478,6 +3639,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Partial import from a JSON file to an existing realm.
+    ///
     /// POST /{realm}/partialImport
     pub async fn realm_partial_import_post(
         &self,
@@ -3495,6 +3657,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Push the realm’s revocation policy to any client that has an admin url associated with it.
+    ///
     /// POST /{realm}/push-revocation
     pub async fn realm_push_revocation_post(
         &self,
@@ -3512,7 +3675,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a specific user session.
+    ///
     /// Any client that has an admin url will also be told to invalidate this  particular session.
+    ///
     /// DELETE /{realm}/sessions/{session}
     pub async fn realm_sessions_with_session_delete(
         &self,
@@ -3585,6 +3750,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get role mappings
+    ///
     /// GET /{realm}/groups/{id}/role-mappings
     pub async fn realm_groups_with_id_role_mappings_get(
         &self,
@@ -3603,6 +3769,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add realm-level role mappings to the user
+    ///
     /// POST /{realm}/groups/{id}/role-mappings/realm
     pub async fn realm_groups_with_id_role_mappings_realm_post(
         &self,
@@ -3624,6 +3791,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level role mappings
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/realm
     pub async fn realm_groups_with_id_role_mappings_realm_get(
         &self,
@@ -3642,6 +3810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete realm-level role mappings
+    ///
     /// DELETE /{realm}/groups/{id}/role-mappings/realm
     pub async fn realm_groups_with_id_role_mappings_realm_delete(
         &self,
@@ -3663,6 +3832,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles that can be mapped
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/realm/available
     pub async fn realm_groups_with_id_role_mappings_realm_available_get(
         &self,
@@ -3681,6 +3851,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective realm-level role mappings   This will recurse all composite roles to get the result.
+    ///
     /// GET /{realm}/groups/{id}/role-mappings/realm/composite
     pub async fn realm_groups_with_id_role_mappings_realm_composite_get(
         &self,
@@ -3703,6 +3874,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get role mappings
+    ///
     /// GET /{realm}/users/{id}/role-mappings
     pub async fn realm_users_with_id_role_mappings_get(
         &self,
@@ -3721,6 +3893,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add realm-level role mappings to the user
+    ///
     /// POST /{realm}/users/{id}/role-mappings/realm
     pub async fn realm_users_with_id_role_mappings_realm_post(
         &self,
@@ -3742,6 +3915,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level role mappings
+    ///
     /// GET /{realm}/users/{id}/role-mappings/realm
     pub async fn realm_users_with_id_role_mappings_realm_get(
         &self,
@@ -3760,6 +3934,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete realm-level role mappings
+    ///
     /// DELETE /{realm}/users/{id}/role-mappings/realm
     pub async fn realm_users_with_id_role_mappings_realm_delete(
         &self,
@@ -3781,6 +3956,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles that can be mapped
+    ///
     /// GET /{realm}/users/{id}/role-mappings/realm/available
     pub async fn realm_users_with_id_role_mappings_realm_available_get(
         &self,
@@ -3799,6 +3975,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective realm-level role mappings   This will recurse all composite roles to get the result.
+    ///
     /// GET /{realm}/users/{id}/role-mappings/realm/composite
     pub async fn realm_users_with_id_role_mappings_realm_composite_get(
         &self,
@@ -3821,6 +3998,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new role for the realm or client
+    ///
     /// POST /{realm}/clients/{id}/roles
     pub async fn realm_clients_with_id_roles_post(
         &self,
@@ -3842,6 +4020,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get all roles for the realm or client
+    ///
     /// GET /{realm}/clients/{id}/roles
     pub async fn realm_clients_with_id_roles_get(
         &self,
@@ -3876,6 +4055,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get a role by name
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}
     pub async fn realm_clients_with_id_roles_with_role_name_get(
         &self,
@@ -3895,6 +4075,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update a role by name
+    ///
     /// PUT /{realm}/clients/{id}/roles/{role-name}
     pub async fn realm_clients_with_id_roles_with_role_name_put(
         &self,
@@ -3917,6 +4098,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete a role by name
+    ///
     /// DELETE /{realm}/clients/{id}/roles/{role-name}
     pub async fn realm_clients_with_id_roles_with_role_name_delete(
         &self,
@@ -3937,6 +4119,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a composite to the role
+    ///
     /// POST /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn realm_clients_with_id_roles_with_role_name_composites_post(
         &self,
@@ -3959,6 +4142,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get composites of the role
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn realm_clients_with_id_roles_with_role_name_composites_get(
         &self,
@@ -3978,6 +4162,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove roles from the role’s composite
+    ///
     /// DELETE /{realm}/clients/{id}/roles/{role-name}/composites
     pub async fn realm_clients_with_id_roles_with_role_name_composites_delete(
         &self,
@@ -4000,6 +4185,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client-level roles for the client that are in the role’s composite
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites/clients/{clientUuid}
     pub async fn realm_clients_with_id_roles_with_role_name_composites_clients_with_client_uuid_get(
         &self,
@@ -4017,6 +4203,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles of the role’s composite
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/composites/realm
     pub async fn realm_clients_with_id_roles_with_role_name_composites_realm_get(
         &self,
@@ -4036,6 +4223,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns a stream of groups that have the specified role name
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/groups
     pub async fn realm_clients_with_id_roles_with_role_name_groups_get(
         &self,
@@ -4067,6 +4255,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/management/permissions
     pub async fn realm_clients_with_id_roles_with_role_name_management_permissions_get(
         &self,
@@ -4086,6 +4275,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/clients/{id}/roles/{role-name}/management/permissions
     pub async fn realm_clients_with_id_roles_with_role_name_management_permissions_put(
         &self,
@@ -4107,6 +4297,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns a stream of users that have the specified role name.
+    ///
     /// GET /{realm}/clients/{id}/roles/{role-name}/users
     pub async fn realm_clients_with_id_roles_with_role_name_users_get(
         &self,
@@ -4134,6 +4325,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new role for the realm or client
+    ///
     /// POST /{realm}/roles
     pub async fn realm_roles_post(
         &self,
@@ -4151,6 +4343,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get all roles for the realm or client
+    ///
     /// GET /{realm}/roles
     pub async fn realm_roles_get(
         &self,
@@ -4181,6 +4374,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get a role by name
+    ///
     /// GET /{realm}/roles/{role-name}
     pub async fn realm_roles_with_role_name_get(
         &self,
@@ -4199,6 +4393,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update a role by name
+    ///
     /// PUT /{realm}/roles/{role-name}
     pub async fn realm_roles_with_role_name_put(
         &self,
@@ -4220,6 +4415,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete a role by name
+    ///
     /// DELETE /{realm}/roles/{role-name}
     pub async fn realm_roles_with_role_name_delete(
         &self,
@@ -4239,6 +4435,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a composite to the role
+    ///
     /// POST /{realm}/roles/{role-name}/composites
     pub async fn realm_roles_with_role_name_composites_post(
         &self,
@@ -4260,6 +4457,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get composites of the role
+    ///
     /// GET /{realm}/roles/{role-name}/composites
     pub async fn realm_roles_with_role_name_composites_get(
         &self,
@@ -4278,6 +4476,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove roles from the role’s composite
+    ///
     /// DELETE /{realm}/roles/{role-name}/composites
     pub async fn realm_roles_with_role_name_composites_delete(
         &self,
@@ -4299,6 +4498,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client-level roles for the client that are in the role’s composite
+    ///
     /// GET /{realm}/roles/{role-name}/composites/clients/{clientUuid}
     pub async fn realm_roles_with_role_name_composites_clients_with_client_uuid_get(
         &self,
@@ -4318,6 +4518,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles of the role’s composite
+    ///
     /// GET /{realm}/roles/{role-name}/composites/realm
     pub async fn realm_roles_with_role_name_composites_realm_get(
         &self,
@@ -4336,6 +4537,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns a stream of groups that have the specified role name
+    ///
     /// GET /{realm}/roles/{role-name}/groups
     pub async fn realm_roles_with_role_name_groups_get(
         &self,
@@ -4366,6 +4568,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/roles/{role-name}/management/permissions
     pub async fn realm_roles_with_role_name_management_permissions_get(
         &self,
@@ -4384,6 +4587,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/roles/{role-name}/management/permissions
     pub async fn realm_roles_with_role_name_management_permissions_put(
         &self,
@@ -4404,6 +4608,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns a stream of users that have the specified role name.
+    ///
     /// GET /{realm}/roles/{role-name}/users
     pub async fn realm_roles_with_role_name_users_get(
         &self,
@@ -4430,6 +4635,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get a specific role’s representation
+    ///
     /// GET /{realm}/roles-by-id/{role-id}
     pub async fn realm_roles_by_id_with_role_id_get(
         &self,
@@ -4448,6 +4654,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the role
+    ///
     /// PUT /{realm}/roles-by-id/{role-id}
     pub async fn realm_roles_by_id_with_role_id_put(
         &self,
@@ -4469,6 +4676,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the role
+    ///
     /// DELETE /{realm}/roles-by-id/{role-id}
     pub async fn realm_roles_by_id_with_role_id_delete(
         &self,
@@ -4488,6 +4696,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Make the role a composite role by associating some child roles
+    ///
     /// POST /{realm}/roles-by-id/{role-id}/composites
     pub async fn realm_roles_by_id_with_role_id_composites_post(
         &self,
@@ -4509,6 +4718,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get role’s children   Returns a set of role’s children provided the role is a composite.
+    ///
     /// GET /{realm}/roles-by-id/{role-id}/composites
     pub async fn realm_roles_by_id_with_role_id_composites_get(
         &self,
@@ -4539,6 +4749,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a set of roles from the role’s composite
+    ///
     /// DELETE /{realm}/roles-by-id/{role-id}/composites
     pub async fn realm_roles_by_id_with_role_id_composites_delete(
         &self,
@@ -4560,6 +4771,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get client-level roles for the client that are in the role’s composite
+    ///
     /// GET /{realm}/roles-by-id/{role-id}/composites/clients/{clientUuid}
     pub async fn realm_roles_by_id_with_role_id_composites_clients_with_client_uuid_get(
         &self,
@@ -4579,6 +4791,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles that are in the role’s composite
+    ///
     /// GET /{realm}/roles-by-id/{role-id}/composites/realm
     pub async fn realm_roles_by_id_with_role_id_composites_realm_get(
         &self,
@@ -4597,6 +4810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+    ///
     /// GET /{realm}/roles-by-id/{role-id}/management/permissions
     pub async fn realm_roles_by_id_with_role_id_management_permissions_get(
         &self,
@@ -4615,6 +4829,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return object stating whether role Authoirzation permissions have been initialized or not and a reference
+    ///
     /// PUT /{realm}/roles-by-id/{role-id}/management/permissions
     pub async fn realm_roles_by_id_with_role_id_management_permissions_put(
         &self,
@@ -4635,6 +4850,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add client-level roles to the client’s scope
+    ///
     /// POST /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_post(
         &self,
@@ -4657,6 +4873,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the roles associated with a client’s scope   Returns roles for the client.
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_get(
         &self,
@@ -4676,6 +4893,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove client-level roles from the client’s scope.
+    ///
     /// DELETE /{realm}/client-scopes/{id}/scope-mappings/clients/{client}
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_delete(
         &self,
@@ -4698,6 +4916,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// The available client-level roles   Returns the roles for the client that can be associated with the client’s scope
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_available_get(
         &self,
@@ -4714,6 +4933,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective client roles   Returns the roles for the client that are associated with the client’s scope.
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite
     pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_composite_get(
         &self,
@@ -4734,6 +4954,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a set of realm-level roles to the client’s scope
+    ///
     /// POST /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn realm_client_scopes_with_id_scope_mappings_realm_post(
         &self,
@@ -4755,6 +4976,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles associated with the client’s scope
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn realm_client_scopes_with_id_scope_mappings_realm_get(
         &self,
@@ -4773,6 +4995,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a set of realm-level roles from the client’s scope
+    ///
     /// DELETE /{realm}/client-scopes/{id}/scope-mappings/realm
     pub async fn realm_client_scopes_with_id_scope_mappings_realm_delete(
         &self,
@@ -4794,6 +5017,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles that are available to attach to this client’s scope
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm/available
     pub async fn realm_client_scopes_with_id_scope_mappings_realm_available_get(
         &self,
@@ -4812,7 +5036,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective realm-level roles associated with the client’s scope   What this does is recurse  any composite roles associated with the client’s scope and adds the roles to this lists.
+    ///
     /// The method is really  to show a comprehensive total view of realm-level roles associated with the client.
+    ///
     /// GET /{realm}/client-scopes/{id}/scope-mappings/realm/composite
     pub async fn realm_client_scopes_with_id_scope_mappings_realm_composite_get(
         &self,
@@ -4835,6 +5061,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add client-level roles to the client’s scope
+    ///
     /// POST /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn realm_clients_with_id_scope_mappings_clients_with_client_post(
         &self,
@@ -4857,6 +5084,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get the roles associated with a client’s scope   Returns roles for the client.
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn realm_clients_with_id_scope_mappings_clients_with_client_get(
         &self,
@@ -4876,6 +5104,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove client-level roles from the client’s scope.
+    ///
     /// DELETE /{realm}/clients/{id}/scope-mappings/clients/{client}
     pub async fn realm_clients_with_id_scope_mappings_clients_with_client_delete(
         &self,
@@ -4898,6 +5127,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// The available client-level roles   Returns the roles for the client that can be associated with the client’s scope
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}/available
     pub async fn realm_clients_with_id_scope_mappings_clients_with_client_available_get(
         &self,
@@ -4917,6 +5147,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective client roles   Returns the roles for the client that are associated with the client’s scope.
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/clients/{client}/composite
     pub async fn realm_clients_with_id_scope_mappings_clients_with_client_composite_get(
         &self,
@@ -4940,6 +5171,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a set of realm-level roles to the client’s scope
+    ///
     /// POST /{realm}/clients/{id}/scope-mappings/realm
     pub async fn realm_clients_with_id_scope_mappings_realm_post(
         &self,
@@ -4961,6 +5193,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles associated with the client’s scope
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/realm
     pub async fn realm_clients_with_id_scope_mappings_realm_get(
         &self,
@@ -4979,6 +5212,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a set of realm-level roles from the client’s scope
+    ///
     /// DELETE /{realm}/clients/{id}/scope-mappings/realm
     pub async fn realm_clients_with_id_scope_mappings_realm_delete(
         &self,
@@ -5000,6 +5234,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get realm-level roles that are available to attach to this client’s scope
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/realm/available
     pub async fn realm_clients_with_id_scope_mappings_realm_available_get(
         &self,
@@ -5018,7 +5253,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get effective realm-level roles associated with the client’s scope   What this does is recurse  any composite roles associated with the client’s scope and adds the roles to this lists.
+    ///
     /// The method is really  to show a comprehensive total view of realm-level roles associated with the client.
+    ///
     /// GET /{realm}/clients/{id}/scope-mappings/realm/composite
     pub async fn realm_clients_with_id_scope_mappings_realm_composite_get(
         &self,
@@ -5041,6 +5278,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Create a new user   Username must be unique.
+    ///
     /// POST /{realm}/users
     pub async fn realm_users_post(
         &self,
@@ -5058,6 +5296,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get users   Returns a stream of users, filtered according to query parameters.
+    ///
     /// GET /{realm}/users
     pub async fn realm_users_get(
         &self,
@@ -5128,7 +5367,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Returns the number of users that match the given criteria.
+    ///
     /// It can be called in three different ways.  1. Don’t specify any criteria and pass {@code null}. The number of all  users within that realm will be returned.  <p>  2. If {@code search} is specified other criteria such as {@code last} will  be ignored even though you set them. The {@code search} string will be  matched against the first and last name, the username and the email of a  user.  <p>  3. If {@code search} is unspecified but any of {@code last}, {@code first},  {@code email} or {@code username} those criteria are matched against their  respective fields on a user entity. Combined with a logical and.
+    ///
     /// GET /{realm}/users/count
     pub async fn realm_users_count_get(
         &self,
@@ -5197,6 +5438,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get representation of the user
+    ///
     /// GET /{realm}/users/{id}
     pub async fn realm_users_with_id_get(
         &self,
@@ -5212,6 +5454,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update the user
+    ///
     /// PUT /{realm}/users/{id}
     pub async fn realm_users_with_id_put(
         &self,
@@ -5230,6 +5473,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Delete the user
+    ///
     /// DELETE /{realm}/users/{id}
     pub async fn realm_users_with_id_delete(
         &self,
@@ -5246,7 +5490,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Return credential types, which are provided by the user storage where user is stored.
+    ///
     /// Returned values can contain for example "password", "otp" etc.  This will always return empty list for "local" users, which are not backed by any user storage
+    ///
     /// GET /{realm}/users/{id}/configured-user-storage-credential-types
     pub async fn realm_users_with_id_configured_user_storage_credential_types_get(
         &self,
@@ -5265,6 +5511,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get consents granted by the user
+    ///
     /// GET /{realm}/users/{id}/consents
     pub async fn realm_users_with_id_consents_get(
         &self,
@@ -5283,6 +5530,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Revoke consent and offline tokens for particular client from user
+    ///
     /// DELETE /{realm}/users/{id}/consents/{client}
     pub async fn realm_users_with_id_consents_with_client_delete(
         &self,
@@ -5320,6 +5568,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a credential for a user
+    ///
     /// DELETE /{realm}/users/{id}/credentials/{credentialId}
     pub async fn realm_users_with_id_credentials_with_credential_id_delete(
         &self,
@@ -5340,6 +5589,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Move a credential to a position behind another credential
+    ///
     /// POST /{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}
     pub async fn realm_users_with_id_credentials_with_credential_id_move_after_with_new_previous_credential_id_post(
         &self,
@@ -5358,6 +5608,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Move a credential to a first position in the credentials list of the user
+    ///
     /// POST /{realm}/users/{id}/credentials/{credentialId}/moveToFirst
     pub async fn realm_users_with_id_credentials_with_credential_id_move_to_first_post(
         &self,
@@ -5378,6 +5629,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Update a credential label for a user
+    ///
     /// PUT /{realm}/users/{id}/credentials/{credentialId}/userLabel
     pub async fn realm_users_with_id_credentials_with_credential_id_user_label_put(
         &self,
@@ -5400,6 +5652,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Disable all credentials for a user of a specific type
+    ///
     /// PUT /{realm}/users/{id}/disable-credential-types
     pub async fn realm_users_with_id_disable_credential_types_put(
         &self,
@@ -5421,7 +5674,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Send a update account email to the user   An email contains a link the user can click to perform a set of required actions.
+    ///
     /// The redirectUri and clientId parameters are optional. If no redirect is given, then there will  be no link back to click after actions have completed. Redirect uri must be a valid uri for the  particular clientId.
+    ///
     /// PUT /{realm}/users/{id}/execute-actions-email
     pub async fn realm_users_with_id_execute_actions_email_put(
         &self,
@@ -5455,6 +5710,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get social logins associated with the user
+    ///
     /// GET /{realm}/users/{id}/federated-identity
     pub async fn realm_users_with_id_federated_identity_get(
         &self,
@@ -5473,6 +5729,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Add a social login provider to the user
+    ///
     /// POST /{realm}/users/{id}/federated-identity/{provider}
     pub async fn realm_users_with_id_federated_identity_with_provider_post(
         &self,
@@ -5495,6 +5752,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove a social login provider from user
+    ///
     /// DELETE /{realm}/users/{id}/federated-identity/{provider}
     pub async fn realm_users_with_id_federated_identity_with_provider_delete(
         &self,
@@ -5607,6 +5865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Impersonate the user
+    ///
     /// POST /{realm}/users/{id}/impersonation
     pub async fn realm_users_with_id_impersonation_post(
         &self,
@@ -5625,6 +5884,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Remove all user sessions associated with the user   Also send notification to all clients that have an admin URL to invalidate the sessions for the particular user.
+    ///
     /// POST /{realm}/users/{id}/logout
     pub async fn realm_users_with_id_logout_post(
         &self,
@@ -5644,6 +5904,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get offline sessions associated with the user and client
+    ///
     /// GET /{realm}/users/{id}/offline-sessions/{clientUuid}
     pub async fn realm_users_with_id_offline_sessions_with_client_uuid_get(
         &self,
@@ -5663,6 +5924,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Set up a new password for the user.
+    ///
     /// PUT /{realm}/users/{id}/reset-password
     pub async fn realm_users_with_id_reset_password_put(
         &self,
@@ -5684,7 +5946,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Send an email-verification email to the user   An email contains a link the user can click to verify their email address.
+    ///
     /// The redirectUri and clientId parameters are optional. The default for the  redirect is the account client.
+    ///
     /// PUT /{realm}/users/{id}/send-verify-email
     pub async fn realm_users_with_id_send_verify_email_put(
         &self,
@@ -5712,6 +5976,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get sessions associated with the user
+    ///
     /// GET /{realm}/users/{id}/sessions
     pub async fn realm_users_with_id_sessions_get(
         &self,
@@ -5730,6 +5995,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// Get themes, social providers, auth providers, and event listeners available on this server
+    ///
     /// GET /
     pub async fn get(&self) -> Result<ServerInfoRepresentation, KeycloakError> {
         let builder = self
@@ -5741,6 +6007,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 
     /// CORS preflight
+    ///
     /// OPTIONS /{any}
     pub async fn any_options(&self) -> Result<(), KeycloakError> {
         let builder = self
