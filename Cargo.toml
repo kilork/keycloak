@@ -1,6 +1,6 @@
 [package]
 name = "keycloak"
-version = "18.0.0"
+version = "19.0.100"
 authors = ["Alexander Korolev <alexander.korolev.germany@gmail.com>"]
 edition = "2021"
 categories = ["api-bindings", "asynchronous"]
@@ -22,7 +22,7 @@ async-trait = "0.1"
 
 [dev-dependencies]
 tokio = { version = "1", features = [ "full" ] }
-scraper = "0.12"
+scraper = "0.13"
 heck = "0.4"
 structopt = "0.3"
 toml = "0.5"

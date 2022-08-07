@@ -665,6 +665,7 @@ pub struct MultivaluedHashMap {
 pub struct PartialImportRepresentation {
     pub clients: Option<Vec<ClientRepresentation>>,
     pub groups: Option<Vec<GroupRepresentation>>,
+    pub identity_provider_mappers: Option<Vec<IdentityProviderMapperRepresentation>>,
     pub identity_providers: Option<Vec<IdentityProviderRepresentation>>,
     pub if_resource_exists: Option<String>,
     pub policy: Option<PartialImportRepresentationPolicy>,
@@ -1006,17 +1007,6 @@ pub struct SpiInfoRepresentation {
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-pub struct SynchronizationResult {
-    pub added: Option<i32>,
-    pub failed: Option<i32>,
-    pub ignored: Option<bool>,
-    pub removed: Option<i32>,
-    pub status: Option<String>,
-    pub updated: Option<i32>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SystemInfoRepresentation {
     pub file_encoding: Option<String>,
@@ -1037,21 +1027,6 @@ pub struct SystemInfoRepresentation {
     pub user_name: Option<String>,
     pub user_timezone: Option<String>,
     pub version: Option<String>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct TestLdapConnectionRepresentation {
-    pub action: Option<String>,
-    pub auth_type: Option<String>,
-    pub bind_credential: Option<String>,
-    pub bind_dn: Option<String>,
-    pub component_id: Option<String>,
-    pub connection_timeout: Option<String>,
-    pub connection_url: Option<String>,
-    pub start_tls: Option<String>,
-    pub use_truststore_spi: Option<String>,
 }
 
 #[skip_serializing_none]
