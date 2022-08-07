@@ -2918,51 +2918,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(())
     }
 
-    /// Clear cache of external public keys (Public keys of clients or Identity providers)
-    /// POST /{realm}/clear-keys-cache
-    pub async fn realm_clear_keys_cache_post(&self, realm: &str) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/clear-keys-cache",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// Clear realm cache
-    /// POST /{realm}/clear-realm-cache
-    pub async fn realm_clear_realm_cache_post(&self, realm: &str) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/clear-realm-cache",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// Clear user cache
-    /// POST /{realm}/clear-user-cache
-    pub async fn realm_clear_user_cache_post(&self, realm: &str) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/clear-user-cache",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
     /// Base path for importing clients under this realm.
     /// POST /{realm}/client-description-converter
     pub async fn realm_client_description_converter_post(
@@ -3355,26 +3310,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get LDAP supported extensions.
-    /// POST /{realm}/ldap-server-capabilities
-    pub async fn realm_ldap_server_capabilities_post(
-        &self,
-        realm: &str,
-        config: TestLdapConnectionRepresentation,
-    ) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/ldap-server-capabilities",
-                self.url
-            ))
-            .json(&config)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
     /// GET /{realm}/localization
     pub async fn realm_localization_get(
         &self,
@@ -3413,14 +3348,18 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         locale: &str,
+        use_realm_default_locale_fallback: Option<bool>,
     ) -> Result<HashMap<String, Value>, KeycloakError> {
-        let builder = self
+        let mut builder = self
             .client
             .get(&format!(
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
+        if let Some(v) = use_realm_default_locale_fallback {
+            builder = builder.query(&[("useRealmDefaultLocaleFallback", v)]);
+        }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3586,26 +3525,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/sessions/{session}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// Test LDAP connection
-    /// POST /{realm}/testLDAPConnection
-    pub async fn realm_test_ldap_connection_post(
-        &self,
-        realm: &str,
-        config: TestLdapConnectionRepresentation,
-    ) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/testLDAPConnection",
-                self.url
-            ))
-            .json(&config)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5116,121 +5035,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
-        }
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
-    /// Need this for admin console to display simple name of provider when displaying client detail   KEYCLOAK-4328
-    /// GET /{id}/name
-    pub async fn with_id_name_get(
-        &self,
-        id: &str,
-    ) -> Result<HashMap<String, Value>, KeycloakError> {
-        let builder = self
-            .client
-            .get(&format!("{}/admin/realms/{id}/name", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
-    /// Need this for admin console to display simple name of provider when displaying user detail   KEYCLOAK-4328
-    /// GET /{realm}/user-storage/{id}/name
-    pub async fn realm_user_storage_with_id_name_get(
-        &self,
-        realm: &str,
-        id: &str,
-    ) -> Result<HashMap<String, Value>, KeycloakError> {
-        let builder = self
-            .client
-            .get(&format!(
-                "{}/admin/realms/{realm}/user-storage/{id}/name",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
-    /// Remove imported users
-    /// POST /{realm}/user-storage/{id}/remove-imported-users
-    pub async fn realm_user_storage_with_id_remove_imported_users_post(
-        &self,
-        realm: &str,
-        id: &str,
-    ) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/user-storage/{id}/remove-imported-users",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// Trigger sync of users   Action can be "triggerFullSync" or "triggerChangedUsersSync"
-    /// POST /{realm}/user-storage/{id}/sync
-    pub async fn realm_user_storage_with_id_sync_post(
-        &self,
-        realm: &str,
-        id: &str,
-        action: Option<String>,
-    ) -> Result<SynchronizationResult, KeycloakError> {
-        let mut builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/user-storage/{id}/sync",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        if let Some(v) = action {
-            builder = builder.query(&[("action", v)]);
-        }
-        let response = builder.send().await?;
-        Ok(error_check(response).await?.json().await?)
-    }
-
-    /// Unlink imported users from a storage provider
-    /// POST /{realm}/user-storage/{id}/unlink-users
-    pub async fn realm_user_storage_with_id_unlink_users_post(
-        &self,
-        realm: &str,
-        id: &str,
-    ) -> Result<(), KeycloakError> {
-        let builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/user-storage/{id}/unlink-users",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
-    }
-
-    /// Trigger sync of mapper data related to ldap mapper (roles, groups, …​)   direction is "fedToKeycloak" or "keycloakToFed"
-    /// POST /{realm}/user-storage/{parentId}/mappers/{id}/sync
-    pub async fn realm_user_storage_with_parent_id_mappers_with_id_sync_post(
-        &self,
-        realm: &str,
-        parent_id: &str,
-        id: &str,
-        direction: Option<String>,
-    ) -> Result<SynchronizationResult, KeycloakError> {
-        let mut builder = self
-            .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/user-storage/{parent_id}/mappers/{id}/sync",
-                self.url
-            ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
-        if let Some(v) = direction {
-            builder = builder.query(&[("direction", v)]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
