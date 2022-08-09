@@ -58,7 +58,7 @@ case "$CONFIRM" in
 esac
 
 echo Generating types...
-git checkout -- src/types.rs src/rest/rest.rs
+git checkout -- src/types.rs src/rest/generated_rest.rs
 cargo run --example gen -- types > src/types2.rs
 cargo run --example gen -- rest > src/rest/rest2.rs
 mv src/types2.rs src/types.rs
