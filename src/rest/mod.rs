@@ -4,7 +4,7 @@ use crate::{types::*, KeycloakError};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
-mod rest;
+mod generated_rest;
 
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,

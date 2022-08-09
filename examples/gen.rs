@@ -170,6 +170,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
         let methods_html = resource.select(&methods_selector);
         for method in methods_html {
             let method_name = text(&method, "h4");
+            let anchor = attr(&method, "h4", "id").map(str::to_string);
             let path = text_opt(&method, "pre").unwrap_or_else(|| method_name.clone());
             let mut path_parts = path.split(' ');
             let method_http = path_parts.next().unwrap();
@@ -239,6 +240,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
             }
 
             let method = MethodStruct {
+                anchor,
                 comment: resource_name.clone(),
                 name: method_name,
                 parameters,
@@ -307,7 +309,7 @@ fn process_method_parameters(
     body_parameter: &mut Option<Vec<(String, Rc<Parameter>)>>,
     has_query_params: &mut bool,
     is_form: &mut bool,
-) {
+) -> Vec<String> {
     let mut parameters = vec![];
     for parameter in &method.parameters {
         let mut name = parameter.name.to_snake_case();
@@ -334,6 +336,7 @@ fn process_method_parameters(
         }
     }
 
+    let mut param_lines = vec![];
     for (name, parameter) in path_params.iter().chain(parameters.iter()) {
         let mut parameter_type = parameter.parameter_type.name();
         if parameter.is_array {
@@ -345,7 +348,7 @@ fn process_method_parameters(
         if !parameter.is_array && !parameter.is_optional && parameter_type == "String" {
             parameter_type = "&str".into();
         }
-        println!("        {}: {},", name, parameter_type);
+        param_lines.push(format!("        {}: {},", name, parameter_type));
         if let ParameterKind::FormData = parameter.kind {
             *is_form = true;
         }
@@ -365,9 +368,12 @@ fn process_method_parameters(
             _ => (),
         }
     }
+    param_lines
 }
 
 fn write_rest(methods: &[MethodStruct]) {
+    let keycloak_version =
+        std::env::var("KEYCLOAK_VERSION").expect("environment variable KEYCLOAK_VERSION");
     println!("use serde_json::{{json, Value}};");
     println!("use std::collections::HashMap;\n");
     println!("use super::*;\n");
@@ -379,7 +385,9 @@ fn write_rest(methods: &[MethodStruct]) {
     for method in methods {
         let mut method_name = method.path.clone();
 
-        for parameter in &method.parameters {
+        let parameters = &method.parameters;
+
+        for parameter in parameters {
             if let ParameterKind::Path = parameter.kind {
                 let parameter_with = (if parameter.name == "realm" {
                     ""
@@ -394,30 +402,97 @@ fn write_rest(methods: &[MethodStruct]) {
         }
         method_name = (method_name + &method.method).to_snake_case();
 
-        let rest_comment = format!("{} {}", method.method, method.path);
-
-        if method.name != rest_comment {
-            println!("    /// {}", method.name);
-        }
-        if let Some(description) = method.description.as_ref().map(|x| x.replace('\n', " ")) {
-            println!("    /// {}", description);
-        }
-        println!("    /// {}", rest_comment);
-
-        println!("    pub async fn {}(", method_name);
-        println!("        &self,");
-
         let mut mapping = HashMap::new();
         let mut body_parameter = None;
         let mut has_query_params = false;
         let mut is_form = false;
-        process_method_parameters(
+        let method_params = process_method_parameters(
             method,
             &mut mapping,
             &mut body_parameter,
             &mut has_query_params,
             &mut is_form,
         );
+        let mut path = method.path.clone();
+        let path_parts = method
+            .path
+            .split('/')
+            .filter(|x| x.starts_with('{') && x.ends_with('}'));
+        if method.parameters.is_empty() {
+            for path_part in path_parts {
+                path = path.replace(path_part, "");
+            }
+        } else {
+            for path_part in path_parts {
+                if let Some((s, _)) = mapping.get(&path_part[1..path_part.len() - 1]) {
+                    path = path.replace(path_part, &format!("{{{s}}}"));
+                }
+            }
+        }
+        let rest_comment = format!("{} {}", method.method, path);
+
+        let mut comments = vec![];
+        if method.name != rest_comment {
+            comments.push(vec![method.name.to_string()]);
+        }
+        if let Some(description) = method.description.as_ref().map(|x| x.replace('\n', " ")) {
+            comments.push(vec![description]);
+        }
+        if !parameters.is_empty() {
+            comments.push(vec!["Parameters:".to_string()]);
+            comments.push(
+                parameters
+                    .iter()
+                    .map(|parameter| {
+                        format!(
+                            "- `{}`{}",
+                            match parameter.kind {
+                                ParameterKind::Query =>
+                                    &mapping.get(parameter.name.as_str()).unwrap().0,
+                                _ => &parameter.name,
+                            }
+                            .to_snake_case(),
+                            parameter
+                                .comment
+                                .as_ref()
+                                .map(|comment| format!(": {}", comment.replace('\n', "")))
+                                .unwrap_or_default()
+                        )
+                    })
+                    .collect(),
+            );
+        }
+        comments.push(vec![format!("Resource: `{}`", method.comment)]);
+        comments.push(vec![format!("`{}`", rest_comment)]);
+        if let Some(anchor) = &method.anchor {
+            comments.push(vec![format!(
+                "Documentation: <https://www.keycloak.org/docs-api/{}/rest-api/index.html#{}>",
+                keycloak_version, anchor
+            )]);
+        }
+        if path != method.path {
+            comments.push(vec![format!(
+                "REST method: `{} {}`",
+                method.method, method.path
+            )]);
+        }
+        let comments = comments
+            .into_iter()
+            .map(|c| {
+                c.into_iter()
+                    .map(|l| format!("    /// {}\n", l))
+                    .collect::<Vec<_>>()
+                    .join("")
+            })
+            .collect::<Vec<_>>()
+            .join("    ///\n");
+        print!("{}", comments);
+
+        println!("    pub async fn {}(", method_name);
+        println!("        &self,");
+        for method_param in method_params {
+            println!("{}", method_param);
+        }
 
         let mut response_type = method.response.return_type.name().replace("'a", "'static");
         if method.response.is_array {
@@ -448,22 +523,6 @@ fn write_rest(methods: &[MethodStruct]) {
             "OPTIONS" => "request(reqwest::Method::OPTIONS, ".to_string(),
             _ => method.method.to_lowercase() + "(",
         };
-        let mut path = method.path.clone();
-        let path_parts = method
-            .path
-            .split('/')
-            .filter(|x| x.starts_with('{') && x.ends_with('}'));
-        if method.parameters.is_empty() {
-            for path_part in path_parts {
-                path = path.replace(path_part, "");
-            }
-        } else {
-            for path_part in path_parts {
-                if let Some((s, _)) = mapping.get(&path_part[1..path_part.len() - 1]) {
-                    path = path.replace(path_part, &format!("{{{s}}}"));
-                }
-            }
-        }
         println!(
             r#"            .{}&format!("{{}}/admin/realms{}", self.url))"#,
             method_http, path,
@@ -483,7 +542,7 @@ fn write_rest(methods: &[MethodStruct]) {
 
         println!("            .bearer_auth(self.token_supplier.get(&self.url).await?);");
 
-        for parameter in &method.parameters {
+        for parameter in parameters {
             if let ParameterKind::Query = parameter.kind {
                 println!(
                     "        if let Some(v) = {} {{",
@@ -533,6 +592,14 @@ fn text(element: &ElementRef, selector: &str) -> String {
 
 fn element_text(element: &ElementRef) -> String {
     element.text().collect::<Vec<_>>().join("")
+}
+
+fn attr<'a>(element: &'a ElementRef, selector: &str, name: &str) -> Option<&'a str> {
+    let selector = Selector::parse(selector).unwrap();
+    element
+        .select(&selector)
+        .next()
+        .and_then(|x| x.value().attr(name))
 }
 
 struct StructType {
@@ -601,6 +668,7 @@ impl FromStr for ParameterKind {
 }
 
 struct MethodStruct {
+    anchor: Option<String>,
     name: String,
     comment: String,
     path: String,

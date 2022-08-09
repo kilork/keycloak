@@ -62,7 +62,7 @@ git checkout -- src/types.rs src/rest/rest.rs
 cargo run --example gen -- types > src/types2.rs
 cargo run --example gen -- rest > src/rest/rest2.rs
 mv src/types2.rs src/types.rs
-mv src/rest/rest2.rs src/rest/rest.rs
+mv src/rest/rest2.rs src/rest/generated_rest.rs
 echo Types generated.
 echo Format and build
 cargo fmt
