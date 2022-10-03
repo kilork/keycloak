@@ -75,18 +75,24 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
 
         let fields = definition.select(&fields_selector);
         let mut result_fields = vec![];
-        let mut is_camel_case = false;
+        let mut camel_case_count = 0;
+        let mut snake_case_count = 0;
         for field in fields {
             let original_field = text(&field, "strong");
             let mut field_name = original_field.to_snake_case();
-            let mut is_rename = false;
-            if original_field != field_name {
-                if field_name.to_lower_camel_case() == original_field {
-                    is_camel_case = true;
-                } else {
-                    is_rename = true;
-                }
-            }
+            let fld_camel_case = original_field.to_lower_camel_case();
+
+            let mut field_case = if field_name == fld_camel_case {
+                FieldCase::Unknown
+            } else if original_field == field_name {
+                snake_case_count += 1;
+                FieldCase::SnakeCase
+            } else if original_field == fld_camel_case {
+                camel_case_count += 1;
+                FieldCase::CamelCase
+            } else {
+                FieldCase::Custom
+            };
 
             let original_field_type = text(&field, "td ~ td p").replace('-', "");
 
@@ -130,21 +136,23 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
             let is_optional = check_optional(&optional_required);
 
             if RESERVED_WORDS.contains(&field_name.as_str()) {
-                is_rename = true;
+                field_case = FieldCase::Custom;
                 field_name = format!("{}_", field_name);
             }
 
             let field = Field {
                 field_name,
                 original_field,
+                field_case,
                 field_type,
                 is_array,
                 is_optional,
-                is_rename,
             };
 
             result_fields.push(field);
         }
+
+        let is_camel_case = camel_case_count > snake_case_count;
 
         let struct_ = Rc::new(StructType {
             name: struct_name.clone(),
@@ -286,7 +294,13 @@ fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
         println!("pub struct {} {{", s.name,);
 
         for field in &s.fields {
-            if field.is_rename {
+            let is_rename = match field.field_case {
+                FieldCase::Custom => true,
+                FieldCase::Unknown => false,
+                FieldCase::CamelCase => !s.is_camel_case,
+                FieldCase::SnakeCase => s.is_camel_case,
+            };
+            if is_rename {
                 println!(r#"    #[serde(rename = "{}")]"#, field.original_field);
             }
             let mut field_type = field.field_type.name();
@@ -619,8 +633,16 @@ struct Field {
     original_field: String,
     is_optional: bool,
     is_array: bool,
-    is_rename: bool,
+    field_case: FieldCase,
     field_type: FieldType,
+}
+
+#[derive(Debug)]
+enum FieldCase {
+    CamelCase,
+    SnakeCase,
+    Custom,
+    Unknown,
 }
 
 #[derive(Debug)]

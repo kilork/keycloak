@@ -87,7 +87,6 @@ pub enum ResourceServerRepresentationPolicyEnforcementMode {
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct AccessToken {
     pub acr: Option<String>,
     pub address: Option<AddressClaimSet>,
@@ -117,6 +116,7 @@ pub struct AccessToken {
     pub nbf: Option<i64>,
     pub nickname: Option<String>,
     pub nonce: Option<String>,
+    #[serde(rename = "otherClaims")]
     pub other_claims: Option<HashMap<String, Value>>,
     pub phone_number: Option<String>,
     pub phone_number_verified: Option<bool>,
@@ -485,7 +485,6 @@ pub struct GroupRepresentation {
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct IDToken {
     pub acr: Option<String>,
     pub address: Option<AddressClaimSet>,
@@ -511,6 +510,7 @@ pub struct IDToken {
     pub nbf: Option<i64>,
     pub nickname: Option<String>,
     pub nonce: Option<String>,
+    #[serde(rename = "otherClaims")]
     pub other_claims: Option<HashMap<String, Value>>,
     pub phone_number: Option<String>,
     pub phone_number_verified: Option<bool>,
@@ -903,6 +903,7 @@ pub struct ResourceRepresentation {
     pub id: String,
     pub attributes: Option<HashMap<String, Value>>,
     pub display_name: Option<String>,
+    #[serde(rename = "icon_uri")]
     pub icon_uri: Option<String>,
     pub name: Option<String>,
     pub owner_managed_access: Option<bool>,
