@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.3">
-<title>Keycloak Admin REST API</title>
+<title>${product.name.full} Admin REST API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -419,7 +419,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Keycloak Admin REST API</h1>
+<h1>${product.name.full} Admin REST API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -483,6 +483,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_componentrepresentation">ComponentRepresentation</a></li>
 <li><a href="#_configpropertyrepresentation">ConfigPropertyRepresentation</a></li>
 <li><a href="#_credentialrepresentation">CredentialRepresentation</a></li>
+<li><a href="#_cryptoinforepresentation">CryptoInfoRepresentation</a></li>
 <li><a href="#_federatedidentityrepresentation">FederatedIdentityRepresentation</a></li>
 <li><a href="#_globalrequestresult">GlobalRequestResult</a></li>
 <li><a href="#_grouprepresentation">GroupRepresentation</a></li>
@@ -531,7 +532,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_overview">Overview</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This is a REST API reference for the Keycloak Admin REST API.</p>
+<p>This is a REST API reference for the ${product.name.full} Admin REST API.</p>
 </div>
 <div class="sect2">
 <h3 id="_version_information">Version information</h3>
@@ -8806,6 +8807,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>exact</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><code>"false"</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>first</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
@@ -8818,6 +8827,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
+<td class="tableblock halign-left valign-middle"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Query</strong></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>q</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 <td class="tableblock halign-left valign-middle"></td>
 </tr>
 <tr>
@@ -11998,7 +12015,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_realms_admin_resource">Realms Admin</h3>
 <div class="sect3">
-<h4 id="_importrealm">Import a realm   Imports a realm from a full representation of that realm.</h4>
+<h4 id="_importrealm">Import a realm.</h4>
 <div class="literalblock">
 <div class="content">
 <pre>POST /</pre>
@@ -12007,33 +12024,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect4">
 <h5 id="_description_11">Description</h5>
 <div class="paragraph">
-<p>Realm name must be unique.</p>
+<p>Imports a realm from a full representation of that realm. Realm name must be unique.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_parameters_143">Parameters</h5>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 11%;">
-<col style="width: 16%;">
-<col style="width: 50%;">
 <col style="width: 22%;">
+<col style="width: 33%;">
+<col style="width: 44%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-middle">Type</th>
 <th class="tableblock halign-left valign-middle">Name</th>
-<th class="tableblock halign-left valign-middle">Description</th>
 <th class="tableblock halign-left valign-middle">Schema</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>Body</strong></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>rep</strong><br>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>requestBody</strong><br>
 <em>required</em></p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock">JSON representation of the realm</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_realmrepresentation">RealmRepresentation</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_inputstream">InputStream</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -14678,20 +14692,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>default</strong></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">success</p></td>
-<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_realmrepresentation">RealmRepresentation</a></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_response">Response</a></p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect4">
-<h5 id="_produces_101">Produces</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><code>application/json</code></p>
-</li>
-</ul>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -15032,7 +15036,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_102">Produces</h5>
+<h5 id="_produces_101">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15114,7 +15118,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_103">Produces</h5>
+<h5 id="_produces_102">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15194,7 +15198,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_104">Produces</h5>
+<h5 id="_produces_103">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15355,7 +15359,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_105">Produces</h5>
+<h5 id="_produces_104">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15516,7 +15520,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_106">Produces</h5>
+<h5 id="_produces_105">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15605,7 +15609,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_107">Produces</h5>
+<h5 id="_produces_106">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15682,7 +15686,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_108">Produces</h5>
+<h5 id="_produces_107">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -15843,7 +15847,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_109">Produces</h5>
+<h5 id="_produces_108">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16004,7 +16008,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_110">Produces</h5>
+<h5 id="_produces_109">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16093,7 +16097,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_111">Produces</h5>
+<h5 id="_produces_110">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16293,7 +16297,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_112">Produces</h5>
+<h5 id="_produces_111">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16377,7 +16381,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_113">Produces</h5>
+<h5 id="_produces_112">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16717,7 +16721,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_114">Produces</h5>
+<h5 id="_produces_113">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16899,7 +16903,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_115">Produces</h5>
+<h5 id="_produces_114">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -16983,7 +16987,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_116">Produces</h5>
+<h5 id="_produces_115">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17096,7 +17100,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_117">Produces</h5>
+<h5 id="_produces_116">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17180,7 +17184,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_118">Produces</h5>
+<h5 id="_produces_117">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17281,7 +17285,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_119">Produces</h5>
+<h5 id="_produces_118">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17379,7 +17383,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_120">Produces</h5>
+<h5 id="_produces_119">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17561,7 +17565,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_121">Produces</h5>
+<h5 id="_produces_120">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17638,7 +17642,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_122">Produces</h5>
+<h5 id="_produces_121">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -17950,7 +17954,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_123">Produces</h5>
+<h5 id="_produces_122">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18118,7 +18122,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_124">Produces</h5>
+<h5 id="_produces_123">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18195,7 +18199,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_125">Produces</h5>
+<h5 id="_produces_124">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18300,7 +18304,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_126">Produces</h5>
+<h5 id="_produces_125">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18377,7 +18381,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_127">Produces</h5>
+<h5 id="_produces_126">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18471,7 +18475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_128">Produces</h5>
+<h5 id="_produces_127">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18562,7 +18566,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_129">Produces</h5>
+<h5 id="_produces_128">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18642,7 +18646,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_130">Produces</h5>
+<h5 id="_produces_129">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -18975,7 +18979,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_131">Produces</h5>
+<h5 id="_produces_130">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19143,7 +19147,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_132">Produces</h5>
+<h5 id="_produces_131">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19220,7 +19224,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_133">Produces</h5>
+<h5 id="_produces_132">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19297,7 +19301,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_134">Produces</h5>
+<h5 id="_produces_133">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19391,7 +19395,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect4">
-<h5 id="_produces_135">Produces</h5>
+<h5 id="_produces_134">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19569,7 +19573,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_136">Produces</h5>
+<h5 id="_produces_135">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19744,7 +19748,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_137">Produces</h5>
+<h5 id="_produces_136">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -19841,7 +19845,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_138">Produces</h5>
+<h5 id="_produces_137">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20002,7 +20006,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_139">Produces</h5>
+<h5 id="_produces_138">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20163,7 +20167,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_140">Produces</h5>
+<h5 id="_produces_139">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20259,7 +20263,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_141">Produces</h5>
+<h5 id="_produces_140">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20434,7 +20438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_142">Produces</h5>
+<h5 id="_produces_141">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20609,7 +20613,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_143">Produces</h5>
+<h5 id="_produces_142">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20706,7 +20710,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_144">Produces</h5>
+<h5 id="_produces_143">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -20867,7 +20871,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_145">Produces</h5>
+<h5 id="_produces_144">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21028,7 +21032,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_146">Produces</h5>
+<h5 id="_produces_145">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21124,7 +21128,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_147">Produces</h5>
+<h5 id="_produces_146">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21372,7 +21376,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_148">Produces</h5>
+<h5 id="_produces_147">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21508,7 +21512,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_149">Produces</h5>
+<h5 id="_produces_148">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21573,7 +21577,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_150">Produces</h5>
+<h5 id="_produces_149">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21722,7 +21726,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_151">Produces</h5>
+<h5 id="_produces_150">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -21957,7 +21961,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_152">Produces</h5>
+<h5 id="_produces_151">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22034,7 +22038,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_153">Produces</h5>
+<h5 id="_produces_152">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22180,7 +22184,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_154">Produces</h5>
+<h5 id="_produces_153">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -22774,7 +22778,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_155">Produces</h5>
+<h5 id="_produces_154">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23037,7 +23041,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_156">Produces</h5>
+<h5 id="_produces_155">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23116,7 +23120,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_157">Produces</h5>
+<h5 id="_produces_156">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23331,7 +23335,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_158">Produces</h5>
+<h5 id="_produces_157">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23482,7 +23486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_159">Produces</h5>
+<h5 id="_produces_158">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23741,7 +23745,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_160">Produces</h5>
+<h5 id="_produces_159">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -23786,7 +23790,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect4">
-<h5 id="_produces_161">Produces</h5>
+<h5 id="_produces_160">Produces</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -25336,6 +25340,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>value</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_cryptoinforepresentation">CryptoInfoRepresentation</h3>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 42%;">
+<col style="width: 57%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-middle">Name</th>
+<th class="tableblock halign-left valign-middle">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>cryptoProvider</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>supportedKeystoreTypes</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">&lt; string &gt; array</p></td>
 </tr>
 </tbody>
 </table>
@@ -26914,6 +26945,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-left valign-middle"><p class="tableblock">string</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>otpPolicyCodeReusable</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock">boolean</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>otpPolicyDigits</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock">integer(int32)</p></td>
@@ -27597,6 +27633,11 @@ _optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_map">Map</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>cryptoInfo</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_cryptoinforepresentation">CryptoInfoRepresentation</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><strong>enums</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-middle"><p class="tableblock"><a href="#_map">Map</a></p></td>
@@ -28056,7 +28097,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-29 10:38:15 UTC
+Last updated 2022-11-07 19:54:54 UTC
 </div>
 </div>
 </body>
