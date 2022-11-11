@@ -455,6 +455,14 @@ pub struct CredentialRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct CryptoInfoRepresentation {
+    pub crypto_provider: Option<String>,
+    pub supported_keystore_types: Option<Vec<String>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FederatedIdentityRepresentation {
     pub identity_provider: Option<String>,
     pub user_id: Option<String>,
@@ -826,6 +834,7 @@ pub struct RealmRepresentation {
     pub offline_session_max_lifespan: Option<i32>,
     pub offline_session_max_lifespan_enabled: Option<bool>,
     pub otp_policy_algorithm: Option<String>,
+    pub otp_policy_code_reusable: Option<bool>,
     pub otp_policy_digits: Option<i32>,
     pub otp_policy_initial_counter: Option<i32>,
     pub otp_policy_look_ahead_window: Option<i32>,
@@ -987,6 +996,7 @@ pub struct ServerInfoRepresentation {
     pub client_importers: Option<Vec<HashMap<String, Value>>>,
     pub client_installations: Option<HashMap<String, Value>>,
     pub component_types: Option<HashMap<String, Value>>,
+    pub crypto_info: Option<CryptoInfoRepresentation>,
     pub enums: Option<HashMap<String, Value>>,
     pub identity_providers: Option<Vec<HashMap<String, Value>>>,
     pub memory_info: Option<MemoryInfoRepresentation>,

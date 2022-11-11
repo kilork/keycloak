@@ -32,8 +32,10 @@ fn parse_document() -> Result<Html, std::io::Error> {
 
 fn generate_rest() -> Result<(), std::io::Error> {
     let document = parse_document()?;
-    let methods = read_methods_info(&document)?;
-    write_rest(&methods);
+    let stream_mapping: HashMap<String, String> =
+        toml::from_str(include_str!("stream.toml")).unwrap();
+    let methods = read_methods_info(&document, &stream_mapping)?;
+    write_rest(&methods, &stream_mapping);
     Ok(())
 }
 
@@ -165,7 +167,10 @@ fn read_types_info(document: &scraper::Html) -> Result<TypeDuo, std::io::Error> 
     Ok((enums, structs))
 }
 
-fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std::io::Error> {
+fn read_methods_info(
+    document: &scraper::Html,
+    stream_mapping: &HashMap<String, String>,
+) -> Result<Vec<MethodStruct>, std::io::Error> {
     let resources_selector = Selector::parse("#_paths ~ div.sectionbody > div.sect2").unwrap();
 
     let resources_html = document.select(&resources_selector);
@@ -211,6 +216,7 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
                             let array = check_array(&parameter_type);
 
                             let is_optional = check_optional(&optional_required);
+                            let name_copy = name.clone();
                             let parameter_ = Parameter {
                                 name,
                                 comment,
@@ -219,6 +225,12 @@ fn read_methods_info(document: &scraper::Html) -> Result<Vec<MethodStruct>, std:
                                 kind: parameter_kind.parse().unwrap(),
                                 parameter_type: array
                                     .or(Some(parameter_type.as_str()))
+                                    .map(|param_type| {
+                                        stream_mapping
+                                            .get(&format!("{}:{}:{}", path, name_copy, param_type))
+                                            .map(String::as_str)
+                                            .unwrap_or(param_type)
+                                    })
                                     .map(convert_type)
                                     .unwrap()
                                     .unwrap(),
@@ -385,16 +397,13 @@ fn process_method_parameters(
     param_lines
 }
 
-fn write_rest(methods: &[MethodStruct]) {
+fn write_rest(methods: &[MethodStruct], stream_mapping: &HashMap<String, String>) {
     let keycloak_version =
         std::env::var("KEYCLOAK_VERSION").expect("environment variable KEYCLOAK_VERSION");
     println!("use serde_json::{{json, Value}};");
     println!("use std::collections::HashMap;\n");
     println!("use super::*;\n");
     println!("impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{");
-
-    let stream_mapping: HashMap<String, String> =
-        toml::from_str(include_str!("stream.toml")).unwrap();
 
     for method in methods {
         let mut method_name = method.path.clone();
