@@ -277,6 +277,8 @@ fn read_methods_info(
 }
 
 fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
+    println!(r#"#[cfg(feature = "schemars")]"#);
+    println!("use schemars::JsonSchema;");
     println!("use serde::{{Deserialize, Serialize}};");
     println!("use serde_json::Value;");
     println!("use serde_with::skip_serializing_none;");
@@ -284,6 +286,7 @@ fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
 
     for e in enums {
         println!("#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]");
+        println!(r#"#[cfg_attr(feature = "schemars", derive(JsonSchema))]"#);
         if e.is_upper_case {
             println!(r#"#[serde(rename_all = "UPPERCASE")]"#);
         }
@@ -300,6 +303,7 @@ fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
     for s in structs {
         println!("#[skip_serializing_none]");
         println!("#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]");
+        println!(r#"#[cfg_attr(feature = "schemars", derive(JsonSchema))]"#);
         if s.is_camel_case {
             println!(r#"#[serde(rename_all = "camelCase")]"#);
         }
