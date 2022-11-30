@@ -9,6 +9,8 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 Implements [Keycloak Admin REST API version 20.0.1](https://www.keycloak.org/docs-api/20.0.1/rest-api/index.html).
 
+To add [schemars](https://crates.io/crates/schemars) support enable feature `schemars`.
+
 ## Usage
 
 Requires Rust version >= `1.58.0`.
