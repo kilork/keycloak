@@ -285,7 +285,7 @@ fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
     println!("use std::collections::HashMap;\n");
 
     for e in enums {
-        println!("#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]");
+        println!("#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]");
         println!(r#"#[cfg_attr(feature = "schemars", derive(JsonSchema))]"#);
         if e.is_upper_case {
             println!(r#"#[serde(rename_all = "UPPERCASE")]"#);
@@ -730,6 +730,7 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
         "Map" => FieldType::Simple("HashMap<String, Value>".into()),
+        "MultivaluedHashMap" => FieldType::Simple("HashMap<String, Vec<Value>>".into()),
         "Object" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
