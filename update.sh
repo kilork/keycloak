@@ -3,8 +3,8 @@
 set -e
 
 KEYCLOAK_RUST_VERSION=`grep "version = " Cargo.toml | head -n1 | cut -d"\"" -f 2`
-KEYCLOAK_VERSION=`echo ${KEYCLOAK_RUST_VERSION} | cut -f 1,2 -d"."`
-KEYCLOAK_RUST_MAJOR_VERSION=${KEYCLOAK_VERSION}
+KEYCLOAK_RUST_MAJOR_VERSION=`echo ${KEYCLOAK_RUST_VERSION} | cut -f 1,2 -d"."`
+KEYCLOAK_VERSION=`echo ${KEYCLOAK_RUST_MAJOR_VERSION}.$(($(echo ${KEYCLOAK_RUST_VERSION} | cut -f 3 -d".") / 100))`
 GITHUB_ISSUE=`git branch --show-current | grep -oh "\d*"`
 
 echo "Enter cargo version [${KEYCLOAK_RUST_VERSION}]: \c"
