@@ -974,7 +974,7 @@ pub struct RequiredActionProviderRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ResourceRepresentation {
-    pub id: String,
+    pub id: Option<String>,
     pub attributes: Option<HashMap<String, Value>>,
     pub display_name: Option<String>,
     #[serde(rename = "icon_uri")]
