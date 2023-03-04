@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 20.0.1](https://www.keycloak.org/docs-api/20.0.1/rest-api/index.html).
+Implements [Keycloak Admin REST API version 21.0.1](https://www.keycloak.org/docs-api/21.0.1/rest-api/index.html).
 
 To add [schemars](https://crates.io/crates/schemars) support enable feature `schemars`.
 
@@ -18,7 +18,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "20.0"
+keycloak = "21.0"
 ```
 
 ```rust

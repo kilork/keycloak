@@ -55,15 +55,6 @@ pub enum KeysMetadataRepresentationKeyMetadataRepresentationUse {
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
-pub enum PartialImportRepresentationPolicy {
-    Skip,
-    Overwrite,
-    Fail,
-}
-
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "UPPERCASE")]
 pub enum PolicyRepresentationDecisionStrategy {
     Affirmative,
     Unanimous,
@@ -719,21 +710,6 @@ pub struct MultivaluedHashMap {
     pub empty: Option<bool>,
     pub load_factor: Option<f32>,
     pub threshold: Option<i32>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PartialImportRepresentation {
-    pub clients: Option<Vec<ClientRepresentation>>,
-    pub groups: Option<Vec<GroupRepresentation>>,
-    pub identity_provider_mappers: Option<Vec<IdentityProviderMapperRepresentation>>,
-    pub identity_providers: Option<Vec<IdentityProviderRepresentation>>,
-    pub if_resource_exists: Option<String>,
-    pub policy: Option<PartialImportRepresentationPolicy>,
-    pub roles: Option<RolesRepresentation>,
-    pub users: Option<Vec<UserRepresentation>>,
 }
 
 #[skip_serializing_none]

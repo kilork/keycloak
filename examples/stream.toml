@@ -1,4 +1,5 @@
 "/:requestBody:InputStream" = "RealmRepresentation"
+"/{realm}/partialImport:requestBody:InputStream" = "RealmRepresentation"
 "/{realm}/authentication/flows" = "AuthenticationFlowRepresentation"
 "/{realm}/authentication/required-actions" = "RequiredActionProviderRepresentation"
 "/{realm}/authentication/unregistered-required-actions" = "HashMap<String, Value>"
