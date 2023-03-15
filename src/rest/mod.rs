@@ -20,6 +20,7 @@ pub trait KeycloakTokenSupplier {
 pub struct KeycloakServiceAccountAdminTokenRetriever {
     client_id: String,
     client_secret: String,
+    realm: String,
     reqwest_client: reqwest::Client,
 }
 
@@ -48,15 +49,26 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         Self {
             client_id: client_id.into(),
             client_secret: client_secret.into(),
+            realm: "master".into(),
+            reqwest_client: client,
+        }
+    }
+
+    pub fn create_with_custom_realm(client_id: &str, client_secret: &str, realm: &str, client: reqwest::Client) -> Self {
+        Self {
+            client_id: client_id.into(),
+            client_secret: client_secret.into(),
+            realm: realm.into(),
             reqwest_client: client,
         }
     }
 
     async fn acquire(&self, url: &str) -> Result<KeycloakAdminToken, KeycloakError> {
+        let realm = &self.realm;
         let response = self
             .reqwest_client
             .post(&format!(
-                "{url}/realms/master/protocol/openid-connect/token",
+                "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
             .form(&json!({
                 "client_id": &self.client_id,
