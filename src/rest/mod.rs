@@ -54,7 +54,12 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         }
     }
 
-    pub fn create_with_custom_realm(client_id: &str, client_secret: &str, realm: &str, client: reqwest::Client) -> Self {
+    pub fn create_with_custom_realm(
+        client_id: &str,
+        client_secret: &str,
+        realm: &str,
+        client: reqwest::Client,
+    ) -> Self {
         Self {
             client_id: client_id.into(),
             client_secret: client_secret.into(),
