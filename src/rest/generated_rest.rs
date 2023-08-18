@@ -1,5 +1,6 @@
-use serde_json::{json, Value};
+use serde_json::{Value};
 use std::collections::HashMap;
+use reqwest::header::CONTENT_LENGTH;
 
 use super::*;
 
@@ -2161,7 +2162,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header( CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2698,7 +2699,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -4774,7 +4775,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -4862,7 +4863,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -4953,7 +4954,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -8703,7 +8704,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{id}/groups/{group_id}",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -8893,7 +8894,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{id}/send-verify-email",
                 self.url
             ))
-            .header("Content-Length", "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("client_id", v)]);
