@@ -277,12 +277,14 @@ fn read_methods_info(
 }
 
 fn write_types(enums: &[EnumType], structs: &[Rc<StructType>]) {
+    println!("use std::collections::HashMap;\n");
+    println!();
     println!(r#"#[cfg(feature = "schemars")]"#);
     println!("use schemars::JsonSchema;");
     println!("use serde::{{Deserialize, Serialize}};");
     println!("use serde_json::Value;");
     println!("use serde_with::skip_serializing_none;");
-    println!("use std::collections::HashMap;\n");
+    println!();
 
     for e in enums {
         println!("#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]");
@@ -404,10 +406,13 @@ fn process_method_parameters(
 fn write_rest(methods: &[MethodStruct], stream_mapping: &HashMap<String, String>) {
     let keycloak_version =
         std::env::var("KEYCLOAK_VERSION").expect("environment variable KEYCLOAK_VERSION");
-    println!("use serde_json::{{json, Value}};");
-    println!("use std::collections::HashMap;\n");
-    println!("use reqwest::header::CONTENT_LENGTH;\n");
-    println!("use super::*;\n");
+    println!("use std::collections::HashMap;");
+    println!();
+    println!("use reqwest::header::CONTENT_LENGTH;");
+    println!("use serde_json::Value;");
+    println!();
+    println!("use super::*;");
+    println!();
     println!("impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{");
 
     for method in methods {

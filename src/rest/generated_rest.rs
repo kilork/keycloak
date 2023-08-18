@@ -1,6 +1,7 @@
-use serde_json::{Value};
 use std::collections::HashMap;
+
 use reqwest::header::CONTENT_LENGTH;
+use serde_json::Value;
 
 use super::*;
 
@@ -2162,7 +2163,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .header( CONTENT_LENGTH, "0")
+            .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
