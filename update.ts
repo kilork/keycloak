@@ -1,13 +1,14 @@
-import * as log from "https://deno.land/std@0.197.0/log/mod.ts";
-import * as toml from "https://deno.land/std@0.197.0/toml/mod.ts";
-import * as semver from "https://deno.land/std@0.197.0/semver/mod.ts";
+import * as log from "https://deno.land/std@0.211.0/log/mod.ts";
+import * as toml from "https://deno.land/std@0.211.0/toml/mod.ts";
+import * as semver from "https://deno.land/std@0.211.0/semver/mod.ts";
 
 import {
   Checkbox,
   Confirm,
+  Input,
   prompt,
   Select,
-} from "https://deno.land/x/cliffy@v1.0.0-rc.2/prompt/mod.ts";
+} from "https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/mod.ts";
 
 class HttpError extends Error {
   readonly body?: string;
@@ -74,9 +75,7 @@ class Cargo {
       readonly version: string;
     }
 
-    return new InternalVersion(
-      (cargoToml.package as Package).version,
-    );
+    return new InternalVersion((cargoToml.package as Package).version);
   }
 
   set version(value: InternalVersion) {
@@ -127,9 +126,7 @@ class User {
     return await Confirm.prompt(message);
   }
 
-  async selectUpdateOptions(
-    updater: Updater,
-  ) {
+  async selectUpdateOptions(updater: Updater) {
     const { options } = updater;
     const { versions } = options;
     const latestVersion = versions.keycloakLatestVersion?.toInternalVersion();
@@ -168,10 +165,31 @@ class User {
             case "cargo":
               milestoneVersion = cargoVersion;
               break;
+            case "manual":
+              await next("enterMilestone");
+              return;
             default:
               milestoneVersion = new InternalVersion(baseVersion!);
               break;
           }
+          options.milestoneVersion = milestoneVersion;
+          const milestone = await updater.git.milestone(
+            milestoneVersion!.toString(),
+          );
+          if (!milestone) {
+            await next("createMilestone");
+          } else {
+            versions.milestone = milestone;
+            await next("createReleaseIssue");
+          }
+        },
+      },
+      {
+        name: "enterMilestone",
+        message: "Enter Milestone",
+        type: Input,
+        after: async ({ enterMilestone }, next) => {
+          const milestoneVersion = new InternalVersion(enterMilestone!);
           options.milestoneVersion = milestoneVersion;
           const milestone = await updater.git.milestone(
             milestoneVersion!.toString(),
@@ -269,13 +287,20 @@ class User {
   }
 
   async selectIssuesAndPullRequests(issues: Issue[]): Promise<Issue[]> {
-    return (await Checkbox.prompt({
-      message: "Select issues to assign milestone",
-      options: [{
-        name: "Issues",
-        options: issues.map((issue) => ({ name: issue.title, value: issue })),
-      }],
-    })).map((option) => (option.value));
+    return (
+      await Checkbox.prompt({
+        message: "Select issues to assign milestone",
+        options: [
+          {
+            name: "Issues",
+            options: issues.map((issue) => ({
+              name: issue.title,
+              value: issue,
+            })),
+          },
+        ],
+      })
+    ).map((option) => option.value);
   }
 }
 
@@ -302,20 +327,12 @@ class Git {
   }
 
   async currentBranch(): Promise<Branch> {
-    return new Branch(
-      await this.gitCommand([
-        "branch",
-        "--show-current",
-      ]),
-    );
+    return new Branch(await this.gitCommand(["branch", "--show-current"]));
   }
 
   async defaultBranch(): Promise<Branch> {
     const prefix = "refs/remotes/origin/";
-    const refs = await this.gitCommand([
-      "symbolic-ref",
-      `${prefix}HEAD`,
-    ]);
+    const refs = await this.gitCommand(["symbolic-ref", `${prefix}HEAD`]);
     if (refs.startsWith(prefix)) {
       return new Branch(refs.substring(prefix.length));
     } else {
@@ -400,11 +417,7 @@ class Version {
   }
 
   toInternalVersion(): InternalVersion {
-    const {
-      major,
-      minor,
-      patch,
-    } = this.value;
+    const { major, minor, patch } = this.value;
     return new InternalVersion(`${major}.${minor}.${Math.round(patch * 100)}`);
   }
 }
@@ -420,11 +433,7 @@ class InternalVersion {
   }
 
   toVersion(): Version {
-    const {
-      major,
-      minor,
-      patch,
-    } = this.version.value;
+    const { major, minor, patch } = this.version.value;
     return new Version(`${major}.${minor}.${Math.round(patch / 100)}`);
   }
 }
@@ -513,9 +522,7 @@ class Updater {
 
   async detectExistingIssue() {
     const { currentBranch } = this.options.versions;
-    const number = detectExistingIssue(
-      currentBranch!.toString(),
-    );
+    const number = detectExistingIssue(currentBranch!.toString());
     if (number) {
       const issue = await this.git.issue(number);
       this.options.versions.issue = issue;

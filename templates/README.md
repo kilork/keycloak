@@ -35,5 +35,5 @@ Example: official version `13.0.1` is `13.0.100` for crate version. `13.0.102` m
 To update current version use provided [update.ts](./update.ts) `deno` script:
 
 ```sh
-deno run --allow-read=Cargo.toml --allow-write=Cargo.toml --allow-net=keycloak.org,www.keycloak.org --allow-run=gh,git update.ts
+deno run --allow-read=Cargo.toml --allow-write=Cargo.toml --allow-net=keycloak.org,www.keycloak.org --allow-run=cargo,gh,git update.ts
 ```
