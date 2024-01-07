@@ -29,3 +29,11 @@ If we have `x.y.z` version of `keycloak`, our package version would be `x.y.(z *
 fix version to official `x.y.z` version.
 
 Example: official version `13.0.1` is `13.0.100` for crate version. `13.0.102` means keycloak version `13.0.1` and minor fix version `2`.
+
+## Update
+
+To update current version use provided [update.ts](./update.ts) `deno` script:
+
+```sh
+deno run --allow-read=Cargo.toml --allow-write=Cargo.toml --allow-net=keycloak.org,www.keycloak.org --allow-run=gh,git update.ts
+```
