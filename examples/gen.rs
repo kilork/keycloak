@@ -171,7 +171,7 @@ fn read_methods_info(
     document: &scraper::Html,
     stream_mapping: &HashMap<String, String>,
 ) -> Result<Vec<MethodStruct>, std::io::Error> {
-    let resources_selector = Selector::parse("#_paths ~ div.sectionbody > div.sect2").unwrap();
+    let resources_selector = Selector::parse("#_resources ~ div.sectionbody > div.sect2").unwrap();
 
     let resources_html = document.select(&resources_selector);
     let mut methods = vec![];
@@ -182,9 +182,9 @@ fn read_methods_info(
 
         let methods_html = resource.select(&methods_selector);
         for method in methods_html {
-            let method_name = text(&method, "h4");
+            let method_name = text(&method, "p");
             let anchor = attr(&method, "h4", "id").map(str::to_string);
-            let path = text_opt(&method, "pre").unwrap_or_else(|| method_name.clone());
+            let path = text(&method, "h4");
             let mut path_parts = path.split(' ');
             let method_http = path_parts.next().unwrap();
             let path = path_parts.next().unwrap();
@@ -204,14 +204,15 @@ fn read_methods_info(
                         let parameters_html = block.select(&parameters_selector);
 
                         for parameter in parameters_html {
-                            let parameter_kind = text(&parameter, "td:nth-child(1) > p > strong");
-                            let name = text(&parameter, "td:nth-child(2) > p > strong");
-                            let optional_required = text(&parameter, "td:nth-child(2) > p > em");
-                            let comment = text_opt(&parameter, "td:nth-child(3) > p");
-                            let parameter_type = text_opt(&parameter, "td:nth-child(4) > p")
-                                .unwrap_or_else(|| {
-                                    text_opt(&parameter, "td:last-child > p").unwrap()
-                                });
+                            let parameter_kind = text(&block, "h6");
+                            let parameter_kind = parameter_kind.split_whitespace().next().unwrap();
+
+                            eprintln!("{:?}", parameter_kind);
+
+                            let name = text(&parameter, "td:nth-child(1) > p > strong");
+                            let optional_required = text(&parameter, "td:nth-child(1) > p > em");
+                            let comment = text_opt(&parameter, "td:nth-child(2) > p");
+                            let parameter_type = "string".to_string();
 
                             let array = check_array(&parameter_type);
 
@@ -729,17 +730,17 @@ struct ResponseType {
 
 fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
     Ok(match original {
-        "No Content" | "Response" => FieldType::Simple("()".into()),
-        "file" => FieldType::Simple("&[u8]".into()),
-        "string" | "< string > array(csv)" => FieldType::Simple("String".into()),
+        "No Content" | "Response" | "<<>>" => FieldType::Simple("()".into()),
+        "file" | "[File]" => FieldType::Simple("&[u8]".into()),
+        "string" | "< string > array(csv)" | "[String]" => FieldType::Simple("String".into()),
         "string(byte)" => FieldType::Simple("u8".into()),
-        "integer(int32)" => FieldType::Simple("i32".into()),
+        "integer(int32)" | "[Integer]" => FieldType::Simple("i32".into()),
         "integer(int64)" => FieldType::Simple("i64".into()),
         "number(float)" => FieldType::Simple("f32".into()),
         "boolean" => FieldType::Simple("bool".into()),
         "Map" => FieldType::Simple("HashMap<String, Value>".into()),
         "MultivaluedHashMap" => FieldType::Simple("HashMap<String, Vec<Value>>".into()),
-        "Object" => FieldType::Simple("Value".into()),
+        "Object" | "[Object]" => FieldType::Simple("Value".into()),
         _ => {
             if original.starts_with("enum (") {
                 return Err(ConvertTypeFail::Enum(
