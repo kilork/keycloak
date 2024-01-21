@@ -100,14 +100,25 @@ class Branch {
   }
 }
 
+type IssueState = "CLOSED" | "OPEN";
+type PullRequestState = "CLOSED" | "OPEN" | "MERGED";
+
 interface Issue {
   milestone?: string;
   number: number;
+  state: IssueState;
   title: string;
 }
 
 interface Milestone {
   number: number;
+  title: string;
+}
+
+interface PullRequest {
+  milestone?: string;
+  number: number;
+  state: PullRequestState;
   title: string;
 }
 
@@ -286,16 +297,27 @@ class User {
     return result as Required<typeof result>;
   }
 
-  async selectIssuesAndPullRequests(issues: Issue[]): Promise<Issue[]> {
+  async selectIssuesAndPullRequests(
+    issues: Issue[],
+    pullRequests: PullRequest[],
+  ): Promise<(Issue | PullRequest)[]> {
     return (
       await Checkbox.prompt({
-        message: "Select issues to assign milestone",
+        message: "Select issues and pull requests to assign milestone",
         options: [
           {
             name: "Issues",
             options: issues.map((issue) => ({
-              name: issue.title,
+              name: `#${issue.number} ${issue.title} (${issue.state})`,
               value: issue,
+            })),
+          },
+          {
+            name: "Pull requests",
+            options: pullRequests.map((pullRequest) => ({
+              name:
+                `#${pullRequest.number} ${pullRequest.title} (${pullRequest.state})`,
+              value: pullRequest,
             })),
           },
         ],
@@ -352,13 +374,25 @@ class Git {
     ]);
   }
 
-  async issues(): Promise<Issue[]> {
+  async issues(
+    search:
+      | string
+      | undefined = undefined,
+  ): Promise<Issue[]> {
     return await this.ghCommandJson([
       "issue",
       "list",
+      "-s",
+      "all",
       "--json",
-      "number,milestone,title",
+      "number,milestone,title,state",
+      "--search",
+      search ?? "",
     ]);
+  }
+
+  async issuesNoMilestone(): Promise<Issue[]> {
+    return await this.issues("no:milestone");
   }
 
   async milestone(title: string): Promise<Milestone | undefined> {
@@ -388,6 +422,27 @@ class Git {
       "state=open",
     ]);
     console.log(result);
+  }
+
+  async pullRequests(
+    search:
+      | string
+      | undefined = undefined,
+  ): Promise<PullRequest[]> {
+    return await this.ghCommandJson([
+      "pr",
+      "list",
+      "-s",
+      "all",
+      "--json",
+      "number,milestone,title,state",
+      "--search",
+      search ?? "",
+    ]);
+  }
+
+  async pullRequestsNoMilestone(): Promise<PullRequest[]> {
+    return await this.pullRequests("no:milestone");
   }
 
   private async gitCommand(args: string[]): Promise<string> {
@@ -500,11 +555,13 @@ class Updater {
     }
 
     if (options.assignMilestone) {
-      const issues = await this.git.issues();
-      console.log(issues);
-      const selectedIssues = await this.user.selectIssuesAndPullRequests(
+      const issues = await this.git.issuesNoMilestone();
+      const pullRequests = await this.git.pullRequestsNoMilestone();
+      const selected = await this.user.selectIssuesAndPullRequests(
         issues,
+        pullRequests,
       );
+      this.info(`${selected}`);
     }
 
     // this.info(`${this.options}`);
@@ -557,8 +614,7 @@ async function main(_args: string[]) {
 
 main(Deno.args);
 
-import { assertEquals } from "https://deno.land/std@0.197.0/assert/mod.ts";
-import { join } from "https://deno.land/std@0.192.0/path/win32.ts";
+import { assertEquals } from "https://deno.land/std@0.211.0/assert/mod.ts";
 
 Deno.test("detectExistingIssue", () => {
   assertEquals(
