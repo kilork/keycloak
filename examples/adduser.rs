@@ -13,7 +13,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     eprintln!("{:?}", admin_token);
 
-    let admin = KeycloakAdmin::new(&url, admin_token, client);
+    let admin = KeycloakAdmin::new(&url, admin_token, &client);
 
     admin
         .post(RealmRepresentation {

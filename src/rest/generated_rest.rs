@@ -5,7 +5,7 @@ use serde_json::Value;
 
 use super::*;
 
-impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
+impl<'a, TS: KeycloakTokenSupplier> KeycloakAdmin<'a, TS> {
     /// Clear any user login failures for all users   This can release temporary disabled users
     ///
     /// Parameters:
