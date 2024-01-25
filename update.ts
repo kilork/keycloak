@@ -236,6 +236,13 @@ class User {
         message: `Assign milestone to issues and merge requests?`,
         type: Confirm,
         default: true,
+        before: async ({ createMilestone }, next) => {
+          if (!(createMilestone ?? true)) {
+            await next("changeCargoTomlVersion");
+          } else {
+            await next();
+          }
+        }
       },
       {
         name: "changeCargoTomlVersion",
