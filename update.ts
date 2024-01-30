@@ -1,6 +1,6 @@
-import * as log from "https://deno.land/std@0.211.0/log/mod.ts";
-import * as toml from "https://deno.land/std@0.211.0/toml/mod.ts";
-import * as semver from "https://deno.land/std@0.211.0/semver/mod.ts";
+import * as log from "https://deno.land/std@0.213.0/log/mod.ts";
+import * as toml from "https://deno.land/std@0.213.0/toml/mod.ts";
+import * as semver from "https://deno.land/std@0.213.0/semver/mod.ts";
 
 import {
   Checkbox,
@@ -120,6 +120,11 @@ interface PullRequest {
   number: number;
   state: PullRequestState;
   title: string;
+}
+
+interface IssueOrPullRequest {
+  issue?: Issue;
+  pullRequest?: PullRequest;
 }
 
 class User {
@@ -242,7 +247,7 @@ class User {
           } else {
             await next();
           }
-        }
+        },
       },
       {
         name: "changeCargoTomlVersion",
@@ -307,7 +312,7 @@ class User {
   async selectIssuesAndPullRequests(
     issues: Issue[],
     pullRequests: PullRequest[],
-  ): Promise<(Issue | PullRequest)[]> {
+  ): Promise<IssueOrPullRequest[]> {
     return (
       await Checkbox.prompt({
         message: "Select issues and pull requests to assign milestone",
@@ -316,7 +321,7 @@ class User {
             name: "Issues",
             options: issues.map((issue) => ({
               name: `#${issue.number} ${issue.title} (${issue.state})`,
-              value: issue,
+              value: { issue },
             })),
           },
           {
@@ -324,12 +329,12 @@ class User {
             options: pullRequests.map((pullRequest) => ({
               name:
                 `#${pullRequest.number} ${pullRequest.title} (${pullRequest.state})`,
-              value: pullRequest,
+              value: { pullRequest },
             })),
           },
         ],
       })
-    ).map((option) => option.value);
+    ).map((item) => item as IssueOrPullRequest);
   }
 }
 
@@ -402,11 +407,42 @@ class Git {
     return await this.issues("no:milestone");
   }
 
+  async createIssue(
+    options: { title: string; body: string; milestone: Milestone },
+  ): Promise<Issue> {
+    const issueUrl: string = await this.ghCommand([
+      "issue",
+      "create",
+      "--assignee",
+      "@me",
+      "--milestone",
+      options.milestone.title,
+      "--title",
+      options.title,
+      "--body",
+      options.body,
+    ]);
+
+    const issueNumber = issueNumberFromUrl(issueUrl.trim());
+
+    return await this.issue(issueNumber!);
+  }
+
+  async setIssueMilestone(issue: Issue, milestoneVersion: InternalVersion) {
+    await this.ghCommand([
+      "issue",
+      "edit",
+      issue.number.toString(),
+      "--milestone",
+      milestoneVersion.toString(),
+    ]);
+  }
+
   async milestone(title: string): Promise<Milestone | undefined> {
     return (await this.milestones("all")).find((m) => m.title === title);
   }
 
-  async milestones(state: "all" | "open"): Promise<[Milestone]> {
+  async milestones(state: "all" | "open"): Promise<Milestone[]> {
     return await this.ghCommandJson([
       "api",
       "-H",
@@ -415,8 +451,8 @@ class Git {
     ]);
   }
 
-  async createMilestone(version: InternalVersion) {
-    const result = await this.ghCommand([
+  async createMilestone(version: InternalVersion): Promise<Milestone> {
+    return await this.ghCommandJson([
       "api",
       "--method",
       "POST",
@@ -428,7 +464,6 @@ class Git {
       "-f",
       "state=open",
     ]);
-    console.log(result);
   }
 
   async pullRequests(
@@ -450,6 +485,19 @@ class Git {
 
   async pullRequestsNoMilestone(): Promise<PullRequest[]> {
     return await this.pullRequests("no:milestone");
+  }
+
+  async setPullRequestMilestone(
+    pullRequest: PullRequest,
+    milestoneVersion: InternalVersion,
+  ) {
+    await this.ghCommand([
+      "pr",
+      "edit",
+      pullRequest.number.toString(),
+      "--milestone",
+      milestoneVersion.toString(),
+    ]);
   }
 
   private async gitCommand(args: string[]): Promise<string> {
@@ -498,6 +546,10 @@ class InternalVersion {
     const { major, minor, patch } = this.version.value;
     return new Version(`${major}.${minor}.${Math.round(patch / 100)}`);
   }
+
+  get fixVersion(): boolean {
+    return this.version.value.patch % 100 !== 0;
+  }
 }
 
 class Options {
@@ -510,13 +562,13 @@ class Options {
 }
 
 interface Versions {
-  milestone: Milestone | string;
+  milestone: Milestone;
   pr: string;
   issue: Issue;
 
   currentBranch: Branch;
   defaultBranch: Branch;
-  currentMilestones: [Milestone];
+  currentMilestones: Milestone[];
 
   keycloakLatestVersion: Version;
   keycloakCargoVersion: InternalVersion;
@@ -536,16 +588,12 @@ class Updater {
       keycloakCargoVersion: this.cargo.version,
       currentBranch: await this.git.currentBranch(),
       defaultBranch: await this.git.defaultBranch(),
-      currentMilestones: await this.git.milestones("open"),
+      currentMilestones: (await this.git.milestones("open")).filter(
+        (milestone) => milestone.title !== "released",
+      ),
     };
 
     this.options.versions = versions;
-
-    // const { currentBranch, defaultBranch } = versions;
-
-    const keycloakApiDocs = await this.keycloak.apiDocs(
-      versions.keycloakLatestVersion,
-    );
 
     const options = await this.user.selectUpdateOptions(this);
 
@@ -553,7 +601,32 @@ class Updater {
 
     if (options.createMilestone) {
       this.info(`Creating milestone ${milestoneVersion}...`);
-      await this.git.createMilestone(milestoneVersion);
+      const milestone = await this.git.createMilestone(milestoneVersion);
+
+      this.options.versions.milestone = milestone;
+    }
+
+    if (
+      options.createReleaseIssue &&
+      this.options.versions.milestone !== undefined
+    ) {
+      this.info(`Creating release issue...`);
+      let body;
+      if (milestoneVersion.fixVersion) {
+        body = `Patch release`;
+      } else {
+        body =
+          `There is a new version of [keycloak](https://www.keycloak.org/) API:
+
+- ${this.keycloak.apiUrl(milestoneVersion.toVersion())}
+        `;
+      }
+      const issue = await this.git.createIssue({
+        title: `Release v${milestoneVersion}`,
+        milestone: this.options.versions.milestone,
+        body,
+      });
+      this.options.versions.issue = issue;
     }
 
     if (options.baseVersion !== "cargo" && options.changeCargoTomlVersion) {
@@ -564,11 +637,32 @@ class Updater {
     if (options.assignMilestone) {
       const issues = await this.git.issuesNoMilestone();
       const pullRequests = await this.git.pullRequestsNoMilestone();
+
       const selected = await this.user.selectIssuesAndPullRequests(
         issues,
         pullRequests,
       );
-      this.info(`${selected}`);
+
+      console.log(selected);
+
+      for (const item of selected) {
+        if (item.issue !== undefined) {
+          const issue = item.issue;
+          this.info(
+            `Changing issue #${issue.number} milestone to ${milestoneVersion}...`,
+          );
+          await this.git.setIssueMilestone(issue, milestoneVersion);
+        } else if (item.pullRequest !== undefined) {
+          const pullRequest = item.pullRequest;
+          this.info(
+            `Changing pull request #${pullRequest.number} milestone to ${milestoneVersion}...`,
+          );
+          await this.git.setPullRequestMilestone(
+            item.pullRequest,
+            milestoneVersion,
+          );
+        }
+      }
     }
 
     // this.info(`${this.options}`);
@@ -576,35 +670,35 @@ class Updater {
     // this.info(keycloakApiDocs);
   }
 
-  async optionsToCreate() {
-    await this.prepareCreateMilestone();
-  }
+  // async optionsToCreate() {
+  //   await this.prepareCreateMilestone();
+  // }
 
-  async optionsForExisting() {
-    await this.detectExistingIssue();
-  }
+  // async optionsForExisting() {
+  //   await this.detectExistingIssue();
+  // }
 
-  async detectExistingIssue() {
-    const { currentBranch } = this.options.versions;
-    const number = detectExistingIssue(currentBranch!.toString());
-    if (number) {
-      const issue = await this.git.issue(number);
-      this.options.versions.issue = issue;
-      if (issue.milestone) {
-        this.options.versions.milestone = await this.git.milestone(
-          issue.milestone!,
-        );
-      } else {
-        this.prepareCreateMilestone();
-      }
-    }
-  }
+  // async detectExistingIssue() {
+  //   const { currentBranch } = this.options.versions;
+  //   const number = detectExistingIssue(currentBranch!.toString());
+  //   if (number) {
+  //     const issue = await this.git.issue(number);
+  //     this.options.versions.issue = issue;
+  //     if (issue.milestone) {
+  //       this.options.versions.milestone = await this.git.milestone(
+  //         issue.milestone!,
+  //       );
+  //     } else {
+  //       this.prepareCreateMilestone();
+  //     }
+  //   }
+  // }
 
-  prepareCreateMilestone() {
-    const { keycloakLatestVersion } = this.options.versions;
-    const milestone = keycloakLatestVersion?.toInternalVersion();
-    this.options.versions.milestone = milestone?.toString();
-  }
+  // prepareCreateMilestone() {
+  //   const { keycloakLatestVersion } = this.options.versions;
+  //   const milestone = keycloakLatestVersion?.toInternalVersion();
+  //   this.options.versions.milestone = milestone?.toString();
+  // }
 
   info(message: string) {
     log.info(message);
@@ -612,7 +706,11 @@ class Updater {
 }
 
 function detectExistingIssue(currentBranch: string): string | undefined {
-  return currentBranch.toString().match(/^\d+/)?.pop();
+  return currentBranch.match(/^\d+/)?.pop();
+}
+
+function issueNumberFromUrl(issueUrl: string): string | undefined {
+  return issueUrl.match(/\d+$/)?.pop();
 }
 
 async function main(_args: string[]) {
@@ -621,12 +719,20 @@ async function main(_args: string[]) {
 
 main(Deno.args);
 
-import { assertEquals } from "https://deno.land/std@0.211.0/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.213.0/assert/mod.ts";
 
 Deno.test("detectExistingIssue", () => {
   assertEquals(
     detectExistingIssue("62-allow-release"),
     "62",
     "cannot detect existing issue from branch",
+  );
+});
+
+Deno.test("issueNumberFromUrl", () => {
+  assertEquals(
+    issueNumberFromUrl("http://github.com/owner/repo/issues/123"),
+    "123",
+    "cannot detect existing issue from url",
   );
 });
