@@ -98,6 +98,10 @@ class Branch {
   toString() {
     return this.value;
   }
+
+  equals(other: Branch): boolean {
+    return other.value === this.value;
+  }
 }
 
 type IssueState = "CLOSED" | "OPEN";
@@ -196,7 +200,7 @@ class User {
             await next("createMilestone");
           } else {
             versions.milestone = milestone;
-            await next("createReleaseIssue");
+            await next("assignMilestone");
           }
         },
       },
@@ -214,25 +218,13 @@ class User {
             await next("createMilestone");
           } else {
             versions.milestone = milestone;
-            await next("createReleaseIssue");
+            await next("assignMilestone");
           }
         },
       },
       {
         name: "createMilestone",
         message: `Milestone does not exist. Should we create it?`,
-        type: Confirm,
-        default: true,
-      },
-      {
-        name: "createReleaseIssue",
-        message: `Create release issue?`,
-        type: Confirm,
-        default: true,
-      },
-      {
-        name: "createReleasePullRequest",
-        message: `Create release pull request?`,
         type: Confirm,
         default: true,
       },
@@ -269,8 +261,14 @@ class User {
         default: true,
       },
       {
-        name: "downloadApiDocs",
+        name: "runGenerator",
         message: `Run generator?`,
+        type: Confirm,
+        default: true,
+      },
+      {
+        name: "createReleaseIssue",
+        message: `Create release issue?`,
         type: Confirm,
         default: true,
       },
@@ -289,6 +287,12 @@ class User {
       {
         name: "gitPush",
         message: `Push changes to GitHub?`,
+        type: Confirm,
+        default: true,
+      },
+      {
+        name: "createReleasePullRequest",
+        message: `Create release pull request?`,
         type: Confirm,
         default: true,
       },
@@ -426,6 +430,15 @@ class Git {
     const issueNumber = issueNumberFromUrl(issueUrl.trim());
 
     return await this.issue(issueNumber!);
+  }
+
+  async developIssue(issue: Issue): Promise<void> {
+    await this.ghCommand([
+      "issue",
+      "develop",
+      issue.number.toString(),
+      "--checkout",
+    ]);
   }
 
   async setIssueMilestone(issue: Issue, milestoneVersion: InternalVersion) {
@@ -583,11 +596,13 @@ class Updater {
   options: Options = new Options();
 
   async run() {
+    const currentBranch = await this.git.currentBranch();
+    const defaultBranch = await this.git.defaultBranch();
     const versions = {
       keycloakLatestVersion: await this.keycloak.latestVersion(),
       keycloakCargoVersion: this.cargo.version,
-      currentBranch: await this.git.currentBranch(),
-      defaultBranch: await this.git.defaultBranch(),
+      currentBranch,
+      defaultBranch,
       currentMilestones: (await this.git.milestones("open")).filter(
         (milestone) => milestone.title !== "released",
       ),
@@ -600,108 +615,126 @@ class Updater {
     const milestoneVersion = this.options.milestoneVersion!;
 
     if (options.createMilestone) {
-      this.info(`Creating milestone ${milestoneVersion}...`);
-      const milestone = await this.git.createMilestone(milestoneVersion);
-
-      this.options.versions.milestone = milestone;
+      await this.createMilestone(milestoneVersion);
     }
 
-    if (
-      options.createReleaseIssue &&
-      this.options.versions.milestone !== undefined
-    ) {
-      this.info(`Creating release issue...`);
-      let body;
-      if (milestoneVersion.fixVersion) {
-        body = `Patch release`;
-      } else {
-        body =
-          `There is a new version of [keycloak](https://www.keycloak.org/) API:
+    const milestoneExists = this.options.versions.milestone !== undefined;
 
-- ${this.keycloak.apiUrl(milestoneVersion.toVersion())}
-        `;
-      }
-      const issue = await this.git.createIssue({
-        title: `Release v${milestoneVersion}`,
-        milestone: this.options.versions.milestone,
-        body,
-      });
-      this.options.versions.issue = issue;
+    if (options.assignMilestone) {
+      await this.assignMilestone(milestoneVersion);
     }
 
     if (options.baseVersion !== "cargo" && options.changeCargoTomlVersion) {
-      this.info(`Changing Cargo.toml version to ${milestoneVersion}...`);
-      this.cargo.version = milestoneVersion;
+      this.changeCargoTomlVersion(milestoneVersion);
     }
 
-    if (options.assignMilestone) {
-      const issues = await this.git.issuesNoMilestone();
-      const pullRequests = await this.git.pullRequestsNoMilestone();
-
-      const selected = await this.user.selectIssuesAndPullRequests(
-        issues,
-        pullRequests,
-      );
-
-      console.log(selected);
-
-      for (const item of selected) {
-        if (item.issue !== undefined) {
-          const issue = item.issue;
-          this.info(
-            `Changing issue #${issue.number} milestone to ${milestoneVersion}...`,
-          );
-          await this.git.setIssueMilestone(issue, milestoneVersion);
-        } else if (item.pullRequest !== undefined) {
-          const pullRequest = item.pullRequest;
-          this.info(
-            `Changing pull request #${pullRequest.number} milestone to ${milestoneVersion}...`,
-          );
-          await this.git.setPullRequestMilestone(
-            item.pullRequest,
-            milestoneVersion,
-          );
-        }
+    const isDefaultBranch = versions.currentBranch.equals(
+      versions.defaultBranch,
+    );
+    if (options.createReleaseIssue && milestoneExists) {
+      const issue = await this.createReleaseIssue(milestoneVersion);
+      this.options.versions.issue = issue;
+      if (isDefaultBranch) {
+        await this.git.developIssue(issue);
       }
     }
 
+    if (options.createReleasePullRequest) {
+      const issueExists = this.options.versions.issue !== undefined;
+      if (!issueExists) {
+        const number = detectExistingIssue(
+          this.options.versions.currentBranch!.toString(),
+        );
+        if (number) {
+          this.options.versions.issue = await this.git.issue(number);
+          const pullRequest =
+            (await this.git.pullRequests(`head:${currentBranch}`)).pop();
+          if (pullRequest !== undefined) {
+            
+          }
+        }
+      }
+
+      if (issueExists) {
+      } else {
+        this.info(`Could not create release pull request: no issue detected`);
+      }
+    }
     // this.info(`${this.options}`);
 
     // this.info(keycloakApiDocs);
   }
 
-  // async optionsToCreate() {
-  //   await this.prepareCreateMilestone();
-  // }
+  private async assignMilestone(milestoneVersion: InternalVersion) {
+    const issues = await this.git.issuesNoMilestone();
+    const pullRequests = await this.git.pullRequestsNoMilestone();
 
-  // async optionsForExisting() {
-  //   await this.detectExistingIssue();
-  // }
+    const selected = await this.user.selectIssuesAndPullRequests(
+      issues,
+      pullRequests,
+    );
 
-  // async detectExistingIssue() {
-  //   const { currentBranch } = this.options.versions;
-  //   const number = detectExistingIssue(currentBranch!.toString());
-  //   if (number) {
-  //     const issue = await this.git.issue(number);
-  //     this.options.versions.issue = issue;
-  //     if (issue.milestone) {
-  //       this.options.versions.milestone = await this.git.milestone(
-  //         issue.milestone!,
-  //       );
-  //     } else {
-  //       this.prepareCreateMilestone();
-  //     }
-  //   }
-  // }
+    for (const item of selected) {
+      if (item.issue !== undefined) {
+        const issue = item.issue;
+        this.info(
+          `Changing issue #${issue.number} milestone to ${milestoneVersion}...`,
+        );
+        await this.git.setIssueMilestone(issue, milestoneVersion);
+      } else if (item.pullRequest !== undefined) {
+        const pullRequest = item.pullRequest;
+        this.info(
+          `Changing pull request #${pullRequest.number} milestone to ${milestoneVersion}...`,
+        );
+        await this.git.setPullRequestMilestone(
+          item.pullRequest,
+          milestoneVersion,
+        );
+      }
+    }
+  }
 
-  // prepareCreateMilestone() {
-  //   const { keycloakLatestVersion } = this.options.versions;
-  //   const milestone = keycloakLatestVersion?.toInternalVersion();
-  //   this.options.versions.milestone = milestone?.toString();
-  // }
+  private changeCargoTomlVersion(milestoneVersion: InternalVersion) {
+    this.info(`Changing Cargo.toml version to ${milestoneVersion}...`);
+    this.cargo.version = milestoneVersion;
+  }
+
+  private async createReleaseIssue(
+    milestoneVersion: InternalVersion,
+  ): Promise<Issue> {
+    this.info(`Creating release issue...`);
+    let body;
+    if (milestoneVersion.fixVersion) {
+      body = `Patch release`;
+    } else {
+      body =
+        `There is a new version of [keycloak](https://www.keycloak.org/) API:
+
+- ${this.keycloak.apiUrl(milestoneVersion.toVersion())}
+        `;
+    }
+    const issue = await this.git.createIssue({
+      title: `Release v${milestoneVersion}`,
+      milestone: this.options.versions.milestone!,
+      body,
+    });
+
+    return issue;
+  }
+
+  private async createMilestone(milestoneVersion: InternalVersion) {
+    this.info(`Creating milestone ${milestoneVersion}...`);
+    const milestone = await this.git.createMilestone(milestoneVersion);
+
+    this.options.versions.milestone = milestone;
+  }
 
   info(message: string) {
     log.info(message);
+  }
+
+  error(message: string) {
+    log.error(message);
   }
 }
 
