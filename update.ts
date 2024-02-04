@@ -1,6 +1,6 @@
-import * as log from "https://deno.land/std@0.213.0/log/mod.ts";
-import * as toml from "https://deno.land/std@0.213.0/toml/mod.ts";
-import * as semver from "https://deno.land/std@0.213.0/semver/mod.ts";
+import * as log from "https://deno.land/std@0.214.0/log/mod.ts";
+import * as toml from "https://deno.land/std@0.214.0/toml/mod.ts";
+import * as semver from "https://deno.land/std@0.214.0/semver/mod.ts";
 
 import {
   Checkbox,
@@ -650,7 +650,6 @@ class Updater {
           const pullRequest =
             (await this.git.pullRequests(`head:${currentBranch}`)).pop();
           if (pullRequest !== undefined) {
-            
           }
         }
       }
@@ -752,7 +751,7 @@ async function main(_args: string[]) {
 
 main(Deno.args);
 
-import { assertEquals } from "https://deno.land/std@0.213.0/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.214.0/assert/mod.ts";
 
 Deno.test("detectExistingIssue", () => {
   assertEquals(
