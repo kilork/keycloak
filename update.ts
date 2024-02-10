@@ -725,6 +725,7 @@ class Updater {
     if (options.downloadApiDocs) {
       const apiDocs = await this.keycloak.apiDocs(milestoneVersion.toVersion());
       Deno.writeTextFileSync("docs/rest-api.html", apiDocs);
+      await Command.spawn("handlebars-magic", ["templates", "."]);
     }
 
     if (options.runGenerator) {
@@ -751,13 +752,6 @@ class Updater {
       await this.cargo.build();
     }
 
-    // TODO: Create release issue?
-    // TODO: Create commit in Git?
-    // TODO: Create tag in Git?
-    // TODO: Push changes to GitHub?
-    // TODO: Create release pull request?
-    // TODO: Create release on GitHub?
-    // TODO: Publish release on crates.io?
     if (options.createReleaseIssue && milestoneExists) {
       const issue = await this.createReleaseIssue(milestoneVersion);
       this.options.versions.issue = issue;
@@ -765,6 +759,13 @@ class Updater {
         await this.git.developIssue(issue);
       }
     }
+    // TODO: Create release issue?
+    // TODO: Create commit in Git?
+    // TODO: Create tag in Git?
+    // TODO: Push changes to GitHub?
+    // TODO: Create release pull request?
+    // TODO: Create release on GitHub?
+    // TODO: Publish release on crates.io?
 
     if (options.createReleasePullRequest) {
       const issueExists = this.options.versions.issue !== undefined;
