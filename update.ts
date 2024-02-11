@@ -289,6 +289,12 @@ class User {
         default: true,
       },
       {
+        name: "updateDocs",
+        message: `Update documentation?`,
+        type: Confirm,
+        default: true,
+      },
+      {
         name: "runGenerator",
         message: `Run generator?`,
         type: Confirm,
@@ -725,6 +731,9 @@ class Updater {
     if (options.downloadApiDocs) {
       const apiDocs = await this.keycloak.apiDocs(milestoneVersion.toVersion());
       Deno.writeTextFileSync("docs/rest-api.html", apiDocs);
+    }
+
+    if (options.updateDocs) {
       await Command.spawn("handlebars-magic", ["templates", "."]);
     }
 
@@ -759,7 +768,7 @@ class Updater {
         await this.git.developIssue(issue);
       }
     }
-    // TODO: Create release issue?
+
     // TODO: Create commit in Git?
     // TODO: Create tag in Git?
     // TODO: Push changes to GitHub?
