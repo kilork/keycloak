@@ -91,6 +91,10 @@ class Cargo {
     return await this.cargoCommandSpawn(["build"]);
   }
 
+  async publish() {
+    return await this.cargoCommandSpawn(["publish"]);
+  }
+
   async fmt() {
     return await this.cargoCommand(["fmt"]);
   }
@@ -434,6 +438,29 @@ class Git {
     await this.gitCommand(["checkout", ...args]);
   }
 
+  async commit(options: { message: string }) {
+    await this.gitCommand(["commit", "-a", "-m", options.message]);
+  }
+
+  async tag(options: { code: string; message: string }) {
+    await this.gitCommand(["tag", "-f", "-m", options.message, options.code]);
+  }
+
+  async push(args: string[] = []) {
+    await this.gitCommand(["push", ...args]);
+  }
+
+  async createRelease(options: { title: string; version: string }) {
+    await this.ghCommand([
+      "release",
+      "create",
+      options.version,
+      "--title",
+      options.title,
+      "--generate-notes",
+    ]);
+  }
+
   async issue(number: string): Promise<Issue> {
     return await this.ghCommandJson([
       "issue",
@@ -769,12 +796,23 @@ class Updater {
       }
     }
 
-    // TODO: Create commit in Git?
-    // TODO: Create tag in Git?
-    // TODO: Push changes to GitHub?
-    // TODO: Create release pull request?
-    // TODO: Create release on GitHub?
-    // TODO: Publish release on crates.io?
+    if (options.gitCommit) {
+      await this.git.commit({
+        message: `Keycloak Admin REST API v${milestoneVersion.toString()}`,
+      });
+    }
+
+    if (options.gitTag) {
+      await this.git.tag({
+        code: `v${milestoneVersion.toString()}`,
+        message: `Keycloak Admin REST API v${milestoneVersion.toString()}`,
+      });
+    }
+
+    if (options.gitPush) {
+      await this.git.push();
+      await this.git.push(["--tag"]);
+    }
 
     if (options.createReleasePullRequest) {
       const issueExists = this.options.versions.issue !== undefined;
@@ -807,6 +845,18 @@ class Updater {
       } else {
         this.info(`Could not create release pull request: no issue detected`);
       }
+    }
+
+    if (options.gitRelease) {
+      const releaseVersion = `v${milestoneVersion.toString()}`;
+      await this.git.createRelease({
+        title: releaseVersion,
+        version: releaseVersion,
+      });
+    }
+
+    if (options.cratesPublish) {
+      await this.cargo.publish();
     }
   }
 
