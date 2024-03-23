@@ -14,13 +14,19 @@ repository = "https://github.com/kilork/keycloak"
 rust-version = "1.58"
 
 [features]
+default = ["rc"]
 schemars = ["dep:schemars"]
+rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
+rc-map = ["serde/rc"]
+rc-str = ["serde/rc"]
+rc-val = ["serde/rc"]
+rc-vec = ["serde/rc"]
 
 [dependencies]
-reqwest = { version = "0.11", default-features = false, features = ["json"] }
+reqwest = { version = "0.12", default-features = false, features = ["json"] }
 serde_json = "1"
 serde = { version = "1", features = ["derive"] }
-serde_with = "2"
+serde_with = "3"
 async-trait = "0.1"
 schemars = { version = "0.8.11", default-features = false, features = [
     "derive",
@@ -28,7 +34,8 @@ schemars = { version = "0.8.11", default-features = false, features = [
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-scraper = "0.15"
-heck = "0.4"
-structopt = "0.3"
-toml = "0.7"
+scraper = "0.19"
+heck = "0.5"
+clap = { version = "4", features = ["derive", "std"], default-features = false }
+toml = "0.8"
+indexmap = { version = "2", features = ["serde"] }
