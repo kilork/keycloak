@@ -1,0 +1,21 @@
+FROM eclipse-temurin:17 as build-prepare
+
+RUN apt-get update && apt-get install -y git maven
+
+FROM build-prepare as build
+
+ARG VERSION=22.0.5
+
+RUN --mount=type=cache,target=/root/.m2/ git clone \
+    --config core.symlinks=true \
+    --depth 1 \
+    --branch ${VERSION} \
+    https://github.com/keycloak/keycloak.git && \
+    cd /keycloak && \
+    ./mvnw -pl quarkus/deployment,quarkus/dist -am -DskipTests clean install && \
+    cd services && \
+    mvn -s ../maven-settings.xml -Pjboss-release -DskipTests clean package
+
+FROM scratch
+
+COPY --from=build /keycloak/services/target/apidocs-rest/swagger/apidocs/openapi.json .
