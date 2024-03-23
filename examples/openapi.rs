@@ -11,6 +11,8 @@ enum Cli {
     Rest,
     /// Specs
     Specs,
+    /// Tags
+    Tags,
 }
 
 const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use"];
@@ -305,7 +307,7 @@ mod openapi {
                 );
             }
             if let [tag] = self.tags.as_slice() {
-                comments.push(vec![format!("Resource: `{}`", tag).into()]);
+                comments.push(vec![format!("Resource: `{tag}`").into()]);
             }
             comments.push(vec![format!(
                 "`{} {path_snake_case}`",
@@ -358,6 +360,12 @@ mod openapi {
             let mut output = vec![];
 
             output.extend(comments);
+
+            if let [tag] = self.tags.as_slice() {
+                use heck::ToKebabCase;
+                let tag = tag.to_kebab_case();
+                output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
+            }
 
             if self.deprecated {
                 output.push("#[deprecated]".into());
@@ -903,6 +911,7 @@ fn main() {
     match cli {
         Cli::Types => generate_types(&specs),
         Cli::Rest => generate_rest(&specs),
+        Cli::Tags => list_tags(&specs),
         Cli::Specs => {
             println!("{specs:#?}");
         }
@@ -990,4 +999,21 @@ pub type TypeVec<I> = Arc<[I]>;"###
             schema_obj.to_rust_type_definition(schema_name, openapi::RefMode::Owned)
         );
     }
+}
+
+fn list_tags(spec: &openapi::Spec) {
+    use heck::ToKebabCase;
+    let tags = spec
+        .tags
+        .iter()
+        .map(|tag| "tag-".to_string() + tag.name.to_kebab_case().as_str())
+        .collect::<Vec<_>>();
+    println!(
+        "tags-all = [{}]",
+        tags.iter()
+            .map(|tag| format!("{tag:?}"))
+            .collect::<Vec<_>>()
+            .join(", ")
+    );
+    tags.iter().for_each(|line| println!("{line} = []"));
 }
