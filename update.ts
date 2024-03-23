@@ -59,6 +59,8 @@ class Keycloak {
   }
 }
 
+const EXAMPLE_FOR_GENERATION = "openapi";
+
 class Cargo {
   get text(): string {
     return Deno.readTextFileSync("Cargo.toml");
@@ -108,7 +110,7 @@ class Cargo {
   }
 
   private async generate(kind: string): Promise<string> {
-    return await this.cargoCommand(["run", "--example", "gen", "--", kind]);
+    return await this.cargoCommand(["run", "--example", EXAMPLE_FOR_GENERATION, "--", kind]);
   }
 
   private async cargoCommand(args: string[]): Promise<string> {
@@ -117,6 +119,25 @@ class Cargo {
 
   private async cargoCommandSpawn(args: string[]): Promise<void> {
     await Command.spawn("cargo", args);
+  }
+}
+
+class Docker {
+  async generateOpenAPI(version: Version): Promise<void> {
+    return await this.dockerCommand([
+      "build",
+      "--build-arg",
+      `VERSION=${version}`,
+      "-o",
+      "docs",
+      "-f",
+      "docker/Dockerfile.docs",
+      "docker",
+    ]);
+  }
+
+  private async dockerCommand(args: string[]): Promise<void> {
+    return await Command.spawn("docker", args);
   }
 }
 
@@ -289,6 +310,12 @@ class User {
       {
         name: "downloadApiDocs",
         message: `Download API documentation?`,
+        type: Confirm,
+        default: true,
+      },
+      {
+        name: "generateOpenAPI",
+        message: `Generate openapi.json?`,
         type: Confirm,
         default: true,
       },
@@ -708,6 +735,7 @@ class Updater {
   readonly cargo: Cargo = new Cargo();
   readonly git: Git = new Git("kilork/keycloak");
   readonly keycloak: Keycloak = new Keycloak();
+  readonly docker: Docker = new Docker();
   readonly user: User = new User();
 
   options: Options = new Options();
@@ -758,6 +786,10 @@ class Updater {
     if (options.downloadApiDocs) {
       const apiDocs = await this.keycloak.apiDocs(milestoneVersion.toVersion());
       Deno.writeTextFileSync("docs/rest-api.html", apiDocs);
+    }
+
+    if (options.generateOpenAPI) {
+      await this.docker.generateOpenAPI(milestoneVersion.toVersion());
     }
 
     if (options.updateDocs) {
