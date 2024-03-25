@@ -333,5 +333,5 @@ fn convert_type(original: &str) -> Result<FieldType, ConvertTypeFail> {
 #[derive(Debug)]
 enum ConvertTypeFail {
     Enum(String),
-    Unknown(String),
+    Unknown(#[allow(dead_code)] String),
 }

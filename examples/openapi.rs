@@ -302,7 +302,8 @@ mod openapi {
             let request_body = self.request_body.as_ref();
 
             let body_parameter_name = "body";
-            let mut body_return_type = request_body.and_then(|request_body| {
+
+            let body_return_type = request_body.and_then(|request_body| {
                 request_body.to_rust_return_type_and_parse_calls(body_parameter_name)
             }).map(|body_type| {
                 let body_type_value = &body_type.value;

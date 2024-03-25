@@ -114,7 +114,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -141,7 +141,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -551,7 +551,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_flows_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<AuthenticationFlowRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -873,7 +873,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_form_action_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -900,7 +900,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_form_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -955,7 +955,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_register_required_action_post(
         &self,
         realm: &str,
-        body: TypeMap<String, String>,
+        body: RequiredActionProviderRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
@@ -985,7 +985,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_required_actions_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RequiredActionProviderRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1164,7 +1164,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RequiredActionProviderRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
