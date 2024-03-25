@@ -1,1 +1,9 @@
-# [path.""]
+[path."/admin/realms:post:body"]
+from_type = "String"
+rust_type = "RealmRepresentation"
+[path."/admin/realms:get:"]
+from_type = "Value"
+rust_type = "RealmRepresentation"
+[path."/admin/realms/{realm}/users:get:"]
+from_type = "Value"
+rust_type = "TypeVec<UserRepresentation>"

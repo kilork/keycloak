@@ -4942,7 +4942,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/22.0.3/rest-api/index.html#_get_adminrealms>
     #[cfg(feature = "tag-realms-admin")]
-    pub async fn get(&self, brief_representation: Option<bool>) -> Result<Value, KeycloakError> {
+    pub async fn get(
+        &self,
+        brief_representation: Option<bool>,
+    ) -> Result<RealmRepresentation, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms", self.url))
@@ -4966,7 +4969,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/22.0.3/rest-api/index.html#_post_adminrealms>
     #[cfg(feature = "tag-realms-admin")]
-    pub async fn post(&self, body: String) -> Result<(), KeycloakError> {
+    pub async fn post(&self, body: RealmRepresentation) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms", self.url))
@@ -9047,7 +9050,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         q: Option<String>,
         search: Option<String>,
         username: Option<String>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/users", self.url))
