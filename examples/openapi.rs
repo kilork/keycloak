@@ -18,7 +18,7 @@ enum Cli {
 const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use"];
 
 mod openapi {
-    use std::{borrow::Cow, fmt::Display, str::FromStr};
+    use std::{borrow::Cow, fmt::Display, str::FromStr, sync::Arc};
 
     use heck::{ToLowerCamelCase, ToSnakeCase, ToUpperCamelCase};
     use indexmap::IndexMap;
@@ -70,12 +70,18 @@ mod openapi {
     }
 
     impl RequestBody {
-        fn to_rust_parameter_type(&self) -> Option<Cow<'_, str>> {
-            self.content.to_rust_parameter_type()
-        }
-
-        fn to_rust_reqwest_body_calls(&self, body_name: &str) -> Option<Vec<String>> {
-            self.content.to_rust_reqwest_body_calls(body_name)
+        fn to_rust_return_type_and_parse_calls<'a>(
+            &'a self,
+            body_name: &str,
+        ) -> Option<ReturnType<'a>> {
+            self.content
+                .to_rust_parameter_type()
+                .zip(self.content.to_rust_reqwest_body_call(body_name))
+                .map(|(value, body)| ReturnType {
+                    value,
+                    body: Some(body.into()),
+                    convert: None,
+                })
         }
     }
 
@@ -142,12 +148,10 @@ mod openapi {
                 .map(|content_schema| content_schema.to_rust_return_type())
         }
 
-        fn to_rust_reqwest_body_calls(&self, body_name: &str) -> Option<Vec<String>> {
+        fn to_rust_reqwest_body_call(&self, body_name: &str) -> Option<String> {
             self.as_json()
-                .map(|_| vec![format!("json(&{body_name})")])
-                .or(self
-                    .as_text_plain()
-                    .map(|_| vec![format!("body({body_name})")]))
+                .map(|_| format!("json(&{body_name})"))
+                .or(self.as_text_plain().map(|_| format!("body({body_name})")))
         }
 
         fn to_rust_reqwest_parse_body_call(&self) -> Option<(Cow<'_, str>, Option<Cow<'_, str>>)> {
@@ -185,6 +189,12 @@ mod openapi {
     #[derive(Debug, Deserialize)]
     struct Responses(IndexMap<String, Response>);
 
+    struct ReturnType<'rt> {
+        value: Cow<'rt, str>,
+        body: Option<Cow<'rt, str>>,
+        convert: Option<Cow<'rt, str>>,
+    }
+
     impl Responses {
         fn to_reqwest_status_response(&self) -> Option<(reqwest::StatusCode, &Response)> {
             if self.0.len() != 1 {
@@ -195,17 +205,17 @@ mod openapi {
             Some((status, response))
         }
 
-        fn to_rust_return_type(&self) -> Option<Cow<str>> {
+        fn to_rust_return_type_and_parse_calls(&self) -> Option<ReturnType<'_>> {
             let (_, response) = self.to_reqwest_status_response()?;
-            if response.content.is_none() {
-                return Some("()".into());
-            }
-            response.content.as_ref()?.to_rust_return_type()
-        }
-
-        fn to_rust_reqwest_parse_body_call(&self) -> Option<(Cow<'_, str>, Option<Cow<'_, str>>)> {
-            let (_, response) = self.to_reqwest_status_response()?;
-            response.content.as_ref()?.to_rust_reqwest_parse_body_call()
+            let content = response.content.as_ref()?;
+            content
+                .to_rust_return_type()
+                .zip(content.to_rust_reqwest_parse_body_call())
+                .map(|(value, (body, convert))| ReturnType {
+                    value,
+                    body: body.into(),
+                    convert,
+                })
         }
     }
 
@@ -229,7 +239,7 @@ mod openapi {
             parameters: Option<&[Parameter]>,
         ) -> String {
             let mut method_name = path
-                .strip_prefix("/admin/realms/")
+                .strip_prefix("/admin/realms")
                 .unwrap_or(path)
                 .to_string();
 
@@ -272,6 +282,182 @@ mod openapi {
 
             method_name = (method_name + &method_string).to_snake_case();
 
+            let (method_string_lc, comments) =
+                self.comments(&parameters, method_string, path, &path_snake_case);
+
+            let mut output = vec![];
+
+            output.extend(comments);
+
+            if let [tag] = self.tags.as_slice() {
+                use heck::ToKebabCase;
+                let tag = tag.to_kebab_case();
+                output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
+            }
+
+            if self.deprecated {
+                output.push("#[deprecated]".into());
+            }
+
+            let request_body = self.request_body.as_ref();
+
+            let body_parameter_name = "body";
+            let mut body_return_type = request_body.and_then(|request_body| {
+                request_body.to_rust_return_type_and_parse_calls(body_parameter_name)
+            }).map(|body_type| {
+                let body_type_value = &body_type.value;
+                let desc =
+                Toml::desc(path, &method_string_lc, Some(body_parameter_name));
+
+            if let Some(desc) = desc.as_ref() {
+                let from_type = desc.from_type.as_str();
+                if &from_type != body_type_value {
+                    eprintln!("warn: body type info changed in [{path}:{method_string_lc}:{body_parameter_name}] : was {from_type} now {body_type_value}");
+                }
+                ReturnType {
+                    value: desc.rust_type.clone().into(),
+                    body: desc.method.clone().map(From::from),
+                    convert: desc.convert.clone().map(From::from),
+                }
+            } else {
+                body_type
+            }
+
+            });
+
+            let parameters_of_method = parameters
+                .iter()
+                .map(|(parameter, param_name)| {
+                    let param_type = parameter.schema.to_rust_parameter_type(parameter.required);
+
+                    format!("{param_name}: {param_type}")
+                })
+                .chain(
+                    body_return_type
+                        .as_ref()
+                        .map(|body| body.value.as_ref())
+                        .map(|param_type| format!("{body_parameter_name}: {param_type}")),
+                )
+                .map(|param_line| format!("    {param_line},"))
+                .collect::<Vec<_>>();
+
+            if parameters_of_method.len() > 6 {
+                output.push("#[allow(clippy::too_many_arguments)]".into());
+            }
+
+            output.push(format!("pub async fn {method_name}("));
+            output.push("    &self,".into());
+
+            // fill parameters
+
+            output.extend(parameters_of_method);
+
+            let mut result_type = self.responses.to_rust_return_type_and_parse_calls();
+
+            let mut result_type_value = result_type
+                .as_ref()
+                .map(|rt| rt.value.as_ref())
+                .unwrap_or("()");
+
+            let desc = Toml::desc::<_, _, String>(path, &method_string_lc, None);
+            if let Some(desc) = desc.as_ref() {
+                let from_type = desc.from_type.as_str();
+                if from_type != result_type_value {
+                    eprintln!("warn: type info changed in [{path}:{method_string_lc}] : was {from_type} now {result_type_value}");
+                }
+                result_type_value = desc.rust_type.as_str();
+                result_type = Some(ReturnType {
+                    value: result_type_value.into(),
+                    body: desc.method.as_deref().map(From::from),
+                    convert: desc.convert.as_deref().map(From::from),
+                });
+            } else if result_type_value == "Value" {
+                eprintln!("warn: Value as result in [{path}:{method_string_lc}]");
+            }
+
+            output.push(format!(
+                ") -> Result<{result_type_value}, KeycloakError> {{"
+            ));
+
+            let query_parameters = parameters
+                .iter()
+                .filter(|(parameter, _)| parameter.position == ParameterPosition::Query)
+                .collect::<Vec<_>>();
+            let has_query_parameters = !query_parameters.is_empty();
+
+            output.push(
+                if has_query_parameters {
+                    "    let mut builder = self"
+                } else {
+                    "    let builder = self"
+                }
+                .into(),
+            );
+            output.push("        .client".into());
+            output.push(format!("        .{method_string_lc}(&format!("));
+            output.push(format!(r#"            "{{}}{path_snake_case}","#));
+            output.push("            self.url".into());
+            output.push("        ))".into());
+            if let Some(reqwest_body) = request_body {
+                let Some(reqwest_body_call) =
+                    body_return_type.map(|return_type: ReturnType<'_>| {
+                        return_type
+                            .body
+                            .unwrap_or_else(|| format!("json(&{body_parameter_name})").into())
+                    })
+                else {
+                    panic!("could not convert reqwest body: {reqwest_body:?}")
+                };
+                output.push(format!("        .{reqwest_body_call}"));
+            } else if matches!(method, Method::Put) {
+                output.push(r#"        .header(CONTENT_LENGTH, "0")"#.into());
+            }
+            output.push("        .bearer_auth(self.token_supplier.get(&self.url).await?);".into());
+
+            output.extend(query_parameters.into_iter().flat_map(
+                |(query_parameter, query_parameter_name)| {
+                    [
+                        format!("if let Some(v) = {query_parameter_name} {{"),
+                        format!(
+                            r#"    builder = builder.query(&[("{}", v)]);"#,
+                            query_parameter.name
+                        ),
+                        "}".into(),
+                    ]
+                    .map(|line| format!("    {line}"))
+                },
+            ));
+
+            if let Some(ReturnType { body, convert, .. }) = result_type.as_ref() {
+                let body = body.as_deref().unwrap_or_else(|| "json".into());
+                output.push("    let response = builder.send().await?;".into());
+                output.push(format!(
+                    "    Ok(error_check(response).await?.{body}().await{}?)",
+                    convert.as_deref().unwrap_or_default()
+                ));
+            } else {
+                output.push("    let response = builder.send().await?;".into());
+                output.push("    error_check(response).await?;".into());
+                output.push("    Ok(())".into());
+            }
+
+            output.push("}".into());
+
+            output
+                .into_iter()
+                .map(|s| "    ".to_string() + &s)
+                .collect::<Vec<_>>()
+                .join("\n")
+                + "\n"
+        }
+
+        fn comments(
+            &self,
+            parameters: &Vec<(&Parameter, String)>,
+            method_string: String,
+            path: &str,
+            path_snake_case: &String,
+        ) -> (String, Vec<String>) {
             let mut comments: Vec<Vec<Cow<str>>> = vec![];
 
             if let Some(comment) = self
@@ -335,7 +521,7 @@ mod openapi {
             )
             .into()]);
 
-            if path_snake_case != path {
+            if *path_snake_case != path {
                 comments.push(vec![format!(
                     "REST method: `{} {path}`",
                     method_string.to_ascii_uppercase()
@@ -356,125 +542,7 @@ mod openapi {
                 .lines()
                 .map(ToString::to_string)
                 .collect();
-
-            let mut output = vec![];
-
-            output.extend(comments);
-
-            if let [tag] = self.tags.as_slice() {
-                use heck::ToKebabCase;
-                let tag = tag.to_kebab_case();
-                output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
-            }
-
-            if self.deprecated {
-                output.push("#[deprecated]".into());
-            }
-
-            let request_body = self.request_body.as_ref();
-            let parameters_of_method = parameters
-                .iter()
-                .map(|(parameter, param_name)| {
-                    let param_type = parameter.schema.to_rust_parameter_type(parameter.required);
-
-                    format!("{param_name}: {param_type}")
-                })
-                .chain(
-                    request_body
-                        .and_then(|body| body.to_rust_parameter_type())
-                        .map(|param_type| format!("body: {param_type}")),
-                )
-                .map(|param_line| format!("    {param_line},"))
-                .collect::<Vec<_>>();
-
-            if parameters_of_method.len() > 6 {
-                output.push("#[allow(clippy::too_many_arguments)]".into());
-            }
-
-            output.push(format!("pub async fn {method_name}("));
-            output.push("    &self,".into());
-
-            // fill parameters
-
-            output.extend(parameters_of_method);
-
-            let Some(result_type) = self.responses.to_rust_return_type() else {
-                panic!(
-                    "{path}: could not determine result type for responses: {:?}",
-                    self.responses
-                );
-            };
-
-            output.push(format!(") -> Result<{result_type}, KeycloakError> {{"));
-
-            let query_parameters = parameters
-                .iter()
-                .filter(|(parameter, _)| parameter.position == ParameterPosition::Query)
-                .collect::<Vec<_>>();
-            let has_query_parameters = !query_parameters.is_empty();
-
-            output.push(
-                if has_query_parameters {
-                    "    let mut builder = self"
-                } else {
-                    "    let builder = self"
-                }
-                .into(),
-            );
-            output.push("        .client".into());
-            output.push(format!("        .{method_string_lc}(&format!("));
-            output.push(format!(r#"            "{{}}{path_snake_case}","#));
-            output.push("            self.url".into());
-            output.push("        ))".into());
-            if let Some(reqwest_body) = request_body {
-                let Some(reqwest_body_calls) = reqwest_body.to_rust_reqwest_body_calls("body")
-                else {
-                    panic!("could not convert reqwest body: {reqwest_body:?}")
-                };
-                for reqwest_body_call in reqwest_body_calls {
-                    output.push(format!("        .{reqwest_body_call}"));
-                }
-            } else if matches!(method, Method::Put) {
-                output.push(r#"        .header(CONTENT_LENGTH, "0")"#.into());
-            }
-            output.push("        .bearer_auth(self.token_supplier.get(&self.url).await?);".into());
-
-            output.extend(query_parameters.into_iter().flat_map(
-                |(query_parameter, query_parameter_name)| {
-                    [
-                        format!("if let Some(v) = {query_parameter_name} {{"),
-                        format!(
-                            r#"    builder = builder.query(&[("{}", v)]);"#,
-                            query_parameter.name
-                        ),
-                        "}".into(),
-                    ]
-                    .map(|line| format!("    {line}"))
-                },
-            ));
-
-            if let Some((parse_body_call, conv_body_call)) =
-                self.responses.to_rust_reqwest_parse_body_call()
-            {
-                output.push("    let response = builder.send().await?;".into());
-                output.push(format!(
-                    "    Ok(error_check(response).await?.{parse_body_call}().await{}?)",
-                    conv_body_call.unwrap_or_default()
-                ));
-            } else {
-                output.push("    let response = builder.send().await?;".into());
-                output.push("    error_check(response).await?;".into());
-                output.push("    Ok(())".into());
-            }
-
-            output.push("}".into());
-
-            output
-                .into_iter()
-                .map(|s| "    ".to_string() + &s)
-                .collect::<Vec<_>>()
-                .join("\n")
-                + "\n"
+            (method_string_lc, comments)
         }
     }
 
@@ -598,7 +666,7 @@ mod openapi {
 
     impl SchemaStruct<Property> {
         fn to_rust_type_definition(&self, name: &str, ref_mode: RefMode) -> String {
-            let fields = self
+            let mut fields = self
                 .properties
                 .iter()
                 .map(|(field, prop)| {
@@ -633,6 +701,8 @@ mod openapi {
                     )
                 })
                 .collect::<Vec<_>>();
+
+            fields.sort_by(|a, b| a.0.cmp(b.0));
 
             let count_snake_case = fields
                 .iter()
@@ -706,7 +776,7 @@ pub struct {name} {{
     impl SchemaMap<Property> {
         fn to_rust_type_definition(&self, name: &str, ref_mode: RefMode) -> String {
             format!(
-                "type {name} = TypeMap<String, {}>;\n",
+                "pub type {name} = TypeMap<String, {}>;\n",
                 self.additional_properties.to_rust_type(ref_mode)
             )
         }
@@ -797,7 +867,7 @@ pub enum {name} {{
             let parameter_type = self.to_rust_type_ref(if required {
                 RefMode::Borrowed
             } else {
-                RefMode::Owned
+                RefMode::Std
             });
             if required {
                 parameter_type
@@ -814,7 +884,7 @@ pub enum {name} {{
                         unique_items: _,
                     } => {
                         let item_type = if let Some(items) = items {
-                            items.to_rust_type(ref_mode)
+                            items.to_rust_type(RefMode::Std)
                         } else {
                             "TypeValue".into()
                         };
@@ -899,6 +969,42 @@ pub enum {name} {{
     pub enum IntegerFormat {
         Int32,
         Int64,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct PathDesc {
+        from_type: String,
+        rust_type: String,
+        method: Option<String>,
+        convert: Option<String>,
+    }
+
+    #[derive(Debug, Deserialize)]
+    struct Toml {
+        #[serde(default)]
+        path: IndexMap<String, Arc<PathDesc>>,
+    }
+
+    impl Toml {
+        fn desc<P, M, A>(path: P, method: M, parameter: Option<A>) -> Option<Arc<PathDesc>>
+        where
+            P: Display,
+            M: Display,
+            A: Display + Default,
+        {
+            OPENAPI_PATCH.with(|toml| {
+                toml.path
+                    .get(&format!(
+                        "{path}:{method}:{}",
+                        parameter.unwrap_or_default()
+                    ))
+                    .cloned()
+            })
+        }
+    }
+
+    thread_local! {
+        static OPENAPI_PATCH: Toml = toml::from_str(include_str!("openapi.patch.toml")).unwrap();
     }
 }
 

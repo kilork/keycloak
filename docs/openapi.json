@@ -8945,32 +8945,6 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/profile/metadata" : {
-      "get" : {
-        "tags" : [ "Users" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/UserProfileMetadata"
-                }
-              }
-            }
-          }
-        }
-      },
-      "parameters" : [ {
-        "name" : "realm",
-        "in" : "path",
-        "description" : "realm name (not id!)",
-        "required" : true,
-        "schema" : {
-          "type" : "string"
-        }
-      } ]
-    },
     "/admin/realms/{realm}/users/{id}" : {
       "get" : {
         "tags" : [ "Users" ],
@@ -13523,26 +13497,6 @@
       "UserManagedAccessConfig" : {
         "type" : "object"
       },
-      "UserProfileAttributeGroupMetadata" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string"
-          },
-          "displayHeader" : {
-            "type" : "string"
-          },
-          "displayDescription" : {
-            "type" : "string"
-          },
-          "annotations" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
-          }
-        }
-      },
       "UserProfileAttributeMetadata" : {
         "type" : "object",
         "properties" : {
@@ -13572,9 +13526,6 @@
                 "type" : "object"
               }
             }
-          },
-          "group" : {
-            "type" : "string"
           }
         }
       },
@@ -13585,12 +13536,6 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/UserProfileAttributeMetadata"
-            }
-          },
-          "groups" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/UserProfileAttributeGroupMetadata"
             }
           }
         }

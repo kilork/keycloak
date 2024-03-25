@@ -1,6 +1,6 @@
-import * as log from "https://deno.land/std@0.214.0/log/mod.ts";
-import * as toml from "https://deno.land/std@0.214.0/toml/mod.ts";
-import * as semver from "https://deno.land/std@0.214.0/semver/mod.ts";
+import * as log from "https://deno.land/std@0.220.1/log/mod.ts";
+import * as toml from "https://deno.land/std@0.220.1/toml/mod.ts";
+import * as semver from "https://deno.land/std@0.220.1/semver/mod.ts";
 
 import {
   Checkbox,
@@ -89,6 +89,10 @@ class Cargo {
     }
   }
 
+  async cleanKeycloak() {
+    return await this.cargoCommandSpawn(["clean", "-p", "keycloak"]);
+  }
+
   async build() {
     return await this.cargoCommandSpawn(["build"]);
   }
@@ -110,11 +114,17 @@ class Cargo {
   }
 
   private async generate(kind: string): Promise<string> {
-    return await this.cargoCommand(["run", "--example", EXAMPLE_FOR_GENERATION, "--", kind]);
+    return await this.cargoCommand([
+      "run",
+      "--example",
+      EXAMPLE_FOR_GENERATION,
+      "--",
+      kind,
+    ]);
   }
 
   private async cargoCommand(args: string[]): Promise<string> {
-    return await Command.execute("cargo", args);
+    return await Command.execute("cargo", args, "inherit");
   }
 
   private async cargoCommandSpawn(args: string[]): Promise<void> {
@@ -424,17 +434,23 @@ class Command {
   static async execute(
     cmd: string,
     args: string[],
+    stderr: "piped" | "inherit" = "piped",
   ): Promise<string> {
     const command = new Deno.Command(cmd, {
       args,
       stdout: "piped",
+      stderr,
     });
 
-    const { code, stdout, stderr } = await command.output();
-    if (code !== 0) {
-      throw new CommandError(new TextDecoder().decode(stderr));
+    const output = await command.output();
+    if (output.code !== 0) {
+      if (stderr == "piped") {
+        throw new CommandError(new TextDecoder().decode(output.stderr));
+      } else {
+        throw new CommandError("failed");
+      }
     }
-    return new TextDecoder().decode(stdout);
+    return new TextDecoder().decode(output.stdout);
   }
 }
 
@@ -804,6 +820,10 @@ class Updater {
         "src/rest/generated_rest.rs",
       ]);
 
+      if (options.generateOpenAPI) {
+        await this.cargo.cleanKeycloak();
+      }
+
       this.info("Generating new...");
 
       const codeTypes = await this.cargo.generateTypes();
@@ -987,7 +1007,7 @@ async function main(_args: string[]) {
 
 main(Deno.args);
 
-import { assertEquals } from "https://deno.land/std@0.214.0/assert/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.220.1/assert/mod.ts";
 
 Deno.test("detectExistingIssue", () => {
   assertEquals(
