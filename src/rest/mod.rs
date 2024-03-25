@@ -6,9 +6,9 @@ use serde_json::json;
 
 mod generated_rest;
 
-pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
+pub struct KeycloakAdmin<'a, TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
-    client: reqwest::Client,
+    client: &'a reqwest::Client,
     token_supplier: TS,
 }
 
@@ -164,8 +164,8 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
-impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
-    pub fn new(url: &str, token_supplier: TS, client: reqwest::Client) -> Self {
+impl<'a, TS: KeycloakTokenSupplier> KeycloakAdmin<'a, TS> {
+    pub fn new(url: &str, token_supplier: TS, client: &'a reqwest::Client) -> Self {
         Self {
             url: url.into(),
             client,
