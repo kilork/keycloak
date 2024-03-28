@@ -1388,7 +1388,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_clients_initial_access_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ClientInitialAccessPresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1475,7 +1475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_client_registration_policy_providers_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1508,7 +1508,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1609,7 +1609,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1642,7 +1642,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1676,7 +1676,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1777,7 +1777,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         client: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1810,7 +1810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         client: &str,
         brief_representation: Option<bool>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -1839,7 +1839,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/22.0.3/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_scopes_get(&self, realm: &str) -> Result<Value, KeycloakError> {
+    pub async fn realm_client_scopes_get(
+        &self,
+        realm: &str,
+    ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
@@ -1980,7 +1983,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/22.0.3/rest-api/index.html#_get_adminrealmsrealmclient_templates>
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_templates_get(&self, realm: &str) -> Result<Value, KeycloakError> {
+    pub async fn realm_client_templates_get(
+        &self,
+        realm: &str,
+    ) -> Result<TypeVec<ClientInitialAccessPresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
