@@ -1362,9 +1362,21 @@ pub type UserManagedAccessConfig = TypeMap<String, TypeValue>;
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct UserProfileAttributeGroupMetadata {
+    pub annotations: Option<TypeMap<String, Value>>,
+    pub display_description: Option<TypeString>,
+    pub display_header: Option<TypeString>,
+    pub name: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct UserProfileAttributeMetadata {
     pub annotations: Option<TypeMap<String, Value>>,
     pub display_name: Option<TypeString>,
+    pub group: Option<TypeString>,
     pub name: Option<TypeString>,
     pub read_only: Option<bool>,
     pub required: Option<bool>,
@@ -1376,6 +1388,7 @@ pub struct UserProfileAttributeMetadata {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct UserProfileMetadata {
     pub attributes: Option<TypeVec<UserProfileAttributeMetadata>>,
+    pub groups: Option<TypeVec<UserProfileAttributeGroupMetadata>>,
 }
 
 #[skip_serializing_none]

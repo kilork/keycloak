@@ -544,6 +544,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#UserConsentRepresentation">UserConsentRepresentation</a></li>
 <li><a href="#UserFederationMapperRepresentation">UserFederationMapperRepresentation</a></li>
 <li><a href="#UserFederationProviderRepresentation">UserFederationProviderRepresentation</a></li>
+<li><a href="#UserProfileAttributeGroupMetadata">UserProfileAttributeGroupMetadata</a></li>
 <li><a href="#UserProfileAttributeMetadata">UserProfileAttributeMetadata</a></li>
 <li><a href="#UserProfileMetadata">UserProfileMetadata</a></li>
 <li><a href="#UserRepresentation">UserRepresentation</a></li>
@@ -28136,12 +28137,80 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 </div>
-<div class="sect3 adminRealmsRealmUsersProfilePut">
-<h4 id="_put_adminrealmsrealmusersprofile">PUT /admin/realms/{realm}/users/profile</h4>
+<div class="sect3 adminRealmsRealmUsersProfileMetadataGet">
+<h4 id="_get_adminrealmsrealmusersprofilemetadata">GET /admin/realms/{realm}/users/profile/metadata</h4>
 <div class="sect4">
 <h5 id="_parameters_314">Parameters</h5>
 <div class="sect5">
 <h6 id="_path_parameters_312">Path Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 28.5714%;">
+<col style="width: 42.8571%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>realm</strong><br>
+<em>required</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">realm name (not id!)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_content_type_171">Content Type</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>application/json</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_responses_314">Responses</h5>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Code</th>
+<th class="tableblock halign-left valign-top">Message</th>
+<th class="tableblock halign-left valign-top">Datatype</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#UserProfileMetadata">UserProfileMetadata</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3 adminRealmsRealmUsersProfilePut">
+<h4 id="_put_adminrealmsrealmusersprofile">PUT /admin/realms/{realm}/users/profile</h4>
+<div class="sect4">
+<h5 id="_parameters_315">Parameters</h5>
+<div class="sect5">
+<h6 id="_path_parameters_313">Path Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 28.5714%;">
@@ -28198,7 +28267,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect4">
-<h5 id="_responses_314">Responses</h5>
+<h5 id="_responses_315">Responses</h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -34052,6 +34121,49 @@ _optional</em></p></td>
 </table>
 </div>
 <div class="sect2">
+<h3 id="UserProfileAttributeGroupMetadata">UserProfileAttributeGroupMetadata</h3>
+<table class="tableblock frame-all grid-all stretch fields-UserProfileAttributeGroupMetadata">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 40%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>name</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>displayHeader</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>displayDescription</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>annotations</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map  of <a href="#object">[object]</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="UserProfileAttributeMetadata">UserProfileAttributeMetadata</h3>
 <table class="tableblock frame-all grid-all stretch fields-UserProfileAttributeMetadata">
 <colgroup>
@@ -34103,6 +34215,12 @@ _optional</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Map  of <a href="#map">[map]</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>group</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -34126,6 +34244,12 @@ _optional</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>attributes</strong><br>
 <em>optional</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#UserProfileAttributeMetadata">UserProfileAttributeMetadata</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>groups</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List  of <a href="#UserProfileAttributeGroupMetadata">UserProfileAttributeGroupMetadata</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -34317,7 +34441,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-12 17:20:13 UTC
+Last updated 2023-10-24 09:35:47 UTC
 </div>
 </div>
 </body>

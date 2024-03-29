@@ -7,9 +7,15 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 22.0.3](https://www.keycloak.org/docs-api/22.0.3/rest-api/index.html).
+Implements [Keycloak Admin REST API version 22.0.5](https://www.keycloak.org/docs-api/22.0.5/rest-api/index.html).
 
-To add [schemars](https://crates.io/crates/schemars) support enable feature `schemars`.
+### Feature flags
+
+Default flags: `tags-all`.
+
+- `rc`: use `Arc` for deserialization.
+- `schemars`: add [schemars](https://crates.io/crates/schemars) support.
+- `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
 
 ## Usage
 
