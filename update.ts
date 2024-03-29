@@ -505,6 +505,10 @@ class Git {
     await this.gitCommand(["push", ...args]);
   }
 
+  async stash(args: string[] = []) {
+    await this.gitCommand(["stash", ...args]);
+  }
+
   async createRelease(options: { title: string; version: string }) {
     await this.ghCommand([
       "release",
@@ -569,12 +573,15 @@ class Git {
   }
 
   async developIssue(issue: Issue): Promise<void> {
+    await this.push();
+    await this.stash();
     await this.ghCommand([
       "issue",
       "develop",
       issue.number.toString(),
       "--checkout",
     ]);
+    await this.stash(["pop"]);
   }
 
   async setIssueMilestone(issue: Issue, milestoneVersion: InternalVersion) {
