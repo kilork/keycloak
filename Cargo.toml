@@ -58,4 +58,5 @@ scraper = "0.19"
 heck = "0.5"
 clap = { version = "4", features = ["derive", "std"], default-features = false }
 toml = "0.8"
+serde = { version = "1", features = ["derive", "rc"] }
 indexmap = { version = "2", features = ["serde"] }
