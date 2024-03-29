@@ -873,11 +873,12 @@ class Updater {
     }
 
     if (options.createReleasePullRequest) {
-      const issueExists = this.options.versions.issue !== undefined;
+      let issueExists = this.options.versions.issue !== undefined;
       if (!issueExists) {
         const number = detectExistingIssue(currentBranch.toString());
         if (number) {
           this.options.versions.issue = await this.git.issue(number);
+          issueExists = true;
           const pullRequest =
             (await this.git.pullRequests(`head:${currentBranch}`)).pop();
           if (
@@ -896,7 +897,7 @@ class Updater {
         }
       }
 
-      if (issueExists) {
+      if (issueExists && this.options.versions.pullRequest === undefined) {
         this.options.versions.pullRequest = await this.createReleasePullRequest(
           milestoneVersion,
         );
