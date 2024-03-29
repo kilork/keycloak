@@ -799,6 +799,10 @@ class Updater {
     const version = milestoneVersion.toVersion();
     const majorVersion = version.majorVersion;
 
+    if (options.mergeReleasePullRequest) {
+      options.gitPush = true;
+    }
+
     Deno.env.set("KEYCLOAK_RUST_VERSION", milestoneVersion.toString());
     Deno.env.set("KEYCLOAK_VERSION", version.toString());
     Deno.env.set("KEYCLOAK_RUST_MAJOR_VERSION", majorVersion);
