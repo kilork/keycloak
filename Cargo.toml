@@ -17,10 +17,10 @@ rust-version = "1.58"
 default = ["tags-all"]
 schemars = ["dep:schemars"]
 rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
-rc-map = []
-rc-str = []
-rc-val = []
-rc-vec = []
+rc-map = ["serde/rc"]
+rc-str = ["serde/rc"]
+rc-val = ["serde/rc"]
+rc-vec = ["serde/rc"]
 tags-all = ["tag-attack-detection", "tag-authentication-management", "tag-client-attribute-certificate", "tag-client-initial-access", "tag-client-registration-policy", "tag-client-role-mappings", "tag-client-scopes", "tag-clients", "tag-component", "tag-groups", "tag-identity-providers", "tag-key", "tag-protocol-mappers", "tag-realms-admin", "tag-role-mapper", "tag-roles", "tag-roles-by-id", "tag-scope-mappings", "tag-users"]
 tag-attack-detection = []
 tag-authentication-management = []
@@ -45,7 +45,7 @@ tag-users = []
 [dependencies]
 reqwest = { version = "0.12", default-features = false, features = ["json"] }
 serde_json = "1"
-serde = { version = "1", features = ["derive", "rc"] }
+serde = { version = "1", features = ["derive"] }
 serde_with = "3"
 async-trait = "0.1"
 schemars = { version = "0.8.11", default-features = false, features = [
