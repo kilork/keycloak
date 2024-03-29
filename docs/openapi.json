@@ -6340,8 +6340,10 @@
           "in" : "path",
           "required" : true,
           "schema" : {
-            "pattern" : ".*",
-            "type" : "string"
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PathSegment"
+            }
           }
         } ],
         "responses" : {
@@ -12547,6 +12549,15 @@
           }
         }
       },
+      "MultivaluedMapStringString" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      },
       "OAuthClientRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -12789,6 +12800,17 @@
           },
           "static" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "PathSegment" : {
+        "type" : "object",
+        "properties" : {
+          "path" : {
+            "type" : "string"
+          },
+          "matrixParameters" : {
+            "$ref" : "#/components/schemas/MultivaluedMapStringString"
           }
         }
       },

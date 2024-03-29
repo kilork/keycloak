@@ -305,34 +305,6 @@ mod openapi {
 
             let body_return_type = request_body.and_then(|request_body| {
                 request_body.to_rust_return_type_and_parse_calls(body_parameter_name)
-            }).map(|body_type| {
-                let body_type_value = &body_type.value;
-                let desc =
-                Toml::desc(path, &method_string_lc, Some(body_parameter_name));
-
-            if let Some(desc) = desc.as_ref() {
-                let from_type = desc.from_type.as_str();
-                if &from_type != body_type_value {
-                    let redundant = body_type_value == &desc.rust_type;
-                    let full_header = format!(r#"[path."{path}:{method_string_lc}:{body_parameter_name}"]"#);
-                    if redundant {
-                        delete_mapping(&full_header);
-                    } else {
-                        eprintln!(
-                            "warn: body type info changed in {full_header} : was {from_type} now {body_type_value} (mapped {})",
-                            &desc.rust_type
-                        );
-                    }
-                }
-                ReturnType {
-                    value: desc.rust_type.clone().into(),
-                    body: desc.method.clone().map(From::from),
-                    convert: desc.convert.clone().map(From::from),
-                }
-            } else {
-                body_type
-            }
-
             });
 
             let parameters_of_method = parameters
@@ -340,15 +312,37 @@ mod openapi {
                 .map(|(parameter, param_name)| {
                     let param_type = parameter.schema.to_rust_parameter_type(parameter.required);
 
-                    format!("{param_name}: {param_type}")
+                    (param_name.as_str(), param_type)
                 })
                 .chain(
                     body_return_type
                         .as_ref()
                         .map(|body| body.value.as_ref())
-                        .map(|param_type| format!("{body_parameter_name}: {param_type}")),
+                        .map(|param_type| (body_parameter_name, param_type.into())),
                 )
-                .map(|param_line| format!("    {param_line},"))
+                .map(|(param_name, param_type)| {
+                    let desc = Toml::desc(path, &method_string_lc, Some(param_name));
+
+                    let param_type = if let Some(desc) = desc.as_ref() {
+                        let from_type = desc.from_type.as_str();
+                        if from_type != param_type {
+                            let redundant = &param_type == &desc.rust_type;
+                            let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
+                            if redundant {
+                                delete_mapping(&full_header);
+                            } else {
+                                eprintln!(
+                                    "warn: body type info changed in {full_header} : was {from_type} now {param_type} (mapped {})",
+                                    &desc.rust_type
+                                );
+                            }
+                        }
+                        desc.rust_type.clone().into()
+                    } else {
+                        param_type
+                    };
+                    format!("    {param_name}: {param_type},")
+                })
                 .collect::<Vec<_>>();
 
             if parameters_of_method.len() > 6 {

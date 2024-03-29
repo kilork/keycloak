@@ -526,6 +526,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#OAuthClientRepresentation">OAuthClientRepresentation</a></li>
 <li><a href="#PathCacheConfig">PathCacheConfig</a></li>
 <li><a href="#PathConfig">PathConfig</a></li>
+<li><a href="#PathSegment">PathSegment</a></li>
 <li><a href="#Permission">Permission</a></li>
 <li><a href="#PolicyEnforcementMode">PolicyEnforcementMode</a></li>
 <li><a href="#PolicyEnforcerConfig">PolicyEnforcerConfig</a></li>
@@ -16303,9 +16304,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>path</strong><br>
 <em>required</em></p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#PathSegment">PathSegment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">/.*/</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
@@ -32604,6 +32605,37 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </table>
 </div>
 <div class="sect2">
+<h3 id="PathSegment">PathSegment</h3>
+<table class="tableblock frame-all grid-all stretch fields-PathSegment">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 40%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>path</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>matrixParameters</strong><br>
+<em>optional</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Map  of <a href="#array">[array]</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="Permission">Permission</h3>
 <table class="tableblock frame-all grid-all stretch fields-Permission">
 <colgroup>
@@ -35284,7 +35316,7 @@ _optional</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-23 14:46:03 UTC
+Last updated 2024-01-08 13:31:02 UTC
 </div>
 </div>
 </body>
