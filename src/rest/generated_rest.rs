@@ -9356,7 +9356,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeString>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -9385,7 +9385,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -9444,7 +9444,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<CredentialRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -9695,7 +9695,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<FederatedIdentityRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -9794,7 +9794,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
         search: Option<String>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
@@ -9995,7 +9995,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         client_uuid: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -10140,7 +10140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(

@@ -262,17 +262,24 @@ rust_type = "TypeVec<RoleRepresentation>"
 [path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite:get:"]
 from_type = "Value"
 rust_type = "TypeVec<RoleRepresentation>"
-# [path."/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/consents:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/credentials:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/federated-identity:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/groups:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/offline-sessions/{clientUuid}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/users/{id}/sessions:get:"]
-# from_type = "Value"
+[path."/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeString>"
+[path."/admin/realms/{realm}/users/{id}/consents:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeMap<String, Value>>"
+[path."/admin/realms/{realm}/users/{id}/credentials:get:"]
+from_type = "Value"
+rust_type = "TypeVec<CredentialRepresentation>"
+[path."/admin/realms/{realm}/users/{id}/federated-identity:get:"]
+from_type = "Value"
+rust_type = "TypeVec<FederatedIdentityRepresentation>"
+[path."/admin/realms/{realm}/users/{id}/groups:get:"]
+from_type = "Value"
+rust_type = "TypeVec<GroupRepresentation>"
+[path."/admin/realms/{realm}/users/{id}/offline-sessions/{clientUuid}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeMap<String, Value>>"
+[path."/admin/realms/{realm}/users/{id}/sessions:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeMap<String, Value>>"
