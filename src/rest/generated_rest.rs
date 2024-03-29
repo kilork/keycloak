@@ -551,7 +551,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_authentication_flows_get(
         &self,
         realm: &str,
-    ) -> Result<AuthenticationFlowRepresentation, KeycloakError> {
+    ) -> Result<TypeVec<AuthenticationFlowRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -1986,7 +1986,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_client_templates_get(
         &self,
         realm: &str,
-    ) -> Result<TypeVec<ClientInitialAccessPresentation>, KeycloakError> {
+    ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4951,7 +4951,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn get(
         &self,
         brief_representation: Option<bool>,
-    ) -> Result<RealmRepresentation, KeycloakError> {
+    ) -> Result<TypeVec<RealmRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms", self.url))
@@ -5342,7 +5342,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_credential_registrators_get(
         &self,
         realm: &str,
-    ) -> Result<TypeVec<TypeString>, KeycloakError> {
+    ) -> Result<TypeVec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5792,7 +5792,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_localization_get(
         &self,
         realm: &str,
-    ) -> Result<TypeVec<TypeMap<String, String>>, KeycloakError> {
+    ) -> Result<TypeVec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/localization", self.url))

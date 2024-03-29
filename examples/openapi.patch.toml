@@ -3,7 +3,7 @@ from_type = "String"
 rust_type = "RealmRepresentation"
 [path."/admin/realms:get:"]
 from_type = "Value"
-rust_type = "RealmRepresentation"
+rust_type = "TypeVec<RealmRepresentation>"
 [path."/admin/realms/{realm}/users:get:"]
 from_type = "Value"
 rust_type = "TypeVec<UserRepresentation>"
@@ -15,7 +15,7 @@ from_type = "Value"
 rust_type = "TypeVec<TypeMap<String, Value>>"
 [path."/admin/realms/{realm}/authentication/flows:get:"]
 from_type = "Value"
-rust_type = "AuthenticationFlowRepresentation"
+rust_type = "TypeVec<AuthenticationFlowRepresentation>"
 [path."/admin/realms/{realm}/authentication/form-action-providers:get:"]
 from_type = "Value"
 rust_type = "TypeVec<TypeMap<String, Value>>"
@@ -60,7 +60,7 @@ from_type = "Value"
 rust_type = "TypeVec<ClientScopeRepresentation>"
 [path."/admin/realms/{realm}/client-templates:get:"]
 from_type = "Value"
-rust_type = "TypeVec<ClientInitialAccessPresentation>"
+rust_type = "TypeVec<ClientScopeRepresentation>"
 [path."/admin/realms/{realm}/clients:get:"]
 from_type = "Value"
 rust_type = "TypeVec<ClientRepresentation>"
@@ -129,7 +129,7 @@ from_type = "Value"
 rust_type = "TypeVec<TypeMap<String, Value>>"
 [path."/admin/realms/{realm}/credential-registrators:get:"]
 from_type = "Value"
-rust_type = "TypeVec<TypeString>"
+rust_type = "TypeVec<String>"
 [path."/admin/realms/{realm}/default-default-client-scopes:get:"]
 from_type = "Value"
 rust_type = "TypeVec<ClientScopeRepresentation>"
@@ -144,7 +144,7 @@ from_type = "Value"
 rust_type = "TypeVec<TypeMap<String, Value>>"
 [path."/admin/realms/{realm}/localization:get:"]
 from_type = "Value"
-rust_type = "TypeVec<TypeMap<String, String>>"
+rust_type = "TypeVec<String>"
 [path."/admin/realms/{realm}/groups/{id}/role-mappings/realm:get:"]
 from_type = "Value"
 rust_type = "TypeVec<RoleRepresentation>"

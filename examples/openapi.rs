@@ -313,7 +313,14 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if &from_type != body_type_value {
-                    eprintln!(r#"warn: body type info changed in [path."{path}:{method_string_lc}:{body_parameter_name}"] : was {from_type} now {body_type_value}"#);
+                    eprintln!(
+                        r#"warn: body type info changed in [path."{path}:{method_string_lc}:{body_parameter_name}"] : was {from_type} now {body_type_value} (mapped {})"#,
+                        if body_type_value == &desc.rust_type {
+                            "redundant"
+                        } else {
+                            &desc.rust_type
+                        }
+                    );
                 }
                 ReturnType {
                     value: desc.rust_type.clone().into(),
@@ -365,7 +372,12 @@ mod openapi {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
                     eprintln!(
-                        r#"warn: type info changed in [path."{path}:{method_string_lc}:"] : was {from_type} now {result_type_value}"#
+                        r#"warn: type info changed in [path."{path}:{method_string_lc}:"] : was {from_type} now {result_type_value} (mapped {})"#,
+                        if result_type_value == &desc.rust_type {
+                            "redundant"
+                        } else {
+                            &desc.rust_type
+                        }
                     );
                 }
                 result_type_value = desc.rust_type.as_str();
@@ -915,7 +927,7 @@ pub enum {name} {{
                     .strip_prefix("#/components/schemas/")
                     .expect("#/components/schemas/ prefixed type name")
                     .into(),
-                Kind::DefaultValue {} => "()".into(),
+                Kind::DefaultValue {} => "Value".into(),
             }
         }
     }
