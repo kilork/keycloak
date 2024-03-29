@@ -63,7 +63,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RealmRepresentation"
+                  }
                 }
               }
             }
@@ -233,7 +236,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AdminEventRepresentation"
+                  }
                 }
               }
             }
@@ -298,9 +304,7 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "additionalProperties" : {
-                    "type" : "object"
-                  }
+                  "additionalProperties" : { }
                 }
               }
             }
@@ -344,7 +348,11 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : { }
+                  }
                 }
               }
             }
@@ -371,7 +379,11 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : { }
+                  }
                 }
               }
             }
@@ -760,7 +772,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AuthenticationFlowRepresentation"
+                  }
                 }
               }
             }
@@ -1064,7 +1079,11 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : { }
+                  }
                 }
               }
             }
@@ -1091,7 +1110,11 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : { }
+                  }
                 }
               }
             }
@@ -1183,7 +1206,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RequiredActionProviderRepresentation"
+                  }
                 }
               }
             }
@@ -1349,7 +1375,13 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : {
+                      "type" : "string"
+                    }
+                  }
                 }
               }
             }
@@ -1515,7 +1547,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ComponentTypeRepresentation"
+                  }
                 }
               }
             }
@@ -1542,7 +1577,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -1687,7 +1725,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -1828,7 +1869,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -1897,7 +1941,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -1980,7 +2027,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2030,7 +2080,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2071,7 +2124,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2147,7 +2203,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2191,7 +2250,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2226,7 +2288,13 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : {
+                      "type" : "string"
+                    }
+                  }
                 }
               }
             }
@@ -2253,7 +2321,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -2398,7 +2469,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -2539,7 +2613,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -2608,7 +2685,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2691,7 +2771,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2741,7 +2824,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2782,7 +2868,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2858,7 +2947,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2902,7 +2994,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -2983,7 +3078,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientRepresentation"
+                  }
                 }
               }
             }
@@ -3027,7 +3125,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientInitialAccessPresentation"
+                  }
                 }
               }
             }
@@ -3526,7 +3627,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -3718,9 +3822,7 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "additionalProperties" : {
-                    "type" : "object"
-                  }
+                  "additionalProperties" : { }
                 }
               }
             }
@@ -3762,7 +3864,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperEvaluationRepresentation"
+                  }
                 }
               }
             }
@@ -3797,7 +3902,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -3846,7 +3954,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -4116,7 +4227,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserSessionRepresentation"
+                  }
                 }
               }
             }
@@ -4150,7 +4264,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -4273,7 +4390,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -4414,7 +4534,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ProtocolMapperRepresentation"
+                  }
                 }
               }
             }
@@ -4545,7 +4668,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -4694,7 +4820,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -4804,7 +4933,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -4847,7 +4979,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -4914,7 +5049,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
                 }
               }
             }
@@ -5048,7 +5186,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserRepresentation"
+                  }
                 }
               }
             }
@@ -5117,7 +5258,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5200,7 +5344,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5250,7 +5397,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5291,7 +5441,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5367,7 +5520,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5411,7 +5567,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -5568,7 +5727,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserSessionRepresentation"
+                  }
                 }
               }
             }
@@ -5620,7 +5782,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ComponentRepresentation"
+                  }
                 }
               }
             }
@@ -5753,7 +5918,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ComponentTypeRepresentation"
+                  }
                 }
               }
             }
@@ -5779,7 +5947,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
                 }
               }
             }
@@ -5806,7 +5977,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -5876,7 +6050,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
                 }
               }
             }
@@ -5946,7 +6123,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ClientScopeRepresentation"
+                  }
                 }
               }
             }
@@ -6078,7 +6258,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/EventRepresentation"
+                  }
                 }
               }
             }
@@ -6242,7 +6425,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
                 }
               }
             }
@@ -6383,6 +6569,49 @@
       } ]
     },
     "/admin/realms/{realm}/groups/{id}/children" : {
+      "get" : {
+        "tags" : [ "Groups" ],
+        "summary" : "Return a paginated list of subgroups that have a parent group corresponding to the group on the URL",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "schema" : {
+            "default" : "false",
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "default" : "0",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "default" : "10",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post" : {
         "tags" : [ "Groups" ],
         "summary" : "Set or create child.",
@@ -6512,7 +6741,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserRepresentation"
+                  }
                 }
               }
             }
@@ -6580,7 +6812,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6663,7 +6898,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6713,7 +6951,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6754,7 +6995,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6830,7 +7074,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6873,7 +7120,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -6907,9 +7157,7 @@
             "application/json" : {
               "schema" : {
                 "type" : "object",
-                "additionalProperties" : {
-                  "type" : "object"
-                }
+                "additionalProperties" : { }
               }
             }
           }
@@ -6943,14 +7191,48 @@
     "/admin/realms/{realm}/identity-provider/instances" : {
       "get" : {
         "tags" : [ "Identity Providers" ],
-        "summary" : "Get identity providers",
+        "summary" : "List identity providers",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Boolean which defines whether brief representations are returned (default: false)",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "Pagination offset",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "Maximum results size (defaults to 100)",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact (\"name\"). Default prefixed.",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/IdentityProviderRepresentation"
+                  }
                 }
               }
             }
@@ -7187,7 +7469,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/IdentityProviderMapperRepresentation"
+                  }
                 }
               }
             }
@@ -7319,11 +7604,11 @@
     "/admin/realms/{realm}/identity-provider/providers/{provider_id}" : {
       "get" : {
         "tags" : [ "Identity Providers" ],
-        "summary" : "Get identity providers",
+        "summary" : "Get the identity provider factory for that provider id",
         "parameters" : [ {
           "name" : "provider_id",
           "in" : "path",
-          "description" : "Provider id",
+          "description" : "The provider id to get the factory",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -7331,7 +7616,14 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object"
+                }
+              }
+            }
           }
         }
       },
@@ -7380,7 +7672,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
                 }
               }
             }
@@ -7739,7 +8034,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -7893,7 +8191,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -7994,7 +8295,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -8029,7 +8333,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -8214,7 +8521,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -8317,7 +8627,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -8353,7 +8666,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -8413,7 +8729,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
                 }
               }
             }
@@ -8533,7 +8852,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserRepresentation"
+                  }
                 }
               }
             }
@@ -8733,7 +9055,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserRepresentation"
+                  }
                 }
               }
             }
@@ -8905,13 +9230,14 @@
     "/admin/realms/{realm}/users/profile" : {
       "get" : {
         "tags" : [ "Users" ],
+        "description" : "Get the configuration for the user profile",
         "responses" : {
           "200" : {
             "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/components/schemas/UPConfig"
                 }
               }
             }
@@ -8920,18 +9246,26 @@
       },
       "put" : {
         "tags" : [ "Users" ],
+        "description" : "Set the configuration for the user profile",
         "requestBody" : {
           "content" : {
             "application/json" : {
               "schema" : {
-                "type" : "string"
+                "$ref" : "#/components/schemas/UPConfig"
               }
             }
           }
         },
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UPConfig"
+                }
+              }
+            }
           }
         }
       },
@@ -8948,6 +9282,7 @@
     "/admin/realms/{realm}/users/profile/metadata" : {
       "get" : {
         "tags" : [ "Users" ],
+        "description" : "Get the UserProfileMetadata from the configuration",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -9051,7 +9386,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "string"
+                  }
                 }
               }
             }
@@ -9085,7 +9423,11 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "additionalProperties" : { }
+                  }
                 }
               }
             }
@@ -9154,7 +9496,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/CredentialRepresentation"
+                  }
                 }
               }
             }
@@ -9449,7 +9794,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/FederatedIdentityRepresentation"
+                  }
                 }
               }
             }
@@ -9564,7 +9912,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
                 }
               }
             }
@@ -9693,9 +10044,7 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object",
-                  "additionalProperties" : {
-                    "type" : "object"
-                  }
+                  "additionalProperties" : { }
                 }
               }
             }
@@ -9764,7 +10113,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserSessionRepresentation"
+                  }
                 }
               }
             }
@@ -9912,7 +10264,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -9995,7 +10350,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -10045,7 +10403,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -10086,7 +10447,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -10162,7 +10526,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -10205,7 +10572,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
                 }
               }
             }
@@ -10282,7 +10652,10 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object"
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/UserSessionRepresentation"
+                  }
                 }
               }
             }
@@ -10356,9 +10729,7 @@
           },
           "otherClaims" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           },
           "nonce" : {
             "type" : "string"
@@ -10480,7 +10851,7 @@
             "$ref" : "#/components/schemas/Authorization"
           },
           "cnf" : {
-            "$ref" : "#/components/schemas/CertConf"
+            "$ref" : "#/components/schemas/Confirmation"
           },
           "scope" : {
             "type" : "string"
@@ -10506,6 +10877,36 @@
             "type" : "string"
           },
           "country" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AdminEventRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "time" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "realmId" : {
+            "type" : "string"
+          },
+          "authDetails" : {
+            "$ref" : "#/components/schemas/AuthDetailsRepresentation"
+          },
+          "operationType" : {
+            "type" : "string"
+          },
+          "resourceType" : {
+            "type" : "string"
+          },
+          "resourcePath" : {
+            "type" : "string"
+          },
+          "representation" : {
+            "type" : "string"
+          },
+          "error" : {
             "type" : "string"
           }
         }
@@ -10693,6 +11094,23 @@
           }
         },
         "deprecated" : true
+      },
+      "AuthDetailsRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "realmId" : {
+            "type" : "string"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "ipAddress" : {
+            "type" : "string"
+          }
+        }
       },
       "AuthenticationExecutionExportRepresentation" : {
         "type" : "object",
@@ -10882,14 +11300,6 @@
             "items" : {
               "$ref" : "#/components/schemas/Permission"
             }
-          }
-        }
-      },
-      "CertConf" : {
-        "type" : "object",
-        "properties" : {
-          "x5t#S256" : {
-            "type" : "string"
           }
         }
       },
@@ -11406,6 +11816,27 @@
           }
         }
       },
+      "ComponentTypeRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "helpText" : {
+            "type" : "string"
+          },
+          "properties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ConfigPropertyRepresentation"
+            }
+          },
+          "metadata" : {
+            "type" : "object",
+            "additionalProperties" : { }
+          }
+        }
+      },
       "Composites" : {
         "type" : "object",
         "properties" : {
@@ -11452,9 +11883,7 @@
           "type" : {
             "type" : "string"
           },
-          "defaultValue" : {
-            "type" : "object"
-          },
+          "defaultValue" : { },
           "options" : {
             "type" : "array",
             "items" : {
@@ -11464,8 +11893,22 @@
           "secret" : {
             "type" : "boolean"
           },
+          "required" : {
+            "type" : "boolean"
+          },
           "readOnly" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "Confirmation" : {
+        "type" : "object",
+        "properties" : {
+          "x5t#S256" : {
+            "type" : "string"
+          },
+          "jkt" : {
+            "type" : "string"
           }
         }
       },
@@ -11554,6 +11997,42 @@
         "enum" : [ "PERMISSIVE", "ENFORCING", "DISABLED" ],
         "type" : "string"
       },
+      "EventRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "time" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "realmId" : {
+            "type" : "string"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "sessionId" : {
+            "type" : "string"
+          },
+          "ipAddress" : {
+            "type" : "string"
+          },
+          "error" : {
+            "type" : "string"
+          },
+          "details" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
       "FederatedIdentityRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -11597,6 +12076,19 @@
           "path" : {
             "type" : "string"
           },
+          "parentId" : {
+            "type" : "string"
+          },
+          "subGroupCount" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "subGroups" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/GroupRepresentation"
+            }
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -11619,12 +12111,6 @@
               "items" : {
                 "type" : "string"
               }
-            }
-          },
-          "subGroups" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/GroupRepresentation"
             }
           },
           "access" : {
@@ -11667,9 +12153,7 @@
           },
           "otherClaims" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           },
           "nonce" : {
             "type" : "string"
@@ -11895,9 +12379,7 @@
           },
           "credentials" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           },
           "use-resource-role-mappings" : {
             "type" : "boolean"
@@ -11941,6 +12423,10 @@
           },
           "use" : {
             "$ref" : "#/components/schemas/KeyUse"
+          },
+          "validTo" : {
+            "format" : "int64",
+            "type" : "integer"
           }
         }
       },
@@ -12053,15 +12539,6 @@
         }
       },
       "MultivaluedHashMapStringString" : {
-        "type" : "object",
-        "additionalProperties" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        }
-      },
-      "MultivaluedMapStringString" : {
         "type" : "object",
         "additionalProperties" : {
           "type" : "array",
@@ -12301,9 +12778,7 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
-              "additionalProperties" : {
-                "type" : "object"
-              }
+              "additionalProperties" : { }
             }
           },
           "invalidated" : {
@@ -12377,9 +12852,7 @@
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
-              "additionalProperties" : {
-                "type" : "object"
-              }
+              "additionalProperties" : { }
             }
           },
           "http-method-as-scope" : {
@@ -12393,9 +12866,7 @@
           },
           "credentials" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           },
           "resource" : {
             "type" : "string"
@@ -12466,6 +12937,29 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          }
+        }
+      },
+      "ProtocolMapperEvaluationRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "mapperId" : {
+            "type" : "string"
+          },
+          "mapperName" : {
+            "type" : "string"
+          },
+          "containerId" : {
+            "type" : "string"
+          },
+          "containerName" : {
+            "type" : "string"
+          },
+          "containerType" : {
+            "type" : "string"
+          },
+          "protocolMapper" : {
+            "type" : "string"
           }
         }
       },
@@ -12814,6 +13308,15 @@
               "type" : "string"
             }
           },
+          "localizationTexts" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string"
+              }
+            }
+          },
           "webAuthnPolicyRpEntityName" : {
             "type" : "string"
           },
@@ -12846,6 +13349,12 @@
             "type" : "boolean"
           },
           "webAuthnPolicyAcceptableAaguids" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "webAuthnPolicyExtraOrigins" : {
             "type" : "array",
             "items" : {
               "type" : "string"
@@ -12888,11 +13397,17 @@
               "type" : "string"
             }
           },
+          "webAuthnPolicyPasswordlessExtraOrigins" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
           "clientProfiles" : {
-            "type" : "array"
+            "$ref" : "#/components/schemas/ClientProfilesRepresentation"
           },
           "clientPolicies" : {
-            "type" : "array"
+            "$ref" : "#/components/schemas/ClientPoliciesRepresentation"
           },
           "users" : {
             "type" : "array",
@@ -13432,6 +13947,125 @@
           }
         }
       },
+      "UPAttribute" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "displayName" : {
+            "type" : "string"
+          },
+          "validations" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : { }
+            }
+          },
+          "annotations" : {
+            "type" : "object",
+            "additionalProperties" : { }
+          },
+          "required" : {
+            "$ref" : "#/components/schemas/UPAttributeRequired"
+          },
+          "permissions" : {
+            "$ref" : "#/components/schemas/UPAttributePermissions"
+          },
+          "selector" : {
+            "$ref" : "#/components/schemas/UPAttributeSelector"
+          },
+          "group" : {
+            "type" : "string"
+          }
+        }
+      },
+      "UPAttributePermissions" : {
+        "type" : "object",
+        "properties" : {
+          "view" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "edit" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "UPAttributeRequired" : {
+        "type" : "object",
+        "properties" : {
+          "roles" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "scopes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "UPAttributeSelector" : {
+        "type" : "object",
+        "properties" : {
+          "scopes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "UPConfig" : {
+        "type" : "object",
+        "properties" : {
+          "attributes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UPAttribute"
+            }
+          },
+          "groups" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UPGroup"
+            }
+          }
+        }
+      },
+      "UPGroup" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "displayHeader" : {
+            "type" : "string"
+          },
+          "displayDescription" : {
+            "type" : "string"
+          },
+          "annotations" : {
+            "type" : "object",
+            "additionalProperties" : { }
+          }
+        }
+      },
       "UserConsentRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -13537,9 +14171,7 @@
           },
           "annotations" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           }
         }
       },
@@ -13560,17 +14192,13 @@
           },
           "annotations" : {
             "type" : "object",
-            "additionalProperties" : {
-              "type" : "object"
-            }
+            "additionalProperties" : { }
           },
           "validators" : {
             "type" : "object",
             "additionalProperties" : {
               "type" : "object",
-              "additionalProperties" : {
-                "type" : "object"
-              }
+              "additionalProperties" : { }
             }
           },
           "group" : {
@@ -13728,6 +14356,40 @@
           },
           "userProfileMetadata" : {
             "$ref" : "#/components/schemas/UserProfileMetadata"
+          }
+        }
+      },
+      "UserSessionRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "ipAddress" : {
+            "type" : "string"
+          },
+          "start" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "lastAccess" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "rememberMe" : {
+            "type" : "boolean"
+          },
+          "clients" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       }

@@ -313,14 +313,16 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if &from_type != body_type_value {
-                    eprintln!(
-                        r#"warn: body type info changed in [path."{path}:{method_string_lc}:{body_parameter_name}"] : was {from_type} now {body_type_value} (mapped {})"#,
-                        if body_type_value == &desc.rust_type {
-                            "redundant"
-                        } else {
+                    let redundant = body_type_value == &desc.rust_type;
+                    let full_header = format!(r#"[path."{path}:{method_string_lc}:{body_parameter_name}"]"#);
+                    if redundant {
+                        delete_mapping(&full_header);
+                    } else {
+                        eprintln!(
+                            "warn: body type info changed in {full_header} : was {from_type} now {body_type_value} (mapped {})",
                             &desc.rust_type
-                        }
-                    );
+                        );
+                    }
                 }
                 ReturnType {
                     value: desc.rust_type.clone().into(),
@@ -371,14 +373,16 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
-                    eprintln!(
-                        r#"warn: type info changed in [path."{path}:{method_string_lc}:"] : was {from_type} now {result_type_value} (mapped {})"#,
-                        if result_type_value == &desc.rust_type {
-                            "redundant"
-                        } else {
+                    let redundant = result_type_value == &desc.rust_type;
+                    let full_header = format!(r#"[path."{path}:{method_string_lc}:"]"#);
+                    if redundant {
+                        delete_mapping(&full_header);
+                    } else {
+                        eprintln!(
+                            "warn: type info changed in {full_header} : was {from_type} now {result_type_value} (mapped {})",
                             &desc.rust_type
-                        }
-                    );
+                        );
+                    }
                 }
                 result_type_value = desc.rust_type.as_str();
                 result_type = Some(ReturnType {
@@ -559,6 +563,33 @@ mod openapi {
                 .collect();
             (method_string_lc, comments)
         }
+    }
+
+    fn delete_mapping(header: &str) {
+        let mut in_header = false;
+        std::fs::write(
+            "examples/openapi.patch.toml",
+            std::fs::read_to_string("examples/openapi.patch.toml")
+                .expect("could not read examples/openapi.patch.toml")
+                .split('\n')
+                .fold(Vec::<&'_ str>::new(), |mut acc, x| {
+                    if !in_header {
+                        if x == header {
+                            in_header = true;
+                        } else {
+                            acc.push(x);
+                        }
+                    } else {
+                        if x.starts_with("[path.") {
+                            in_header = false;
+                            acc.push(x);
+                        }
+                    }
+                    acc
+                })
+                .join("\n"),
+        )
+        .expect("write to examples/openapi.patch.toml");
     }
 
     #[derive(Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
