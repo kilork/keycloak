@@ -482,7 +482,13 @@ class Git {
   }
 
   async commit(options: { message: string }) {
-    await this.gitCommand(["commit", "-a", "-m", options.message]);
+    await this.gitCommand([
+      "commit",
+      "-a",
+      "--allow-empty",
+      "-m",
+      options.message,
+    ]);
   }
 
   async tag(options: { code: string; message: string }) {
