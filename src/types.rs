@@ -876,6 +876,8 @@ pub type MultivaluedHashMapStringComponentExportRepresentation =
 
 pub type MultivaluedHashMapStringString = TypeMap<String, TypeVec<String>>;
 
+pub type MultivaluedMapStringString = TypeMap<String, TypeVec<String>>;
+
 #[deprecated]
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
@@ -965,6 +967,15 @@ pub struct PathConfig {
     pub static_path: Option<bool>,
     #[serde(rename = "type")]
     pub type_: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PathSegment {
+    pub matrix_parameters: Option<MultivaluedMapStringString>,
+    pub path: Option<TypeString>,
 }
 
 #[skip_serializing_none]
