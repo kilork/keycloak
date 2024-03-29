@@ -313,7 +313,7 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if &from_type != body_type_value {
-                    eprintln!("warn: body type info changed in [{path}:{method_string_lc}:{body_parameter_name}] : was {from_type} now {body_type_value}");
+                    eprintln!(r#"warn: body type info changed in [path."{path}:{method_string_lc}:{body_parameter_name}"] : was {from_type} now {body_type_value}"#);
                 }
                 ReturnType {
                     value: desc.rust_type.clone().into(),
@@ -364,7 +364,9 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
-                    eprintln!("warn: type info changed in [{path}:{method_string_lc}] : was {from_type} now {result_type_value}");
+                    eprintln!(
+                        r#"warn: type info changed in [path."{path}:{method_string_lc}:"] : was {from_type} now {result_type_value}"#
+                    );
                 }
                 result_type_value = desc.rust_type.as_str();
                 result_type = Some(ReturnType {
@@ -373,7 +375,7 @@ mod openapi {
                     convert: desc.convert.as_deref().map(From::from),
                 });
             } else if result_type_value == "Value" {
-                eprintln!("warn: Value as result in [{path}:{method_string_lc}]");
+                eprintln!(r#"warn: Value as result in [path."{path}:{method_string_lc}:"]"#);
             }
 
             output.push(format!(
