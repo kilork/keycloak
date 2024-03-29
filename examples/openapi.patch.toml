@@ -208,42 +208,60 @@ rust_type = "TypeVec<RoleRepresentation>"
 [path."/admin/realms/{realm}/roles-by-id/{role-id}/composites/realm:get:"]
 from_type = "Value"
 rust_type = "TypeVec<RoleRepresentation>"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/composite:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm/available:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite:get:"]
-# from_type = "Value"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm/available:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite:get:"]
+from_type = "Value"
+rust_type = "TypeVec<RoleRepresentation>"
 # [path."/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types:get:"]
 # from_type = "Value"
 # [path."/admin/realms/{realm}/users/{id}/consents:get:"]
