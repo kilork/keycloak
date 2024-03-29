@@ -372,6 +372,12 @@ class User {
         default: true,
       },
       {
+        name: "mergeReleasePullRequest",
+        message: `Merge release pull request?`,
+        type: Confirm,
+        default: true,
+      },
+      {
         name: "gitRelease",
         message: `Create release on GitHub?`,
         type: Confirm,
@@ -627,6 +633,13 @@ class Git {
     const pullRequestNumber = githubNumberFromUrl(pullRequestUrl.trim());
 
     return await this.pullRequest(pullRequestNumber!);
+  }
+
+  async mergePullRequest() {
+    await this.ghCommand([
+      "pr",
+      "merge",
+    ]);
   }
 
   async pullRequest(number: string): Promise<PullRequest> {
@@ -906,6 +919,10 @@ class Updater {
       }
     }
 
+    if (options.mergeReleasePullRequest) {
+      await this.mergePullRequest();
+    }
+
     if (options.gitRelease) {
       const releaseVersion = `v${milestoneVersion.toString()}`;
       await this.git.createRelease({
@@ -974,6 +991,7 @@ class Updater {
       body,
     });
   }
+
   private async createReleasePullRequest(
     milestoneVersion: InternalVersion,
   ): Promise<PullRequest> {
@@ -982,6 +1000,11 @@ class Updater {
       title: `Release v${milestoneVersion}`,
       milestone: this.options.versions.milestone!,
     });
+  }
+
+  private async mergePullRequest() {
+    this.info(`Merging pull request...`);
+    await this.git.mergePullRequest();
   }
 
   private async createMilestone(milestoneVersion: InternalVersion) {
