@@ -372,6 +372,12 @@ class User {
         default: true,
       },
       {
+        name: "mergeReleasePullRequest",
+        message: `Merge release pull request?`,
+        type: Confirm,
+        default: true,
+      },
+      {
         name: "gitRelease",
         message: `Create release on GitHub?`,
         type: Confirm,
@@ -482,7 +488,13 @@ class Git {
   }
 
   async commit(options: { message: string }) {
-    await this.gitCommand(["commit", "-a", "-m", options.message]);
+    await this.gitCommand([
+      "commit",
+      "-a",
+      "--allow-empty",
+      "-m",
+      options.message,
+    ]);
   }
 
   async tag(options: { code: string; message: string }) {
@@ -621,6 +633,15 @@ class Git {
     const pullRequestNumber = githubNumberFromUrl(pullRequestUrl.trim());
 
     return await this.pullRequest(pullRequestNumber!);
+  }
+
+  async mergePullRequest() {
+    await this.ghCommand([
+      "pr",
+      "merge",
+      "-r",
+      "-s",
+    ]);
   }
 
   async pullRequest(number: string): Promise<PullRequest> {
@@ -867,11 +888,12 @@ class Updater {
     }
 
     if (options.createReleasePullRequest) {
-      const issueExists = this.options.versions.issue !== undefined;
+      let issueExists = this.options.versions.issue !== undefined;
       if (!issueExists) {
         const number = detectExistingIssue(currentBranch.toString());
         if (number) {
           this.options.versions.issue = await this.git.issue(number);
+          issueExists = true;
           const pullRequest =
             (await this.git.pullRequests(`head:${currentBranch}`)).pop();
           if (
@@ -890,13 +912,17 @@ class Updater {
         }
       }
 
-      if (issueExists) {
+      if (issueExists && this.options.versions.pullRequest === undefined) {
         this.options.versions.pullRequest = await this.createReleasePullRequest(
           milestoneVersion,
         );
       } else {
         this.info(`Could not create release pull request: no issue detected`);
       }
+    }
+
+    if (options.mergeReleasePullRequest) {
+      await this.mergePullRequest();
     }
 
     if (options.gitRelease) {
@@ -967,6 +993,7 @@ class Updater {
       body,
     });
   }
+
   private async createReleasePullRequest(
     milestoneVersion: InternalVersion,
   ): Promise<PullRequest> {
@@ -975,6 +1002,11 @@ class Updater {
       title: `Release v${milestoneVersion}`,
       milestone: this.options.versions.milestone!,
     });
+  }
+
+  private async mergePullRequest() {
+    this.info(`Merging pull request...`);
+    await this.git.mergePullRequest();
   }
 
   private async createMilestone(milestoneVersion: InternalVersion) {
