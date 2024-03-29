@@ -639,6 +639,8 @@ class Git {
     await this.ghCommand([
       "pr",
       "merge",
+      "-r",
+      "-s",
     ]);
   }
 
