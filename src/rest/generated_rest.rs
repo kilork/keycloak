@@ -3804,7 +3804,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_identity_provider_instances_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<IdentityProviderRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4081,7 +4081,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         alias: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<IdentityProviderMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4330,7 +4330,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4486,7 +4486,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         protocol: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4548,7 +4548,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4704,7 +4704,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         protocol: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4766,7 +4766,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         id: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -4922,7 +4922,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
         protocol: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5095,7 +5095,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         operation_types: Option<Vec<String>>,
         resource_path: Option<String>,
         resource_types: Option<Vec<String>>,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/admin-events", self.url))
@@ -5317,7 +5317,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_client_session_stats_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
@@ -5342,7 +5342,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub async fn realm_credential_registrators_get(
         &self,
         realm: &str,
-    ) -> Result<Value, KeycloakError> {
+    ) -> Result<TypeVec<TypeString>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(

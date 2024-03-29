@@ -97,28 +97,39 @@ rust_type = "TypeVec<GroupRepresentation>"
 [path."/admin/realms/{realm}/groups/{id}/members:get:"]
 from_type = "Value"
 rust_type = "TypeVec<UserRepresentation>"
-# [path."/admin/realms/{realm}/identity-provider/instances:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/identity-provider/instances/{alias}/mappers:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/protocol-mappers/models:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/admin-events:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/client-session-stats:get:"]
-# from_type = "Value"
-# [path."/admin/realms/{realm}/credential-registrators:get:"]
-# from_type = "Value"
+[path."/admin/realms/{realm}/identity-provider/instances:get:"]
+from_type = "Value"
+rust_type = "TypeVec<IdentityProviderRepresentation>"
+[path."/admin/realms/{realm}/identity-provider/instances/{alias}/mappers:get:"]
+from_type = "Value"
+rust_type = "TypeVec<IdentityProviderMapperRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/protocol-mappers/models:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}:get:"]
+from_type = "Value"
+rust_type = "TypeVec<ProtocolMapperRepresentation>"
+[path."/admin/realms/{realm}/admin-events:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeMap<String, Value>>"
+[path."/admin/realms/{realm}/client-session-stats:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeMap<String, Value>>"
+[path."/admin/realms/{realm}/credential-registrators:get:"]
+from_type = "Value"
+rust_type = "TypeVec<TypeString>"
 # [path."/admin/realms/{realm}/default-default-client-scopes:get:"]
 # from_type = "Value"
 # [path."/admin/realms/{realm}/default-groups:get:"]

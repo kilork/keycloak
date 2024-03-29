@@ -1,8 +1,8 @@
 use async_trait::async_trait;
-
-use crate::{types::*, KeycloakError};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+
+use crate::{types::*, KeycloakError};
 
 mod generated_rest;
 
@@ -27,18 +27,13 @@ pub struct KeycloakServiceAccountAdminTokenRetriever {
 #[async_trait]
 impl KeycloakTokenSupplier for KeycloakServiceAccountAdminTokenRetriever {
     async fn get(&self, url: &str) -> Result<String, KeycloakError> {
-        //For simplicity for now, just get a token per call, Keycloak by default only gives a lifetime of 60 seconds
-        //and no refresh tokens for the master realm.
-        //Since this is for Service Accounts it's assumed the process would last for much longer than 60 seconds.
-        //Ideally in the future we could inspect a response and check for a refresh token and inspect the given
-        //access token for its time of expiration
         let admin_token = self.acquire(url).await?;
         Ok(admin_token.access_token)
     }
 }
 
 impl KeycloakServiceAccountAdminTokenRetriever {
-    /// Creates a token retriever for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticate-with-a-service-account)
+    /// Creates a token retriever for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticating-with-a-service-account)
     /// * `client_id` - The client id of a client with the following characteristics:
     ///                  1. Exists in the **master** realm
     ///                  2. `confidential` access type
