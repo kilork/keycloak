@@ -13,14 +13,13 @@ jobs:
   integration:
     services:
       keycloak:
-        image: quay.io/keycloak/keycloak:24.0.2
+        image: quay.io/keycloak/keycloak:24.0.2 start-dev
         env:
           KEYCLOAK_ADMIN: admin
           KEYCLOAK_ADMIN_PASSWORD: password
         ports:
           - "8080:8080"
-        options: >-
-          start-dev
+
     runs-on: ubuntu-latest
 
     steps:
