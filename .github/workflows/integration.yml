@@ -11,16 +11,6 @@ env:
 
 jobs:
   integration:
-    # services:
-    #   keycloak:
-    #     image: quay.io/keycloak/keycloak:24.0.2
-    #     env:
-    #       KEYCLOAK_ADMIN: admin
-    #       KEYCLOAK_ADMIN_PASSWORD: password
-    #     ports:
-    #       - "8080:8080"
-    #     options: --entrypoint "kc.sh start-dev"
-
     runs-on: ubuntu-latest
 
     steps:
@@ -30,9 +20,8 @@ jobs:
       run: cargo build
     - name: Run unit tests
       run: cargo test
-    - name: Start keycloak
-      run: |
-        docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password quay.io/keycloak/keycloak:24.0.2 start-dev &
-        for attempt in {1..20}; do sleep 5; if netstat -ltn | grep -c 8080; then echo ready; break; fi; echo waiting...; done
     - name: Run integration tests
-      run: cargo run --example=adduser
+      run: |
+        docker run -p 8080:8080 --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password quay.io/keycloak/keycloak:24.0.2 start-dev &
+        sleep 120
+        cargo run --example=adduser
