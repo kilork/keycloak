@@ -1,7 +1,5 @@
 use clap::Parser;
 
-mod common;
-
 /// Generate Rust code from Keycloak REST Description in HTML
 #[derive(Parser)]
 enum Cli {
@@ -24,7 +22,15 @@ mod openapi {
     use indexmap::IndexMap;
     use serde::Deserialize;
 
-    use crate::{common::FieldCase, RESERVED_WORDS};
+    use crate::RESERVED_WORDS;
+
+    #[derive(Debug, PartialEq, Eq)]
+    pub enum FieldCase {
+        CamelCase,
+        SnakeCase,
+        Custom,
+        Unknown,
+    }
 
     #[derive(Debug, Deserialize)]
     pub struct Spec {
@@ -1051,7 +1057,7 @@ pub enum {name} {{
 fn main() {
     let cli = Cli::parse();
 
-    let specs: openapi::Spec = serde_json::from_slice(include_bytes!("../docs/openapi.json"))
+    let specs: openapi::Spec = serde_json::from_slice(include_bytes!("../api/openapi.json"))
         .expect("valid openapi json specs");
 
     match cli {
