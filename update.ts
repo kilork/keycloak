@@ -50,10 +50,10 @@ class Keycloak {
   }
 
   apiUrl(version: Version): string {
-    return `https://www.keycloak.org/docs-api/${version}/rest-api/index.html`;
+    return `https://www.keycloak.org/docs-api/${version}/rest-api/openapi.json`;
   }
 
-  async apiDocs(version: Version): Promise<string> {
+  async apiOpenJson(version: Version): Promise<string> {
     const response = await fetch(this.apiUrl(version));
     return await responseBody(response);
   }
@@ -113,7 +113,7 @@ class Cargo {
     return await this.generate("rest");
   }
 
-  private async generate(kind: string): Promise<string> {
+  private async generate(kind: "rest" | "types"): Promise<string> {
     return await this.cargoCommand([
       "run",
       "--example",
@@ -129,25 +129,6 @@ class Cargo {
 
   private async cargoCommandSpawn(args: string[]): Promise<void> {
     await Command.spawn("cargo", args);
-  }
-}
-
-class Docker {
-  async generateOpenAPI(version: Version): Promise<void> {
-    return await this.dockerCommand([
-      "build",
-      "--build-arg",
-      `VERSION=${version}`,
-      "-o",
-      "docs",
-      "-f",
-      "docker/Dockerfile.docs",
-      "docker",
-    ]);
-  }
-
-  private async dockerCommand(args: string[]): Promise<void> {
-    return await Command.spawn("docker", args);
   }
 }
 
@@ -214,6 +195,24 @@ class User {
     const { versions } = options;
     const latestVersion = versions.keycloakLatestVersion?.toInternalVersion();
     const cargoVersion = versions.keycloakCargoVersion;
+    const { mode } = await prompt([
+      {
+        name: "mode",
+        message: "Type of update",
+        type: Select,
+        options: [
+          {
+            name: "Generation",
+            value: "generation",
+          },
+          {
+            name: "Release",
+            value: "release",
+          },
+        ],
+      },
+    ]);
+    const release = mode === "release";
     const result = await prompt([
       {
         name: "baseVersion",
@@ -249,59 +248,30 @@ class User {
               milestoneVersion = cargoVersion;
               break;
             case "manual":
-              await next("enterMilestone");
-              return;
+              break;
             default:
               milestoneVersion = new InternalVersion(baseVersion!);
               break;
           }
           options.milestoneVersion = milestoneVersion;
-          const milestone = await updater.git.milestone(
-            milestoneVersion!.toString(),
-          );
-          if (!milestone) {
-            await next("createMilestone");
-          } else {
-            versions.milestone = milestone;
-            await next("assignMilestone");
-          }
+          await next();
         },
       },
       {
         name: "enterMilestone",
         message: "Enter Milestone",
         type: Input,
-        after: async ({ enterMilestone }, next) => {
-          const milestoneVersion = new InternalVersion(enterMilestone!);
-          options.milestoneVersion = milestoneVersion;
-          const milestone = await updater.git.milestone(
-            milestoneVersion!.toString(),
-          );
-          if (!milestone) {
-            await next("createMilestone");
-          } else {
-            versions.milestone = milestone;
-            await next("assignMilestone");
-          }
-        },
-      },
-      {
-        name: "createMilestone",
-        message: `Milestone does not exist. Should we create it?`,
-        type: Confirm,
-        default: true,
-      },
-      {
-        name: "assignMilestone",
-        message: `Assign milestone to issues and merge requests?`,
-        type: Confirm,
-        default: true,
-        before: async ({ createMilestone }, next) => {
-          if (!(createMilestone ?? true)) {
+        before: async (_, next) => {
+          if (options.milestoneVersion) {
             await next("changeCargoTomlVersion");
           } else {
             await next();
           }
+        },
+        after: async ({ enterMilestone }, next) => {
+          const milestoneVersion = new InternalVersion(enterMilestone!);
+          options.milestoneVersion = milestoneVersion;
+          await next();
         },
       },
       {
@@ -311,21 +281,15 @@ class User {
         default: true,
         before: async ({ baseVersion }, next) => {
           if (baseVersion === "cargo") {
-            await next("downloadApiDocs");
+            await next("downloadApi");
           } else {
             await next();
           }
         },
       },
       {
-        name: "downloadApiDocs",
-        message: `Download API documentation?`,
-        type: Confirm,
-        default: true,
-      },
-      {
-        name: "generateOpenAPI",
-        message: `Generate openapi.json?`,
+        name: "downloadApi",
+        message: `Download API description?`,
         type: Confirm,
         default: true,
       },
@@ -342,52 +306,82 @@ class User {
         default: true,
       },
       {
+        name: "createMilestone",
+        message: `Milestone does not exist. Should we create it?`,
+        type: Confirm,
+        default: release,
+        before: async (_, next) => {
+          const milestone = await updater.git.milestone(
+            options.milestoneVersion!.toString(),
+          );
+          if (!milestone) {
+            await next();
+          } else {
+            versions.milestone = milestone;
+            await next("assignMilestone");
+          }
+        },
+      },
+      {
+        name: "assignMilestone",
+        message: `Assign milestone to issues and merge requests?`,
+        type: Confirm,
+        default: release,
+        before: async (_, next) => {
+          if (!(versions.milestone)) {
+            await next("createReleaseIssue");
+          } else {
+            await next();
+          }
+        },
+      },
+      {
         name: "createReleaseIssue",
         message: `Create release issue?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "gitCommit",
         message: `Create commit in Git?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "gitTag",
         message: `Create tag in Git?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "gitPush",
         message: `Push changes to GitHub?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "createReleasePullRequest",
         message: `Create release pull request?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "mergeReleasePullRequest",
         message: `Merge release pull request?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "gitRelease",
         message: `Create release on GitHub?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
       {
         name: "cratesPublish",
         message: `Publish release on crates.io?`,
         type: Confirm,
-        default: true,
+        default: release,
       },
     ]);
 
@@ -780,7 +774,6 @@ class Updater {
   readonly cargo: Cargo = new Cargo();
   readonly git: Git = new Git("kilork/keycloak");
   readonly keycloak: Keycloak = new Keycloak();
-  readonly docker: Docker = new Docker();
   readonly user: User = new User();
 
   options: Options = new Options();
@@ -832,13 +825,9 @@ class Updater {
       versions.defaultBranch,
     );
 
-    if (options.downloadApiDocs) {
-      const apiDocs = await this.keycloak.apiDocs(milestoneVersion.toVersion());
-      Deno.writeTextFileSync("docs/rest-api.html", apiDocs);
-    }
-
-    if (options.generateOpenAPI) {
-      await this.docker.generateOpenAPI(milestoneVersion.toVersion());
+    if (options.downloadApi) {
+      const api = await this.keycloak.apiOpenJson(milestoneVersion.toVersion());
+      Deno.writeTextFileSync("api/openapi.json", api);
     }
 
     if (options.updateDocs) {
@@ -852,10 +841,6 @@ class Updater {
         "src/types.rs",
         "src/rest/generated_rest.rs",
       ]);
-
-      if (options.generateOpenAPI) {
-        await this.cargo.cleanKeycloak();
-      }
 
       this.info("Generating new...");
 
