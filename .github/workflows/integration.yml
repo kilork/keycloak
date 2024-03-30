@@ -19,7 +19,7 @@ jobs:
           KEYCLOAK_ADMIN_PASSWORD: password
         ports:
           - "8080:8080"
-        options: --name start-dev
+        options: --entrypoint "kc.sh start-dev"
 
     runs-on: ubuntu-latest
 
