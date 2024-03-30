@@ -33,11 +33,11 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Spec {
+    pub struct Spec<'s> {
         pub openapi: String,
         pub info: Info,
-        pub tags: Vec<Tag>,
-        pub paths: IndexMap<String, SpecPath>,
+        pub tags: Vec<Tag<'s>>,
+        pub paths: IndexMap<String, SpecPath<'s>>,
         pub components: Components,
     }
 
@@ -49,18 +49,18 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Tag {
-        pub name: String,
+    pub struct Tag<'t> {
+        pub name: Cow<'t, str>,
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct SpecPath {
+    pub struct SpecPath<'s> {
         #[serde(flatten)]
-        pub calls: IndexMap<Method, Call>,
+        pub calls: IndexMap<Method, Call<'s>>,
         pub parameters: Option<Vec<Parameter>>,
     }
 
-    impl SpecPath {
+    impl<'s> SpecPath<'s> {
         pub fn to_rust_method(&self, path: &str) -> String {
             self.calls
                 .iter()
@@ -227,8 +227,8 @@ mod openapi {
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "camelCase")]
-    pub struct Call {
-        pub tags: Vec<String>,
+    pub struct Call<'c> {
+        pub tags: Option<Vec<Cow<'c, str>>>,
         summary: Option<String>,
         #[serde(default)]
         deprecated: bool,
@@ -237,7 +237,7 @@ mod openapi {
         responses: Responses,
     }
 
-    impl Call {
+    impl<'c> Call<'c> {
         fn to_rust_method(
             &self,
             path: &str,
@@ -295,7 +295,7 @@ mod openapi {
 
             output.extend(comments);
 
-            if let [tag] = self.tags.as_slice() {
+            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
                 use heck::ToKebabCase;
                 let tag = tag.to_kebab_case();
                 output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
@@ -511,7 +511,7 @@ mod openapi {
                         .collect(),
                 );
             }
-            if let [tag] = self.tags.as_slice() {
+            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
             }
             comments.push(vec![format!(
@@ -1086,14 +1086,15 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
         .iter()
         .map(|tag| {
             (
-                tag.name.as_str(),
+                &tag.name,
                 spec.paths
                     .iter()
                     .filter(|(_, path_spec)| {
-                        path_spec
-                            .calls
-                            .iter()
-                            .all(|(_, call)| call.tags == vec![tag.name.as_str()])
+                        path_spec.calls.iter().all(|(_, call)| {
+                            let call_tags = call.tags.as_deref();
+                            let call_tags_ref = call_tags.as_ref();
+                            matches!(call_tags_ref, Some(&[tag_name]) if tag_name == &tag.name)
+                        })
                     })
                     .collect::<Vec<_>>(),
             )

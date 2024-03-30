@@ -29,6 +29,26 @@ pub type TypeVec<I> = Arc<[I]>;
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AbstractPolicyRepresentation {
+    pub decision_strategy: Option<DecisionStrategy>,
+    pub description: Option<TypeString>,
+    pub id: Option<TypeString>,
+    pub logic: Option<Logic>,
+    pub name: Option<TypeString>,
+    pub owner: Option<TypeString>,
+    pub policies: Option<TypeVec<String>>,
+    pub resources: Option<TypeVec<String>>,
+    pub resources_data: Option<TypeVec<ResourceRepresentation>>,
+    pub scopes: Option<TypeVec<String>>,
+    pub scopes_data: Option<TypeVec<ScopeRepresentation>>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct Access {
     pub roles: Option<TypeVec<String>>,
     pub verify_caller: Option<bool>,
@@ -154,7 +174,6 @@ pub struct ApplicationRepresentation {
     pub name: Option<TypeString>,
     pub node_re_registration_timeout: Option<i32>,
     pub not_before: Option<i32>,
-    pub oauth2_device_authorization_grant_enabled: Option<bool>,
     pub optional_client_scopes: Option<TypeVec<String>>,
     pub origin: Option<TypeString>,
     pub protocol: Option<TypeString>,
@@ -425,7 +444,6 @@ pub struct ClientRepresentation {
     pub name: Option<TypeString>,
     pub node_re_registration_timeout: Option<i32>,
     pub not_before: Option<i32>,
-    pub oauth2_device_authorization_grant_enabled: Option<bool>,
     pub optional_client_scopes: Option<TypeVec<String>>,
     pub origin: Option<TypeString>,
     pub protocol: Option<TypeString>,
@@ -596,6 +614,14 @@ pub struct CredentialRepresentation {
 #[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
+pub enum DecisionEffect {
+    Permit,
+    Deny,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "UPPERCASE")]
 pub enum DecisionStrategy {
     Affirmative,
     Unanimous,
@@ -609,6 +635,18 @@ pub enum EnforcementMode {
     Permissive,
     Enforcing,
     Disabled,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct EvaluationResultRepresentation {
+    pub allowed_scopes: Option<TypeVec<ScopeRepresentation>>,
+    pub policies: Option<TypeVec<PolicyResultRepresentation>>,
+    pub resource: Option<ResourceRepresentation>,
+    pub scopes: Option<TypeVec<ScopeRepresentation>>,
+    pub status: Option<DecisionEffect>,
 }
 
 #[skip_serializing_none]
@@ -915,7 +953,6 @@ pub struct OAuthClientRepresentation {
     pub name: Option<TypeString>,
     pub node_re_registration_timeout: Option<i32>,
     pub not_before: Option<i32>,
-    pub oauth2_device_authorization_grant_enabled: Option<bool>,
     pub optional_client_scopes: Option<TypeVec<String>>,
     pub origin: Option<TypeString>,
     pub protocol: Option<TypeString>,
@@ -1027,6 +1064,39 @@ pub struct PolicyEnforcerConfig {
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct PolicyEvaluationRequest {
+    pub client_id: Option<TypeString>,
+    pub context: Option<TypeMap<String, TypeMap<String, TypeString>>>,
+    pub entitlements: Option<bool>,
+    pub resources: Option<TypeVec<ResourceRepresentation>>,
+    pub role_ids: Option<TypeVec<String>>,
+    pub user_id: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct PolicyEvaluationResponse {
+    pub entitlements: Option<bool>,
+    pub results: Option<TypeVec<EvaluationResultRepresentation>>,
+    pub rpt: Option<AccessToken>,
+    pub status: Option<DecisionEffect>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct PolicyProviderRepresentation {
+    pub group: Option<TypeString>,
+    pub name: Option<TypeString>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct PolicyRepresentation {
     pub config: Option<TypeMap<String, TypeString>>,
     pub decision_strategy: Option<DecisionStrategy>,
@@ -1042,6 +1112,17 @@ pub struct PolicyRepresentation {
     pub scopes_data: Option<TypeVec<ScopeRepresentation>>,
     #[serde(rename = "type")]
     pub type_: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct PolicyResultRepresentation {
+    pub associated_policies: Option<TypeVec<PolicyResultRepresentation>>,
+    pub policy: Option<PolicyRepresentation>,
+    pub scopes: Option<TypeVec<String>>,
+    pub status: Option<DecisionEffect>,
 }
 
 #[skip_serializing_none]
@@ -1165,6 +1246,7 @@ pub struct RealmRepresentation {
     pub events_listeners: Option<TypeVec<String>>,
     pub failure_factor: Option<i32>,
     pub federated_users: Option<TypeVec<UserRepresentation>>,
+    pub first_broker_login_flow: Option<TypeString>,
     pub groups: Option<TypeVec<GroupRepresentation>>,
     pub id: Option<TypeString>,
     pub identity_provider_mappers: Option<TypeVec<IdentityProviderMapperRepresentation>>,
@@ -1176,6 +1258,7 @@ pub struct RealmRepresentation {
     pub login_with_email_allowed: Option<bool>,
     pub max_delta_time_seconds: Option<i32>,
     pub max_failure_wait_seconds: Option<i32>,
+    pub max_temporary_lockouts: Option<i32>,
     pub minimum_quick_login_wait_seconds: Option<i32>,
     pub not_before: Option<i32>,
     pub o_auth2_device_code_lifespan: Option<i32>,
@@ -1408,6 +1491,7 @@ pub struct UPAttribute {
     pub annotations: Option<TypeMap<String, Value>>,
     pub display_name: Option<TypeString>,
     pub group: Option<TypeString>,
+    pub multivalued: Option<bool>,
     pub name: Option<TypeString>,
     pub permissions: Option<UPAttributePermissions>,
     pub required: Option<UPAttributeRequired>,
@@ -1441,9 +1525,11 @@ pub struct UPAttributeSelector {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct UPConfig {
     pub attributes: Option<TypeVec<UPAttribute>>,
     pub groups: Option<TypeVec<UPGroup>>,
+    pub unmanaged_attribute_policy: Option<UnmanagedAttributePolicy>,
 }
 
 #[skip_serializing_none]
@@ -1455,6 +1541,14 @@ pub struct UPGroup {
     pub display_description: Option<TypeString>,
     pub display_header: Option<TypeString>,
     pub name: Option<TypeString>,
+}
+
+#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub enum UnmanagedAttributePolicy {
+    Enabled,
+    AdminView,
+    AdminEdit,
 }
 
 #[skip_serializing_none]
@@ -1518,6 +1612,7 @@ pub struct UserProfileAttributeMetadata {
     pub annotations: Option<TypeMap<String, Value>>,
     pub display_name: Option<TypeString>,
     pub group: Option<TypeString>,
+    pub multivalued: Option<bool>,
     pub name: Option<TypeString>,
     pub read_only: Option<bool>,
     pub required: Option<bool>,

@@ -88,8 +88,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       }
@@ -718,8 +718,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -747,8 +747,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1181,8 +1181,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1321,8 +1321,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1350,8 +1350,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1615,7 +1615,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}" : {
       "get" : {
         "tags" : [ "Client Scopes" ],
         "summary" : "Get representation of the client scope",
@@ -1668,7 +1668,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -1676,7 +1676,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/add-models" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/add-models" : {
       "post" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Create multiple mappers",
@@ -1693,8 +1693,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1707,7 +1707,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -1715,7 +1715,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers",
@@ -1762,7 +1762,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -1770,7 +1770,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models/{id}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mapper by id",
@@ -1849,9 +1849,16 @@
         "schema" : {
           "type" : "string"
         }
+      }, {
+        "name" : "client-scope-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/protocol/{protocol}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers by name for a specific protocol",
@@ -1888,7 +1895,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -1896,7 +1903,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get all scope mappings for the client",
@@ -1923,7 +1930,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -1931,7 +1938,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get the roles associated with a client's scope Returns roles for the client.",
@@ -1967,8 +1974,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -2002,7 +2009,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2017,7 +2024,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "The available client-level roles Returns the roles for the client that can be associated with the client's scope",
@@ -2046,7 +2053,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2061,7 +2068,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective client roles Returns the roles for the client that are associated with the client's scope.",
@@ -2099,7 +2106,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2114,7 +2121,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles associated with the client's scope",
@@ -2150,8 +2157,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -2185,7 +2192,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2193,7 +2200,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles that are available to attach to this client's scope",
@@ -2222,7 +2229,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2230,7 +2237,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite" : {
+    "/admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.",
@@ -2269,7 +2276,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2359,7 +2366,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}" : {
       "get" : {
         "tags" : [ "Client Scopes" ],
         "summary" : "Get representation of the client scope",
@@ -2412,7 +2419,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2420,7 +2427,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/protocol-mappers/add-models" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/add-models" : {
       "post" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Create multiple mappers",
@@ -2437,8 +2444,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -2451,7 +2458,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2459,7 +2466,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers",
@@ -2506,7 +2513,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2514,7 +2521,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models/{id}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mapper by id",
@@ -2593,9 +2600,16 @@
         "schema" : {
           "type" : "string"
         }
+      }, {
+        "name" : "client-scope-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/protocol/{protocol}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers by name for a specific protocol",
@@ -2632,7 +2646,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2640,7 +2654,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get all scope mappings for the client",
@@ -2667,7 +2681,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2675,7 +2689,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get the roles associated with a client's scope Returns roles for the client.",
@@ -2711,8 +2725,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -2746,7 +2760,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2761,7 +2775,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "The available client-level roles Returns the roles for the client that can be associated with the client's scope",
@@ -2790,7 +2804,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2805,7 +2819,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective client roles Returns the roles for the client that are associated with the client's scope.",
@@ -2843,7 +2857,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2858,7 +2872,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles associated with the client's scope",
@@ -2894,8 +2908,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -2929,7 +2943,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2937,7 +2951,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/available" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles that are available to attach to this client's scope",
@@ -2966,7 +2980,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2974,7 +2988,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/composite" : {
+    "/admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.",
@@ -3013,7 +3027,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-scope-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -3101,8 +3115,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -3148,12 +3162,12 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK",
+          "201" : {
+            "description" : "Created",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ClientInitialAccessPresentation"
+                  "$ref" : "#/components/schemas/ClientInitialAccessCreatePresentation"
                 }
               }
             }
@@ -3197,7 +3211,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get representation of the client",
@@ -3250,15 +3264,1742 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceServerRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResourceServerRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/import" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResourceServerRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "owner",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "permission",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "policyId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resource",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scope",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AbstractPolicyRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/evaluate" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PolicyEvaluationRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyEvaluationResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/providers" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PolicyProviderRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/search" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AbstractPolicyRepresentation"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "owner",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "permission",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "policyId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "resource",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scope",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AbstractPolicyRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/evaluate" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PolicyEvaluationRequest"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PolicyEvaluationResponse"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/providers" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PolicyProviderRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/search" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "fields",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AbstractPolicyRepresentation"
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "deep",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "exactName",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "matchingUri",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "owner",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scope",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "uri",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ResourceRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResourceRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceRepresentation"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/search" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceRepresentation"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceRepresentation"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "put" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResourceRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/attributes" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/permissions" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PolicyRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/scopes" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ScopeRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "deep",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "exactName",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "first",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "matchingUri",
+        "in" : "query",
+        "schema" : {
+          "type" : "boolean"
+        }
+      }, {
+        "name" : "max",
+        "in" : "query",
+        "schema" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }, {
+        "name" : "name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "owner",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "scope",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "type",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "uri",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scopeId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ScopeRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ScopeRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/search" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "name",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ScopeRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "scope-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ScopeRepresentation"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "put" : {
+        "parameters" : [ {
+          "name" : "scope-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ScopeRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "scope-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/permissions" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "scope-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/PolicyRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/resources" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "scope-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ResourceRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/settings" : {
+      "get" : {
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResourceServerRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}" : {
       "get" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Get key info",
@@ -3284,8 +5025,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3299,7 +5041,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}/download" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/download" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Get a keystore file for the client, containing private key and public certificate",
@@ -3335,8 +5077,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3350,7 +5093,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Generate a new certificate with new key pair",
@@ -3376,8 +5119,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3391,7 +5135,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate-and-download" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate-and-download" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Generate a new keypair and certificate, and get the private key file\n\nGenerates a keypair and certificate and serves the private key in a specified keystore format.\nOnly generated public certificate is saved in Keycloak DB - the private key is not.",
@@ -3427,8 +5171,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3442,7 +5187,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Upload certificate and eventually private key",
@@ -3468,8 +5213,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3483,7 +5229,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload-certificate" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload-certificate" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
         "summary" : "Upload only certificate, not private key",
@@ -3509,8 +5255,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3524,7 +5271,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/client-secret" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/client-secret" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get the client secret",
@@ -3566,15 +5313,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/client-secret/rotated" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get the rotated client secret",
@@ -3609,15 +5357,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/default-client-scopes" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/default-client-scopes" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get default client scopes.  Only name and ids are returned.",
@@ -3646,15 +5395,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/default-client-scopes/{clientScopeId}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}" : {
       "put" : {
         "tags" : [ "Clients" ],
         "parameters" : [ {
@@ -3696,15 +5446,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-access-token" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Create JSON with payload of example access token",
@@ -3743,15 +5494,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-id-token" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-id-token" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Create JSON with payload of example id token",
@@ -3790,15 +5542,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-userinfo" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Create JSON with payload of example user info",
@@ -3838,15 +5591,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/protocol-mappers" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/protocol-mappers" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Return list of all protocol mappers, which will be used when generating tokens issued for particular client.",
@@ -3883,15 +5637,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get effective scope mapping of all roles of particular role container, which this client is defacto allowed to have in the accessToken issued for him.",
@@ -3921,8 +5676,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3943,7 +5699,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get roles, which this client doesn't have scope for and can't have them in the accessToken issued for him.",
@@ -3973,8 +5729,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -3995,7 +5752,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/installation/providers/{providerId}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/installation/providers/{providerId}" : {
       "get" : {
         "tags" : [ "Clients" ],
         "parameters" : [ {
@@ -4021,15 +5778,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/management/permissions" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/management/permissions" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Return object stating whether client Authorization permissions have been initialized or not and a reference",
@@ -4080,15 +5838,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/nodes" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/nodes" : {
       "post" : {
         "tags" : [ "Clients" ],
         "summary" : "Register a cluster node with the client Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle by sending registration request to Keycloak",
@@ -4105,8 +5864,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -4119,15 +5878,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/nodes/{node}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/nodes/{node}" : {
       "delete" : {
         "tags" : [ "Clients" ],
         "summary" : "Unregister a cluster node from the client",
@@ -4154,15 +5914,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/offline-session-count" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/offline-session-count" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get application offline session count Returns a number of offline user sessions associated with this client { \"count\": number }",
@@ -4192,15 +5953,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/offline-sessions" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/offline-sessions" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get offline sessions for client Returns a list of offline user sessions associated with this client",
@@ -4246,15 +6008,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/optional-client-scopes" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get optional client scopes.  Only name and ids are returned.",
@@ -4283,15 +6046,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/optional-client-scopes/{clientScopeId}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}" : {
       "put" : {
         "tags" : [ "Clients" ],
         "parameters" : [ {
@@ -4333,15 +6097,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/protocol-mappers/add-models" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/add-models" : {
       "post" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Create multiple mappers",
@@ -4358,8 +6123,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -4372,15 +6137,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/protocol-mappers/models" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers",
@@ -4427,15 +6193,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models/{id}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mapper by id",
@@ -4514,9 +6281,17 @@
         "schema" : {
           "type" : "string"
         }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/protocol/{protocol}" : {
       "get" : {
         "tags" : [ "Protocol Mappers" ],
         "summary" : "Get mappers by name for a specific protocol",
@@ -4553,15 +6328,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/push-revocation" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/push-revocation" : {
       "post" : {
         "tags" : [ "Clients" ],
         "summary" : "Push the client's revocation policy to its admin URL If the client has an admin URL, push revocation policy to it.",
@@ -4587,15 +6363,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/registration-access-token" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/registration-access-token" : {
       "post" : {
         "tags" : [ "Clients" ],
         "summary" : "Generate a new registration access token for the client",
@@ -4621,15 +6398,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get all roles for the realm or client",
@@ -4705,15 +6483,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get a role by name",
@@ -4793,15 +6572,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/composites" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get composites of the role",
@@ -4855,8 +6635,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -4899,20 +6679,21 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/composites/clients/{clientUuid}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{client-uuid}" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get client-level roles for the client that are in the role's composite",
         "parameters" : [ {
-          "name" : "clientUuid",
+          "name" : "client-uuid",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -4951,16 +6732,9 @@
         "schema" : {
           "type" : "string"
         }
-      }, {
-        "name" : "id",
-        "in" : "path",
-        "required" : true,
-        "schema" : {
-          "type" : "string"
-        }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/composites/realm" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/realm" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get realm-level roles of the role's composite",
@@ -4998,15 +6772,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/groups" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/groups" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Returns a stream of groups that have the specified role name",
@@ -5068,15 +6843,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/management/permissions" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Return object stating whether role Authorization permissions have been initialized or not and a reference",
@@ -5143,15 +6919,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/roles/{role-name}/users" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/users" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Returns a stream of users that have the specified role name.",
@@ -5205,15 +6982,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get all scope mappings for the client",
@@ -5240,15 +7018,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get the roles associated with a client's scope Returns roles for the client.",
@@ -5284,8 +7063,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -5319,8 +7098,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -5334,7 +7114,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "The available client-level roles Returns the roles for the client that can be associated with the client's scope",
@@ -5363,8 +7143,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -5378,7 +7159,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective client roles Returns the roles for the client that are associated with the client's scope.",
@@ -5416,8 +7197,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -5431,7 +7213,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/realm" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles associated with the client's scope",
@@ -5467,8 +7249,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -5502,15 +7284,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/realm/available" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/available" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get realm-level roles that are available to attach to this client's scope",
@@ -5539,15 +7322,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/composite" : {
       "get" : {
         "tags" : [ "Scope Mappings" ],
         "summary" : "Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.",
@@ -5586,15 +7370,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/service-account-user" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/service-account-user" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get a user dedicated to the service account",
@@ -5620,15 +7405,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/session-count" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/session-count" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get application session count Returns a number of user sessions associated with this client { \"count\": number }",
@@ -5658,15 +7444,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/test-nodes-available" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/test-nodes-available" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Test if registered cluster nodes are available Tests availability by sending 'ping' request to all cluster nodes.",
@@ -5692,15 +7479,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{id}/user-sessions" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/user-sessions" : {
       "get" : {
         "tags" : [ "Clients" ],
         "summary" : "Get user sessions for client Returns a list of user sessions associated with this client\n",
@@ -5746,8 +7534,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "client-uuid",
         "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -6511,7 +8300,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}" : {
+    "/admin/realms/{realm}/groups/{group-id}" : {
       "get" : {
         "tags" : [ "Groups" ],
         "responses" : {
@@ -6562,7 +8351,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6570,7 +8359,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/children" : {
+    "/admin/realms/{realm}/groups/{group-id}/children" : {
       "get" : {
         "tags" : [ "Groups" ],
         "summary" : "Return a paginated list of subgroups that have a parent group corresponding to the group on the URL",
@@ -6642,7 +8431,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6650,7 +8439,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/management/permissions" : {
+    "/admin/realms/{realm}/groups/{group-id}/management/permissions" : {
       "get" : {
         "tags" : [ "Groups" ],
         "summary" : "Return object stating whether client Authorization permissions have been initialized or not and a reference",
@@ -6701,7 +8490,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6709,7 +8498,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/members" : {
+    "/admin/realms/{realm}/groups/{group-id}/members" : {
       "get" : {
         "tags" : [ "Groups" ],
         "summary" : "Get users Returns a stream of users, filtered according to query parameters",
@@ -6762,7 +8551,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6770,7 +8559,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get role mappings",
@@ -6796,7 +8585,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6804,7 +8593,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get client-level role mappings for the user, and the app",
@@ -6840,8 +8629,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -6875,7 +8664,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6890,7 +8679,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/available" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get available client-level roles that can be mapped to the user",
@@ -6919,7 +8708,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6934,7 +8723,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/composite" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get effective client-level role mappings This recurses any composite roles",
@@ -6972,7 +8761,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -6987,7 +8776,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/realm" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/realm" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get realm-level role mappings",
@@ -7023,8 +8812,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -7058,7 +8847,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -7066,7 +8855,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/realm/available" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/realm/available" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get realm-level roles that can be mapped",
@@ -7095,7 +8884,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -7103,7 +8892,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{id}/role-mappings/realm/composite" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/realm/composite" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get effective realm-level role mappings This will recurse all composite roles to get the result.",
@@ -7141,7 +8930,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "group-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -7603,6 +9392,40 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys" : {
+      "get" : {
+        "tags" : [ "Identity Providers" ],
+        "summary" : "Reaload keys for the identity provider if the provider supports it, \"true\" is returned if reload was performed, \"false\" if not.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "alias",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/identity-provider/providers/{provider_id}" : {
       "get" : {
         "tags" : [ "Identity Providers" ],
@@ -7752,8 +9575,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -8227,8 +10050,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -8558,8 +10381,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -8603,12 +10426,12 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/roles/{role-name}/composites/clients/{clientUuid}" : {
+    "/admin/realms/{realm}/roles/{role-name}/composites/clients/{client-uuid}" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get client-level roles for the client that are in the role's composite",
         "parameters" : [ {
-          "name" : "clientUuid",
+          "name" : "client-uuid",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -9308,7 +11131,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}" : {
+    "/admin/realms/{realm}/users/{user-id}" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get representation of the user",
@@ -9369,7 +11192,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9377,7 +11200,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types" : {
+    "/admin/realms/{realm}/users/{user-id}/configured-user-storage-credential-types" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Return credential types, which are provided by the user storage where user is stored.",
@@ -9407,7 +11230,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9415,7 +11238,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/consents" : {
+    "/admin/realms/{realm}/users/{user-id}/consents" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get consents granted by the user",
@@ -9445,7 +11268,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9453,7 +11276,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/consents/{client}" : {
+    "/admin/realms/{realm}/users/{user-id}/consents/{client}" : {
       "delete" : {
         "tags" : [ "Users" ],
         "summary" : "Revoke consent and offline tokens for particular client from user",
@@ -9481,7 +11304,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9489,7 +11312,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/credentials" : {
+    "/admin/realms/{realm}/users/{user-id}/credentials" : {
       "get" : {
         "tags" : [ "Users" ],
         "responses" : {
@@ -9517,7 +11340,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9525,7 +11348,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/credentials/{credentialId}" : {
+    "/admin/realms/{realm}/users/{user-id}/credentials/{credentialId}" : {
       "delete" : {
         "tags" : [ "Users" ],
         "summary" : "Remove a credential for a user",
@@ -9552,7 +11375,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9560,7 +11383,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}" : {
+    "/admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}" : {
       "post" : {
         "tags" : [ "Users" ],
         "summary" : "Move a credential to a position behind another credential",
@@ -9582,8 +11405,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -9596,7 +11419,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9604,7 +11427,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/credentials/{credentialId}/moveToFirst" : {
+    "/admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveToFirst" : {
       "post" : {
         "tags" : [ "Users" ],
         "summary" : "Move a credential to a first position in the credentials list of the user",
@@ -9618,8 +11441,8 @@
           }
         } ],
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -9632,7 +11455,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9640,7 +11463,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/credentials/{credentialId}/userLabel" : {
+    "/admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/userLabel" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Update a credential label for a user",
@@ -9676,7 +11499,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9684,7 +11507,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/disable-credential-types" : {
+    "/admin/realms/{realm}/users/{user-id}/disable-credential-types" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Disable all credentials for a user of a specific type",
@@ -9715,7 +11538,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9723,7 +11546,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/execute-actions-email" : {
+    "/admin/realms/{realm}/users/{user-id}/execute-actions-email" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Send an email to the user with a link they can click to execute particular actions.",
@@ -9778,7 +11601,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9786,7 +11609,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/federated-identity" : {
+    "/admin/realms/{realm}/users/{user-id}/federated-identity" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get social logins associated with the user",
@@ -9815,7 +11638,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9823,7 +11646,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/federated-identity/{provider}" : {
+    "/admin/realms/{realm}/users/{user-id}/federated-identity/{provider}" : {
       "post" : {
         "tags" : [ "Users" ],
         "summary" : "Add a social login provider to the user",
@@ -9869,7 +11692,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9877,7 +11700,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/groups" : {
+    "/admin/realms/{realm}/users/{user-id}/groups" : {
       "get" : {
         "tags" : [ "Users" ],
         "parameters" : [ {
@@ -9933,7 +11756,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9941,7 +11764,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/groups/count" : {
+    "/admin/realms/{realm}/users/{user-id}/groups/count" : {
       "get" : {
         "tags" : [ "Users" ],
         "parameters" : [ {
@@ -9977,7 +11800,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -9985,7 +11808,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/groups/{groupId}" : {
+    "/admin/realms/{realm}/users/{user-id}/groups/{groupId}" : {
       "put" : {
         "tags" : [ "Users" ],
         "parameters" : [ {
@@ -10027,7 +11850,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10035,7 +11858,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/impersonation" : {
+    "/admin/realms/{realm}/users/{user-id}/impersonation" : {
       "post" : {
         "tags" : [ "Users" ],
         "summary" : "Impersonate the user",
@@ -10062,7 +11885,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10070,13 +11893,13 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/logout" : {
+    "/admin/realms/{realm}/users/{user-id}/logout" : {
       "post" : {
         "tags" : [ "Users" ],
         "summary" : "Remove all user sessions associated with the user Also send notification to all clients that have an admin URL to invalidate the sessions for the particular user.",
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -10089,7 +11912,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10097,7 +11920,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/offline-sessions/{clientUuid}" : {
+    "/admin/realms/{realm}/users/{user-id}/offline-sessions/{clientUuid}" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get offline sessions associated with the user and client",
@@ -10134,7 +11957,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10142,7 +11965,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/reset-password" : {
+    "/admin/realms/{realm}/users/{user-id}/reset-password" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Set up a new password for the user.",
@@ -10170,7 +11993,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10178,7 +12001,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/reset-password-email" : {
+    "/admin/realms/{realm}/users/{user-id}/reset-password-email" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Send an email to the user with a link they can click to reset their password.",
@@ -10214,7 +12037,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10222,7 +12045,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get role mappings",
@@ -10248,7 +12071,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10256,7 +12079,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get client-level role mappings for the user, and the app",
@@ -10292,8 +12115,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -10327,7 +12150,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10342,7 +12165,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/available" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get available client-level roles that can be mapped to the user",
@@ -10371,7 +12194,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10386,7 +12209,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/composite" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get effective client-level role mappings This recurses any composite roles",
@@ -10424,7 +12247,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10439,7 +12262,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/realm" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/realm" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get realm-level role mappings",
@@ -10475,8 +12298,8 @@
           }
         },
         "responses" : {
-          "201" : {
-            "description" : "Created"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -10510,7 +12333,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10518,7 +12341,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/realm/available" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/realm/available" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get realm-level roles that can be mapped",
@@ -10547,7 +12370,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10555,7 +12378,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/role-mappings/realm/composite" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/realm/composite" : {
       "get" : {
         "tags" : [ "Role Mapper" ],
         "summary" : "Get effective realm-level role mappings This will recurse all composite roles to get the result.",
@@ -10593,7 +12416,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10601,17 +12424,25 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/send-verify-email" : {
+    "/admin/realms/{realm}/users/{user-id}/send-verify-email" : {
       "put" : {
         "tags" : [ "Users" ],
         "summary" : "Send an email-verification email to the user An email contains a link the user can click to verify their email address.",
-        "description" : "The redirectUri and clientId parameters are optional. The default for the redirect is the account client.",
+        "description" : "The redirectUri, clientId and lifespan parameters are optional. The default for the redirect is the account client. The default for the lifespan is 12 hours",
         "parameters" : [ {
           "name" : "client_id",
           "in" : "query",
           "description" : "Client id",
           "schema" : {
             "type" : "string"
+          }
+        }, {
+          "name" : "lifespan",
+          "in" : "query",
+          "description" : "Number of seconds after which the generated token expires",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
           }
         }, {
           "name" : "redirect_uri",
@@ -10636,7 +12467,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10644,7 +12475,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{id}/sessions" : {
+    "/admin/realms/{realm}/users/{user-id}/sessions" : {
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get sessions associated with the user",
@@ -10673,7 +12504,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "user-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10684,6 +12515,67 @@
   },
   "components" : {
     "schemas" : {
+      "AbstractPolicyRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string"
+          },
+          "policies" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "resources" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "scopes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "logic" : {
+            "$ref" : "#/components/schemas/Logic"
+          },
+          "decisionStrategy" : {
+            "$ref" : "#/components/schemas/DecisionStrategy"
+          },
+          "owner" : {
+            "type" : "string"
+          },
+          "resourcesData" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ResourceRepresentation"
+            }
+          },
+          "scopesData" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScopeRepresentation"
+            }
+          }
+        }
+      },
       "Access" : {
         "type" : "object",
         "properties" : {
@@ -10991,9 +12883,6 @@
             "type" : "boolean"
           },
           "serviceAccountsEnabled" : {
-            "type" : "boolean"
-          },
-          "oauth2DeviceAuthorizationGrantEnabled" : {
             "type" : "boolean"
           },
           "authorizationServicesEnabled" : {
@@ -11590,9 +13479,6 @@
           "serviceAccountsEnabled" : {
             "type" : "boolean"
           },
-          "oauth2DeviceAuthorizationGrantEnabled" : {
-            "type" : "boolean"
-          },
           "authorizationServicesEnabled" : {
             "type" : "boolean"
           },
@@ -11991,6 +13877,10 @@
           }
         }
       },
+      "DecisionEffect" : {
+        "enum" : [ "PERMIT", "DENY" ],
+        "type" : "string"
+      },
       "DecisionStrategy" : {
         "enum" : [ "AFFIRMATIVE", "UNANIMOUS", "CONSENSUS" ],
         "type" : "string"
@@ -11998,6 +13888,35 @@
       "EnforcementMode" : {
         "enum" : [ "PERMISSIVE", "ENFORCING", "DISABLED" ],
         "type" : "string"
+      },
+      "EvaluationResultRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "resource" : {
+            "$ref" : "#/components/schemas/ResourceRepresentation"
+          },
+          "scopes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScopeRepresentation"
+            }
+          },
+          "policies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyResultRepresentation"
+            }
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/DecisionEffect"
+          },
+          "allowedScopes" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ScopeRepresentation"
+            }
+          }
+        }
       },
       "EventRepresentation" : {
         "type" : "object",
@@ -12638,9 +14557,6 @@
           "serviceAccountsEnabled" : {
             "type" : "boolean"
           },
-          "oauth2DeviceAuthorizationGrantEnabled" : {
-            "type" : "boolean"
-          },
           "authorizationServicesEnabled" : {
             "type" : "boolean"
           },
@@ -12895,6 +14811,75 @@
           }
         }
       },
+      "PolicyEvaluationRequest" : {
+        "type" : "object",
+        "properties" : {
+          "context" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string"
+              }
+            }
+          },
+          "resources" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ResourceRepresentation"
+            }
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "roleIds" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "entitlements" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "PolicyEvaluationResponse" : {
+        "type" : "object",
+        "properties" : {
+          "results" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/EvaluationResultRepresentation"
+            }
+          },
+          "entitlements" : {
+            "type" : "boolean"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/DecisionEffect"
+          },
+          "rpt" : {
+            "$ref" : "#/components/schemas/AccessToken"
+          }
+        }
+      },
+      "PolicyProviderRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "group" : {
+            "type" : "string"
+          }
+        }
+      },
       "PolicyRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -12957,6 +14942,30 @@
           "config" : {
             "type" : "object",
             "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "PolicyResultRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "policy" : {
+            "$ref" : "#/components/schemas/PolicyRepresentation"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/DecisionEffect"
+          },
+          "associatedPolicies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/PolicyResultRepresentation"
+            }
+          },
+          "scopes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
               "type" : "string"
             }
           }
@@ -13222,6 +15231,10 @@
           },
           "permanentLockout" : {
             "type" : "boolean"
+          },
+          "maxTemporaryLockouts" : {
+            "format" : "int32",
+            "type" : "integer"
           },
           "maxFailureWaitSeconds" : {
             "format" : "int32",
@@ -13613,6 +15626,9 @@
           "dockerAuthenticationFlow" : {
             "type" : "string"
           },
+          "firstBrokerLoginFlow" : {
+            "type" : "string"
+          },
           "attributes" : {
             "type" : "object",
             "additionalProperties" : {
@@ -14000,6 +16016,9 @@
           },
           "group" : {
             "type" : "string"
+          },
+          "multivalued" : {
+            "type" : "boolean"
           }
         }
       },
@@ -14067,6 +16086,9 @@
             "items" : {
               "$ref" : "#/components/schemas/UPGroup"
             }
+          },
+          "unmanagedAttributePolicy" : {
+            "$ref" : "#/components/schemas/UnmanagedAttributePolicy"
           }
         }
       },
@@ -14087,6 +16109,10 @@
             "additionalProperties" : { }
           }
         }
+      },
+      "UnmanagedAttributePolicy" : {
+        "enum" : [ "ENABLED", "ADMIN_VIEW", "ADMIN_EDIT" ],
+        "type" : "string"
       },
       "UserConsentRepresentation" : {
         "type" : "object",
@@ -14225,6 +16251,9 @@
           },
           "group" : {
             "type" : "string"
+          },
+          "multivalued" : {
+            "type" : "boolean"
           }
         }
       },
@@ -14248,30 +16277,11 @@
       "UserRepresentation" : {
         "type" : "object",
         "properties" : {
-          "self" : {
-            "type" : "string"
-          },
           "id" : {
             "type" : "string"
           },
-          "origin" : {
-            "type" : "string"
-          },
-          "createdTimestamp" : {
-            "format" : "int64",
-            "type" : "integer"
-          },
           "username" : {
             "type" : "string"
-          },
-          "enabled" : {
-            "type" : "boolean"
-          },
-          "totp" : {
-            "type" : "boolean"
-          },
-          "emailVerified" : {
-            "type" : "boolean"
           },
           "firstName" : {
             "type" : "string"
@@ -14282,11 +16292,8 @@
           "email" : {
             "type" : "string"
           },
-          "federationLink" : {
-            "type" : "string"
-          },
-          "serviceAccountClientId" : {
-            "type" : "string"
+          "emailVerified" : {
+            "type" : "boolean"
           },
           "attributes" : {
             "type" : "object",
@@ -14296,6 +16303,31 @@
                 "type" : "string"
               }
             }
+          },
+          "userProfileMetadata" : {
+            "$ref" : "#/components/schemas/UserProfileMetadata"
+          },
+          "self" : {
+            "type" : "string"
+          },
+          "origin" : {
+            "type" : "string"
+          },
+          "createdTimestamp" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "totp" : {
+            "type" : "boolean"
+          },
+          "federationLink" : {
+            "type" : "string"
+          },
+          "serviceAccountClientId" : {
+            "type" : "string"
           },
           "credentials" : {
             "type" : "array",
@@ -14375,9 +16407,6 @@
             "additionalProperties" : {
               "type" : "boolean"
             }
-          },
-          "userProfileMetadata" : {
-            "$ref" : "#/components/schemas/UserProfileMetadata"
           }
         }
       },
