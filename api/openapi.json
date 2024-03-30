@@ -10709,6 +10709,13 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "isOffline",
+          "in" : "query",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
         } ],
         "responses" : {
           "204" : {

@@ -1,6 +1,6 @@
 [package]
 name = "keycloak"
-version = "24.0.0"
+version = "24.0.200"
 authors = ["Alexander Korolev <alexander.korolev.germany@gmail.com>"]
 edition = "2021"
 categories = ["api-bindings", "asynchronous"]
