@@ -31,6 +31,8 @@ jobs:
     - name: Run unit tests
       run: cargo test
     - name: Start keycloak
-      run: docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password quay.io/keycloak/keycloak:24.0.2 start-dev
+      run: |
+        docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password quay.io/keycloak/keycloak:24.0.2 start-dev &
+        for attempt in {1..20}; do sleep 1; if netstat -ltn | grep -c 9083; then echo ready; break; fi; echo waiting...; done
     - name: Run integration tests
       run: cargo run --example=adduser
