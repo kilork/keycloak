@@ -20,7 +20,7 @@ jobs:
         ports:
           - "8080:8080"
         options: >-
-          --entrypoint start-dev
+          start-dev
     runs-on: ubuntu-latest
 
     steps:
