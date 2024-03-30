@@ -18,7 +18,7 @@ Default flags: `tags-all`.
 
 ## Usage
 
-Requires Rust version >= `1.58.0`.
+Requires Rust version >= `1.60.0`.
 
 Add dependency to Cargo.toml:
 
