@@ -16,7 +16,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/attack-detection/brute-force/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusers>
     #[cfg(feature = "tag-attack-detection")]
     pub async fn realm_attack_detection_brute_force_users_delete(
         &self,
@@ -45,7 +45,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/attack-detection/brute-force/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmattack_detectionbrute_forceusersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmattack_detectionbrute_forceusersuserid>
     ///
     /// REST method: `GET /admin/realms/{realm}/attack-detection/brute-force/users/{userId}`
     #[cfg(feature = "tag-attack-detection")]
@@ -76,7 +76,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/attack-detection/brute-force/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusersuserid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/attack-detection/brute-force/users/{userId}`
     #[cfg(feature = "tag-attack-detection")]
@@ -109,7 +109,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/authenticator-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationauthenticator_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationauthenticator_providers>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
@@ -136,7 +136,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/client-authenticator-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationclient_authenticator_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationclient_authenticator_providers>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
@@ -164,7 +164,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationconfig>
     #[cfg(feature = "tag-authentication-management")]
     #[deprecated]
     pub async fn realm_authentication_config_post(
@@ -196,7 +196,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/config-description/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationconfig_descriptionproviderid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationconfig_descriptionproviderid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/config-description/{providerId}`
     #[cfg(feature = "tag-authentication-management")]
@@ -227,7 +227,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationconfigid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_config_with_id_get(
         &self,
@@ -257,7 +257,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmauthenticationconfigid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_config_with_id_put(
         &self,
@@ -289,7 +289,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationconfigid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_config_with_id_delete(
         &self,
@@ -319,7 +319,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutions>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_executions_post(
         &self,
@@ -350,7 +350,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/executions/{execution_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/executions/{executionId}`
     #[cfg(feature = "tag-authentication-management")]
@@ -382,7 +382,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/executions/{execution_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmauthenticationexecutionsexecutionid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationexecutionsexecutionid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/authentication/executions/{executionId}`
     #[cfg(feature = "tag-authentication-management")]
@@ -415,7 +415,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidconfig>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/config`
     #[cfg(feature = "tag-authentication-management")]
@@ -450,7 +450,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/executions/{execution_id}/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionidconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionidconfigid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/executions/{executionId}/config/{id}`
     #[cfg(feature = "tag-authentication-management")]
@@ -483,7 +483,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidlower_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidlower_priority>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/lower-priority`
     #[cfg(feature = "tag-authentication-management")]
@@ -515,7 +515,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidraise_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidraise_priority>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/raise-priority`
     #[cfg(feature = "tag-authentication-management")]
@@ -546,7 +546,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflows>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_flows_get(
         &self,
@@ -574,7 +574,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflows>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_flows_post(
         &self,
@@ -606,7 +606,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/copy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliascopy>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliascopy>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/copy`
     #[cfg(feature = "tag-authentication-management")]
@@ -640,7 +640,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows/{flow_alias}/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsflowaliasexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsflowaliasexecutions>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/flows/{flowAlias}/executions`
     #[cfg(feature = "tag-authentication-management")]
@@ -673,7 +673,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/flows/{flow_alias}/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsflowaliasexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsflowaliasexecutions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/authentication/flows/{flowAlias}/executions`
     #[cfg(feature = "tag-authentication-management")]
@@ -708,7 +708,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/executions/execution`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsexecution>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsexecution>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/executions/execution`
     #[cfg(feature = "tag-authentication-management")]
@@ -743,7 +743,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/executions/flow`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsflow>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsflow>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/executions/flow`
     #[cfg(feature = "tag-authentication-management")]
@@ -777,7 +777,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_flows_with_id_get(
         &self,
@@ -807,7 +807,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_flows_with_id_put(
         &self,
@@ -839,7 +839,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationflowsid>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_flows_with_id_delete(
         &self,
@@ -868,7 +868,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/form-action-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationform_action_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationform_action_providers>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_form_action_providers_get(
         &self,
@@ -895,7 +895,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/form-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationform_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationform_providers>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_form_providers_get(
         &self,
@@ -922,7 +922,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/per-client-config-description`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationper_client_config_description>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationper_client_config_description>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_per_client_config_description_get(
         &self,
@@ -950,7 +950,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/register-required-action`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationregister_required_action>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationregister_required_action>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_register_required_action_post(
         &self,
@@ -980,7 +980,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actions>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_get(
         &self,
@@ -1008,7 +1008,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsalias>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_with_alias_get(
         &self,
@@ -1038,7 +1038,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsalias>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_with_alias_put(
         &self,
@@ -1070,7 +1070,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsalias>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_with_alias_delete(
         &self,
@@ -1100,7 +1100,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliaslower_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliaslower_priority>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_with_alias_lower_priority_post(
         &self,
@@ -1130,7 +1130,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliasraise_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliasraise_priority>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_required_actions_with_alias_raise_priority_post(
         &self,
@@ -1159,7 +1159,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/unregistered-required-actions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmauthenticationunregistered_required_actions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmauthenticationunregistered_required_actions>
     #[cfg(feature = "tag-authentication-management")]
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
@@ -1183,25 +1183,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/certificates/{attr}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidcertificatesattr>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidcertificatesattr>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_get(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1214,27 +1216,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     /// - `body`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/certificates/{attr}/download`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidcertificatesattrdownload>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrdownload>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/download`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_download_post(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_download_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
         body: KeyStoreConfig,
     ) -> Result<TypeString, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/download",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/download",
                 self.url
             ))
             .json(&body)
@@ -1248,25 +1252,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/certificates/{attr}/generate`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidcertificatesattrgenerate>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_generate_post(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1282,27 +1288,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     /// - `body`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/certificates/{attr}/generate-and-download`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate-and-download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidcertificatesattrgenerate_and_download>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate_and_download>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate-and-download`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_generate_and_download_post(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_and_download_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
         body: KeyStoreConfig,
     ) -> Result<TypeString, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/generate-and-download",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate-and-download",
                 self.url
             ))
             .json(&body)
@@ -1316,25 +1324,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/certificates/{attr}/upload`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidcertificatesattrupload>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_upload_post(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1347,25 +1357,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `attr`
     ///
     /// Resource: `Client Attribute Certificate`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/certificates/{attr}/upload-certificate`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidcertificatesattrupload_certificate>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload_certificate>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload-certificate`
     #[cfg(feature = "tag-client-attribute-certificate")]
-    pub async fn realm_clients_with_id_certificates_with_attr_upload_certificate_post(
+    pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_certificate_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/certificates/{attr}/upload-certificate",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1383,7 +1395,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/clients-initial-access`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclients_initial_access>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclients_initial_access>
     #[cfg(feature = "tag-client-initial-access")]
     pub async fn realm_clients_initial_access_get(
         &self,
@@ -1411,13 +1423,13 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients-initial-access`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclients_initial_access>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclients_initial_access>
     #[cfg(feature = "tag-client-initial-access")]
     pub async fn realm_clients_initial_access_post(
         &self,
         realm: &str,
         body: ClientInitialAccessCreatePresentation,
-    ) -> Result<ClientInitialAccessPresentation, KeycloakError> {
+    ) -> Result<ClientInitialAccessCreatePresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -1439,7 +1451,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients-initial-access/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclients_initial_accessid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclients_initial_accessid>
     #[cfg(feature = "tag-client-initial-access")]
     pub async fn realm_clients_initial_access_with_id_delete(
         &self,
@@ -1470,7 +1482,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-registration-policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
     #[cfg(feature = "tag-client-registration-policy")]
     pub async fn realm_client_registration_policy_providers_get(
         &self,
@@ -1494,25 +1506,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `client`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_groups_with_id_role_mappings_clients_with_client_get(
+    pub async fn realm_groups_with_group_id_role_mappings_clients_with_client_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1525,27 +1539,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `POST /admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}`
+    /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmgroupsidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_groups_with_id_role_mappings_clients_with_client_post(
+    pub async fn realm_groups_with_group_id_role_mappings_clients_with_client_post(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -1560,27 +1576,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}`
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmgroupsidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_groups_with_id_role_mappings_clients_with_client_delete(
+    pub async fn realm_groups_with_group_id_role_mappings_clients_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -1595,25 +1613,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `client`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/available`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsclientsclientavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/available`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_groups_with_id_role_mappings_clients_with_client_available_get(
+    pub async fn realm_groups_with_group_id_role_mappings_clients_with_client_available_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/available",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1626,27 +1646,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `client`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/composite`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsclientsclientcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/composite`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_groups_with_id_role_mappings_clients_with_client_composite_get(
+    pub async fn realm_groups_with_group_id_role_mappings_clients_with_client_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/clients/{client}/composite",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client}/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1662,25 +1684,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/clients/{client}`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_users_with_id_role_mappings_clients_with_client_get(
+    pub async fn realm_users_with_user_id_role_mappings_clients_with_client_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1693,27 +1717,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/role-mappings/clients/{client}`
+    /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_users_with_id_role_mappings_clients_with_client_post(
+    pub async fn realm_users_with_user_id_role_mappings_clients_with_client_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -1728,27 +1754,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/role-mappings/clients/{client}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidrole_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_users_with_id_role_mappings_clients_with_client_delete(
+    pub async fn realm_users_with_user_id_role_mappings_clients_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -1763,25 +1791,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/available`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsclientsclientavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/available`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_users_with_id_role_mappings_clients_with_client_available_get(
+    pub async fn realm_users_with_user_id_role_mappings_clients_with_client_available_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/available",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1794,27 +1824,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Client Role Mappings`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/composite`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsclientsclientcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/composite`
     #[cfg(feature = "tag-client-role-mappings")]
-    pub async fn realm_users_with_id_role_mappings_clients_with_client_composite_get(
+    pub async fn realm_users_with_user_id_role_mappings_clients_with_client_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/clients/{client}/composite",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client}/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1837,7 +1869,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopes>
     #[cfg(feature = "tag-client-scopes")]
     pub async fn realm_client_scopes_get(
         &self,
@@ -1862,7 +1894,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_scopes>
     #[cfg(feature = "tag-client-scopes")]
     pub async fn realm_client_scopes_post(
         &self,
@@ -1884,23 +1916,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_scopes_with_id_get(
+    pub async fn realm_client_scopes_with_client_scope_id_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<ClientScopeRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1913,25 +1947,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `PUT /admin/realms/{realm}/client-scopes/{id}`
+    /// `PUT /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_scopesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/client-scopes/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_scopes_with_id_put(
+    pub async fn realm_client_scopes_with_client_scope_id_put(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
             .json(&body)
@@ -1946,23 +1982,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `DELETE /admin/realms/{realm}/client-scopes/{id}`
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_scopesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_scopes_with_id_delete(
+    pub async fn realm_client_scopes_with_client_scope_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -1981,7 +2019,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templates>
     #[cfg(feature = "tag-client-scopes")]
     pub async fn realm_client_templates_get(
         &self,
@@ -2009,7 +2047,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-templates`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_templates>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_templates>
     #[cfg(feature = "tag-client-scopes")]
     pub async fn realm_client_templates_post(
         &self,
@@ -2034,23 +2072,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_templates_with_id_get(
+    pub async fn realm_client_templates_with_client_scope_id_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<ClientScopeRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2063,25 +2103,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `PUT /admin/realms/{realm}/client-templates/{id}`
+    /// `PUT /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_templatesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/client-templates/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_templates_with_id_put(
+    pub async fn realm_client_templates_with_client_scope_id_put(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
             .json(&body)
@@ -2096,23 +2138,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Client Scopes`
     ///
-    /// `DELETE /admin/realms/{realm}/client-templates/{id}`
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_templatesid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}`
     #[cfg(feature = "tag-client-scopes")]
-    pub async fn realm_client_templates_with_id_delete(
+    pub async fn realm_client_templates_with_client_scope_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2139,7 +2183,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/clients`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclients>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclients>
     #[cfg(feature = "tag-clients")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_get(
@@ -2189,7 +2233,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclients>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclients>
     #[cfg(feature = "tag-clients")]
     pub async fn realm_clients_post(
         &self,
@@ -2211,22 +2255,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_get(
+    pub async fn realm_clients_with_client_uuid_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/clients/{client_uuid}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2237,24 +2286,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Clients`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_put(
+    pub async fn realm_clients_with_client_uuid_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: ClientRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/clients/{client_uuid}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2267,22 +2321,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_delete(
+    pub async fn realm_clients_with_client_uuid_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}/clients/{id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/clients/{client_uuid}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -2294,23 +2353,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/client-secret`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidclient_secret>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secret>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_client_secret_get(
+    pub async fn realm_clients_with_client_uuid_client_secret_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/client-secret",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2323,23 +2384,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/client-secret`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/client-secret`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidclient_secret>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidclient_secret>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_client_secret_post(
+    pub async fn realm_clients_with_client_uuid_client_secret_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/client-secret",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2352,23 +2415,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/client-secret/rotated`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidclient_secretrotated>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_client_secret_rotated_get(
+    pub async fn realm_clients_with_client_uuid_client_secret_rotated_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/client-secret/rotated",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2381,23 +2446,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/client-secret/rotated`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidclient_secretrotated>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_client_secret_rotated_delete(
+    pub async fn realm_clients_with_client_uuid_client_secret_rotated_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/client-secret/rotated",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2411,23 +2478,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/default-client-scopes`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsiddefault_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiddefault_client_scopes>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_default_client_scopes_get(
+    pub async fn realm_clients_with_client_uuid_default_client_scopes_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2438,27 +2507,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client_scope_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsiddefault_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/clients/{id}/default-client-scopes/{clientScopeId}`
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_default_client_scopes_with_client_scope_id_put(
+    pub async fn realm_clients_with_client_uuid_default_client_scopes_with_client_scope_id_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
@@ -2471,27 +2540,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client_scope_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsiddefault_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/clients/{id}/default-client-scopes/{clientScopeId}`
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_default_client_scopes_with_client_scope_id_delete(
+    pub async fn realm_clients_with_client_uuid_default_client_scopes_with_client_scope_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/default-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2505,27 +2574,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `scope`
     /// - `user_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesgenerate_example_access_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_access_token>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-access-token`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_generate_example_access_token_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_generate_example_access_token_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<AccessToken, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-access-token",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2544,27 +2615,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `scope`
     /// - `user_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-id-token`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesgenerate_example_id_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_id_token>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-id-token`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_generate_example_id_token_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_generate_example_id_token_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<IDToken, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-id-token",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2583,27 +2656,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `scope`
     /// - `user_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesgenerate_example_userinfo>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_userinfo>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-userinfo`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_generate_example_userinfo_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_generate_example_userinfo_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<TypeMap<String, Value>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/generate-example-userinfo",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2622,25 +2697,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `scope`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/protocol-mappers`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesprotocol_mappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesprotocol_mappers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/protocol-mappers`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_protocol_mappers_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_protocol_mappers_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<ProtocolMapperEvaluationRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/protocol-mappers",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2656,29 +2733,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_container_id`: either realm name OR client UUID
     /// - `scope`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/granted`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesscope_mappingsrolecontaineridgranted>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridgranted>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/granted`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_container_id: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/granted",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2694,29 +2771,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_container_id`: either realm name OR client UUID
     /// - `scope`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidevaluate_scopesscope_mappingsrolecontaineridnot_granted>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridnot_granted>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
+    pub async fn realm_clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_container_id: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2730,27 +2807,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `provider_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/installation/providers/{provider_id}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidinstallationprovidersproviderid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidinstallationprovidersproviderid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/installation/providers/{providerId}`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/installation/providers/{providerId}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_installation_providers_with_provider_id_get(
+    pub async fn realm_clients_with_client_uuid_installation_providers_with_provider_id_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         provider_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/installation/providers/{provider_id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2764,23 +2841,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/management/permissions`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_management_permissions_get(
+    pub async fn realm_clients_with_client_uuid_management_permissions_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2793,25 +2872,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Clients`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/management/permissions`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_management_permissions_put(
+    pub async fn realm_clients_with_client_uuid_management_permissions_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/management/permissions",
                 self.url
             ))
             .json(&body)
@@ -2825,25 +2906,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Clients`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/nodes`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/nodes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidnodes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidnodes>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/nodes`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_nodes_post(
+    pub async fn realm_clients_with_client_uuid_nodes_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: TypeMap<String, String>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/nodes",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/nodes",
                 self.url
             ))
             .json(&body)
@@ -2858,25 +2941,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `node`
     ///
     /// Resource: `Clients`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/nodes/{node}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/nodes/{node}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidnodesnode>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidnodesnode>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/nodes/{node}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_nodes_with_node_delete(
+    pub async fn realm_clients_with_client_uuid_nodes_with_node_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         node: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/nodes/{node}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/nodes/{node}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2890,23 +2975,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/offline-session-count`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-session-count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidoffline_session_count>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_session_count>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-session-count`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_offline_session_count_get(
+    pub async fn realm_clients_with_client_uuid_offline_session_count_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/offline-session-count",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/offline-session-count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2919,27 +3006,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `first`: Paging offset
     /// - `max`: Maximum results size (defaults to 100)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/offline-sessions`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidoffline_sessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_sessions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-sessions`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_offline_sessions_get(
+    pub async fn realm_clients_with_client_uuid_offline_sessions_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/offline-sessions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/offline-sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2958,23 +3047,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/optional-client-scopes`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidoptional_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoptional_client_scopes>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_optional_client_scopes_get(
+    pub async fn realm_clients_with_client_uuid_optional_client_scopes_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -2985,27 +3076,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client_scope_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsidoptional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/clients/{id}/optional-client-scopes/{clientScopeId}`
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_optional_client_scopes_with_client_scope_id_put(
+    pub async fn realm_clients_with_client_uuid_optional_client_scopes_with_client_scope_id_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
@@ -3018,27 +3109,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client_scope_id`
     ///
     /// Resource: `Clients`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidoptional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/clients/{id}/optional-client-scopes/{clientScopeId}`
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_optional_client_scopes_with_client_scope_id_delete(
+    pub async fn realm_clients_with_client_uuid_optional_client_scopes_with_client_scope_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/optional-client-scopes/{client_scope_id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3052,23 +3143,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/push-revocation`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/push-revocation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidpush_revocation>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidpush_revocation>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/push-revocation`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_push_revocation_post(
+    pub async fn realm_clients_with_client_uuid_push_revocation_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/push-revocation",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/push-revocation",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3081,23 +3174,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/registration-access-token`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/registration-access-token`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidregistration_access_token>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidregistration_access_token>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/registration-access-token`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_registration_access_token_post(
+    pub async fn realm_clients_with_client_uuid_registration_access_token_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<ClientRepresentation, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/registration-access-token",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/registration-access-token",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3110,23 +3205,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/service-account-user`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/service-account-user`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidservice_account_user>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidservice_account_user>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/service-account-user`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_service_account_user_get(
+    pub async fn realm_clients_with_client_uuid_service_account_user_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<UserRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/service-account-user",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/service-account-user",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3139,23 +3236,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/session-count`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/session-count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidsession_count>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidsession_count>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/session-count`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_session_count_get(
+    pub async fn realm_clients_with_client_uuid_session_count_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/session-count",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/session-count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3168,23 +3267,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/test-nodes-available`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/test-nodes-available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidtest_nodes_available>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidtest_nodes_available>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/test-nodes-available`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_test_nodes_available_get(
+    pub async fn realm_clients_with_client_uuid_test_nodes_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/test-nodes-available",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/test-nodes-available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3197,27 +3298,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `first`: Paging offset
     /// - `max`: Maximum results size (defaults to 100)
     ///
     /// Resource: `Clients`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/user-sessions`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/user-sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsiduser_sessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiduser_sessions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/user-sessions`
     #[cfg(feature = "tag-clients")]
-    pub async fn realm_clients_with_id_user_sessions_get(
+    pub async fn realm_clients_with_client_uuid_user_sessions_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/user-sessions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/user-sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3244,7 +3347,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmcomponents>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_get(
         &self,
@@ -3279,7 +3382,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmcomponents>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_post(
         &self,
@@ -3305,7 +3408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_with_id_get(
         &self,
@@ -3333,7 +3436,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_with_id_put(
         &self,
@@ -3363,7 +3466,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_with_id_delete(
         &self,
@@ -3394,7 +3497,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}/sub-component-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
     #[cfg(feature = "tag-component")]
     pub async fn realm_components_with_id_sub_component_types_get(
         &self,
@@ -3435,7 +3538,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroups>
     #[cfg(feature = "tag-groups")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_groups_get(
@@ -3489,7 +3592,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmgroups>
     #[cfg(feature = "tag-groups")]
     pub async fn realm_groups_post(
         &self,
@@ -3518,7 +3621,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupscount>
     #[cfg(feature = "tag-groups")]
     pub async fn realm_groups_count_get(
         &self,
@@ -3543,22 +3646,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Groups`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}`
+    /// `GET /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_get(
+    pub async fn realm_groups_with_group_id_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<GroupRepresentation, KeycloakError> {
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/groups/{group_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3569,24 +3677,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `body`
     ///
     /// Resource: `Groups`
     ///
-    /// `PUT /admin/realms/{realm}/groups/{id}`
+    /// `PUT /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmgroupsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_put(
+    pub async fn realm_groups_with_group_id_put(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         body: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/groups/{group_id}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3597,22 +3710,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Groups`
     ///
-    /// `DELETE /admin/realms/{realm}/groups/{id}`
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmgroupsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_delete(
+    pub async fn realm_groups_with_group_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}/groups/{id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/groups/{group_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3624,21 +3742,23 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `brief_representation`
     /// - `first`
     /// - `max`
     ///
     /// Resource: `Groups`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/children`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_children_get(
+    pub async fn realm_groups_with_group_id_children_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -3646,7 +3766,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/children",
+                "{}/admin/realms/{realm}/groups/{group_id}/children",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3668,25 +3788,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `body`
     ///
     /// Resource: `Groups`
     ///
-    /// `POST /admin/realms/{realm}/groups/{id}/children`
+    /// `POST /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmgroupsidchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_children_post(
+    pub async fn realm_groups_with_group_id_children_post(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         body: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/children",
+                "{}/admin/realms/{realm}/groups/{group_id}/children",
                 self.url
             ))
             .json(&body)
@@ -3701,23 +3823,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Groups`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/management/permissions`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_management_permissions_get(
+    pub async fn realm_groups_with_group_id_management_permissions_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/management/permissions",
+                "{}/admin/realms/{realm}/groups/{group_id}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3730,25 +3854,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `body`
     ///
     /// Resource: `Groups`
     ///
-    /// `PUT /admin/realms/{realm}/groups/{id}/management/permissions`
+    /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmgroupsidmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_management_permissions_put(
+    pub async fn realm_groups_with_group_id_management_permissions_put(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/management/permissions",
+                "{}/admin/realms/{realm}/groups/{group_id}/management/permissions",
                 self.url
             ))
             .json(&body)
@@ -3762,21 +3888,23 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `brief_representation`: Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
     /// - `first`: Pagination offset
     /// - `max`: Maximum results size (defaults to 100)
     ///
     /// Resource: `Groups`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/members`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     #[cfg(feature = "tag-groups")]
-    pub async fn realm_groups_with_id_members_get(
+    pub async fn realm_groups_with_group_id_members_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -3784,7 +3912,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/members",
+                "{}/admin/realms/{realm}/groups/{group_id}/members",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -3814,7 +3942,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/import-config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmidentity_providerimport_config>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerimport_config>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_import_config_post(
         &self,
@@ -3847,7 +3975,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstances>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstances>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_get(
         &self,
@@ -3891,7 +4019,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/instances`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstances>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstances>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_post(
         &self,
@@ -3922,7 +4050,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesalias>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_get(
         &self,
@@ -3952,7 +4080,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesalias>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_put(
         &self,
@@ -3984,7 +4112,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesalias>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_delete(
         &self,
@@ -4015,7 +4143,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/export`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasexport>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasexport>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_export_get(
         &self,
@@ -4049,7 +4177,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_management_permissions_get(
         &self,
@@ -4079,7 +4207,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_management_permissions_put(
         &self,
@@ -4110,7 +4238,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmapper_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmapper_types>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mapper_types_get(
         &self,
@@ -4139,7 +4267,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappers>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mappers_get(
         &self,
@@ -4169,7 +4297,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstancesaliasmappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstancesaliasmappers>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mappers_post(
         &self,
@@ -4202,7 +4330,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_get(
         &self,
@@ -4234,7 +4362,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_put(
         &self,
@@ -4268,7 +4396,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_instances_with_alias_mappers_with_id_delete(
         &self,
@@ -4288,6 +4416,35 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(())
     }
 
+    /// Reaload keys for the identity provider if the provider supports it, "true" is returned if reload was performed, "false" if not.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasreload_keys>
+    #[cfg(feature = "tag-identity-providers")]
+    pub async fn realm_identity_provider_instances_with_alias_reload_keys_get(
+        &self,
+        realm: &str,
+        alias: &str,
+    ) -> Result<bool, KeycloakError> {
+        let builder = self
+            .client
+            .get(&format!(
+                "{}/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys",
+                self.url
+            ))
+            .bearer_auth(self.token_supplier.get(&self.url).await?);
+        let response = builder.send().await?;
+        Ok(error_check(response).await?.json().await?)
+    }
+
     /// Get the identity provider factory for that provider id
     ///
     /// Parameters:
@@ -4299,7 +4456,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/providers/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmidentity_providerprovidersprovider_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerprovidersprovider_id>
     #[cfg(feature = "tag-identity-providers")]
     pub async fn realm_identity_provider_providers_with_provider_id_get(
         &self,
@@ -4327,7 +4484,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/keys`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmkeys>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmkeys>
     #[cfg(feature = "tag-key")]
     pub async fn realm_keys_get(
         &self,
@@ -4348,25 +4505,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/add-models`
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/add-models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_scopesidprotocol_mappersadd_models>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersadd_models>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/add-models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_add_models_post(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_add_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/add-models",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/add-models",
                 self.url
             ))
             .json(&body)
@@ -4381,23 +4540,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersmodels>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_models_get(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_models_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4410,25 +4571,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models`
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_scopesidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersmodels>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_models_post(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
             .json(&body)
@@ -4443,23 +4606,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_get(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_models_with_id_get(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4472,25 +4639,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `PUT /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}`
+    /// `PUT /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_scopesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_put(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_models_with_id_put(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .json(&body)
@@ -4505,23 +4676,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `DELETE /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}`
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_scopesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_models_with_id_delete(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_models_with_id_delete(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4535,25 +4710,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `protocol`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/protocol/{protocol}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidprotocol_mappersprotocolprotocol>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idprotocol_mappersprotocolprotocol>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/protocol-mappers/protocol/{protocol}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_scopes_with_id_protocol_mappers_protocol_with_protocol_get(
+    pub async fn realm_client_scopes_with_client_scope_id_protocol_mappers_protocol_with_protocol_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/protocol-mappers/protocol/{protocol}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4566,25 +4743,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/client-templates/{id}/protocol-mappers/add-models`
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/add-models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_templatesidprotocol_mappersadd_models>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersadd_models>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/add-models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_add_models_post(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_add_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/add-models",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/add-models",
                 self.url
             ))
             .json(&body)
@@ -4599,23 +4778,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/protocol-mappers/models`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersmodels>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_models_get(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_models_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4628,25 +4809,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/client-templates/{id}/protocol-mappers/models`
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_templatesidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersmodels>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_models_post(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
             .json(&body)
@@ -4661,23 +4844,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_models_with_id_get(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_models_with_id_get(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4690,25 +4877,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `PUT /admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}`
+    /// `PUT /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_templatesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_models_with_id_put(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_models_with_id_put(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .json(&body)
@@ -4723,23 +4914,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `DELETE /admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}`
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_templatesidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersmodelsid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_models_with_id_delete(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_models_with_id_delete(
         &self,
         realm: &str,
+        client_scope_id: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4753,25 +4948,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `protocol`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/protocol/{protocol}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidprotocol_mappersprotocolprotocol>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idprotocol_mappersprotocolprotocol>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/protocol-mappers/protocol/{protocol}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_client_templates_with_id_protocol_mappers_protocol_with_protocol_get(
+    pub async fn realm_client_templates_with_client_scope_id_protocol_mappers_protocol_with_protocol_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/protocol-mappers/protocol/{protocol}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4784,25 +4981,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/protocol-mappers/add-models`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/add-models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidprotocol_mappersadd_models>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidprotocol_mappersadd_models>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/add-models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_add_models_post(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_add_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/add-models",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/add-models",
                 self.url
             ))
             .json(&body)
@@ -4817,23 +5016,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/protocol-mappers/models`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidprotocol_mappersmodels>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_models_get(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_models_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4846,25 +5047,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/protocol-mappers/models`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidprotocol_mappersmodels>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidprotocol_mappersmodels>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_models_post(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_models_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models",
                 self.url
             ))
             .json(&body)
@@ -4879,23 +5082,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidprotocol_mappersmodelsid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_models_with_id_get(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_models_with_id_get(
         &self,
         realm: &str,
+        client_uuid: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4908,25 +5115,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `id`: Mapper id
     /// - `body`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidprotocol_mappersmodelsid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_models_with_id_put(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_models_with_id_put(
         &self,
         realm: &str,
+        client_uuid: &str,
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
             .json(&body)
@@ -4941,23 +5152,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `id`: Mapper id
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidprotocol_mappersmodelsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidprotocol_mappersmodelsid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/models/{id}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_models_with_id_delete(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_models_with_id_delete(
         &self,
         realm: &str,
+        client_uuid: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/models/{id}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -4971,25 +5186,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `protocol`
     ///
     /// Resource: `Protocol Mappers`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/protocol/{protocol}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidprotocol_mappersprotocolprotocol>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidprotocol_mappersprotocolprotocol>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/protocol-mappers/protocol/{protocol}`
     #[cfg(feature = "tag-protocol-mappers")]
-    pub async fn realm_clients_with_id_protocol_mappers_protocol_with_protocol_get(
+    pub async fn realm_clients_with_client_uuid_protocol_mappers_protocol_with_protocol_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/protocol-mappers/protocol/{protocol}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -5009,7 +5226,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealms>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealms>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn get(
         &self,
@@ -5036,7 +5253,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealms>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealms>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn post(&self, body: RealmRepresentation) -> Result<(), KeycloakError> {
         let builder = self
@@ -5059,7 +5276,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealm>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
         let builder = self
@@ -5081,7 +5298,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealm>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_put(
         &self,
@@ -5108,7 +5325,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealm>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -5141,7 +5358,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmadmin_events>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmadmin_events>
     #[cfg(feature = "tag-realms-admin")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_admin_events_get(
@@ -5210,7 +5427,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/admin-events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_admin_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -5233,7 +5450,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/client-description-converter`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_description_converter_post(
         &self,
@@ -5260,7 +5477,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_policies_policies_get(
         &self,
@@ -5286,7 +5503,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/policies`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_policies_policies_put(
         &self,
@@ -5315,7 +5532,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_policies_profiles_get(
         &self,
@@ -5345,7 +5562,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/client-policies/profiles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_policies_profiles_put(
         &self,
@@ -5375,7 +5592,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-session-stats`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_client_session_stats_get(
         &self,
@@ -5400,7 +5617,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/credential-registrators`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_credential_registrators_get(
         &self,
@@ -5427,7 +5644,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-default-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_default_default_client_scopes_get(
         &self,
@@ -5453,7 +5670,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5484,7 +5701,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5515,7 +5732,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_default_groups_get(
         &self,
@@ -5538,7 +5755,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-groups/{groupId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5569,7 +5786,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-groups/{groupId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5600,7 +5817,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/default-optional-client-scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_default_optional_client_scopes_get(
         &self,
@@ -5626,7 +5843,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5657,7 +5874,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     #[cfg(feature = "tag-realms-admin")]
@@ -5696,7 +5913,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmevents>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmevents>
     #[cfg(feature = "tag-realms-admin")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_events_get(
@@ -5753,7 +5970,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/events`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmevents>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmevents>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
         let builder = self
@@ -5775,7 +5992,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_events_config_get(
         &self,
@@ -5798,7 +6015,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/events/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_events_config_put(
         &self,
@@ -5824,7 +6041,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/group-by-path/{path}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_group_by_path_with_path_get(
         &self,
@@ -5850,7 +6067,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmlocalization>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmlocalization>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_get(
         &self,
@@ -5874,7 +6091,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_get(
         &self,
@@ -5908,7 +6125,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_post(
         &self,
@@ -5938,7 +6155,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_delete(
         &self,
@@ -5967,7 +6184,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_with_key_get(
         &self,
@@ -5997,7 +6214,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_with_key_put(
         &self,
@@ -6029,7 +6246,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/localization/{locale}/{key}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_localization_with_locale_with_key_delete(
         &self,
@@ -6059,7 +6276,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/logout-all`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmlogout_all>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmlogout_all>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_logout_all_post(
         &self,
@@ -6085,7 +6302,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/partial-export`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmpartial_export>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmpartial_export>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_partial_export_post(
         &self,
@@ -6119,7 +6336,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/partialImport`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmpartialimport>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmpartialimport>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_partial_import_post(
         &self,
@@ -6146,7 +6363,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/push-revocation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_push_revocation_post(
         &self,
@@ -6174,7 +6391,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/sessions/{session}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_sessions_with_session_delete(
         &self,
@@ -6204,7 +6421,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/testSMTPConnection`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
     #[cfg(feature = "tag-realms-admin")]
     #[deprecated]
     pub async fn realm_test_smtp_connection_post(
@@ -6233,7 +6450,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_users_management_permissions_get(
         &self,
@@ -6259,7 +6476,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users-management-permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_users_management_permissions_put(
         &self,
@@ -6285,23 +6502,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_get(
+    pub async fn realm_groups_with_group_id_role_mappings_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6314,23 +6533,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/realm`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_realm_get(
+    pub async fn realm_groups_with_group_id_role_mappings_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6343,25 +6564,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `body`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `POST /admin/realms/{realm}/groups/{id}/role-mappings/realm`
+    /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmgroupsidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_realm_post(
+    pub async fn realm_groups_with_group_id_role_mappings_realm_post(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -6376,25 +6599,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `body`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `DELETE /admin/realms/{realm}/groups/{id}/role-mappings/realm`
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmgroupsidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_realm_delete(
+    pub async fn realm_groups_with_group_id_role_mappings_realm_delete(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -6409,23 +6634,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/realm/available`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/available`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_realm_available_get(
+    pub async fn realm_groups_with_group_id_role_mappings_realm_available_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm/available",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6438,25 +6665,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `group_id`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/groups/{id}/role-mappings/realm/composite`
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmgroupsidrole_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/composite`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_groups_with_id_role_mappings_realm_composite_get(
+    pub async fn realm_groups_with_group_id_role_mappings_realm_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        group_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/groups/{id}/role-mappings/realm/composite",
+                "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6472,23 +6701,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_get(
+    pub async fn realm_users_with_user_id_role_mappings_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6501,23 +6732,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/realm`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_realm_get(
+    pub async fn realm_users_with_user_id_role_mappings_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6530,25 +6763,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `body`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/role-mappings/realm`
+    /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_realm_post(
+    pub async fn realm_users_with_user_id_role_mappings_realm_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -6563,25 +6798,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `body`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/role-mappings/realm`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidrole_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_realm_delete(
+    pub async fn realm_users_with_user_id_role_mappings_realm_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -6596,23 +6833,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/realm/available`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/available`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_realm_available_get(
+    pub async fn realm_users_with_user_id_role_mappings_realm_available_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm/available",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6625,25 +6864,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Role Mapper`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/role-mappings/realm/composite`
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidrole_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/composite`
     #[cfg(feature = "tag-role-mapper")]
-    pub async fn realm_users_with_id_role_mappings_realm_composite_get(
+    pub async fn realm_users_with_user_id_role_mappings_realm_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/role-mappings/realm/composite",
+                "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6661,7 +6902,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `brief_representation`
     /// - `first`
     /// - `max`
@@ -6669,14 +6910,16 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidroles>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_get(
+    pub async fn realm_clients_with_client_uuid_roles_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -6685,7 +6928,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6710,25 +6953,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Roles`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/roles`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidroles>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_post(
+    pub async fn realm_clients_with_client_uuid_roles_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles",
                 self.url
             ))
             .json(&body)
@@ -6743,27 +6988,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
     ) -> Result<RoleRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6776,29 +7021,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     /// - `body`
     ///
     /// Resource: `Roles`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/roles/{role_name}`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/clients/{id}/roles/{role-name}`
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_put(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         body: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
             .json(&body)
@@ -6813,27 +7058,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     ///
     /// Resource: `Roles`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/roles/{role_name}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_name>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/clients/{id}/roles/{role-name}`
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_delete(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6847,27 +7092,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/composites`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/composites`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_composites_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_composites_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6880,29 +7125,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     /// - `body`
     ///
     /// Resource: `Roles`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/roles/{role_name}/composites`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
-    /// REST method: `POST /admin/realms/{realm}/clients/{id}/roles/{role-name}/composites`
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_composites_post(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_composites_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&body)
@@ -6917,29 +7162,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     /// - `body`
     ///
     /// Resource: `Roles`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/roles/{role_name}/composites`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/clients/{id}/roles/{role-name}/composites`
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_composites_delete(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_composites_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
             .json(&body)
@@ -6954,29 +7199,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
     /// - `client_uuid`
     /// - `role_name`: role's name (not id!)
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/clients/{client_uuid}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_namecompositesclientsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesclientsclient_uuid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/composites/clients/{clientUuid}`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{client-uuid}`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_composites_clients_with_client_uuid_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_composites_clients_with_client_uuid_get(
         &self,
         realm: &str,
-        id: &str,
         client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/clients/{client_uuid}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -6989,27 +7232,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: role's name (not id!)
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/realm`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_namecompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesrealm>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/composites/realm`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/realm`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_composites_realm_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_composites_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/composites/realm",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -7022,7 +7265,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: the role name.
     /// - `brief_representation`: if false, return a full representation of the {@code GroupRepresentation} objects.
     /// - `first`: first result to return. Ignored if negative or {@code null}.
@@ -7030,16 +7273,16 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/groups`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_namegroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namegroups>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/groups`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/groups`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_groups_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_groups_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
@@ -7048,7 +7291,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/groups",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -7070,27 +7313,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/management/permissions`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_management_permissions_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_management_permissions_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -7103,29 +7346,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`
     /// - `body`
     ///
     /// Resource: `Roles`
     ///
-    /// `PUT /admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions`
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmclientsidrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/clients/{id}/roles/{role-name}/management/permissions`
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_management_permissions_put(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_management_permissions_put(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/management/permissions",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions",
                 self.url
             ))
             .json(&body)
@@ -7139,23 +7382,23 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `role_name`: the role name.
     /// - `first`: first result to return. Ignored if negative or {@code null}.
     /// - `max`: maximum number of results to return. Ignored if negative or {@code null}.
     ///
     /// Resource: `Roles`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/roles/{role_name}/users`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidrolesrole_nameusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_nameusers>
     ///
-    /// REST method: `GET /admin/realms/{realm}/clients/{id}/roles/{role-name}/users`
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/users`
     #[cfg(feature = "tag-roles")]
-    pub async fn realm_clients_with_id_roles_with_role_name_users_get(
+    pub async fn realm_clients_with_client_uuid_roles_with_role_name_users_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         role_name: &str,
         first: Option<i32>,
         max: Option<i32>,
@@ -7163,7 +7406,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/roles/{role_name}/users",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -7191,7 +7434,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles>
     #[cfg(feature = "tag-roles")]
     pub async fn realm_roles_get(
         &self,
@@ -7232,7 +7475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/roles`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmroles>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmroles>
     #[cfg(feature = "tag-roles")]
     pub async fn realm_roles_post(
         &self,
@@ -7260,7 +7503,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
@@ -7292,7 +7535,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
@@ -7326,7 +7569,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles/{role_name}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmrolesrole_name>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmrolesrole_name>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}`
     #[cfg(feature = "tag-roles")]
@@ -7358,7 +7601,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
@@ -7390,7 +7633,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `POST /admin/realms/{realm}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
@@ -7425,7 +7668,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles/{role_name}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmrolesrole_namecomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmrolesrole_namecomposites>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}/composites`
     #[cfg(feature = "tag-roles")]
@@ -7460,9 +7703,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesclientsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesclientsclient_uuid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/clients/{clientUuid}`
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/clients/{client-uuid}`
     #[cfg(feature = "tag-roles")]
     pub async fn realm_roles_with_role_name_composites_clients_with_client_uuid_get(
         &self,
@@ -7492,7 +7735,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/realm`
     #[cfg(feature = "tag-roles")]
@@ -7526,7 +7769,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_namegroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_namegroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/groups`
     #[cfg(feature = "tag-roles")]
@@ -7569,7 +7812,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_namemanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/management/permissions`
     #[cfg(feature = "tag-roles")]
@@ -7601,7 +7844,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles/{role_name}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmrolesrole_namemanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmrolesrole_namemanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}/management/permissions`
     #[cfg(feature = "tag-roles")]
@@ -7636,7 +7879,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles/{role_name}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmrolesrole_nameusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmrolesrole_nameusers>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/users`
     #[cfg(feature = "tag-roles")]
@@ -7677,7 +7920,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7709,7 +7952,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles-by-id/{role-id}`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7743,7 +7986,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles-by-id/{role-id}`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7778,7 +8021,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7822,7 +8065,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `POST /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7857,7 +8100,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7892,7 +8135,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesclientsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesclientsclientuuid>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites/clients/{clientUuid}`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7924,7 +8167,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites/realm`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7955,7 +8198,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/management/permissions`
     #[cfg(feature = "tag-roles-by-id")]
@@ -7987,7 +8230,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles-by-id/{role_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles-by-id/{role-id}/management/permissions`
     #[cfg(feature = "tag-roles-by-id")]
@@ -8016,24 +8259,26 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings`
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
-    pub async fn realm_client_scopes_with_id_scope_mappings_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8046,25 +8291,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_clients_with_client_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8077,27 +8324,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}`
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_scopesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_post(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_clients_with_client_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8112,27 +8361,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}`
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_scopesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_delete(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8147,25 +8398,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsclientsclientavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_available_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/available",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8178,27 +8431,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsclientsclientcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_clients_with_client_composite_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/clients/{client}/composite",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8214,23 +8469,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_realm_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8243,25 +8500,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm`
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_scopesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_realm_post(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_realm_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -8276,25 +8535,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm`
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_scopesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_realm_delete(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_realm_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -8309,23 +8570,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_realm_available_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_realm_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/available",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8338,25 +8601,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite`
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_scopesidscope_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_scopes_with_id_scope_mappings_realm_composite_get(
+    pub async fn realm_client_scopes_with_client_scope_id_scope_mappings_realm_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-scopes/{id}/scope-mappings/realm/composite",
+                "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8372,24 +8637,26 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings`
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
-    pub async fn realm_client_templates_with_id_scope_mappings_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8402,25 +8669,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_clients_with_client_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_clients_with_client_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8433,27 +8702,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}`
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_templatesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_clients_with_client_post(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_clients_with_client_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8468,27 +8739,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}`
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_templatesidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_clients_with_client_delete(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8503,25 +8776,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/available`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsclientsclientavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_clients_with_client_available_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/available",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8534,27 +8809,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `client`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsclientsclientcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_clients_with_client_composite_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/clients/{client}/composite",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8570,23 +8847,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/realm`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_realm_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8599,25 +8878,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/client-templates/{id}/scope-mappings/realm`
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclient_templatesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_realm_post(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_realm_post(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -8632,25 +8913,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/client-templates/{id}/scope-mappings/realm`
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclient_templatesidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_realm_delete(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_realm_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -8665,23 +8948,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/available`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_realm_available_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_realm_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/available",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8694,25 +8979,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_scope_id`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/composite`
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclient_templatesidscope_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_client_templates_with_id_scope_mappings_realm_composite_get(
+    pub async fn realm_client_templates_with_client_scope_id_scope_mappings_realm_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_scope_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/client-templates/{id}/scope-mappings/realm/composite",
+                "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8728,24 +9015,26 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappings>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings`
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
-    pub async fn realm_clients_with_id_scope_mappings_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8758,25 +9047,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_clients_with_client_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_clients_with_client_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8789,27 +9080,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_clients_with_client_post(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_clients_with_client_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8824,27 +9117,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client`
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidscope_mappingsclientsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_clients_with_client_delete(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_clients_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
             .json(&body)
@@ -8859,25 +9154,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsclientsclientavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_clients_with_client_available_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_clients_with_client_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/available",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8890,27 +9187,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `client`
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsclientsclientcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_clients_with_client_composite_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_clients_with_client_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/clients/{client}/composite",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8926,23 +9225,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/realm`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_realm_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_realm_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -8955,25 +9256,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `POST /admin/realms/{realm}/clients/{id}/scope-mappings/realm`
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmclientsidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_realm_post(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_realm_post(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -8988,25 +9291,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `DELETE /admin/realms/{realm}/clients/{id}/scope-mappings/realm`
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmclientsidscope_mappingsrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_realm_delete(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_realm_delete(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
             .json(&body)
@@ -9021,23 +9326,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/realm/available`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsrealmavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/available`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_realm_available_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_realm_available_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm/available",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/available",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9050,25 +9357,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `client_uuid`: id of client (not client-id!)
     /// - `brief_representation`: if false, return roles with their attributes
     ///
     /// Resource: `Scope Mappings`
     ///
-    /// `GET /admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite`
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmclientsidscope_mappingsrealmcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/composite`
     #[cfg(feature = "tag-scope-mappings")]
-    pub async fn realm_clients_with_id_scope_mappings_realm_composite_get(
+    pub async fn realm_clients_with_client_uuid_scope_mappings_realm_composite_get(
         &self,
         realm: &str,
-        id: &str,
+        client_uuid: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/clients/{id}/scope-mappings/realm/composite",
+                "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/composite",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9105,7 +9414,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusers>
     #[cfg(feature = "tag-users")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_users_get(
@@ -9187,7 +9496,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusers>
     #[cfg(feature = "tag-users")]
     pub async fn realm_users_post(
         &self,
@@ -9222,7 +9531,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmuserscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmuserscount>
     #[cfg(feature = "tag-users")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_users_count_get(
@@ -9277,7 +9586,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/profile`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersprofile>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersprofile>
     #[cfg(feature = "tag-users")]
     pub async fn realm_users_profile_get(&self, realm: &str) -> Result<UPConfig, KeycloakError> {
         let builder = self
@@ -9297,7 +9606,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/profile`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersprofile>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersprofile>
     #[cfg(feature = "tag-users")]
     pub async fn realm_users_profile_put(
         &self,
@@ -9321,7 +9630,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/profile/metadata`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersprofilemetadata>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersprofilemetadata>
     #[cfg(feature = "tag-users")]
     pub async fn realm_users_profile_metadata_get(
         &self,
@@ -9343,24 +9652,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `user_profile_metadata`: Indicates if the user profile metadata should be added to the response
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}`
+    /// `GET /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_get(
+    pub async fn realm_users_with_user_id_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         user_profile_metadata: Option<bool>,
     ) -> Result<UserRepresentation, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
+            .get(&format!(
+                "{}/admin/realms/{realm}/users/{user_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = user_profile_metadata {
             builder = builder.query(&[("userProfileMetadata", v)]);
@@ -9374,24 +9688,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `body`
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}`
+    /// `PUT /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_put(
+    pub async fn realm_users_with_user_id_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         body: UserRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
+            .put(&format!(
+                "{}/admin/realms/{realm}/users/{user_id}",
+                self.url
+            ))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -9404,22 +9723,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_delete(
+    pub async fn realm_users_with_user_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}/users/{id}", self.url))
+            .delete(&format!(
+                "{}/admin/realms/{realm}/users/{user_id}",
+                self.url
+            ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -9431,23 +9755,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/configured-user-storage-credential-types`
+    /// `GET /admin/realms/{realm}/users/{user_id}/configured-user-storage-credential-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidconfigured_user_storage_credential_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idconfigured_user_storage_credential_types>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/configured-user-storage-credential-types`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_configured_user_storage_credential_types_get(
+    pub async fn realm_users_with_user_id_configured_user_storage_credential_types_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<String>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/configured-user-storage-credential-types",
+                "{}/admin/realms/{realm}/users/{user_id}/configured-user-storage-credential-types",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9460,23 +9786,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/consents`
+    /// `GET /admin/realms/{realm}/users/{user_id}/consents`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidconsents>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idconsents>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/consents`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_consents_get(
+    pub async fn realm_users_with_user_id_consents_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/consents",
+                "{}/admin/realms/{realm}/users/{user_id}/consents",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9489,25 +9817,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client`: Client id
     ///
     /// Resource: `Users`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/consents/{client}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/consents/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidconsentsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idconsentsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/consents/{client}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_consents_with_client_delete(
+    pub async fn realm_users_with_user_id_consents_with_client_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/consents/{client}",
+                "{}/admin/realms/{realm}/users/{user_id}/consents/{client}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9519,23 +9849,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/credentials`
+    /// `GET /admin/realms/{realm}/users/{user_id}/credentials`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidcredentials>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idcredentials>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/credentials`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_credentials_get(
+    pub async fn realm_users_with_user_id_credentials_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<CredentialRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/credentials",
+                "{}/admin/realms/{realm}/users/{user_id}/credentials",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9548,27 +9880,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `credential_id`
     ///
     /// Resource: `Users`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/credentials/{credential_id}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidcredentialscredentialid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idcredentialscredentialid>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/users/{id}/credentials/{credentialId}`
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_credentials_with_credential_id_delete(
+    pub async fn realm_users_with_user_id_credentials_with_credential_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}",
+                "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9582,29 +9914,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `credential_id`: The credential to move
     /// - `new_previous_credential_id`: The credential that will be the previous element in the list. If set to null, the moved credential will be the first element in the list.
     ///
     /// Resource: `Users`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}`
+    /// `POST /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidcredentialscredentialidmoveafternewpreviouscredentialid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmoveafternewpreviouscredentialid>
     ///
-    /// REST method: `POST /admin/realms/{realm}/users/{id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}`
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_credentials_with_credential_id_move_after_with_new_previous_credential_id_post(
+    pub async fn realm_users_with_user_id_credentials_with_credential_id_move_after_with_new_previous_credential_id_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         credential_id: &str,
         new_previous_credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}",
+                "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9618,27 +9950,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `credential_id`: The credential to move
     ///
     /// Resource: `Users`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveToFirst`
+    /// `POST /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveToFirst`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidcredentialscredentialidmovetofirst>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmovetofirst>
     ///
-    /// REST method: `POST /admin/realms/{realm}/users/{id}/credentials/{credentialId}/moveToFirst`
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveToFirst`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_credentials_with_credential_id_move_to_first_post(
+    pub async fn realm_users_with_user_id_credentials_with_credential_id_move_to_first_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         credential_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/moveToFirst",
+                "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveToFirst",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9652,29 +9984,29 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `credential_id`
     /// - `body`
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/credentials/{credential_id}/userLabel`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/userLabel`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidcredentialscredentialiduserlabel>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idcredentialscredentialiduserlabel>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/users/{id}/credentials/{credentialId}/userLabel`
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/userLabel`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_credentials_with_credential_id_user_label_put(
+    pub async fn realm_users_with_user_id_credentials_with_credential_id_user_label_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         credential_id: &str,
         body: String,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/credentials/{credential_id}/userLabel",
+                "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/userLabel",
                 self.url
             ))
             .body(body)
@@ -9689,25 +10021,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `body`
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/disable-credential-types`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/disable-credential-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersiddisable_credential_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_iddisable_credential_types>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/disable-credential-types`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_disable_credential_types_put(
+    pub async fn realm_users_with_user_id_disable_credential_types_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         body: Vec<String>,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/disable-credential-types",
+                "{}/admin/realms/{realm}/users/{user_id}/disable-credential-types",
                 self.url
             ))
             .json(&body)
@@ -9722,7 +10056,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client_id`: Client id
     /// - `lifespan`: Number of seconds after which the generated token expires
     /// - `redirect_uri`: Redirect uri
@@ -9730,14 +10064,16 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/execute-actions-email`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/execute-actions-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidexecute_actions_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idexecute_actions_email>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/execute-actions-email`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_execute_actions_email_put(
+    pub async fn realm_users_with_user_id_execute_actions_email_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client_id: Option<String>,
         lifespan: Option<i32>,
         redirect_uri: Option<String>,
@@ -9746,7 +10082,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/execute-actions-email",
+                "{}/admin/realms/{realm}/users/{user_id}/execute-actions-email",
                 self.url
             ))
             .json(&body)
@@ -9770,23 +10106,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/federated-identity`
+    /// `GET /admin/realms/{realm}/users/{user_id}/federated-identity`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidfederated_identity>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idfederated_identity>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/federated-identity`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_federated_identity_get(
+    pub async fn realm_users_with_user_id_federated_identity_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<FederatedIdentityRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/federated-identity",
+                "{}/admin/realms/{realm}/users/{user_id}/federated-identity",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9799,25 +10137,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `provider`: Social login provider id
     ///
     /// Resource: `Users`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/federated-identity/{provider}`
+    /// `POST /admin/realms/{realm}/users/{user_id}/federated-identity/{provider}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidfederated_identityprovider>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idfederated_identityprovider>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/federated-identity/{provider}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_federated_identity_with_provider_post(
+    pub async fn realm_users_with_user_id_federated_identity_with_provider_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         provider: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/federated-identity/{provider}",
+                "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9831,25 +10171,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `provider`: Social login provider id
     ///
     /// Resource: `Users`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/federated-identity/{provider}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/federated-identity/{provider}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidfederated_identityprovider>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idfederated_identityprovider>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/federated-identity/{provider}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_federated_identity_with_provider_delete(
+    pub async fn realm_users_with_user_id_federated_identity_with_provider_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         provider: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/federated-identity/{provider}",
+                "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9861,7 +10203,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `brief_representation`
     /// - `first`
     /// - `max`
@@ -9869,14 +10211,16 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/groups`
+    /// `GET /admin/realms/{realm}/users/{user_id}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroups>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/groups`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_groups_get(
+    pub async fn realm_users_with_user_id_groups_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -9885,7 +10229,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/groups",
+                "{}/admin/realms/{realm}/users/{user_id}/groups",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9908,25 +10252,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `search`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/groups/count`
+    /// `GET /admin/realms/{realm}/users/{user_id}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroupscount>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/groups/count`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_groups_count_get(
+    pub async fn realm_users_with_user_id_groups_count_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         search: Option<String>,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
         let mut builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/groups/count",
+                "{}/admin/realms/{realm}/users/{user_id}/groups/count",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -9940,27 +10286,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `group_id`
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/groups/{group_id}`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidgroupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idgroupsgroupid>
     ///
-    /// REST method: `PUT /admin/realms/{realm}/users/{id}/groups/{groupId}`
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/groups/{groupId}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_groups_with_group_id_put(
+    pub async fn realm_users_with_user_id_groups_with_group_id_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/groups/{group_id}",
+                "{}/admin/realms/{realm}/users/{user_id}/groups/{group_id}",
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
@@ -9973,27 +10319,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `group_id`
     ///
     /// Resource: `Users`
     ///
-    /// `DELETE /admin/realms/{realm}/users/{id}/groups/{group_id}`
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_delete_adminrealmsrealmusersidgroupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idgroupsgroupid>
     ///
-    /// REST method: `DELETE /admin/realms/{realm}/users/{id}/groups/{groupId}`
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/groups/{groupId}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_groups_with_group_id_delete(
+    pub async fn realm_users_with_user_id_groups_with_group_id_delete(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .delete(&format!(
-                "{}/admin/realms/{realm}/users/{id}/groups/{group_id}",
+                "{}/admin/realms/{realm}/users/{user_id}/groups/{group_id}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -10007,23 +10353,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/impersonation`
+    /// `POST /admin/realms/{realm}/users/{user_id}/impersonation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidimpersonation>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idimpersonation>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/impersonation`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_impersonation_post(
+    pub async fn realm_users_with_user_id_impersonation_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeMap<String, Value>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/impersonation",
+                "{}/admin/realms/{realm}/users/{user_id}/impersonation",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -10036,23 +10384,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `POST /admin/realms/{realm}/users/{id}/logout`
+    /// `POST /admin/realms/{realm}/users/{user_id}/logout`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_post_adminrealmsrealmusersidlogout>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idlogout>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/logout`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_logout_post(
+    pub async fn realm_users_with_user_id_logout_post(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .post(&format!(
-                "{}/admin/realms/{realm}/users/{id}/logout",
+                "{}/admin/realms/{realm}/users/{user_id}/logout",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -10066,27 +10416,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client_uuid`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/offline-sessions/{client_uuid}`
+    /// `GET /admin/realms/{realm}/users/{user_id}/offline-sessions/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidoffline_sessionsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idoffline_sessionsclientuuid>
     ///
-    /// REST method: `GET /admin/realms/{realm}/users/{id}/offline-sessions/{clientUuid}`
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/offline-sessions/{clientUuid}`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_offline_sessions_with_client_uuid_get(
+    pub async fn realm_users_with_user_id_offline_sessions_with_client_uuid_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/offline-sessions/{client_uuid}",
+                "{}/admin/realms/{realm}/users/{user_id}/offline-sessions/{client_uuid}",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -10099,25 +10449,27 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `body`
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/reset-password`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/reset-password`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidreset_password>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/reset-password`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_reset_password_put(
+    pub async fn realm_users_with_user_id_reset_password_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         body: CredentialRepresentation,
     ) -> Result<(), KeycloakError> {
         let builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/reset-password",
+                "{}/admin/realms/{realm}/users/{user_id}/reset-password",
                 self.url
             ))
             .json(&body)
@@ -10132,28 +10484,30 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client_id`: client id
     /// - `redirect_uri`: redirect uri
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/reset-password-email`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/reset-password-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidreset_password_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password_email>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/reset-password-email`
     #[cfg(feature = "tag-users")]
     #[deprecated]
-    pub async fn realm_users_with_id_reset_password_email_put(
+    pub async fn realm_users_with_user_id_reset_password_email_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client_id: Option<String>,
         redirect_uri: Option<String>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/reset-password-email",
+                "{}/admin/realms/{realm}/users/{user_id}/reset-password-email",
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
@@ -10174,33 +10528,40 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     /// - `client_id`: Client id
+    /// - `lifespan`: Number of seconds after which the generated token expires
     /// - `redirect_uri`: Redirect uri
     ///
     /// Resource: `Users`
     ///
-    /// `PUT /admin/realms/{realm}/users/{id}/send-verify-email`
+    /// `PUT /admin/realms/{realm}/users/{user_id}/send-verify-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_put_adminrealmsrealmusersidsend_verify_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idsend_verify_email>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/send-verify-email`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_send_verify_email_put(
+    pub async fn realm_users_with_user_id_send_verify_email_put(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
         client_id: Option<String>,
+        lifespan: Option<i32>,
         redirect_uri: Option<String>,
     ) -> Result<(), KeycloakError> {
         let mut builder = self
             .client
             .put(&format!(
-                "{}/admin/realms/{realm}/users/{id}/send-verify-email",
+                "{}/admin/realms/{realm}/users/{user_id}/send-verify-email",
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("client_id", v)]);
+        }
+        if let Some(v) = lifespan {
+            builder = builder.query(&[("lifespan", v)]);
         }
         if let Some(v) = redirect_uri {
             builder = builder.query(&[("redirect_uri", v)]);
@@ -10215,23 +10576,25 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `id`
+    /// - `user_id`
     ///
     /// Resource: `Users`
     ///
-    /// `GET /admin/realms/{realm}/users/{id}/sessions`
+    /// `GET /admin/realms/{realm}/users/{user_id}/sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/23.0.4/rest-api/index.html#_get_adminrealmsrealmusersidsessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/24.0.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idsessions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/sessions`
     #[cfg(feature = "tag-users")]
-    pub async fn realm_users_with_id_sessions_get(
+    pub async fn realm_users_with_user_id_sessions_get(
         &self,
         realm: &str,
-        id: &str,
+        user_id: &str,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
         let builder = self
             .client
             .get(&format!(
-                "{}/admin/realms/{realm}/users/{id}/sessions",
+                "{}/admin/realms/{realm}/users/{user_id}/sessions",
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
@@ -10239,3 +10602,5 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(error_check(response).await?.json().await?)
     }
 }
+// not all paths processed
+// left 22

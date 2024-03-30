@@ -51,7 +51,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .to_string();
 
     admin
-        .realm_users_with_id_delete("test", id.as_str())
+        .realm_users_with_user_id_delete("test", id.as_str())
         .await?;
 
     admin.realm_delete("test").await?;
