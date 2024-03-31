@@ -327,11 +327,11 @@ class User {
         message: `Assign milestone to issues and merge requests?`,
         type: Confirm,
         default: release,
-        before: async (_, next) => {
-          if (!(versions.milestone)) {
-            await next("createReleaseIssue");
-          } else {
+        before: async (createMilestone, next) => {
+          if (versions.milestone || createMilestone) {
             await next();
+          } else {
+            await next("createReleaseIssue");
           }
         },
       },
