@@ -82,7 +82,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
     }
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize, Serialize)]
 pub struct KeycloakAdminToken {
     access_token: String,
     expires_in: usize,
