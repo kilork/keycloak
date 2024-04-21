@@ -6,6 +6,7 @@ use crate::{types::*, KeycloakError};
 
 mod generated_rest;
 
+#[derive(Debug, Clone)]
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
@@ -17,6 +18,7 @@ pub trait KeycloakTokenSupplier {
     async fn get(&self, url: &str) -> Result<String, KeycloakError>;
 }
 
+#[derive(Debug, Clone)]
 pub struct KeycloakServiceAccountAdminTokenRetriever {
     client_id: String,
     client_secret: String,
@@ -81,7 +83,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, Eq, PartialEq)]
 pub struct KeycloakAdminToken {
     access_token: String,
     expires_in: usize,

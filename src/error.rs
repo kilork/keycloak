@@ -12,7 +12,7 @@ pub enum KeycloakError {
     },
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct KeycloakHttpError {
     pub error: Option<String>,
     #[serde(rename = "errorMessage")]
