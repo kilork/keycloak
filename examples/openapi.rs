@@ -25,7 +25,7 @@ mod openapi {
     use crate::RESERVED_WORDS;
 
     #[derive(Debug, PartialEq, Eq)]
-    pub enum FieldCase {
+    pub(super) enum FieldCase {
         CamelCase,
         SnakeCase,
         Custom,
@@ -33,7 +33,7 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Spec<'s> {
+    pub(super) struct Spec<'s> {
         pub openapi: String,
         pub info: Info,
         pub tags: Vec<Tag<'s>>,
@@ -42,19 +42,19 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Info {
+    pub(super) struct Info {
         pub title: String,
         pub description: String,
         pub version: String,
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Tag<'t> {
+    pub(super) struct Tag<'t> {
         pub name: Cow<'t, str>,
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct SpecPath<'s> {
+    pub(super) struct SpecPath<'s> {
         #[serde(flatten)]
         pub calls: IndexMap<Method, Call<'s>>,
         pub parameters: Option<Vec<Parameter>>,
@@ -227,7 +227,7 @@ mod openapi {
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "camelCase")]
-    pub struct Call<'c> {
+    pub(super) struct Call<'c> {
         pub tags: Option<Vec<Cow<'c, str>>>,
         summary: Option<String>,
         #[serde(default)]
@@ -594,7 +594,7 @@ mod openapi {
 
     #[derive(Debug, Deserialize, PartialEq, Eq, PartialOrd, Ord, Hash)]
     #[serde(rename_all = "lowercase")]
-    pub enum Method {
+    pub(super) enum Method {
         Delete,
         Get,
         Post,
@@ -608,7 +608,7 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Parameter {
+    pub(super) struct Parameter {
         pub name: String,
         #[serde(rename = "in")]
         pub position: ParameterPosition,
@@ -622,18 +622,18 @@ mod openapi {
 
     #[derive(Debug, Deserialize, PartialEq, Eq)]
     #[serde(rename_all = "lowercase")]
-    pub enum ParameterPosition {
+    pub(super) enum ParameterPosition {
         Path,
         Query,
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Components {
+    pub(super) struct Components {
         pub schemas: IndexMap<String, SchemaObj>,
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct SchemaObj {
+    pub(super) struct SchemaObj {
         #[serde(default)]
         deprecated: bool,
         #[serde(flatten)]
@@ -656,13 +656,13 @@ mod openapi {
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "lowercase", tag = "type")]
-    pub enum Schema {
+    pub(super) enum Schema {
         Object(ObjectSchema<Property>),
         String(StringSchema),
     }
 
     impl Schema {
-        pub fn to_rust_type_definition(&self, name: &str, ref_mode: RefMode) -> String {
+        fn to_rust_type_definition(&self, name: &str, ref_mode: RefMode) -> String {
             match self {
                 Schema::Object(schema_obj) => schema_obj.to_rust_type_definition(name, ref_mode),
                 Schema::String(schema_str) => schema_str.to_rust_type_definition(name),
@@ -672,7 +672,7 @@ mod openapi {
 
     #[derive(Debug, Deserialize)]
     #[serde(untagged)]
-    pub enum ObjectSchema<P> {
+    pub(super) enum ObjectSchema<P> {
         Struct(SchemaStruct<P>),
         Map(SchemaMap<P>),
         AllOf(SchemaAllOf<P>),
@@ -706,7 +706,7 @@ mod openapi {
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct SchemaStruct<P> {
+    pub(super) struct SchemaStruct<P> {
         pub properties: IndexMap<String, P>,
     }
 
@@ -770,7 +770,7 @@ mod openapi {
             };
             format!(
                 r##"#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]{}
 pub struct {name} {{
 {}
@@ -815,7 +815,7 @@ pub struct {name} {{
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "camelCase")]
-    pub struct SchemaMap<P> {
+    pub(super) struct SchemaMap<P> {
         pub additional_properties: P,
     }
 
@@ -840,7 +840,7 @@ pub struct {name} {{
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "camelCase")]
-    pub struct SchemaAllOf<P> {
+    pub(super) struct SchemaAllOf<P> {
         pub all_of: Vec<P>,
     }
 
@@ -855,7 +855,7 @@ pub struct {name} {{
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "lowercase")]
-    pub enum StringSchema {
+    pub(super) enum StringSchema {
         Enum(Vec<String>),
     }
 
@@ -890,7 +890,7 @@ pub enum {name} {{
     }
 
     #[derive(Clone, Copy)]
-    pub enum RefMode {
+    pub(super) enum RefMode {
         Owned,
         Borrowed,
         Std,
@@ -898,7 +898,7 @@ pub enum {name} {{
 
     #[derive(Debug, Deserialize)]
     #[serde(untagged)]
-    pub enum Kind {
+    pub(super) enum Kind {
         Generic(Generic),
         Ref(Ref),
         DefaultValue {},
@@ -964,7 +964,7 @@ pub enum {name} {{
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Property {
+    pub(super) struct Property {
         #[serde(default)]
         deprecated: bool,
         #[serde(default)]
@@ -990,7 +990,7 @@ pub enum {name} {{
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "lowercase", tag = "type")]
-    pub enum Generic {
+    pub(super) enum Generic {
         Array {
             items: Option<Box<Property>>,
             #[serde(rename = "uniqueItems", default)]
@@ -1005,14 +1005,14 @@ pub enum {name} {{
     }
 
     #[derive(Debug, Deserialize)]
-    pub struct Ref {
+    pub(super) struct Ref {
         #[serde(rename = "$ref")]
         pub reference: String,
     }
 
     #[derive(Debug, Deserialize)]
     #[serde(rename_all = "lowercase")]
-    pub enum IntegerFormat {
+    pub(super) enum IntegerFormat {
         Int32,
         Int64,
     }
