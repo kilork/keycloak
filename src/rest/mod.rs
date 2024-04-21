@@ -6,7 +6,6 @@ use crate::{types::*, KeycloakError};
 
 mod generated_rest;
 
-#[derive(Debug, Clone)]
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
     client: reqwest::Client,
