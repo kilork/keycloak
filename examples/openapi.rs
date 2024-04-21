@@ -770,7 +770,7 @@ mod openapi {
             };
             format!(
                 r##"#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Deserialize, Serialize)]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]{}
 pub struct {name} {{
 {}
@@ -867,7 +867,7 @@ pub struct {name} {{
                         .iter()
                         .all(|variant| variant.chars().all(|c| c.is_uppercase()));
                     format!(
-                        r##"#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+                        r##"#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]{}
 pub enum {name} {{
 {}
