@@ -611,7 +611,7 @@ pub struct CredentialRepresentation {
     pub value: Option<TypeString>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum DecisionEffect {
@@ -619,7 +619,7 @@ pub enum DecisionEffect {
     Deny,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum DecisionStrategy {
@@ -628,7 +628,7 @@ pub enum DecisionStrategy {
     Consensus,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum EnforcementMode {
@@ -856,7 +856,7 @@ pub struct KeyStoreConfig {
     pub store_password: Option<TypeString>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum KeyUse {
@@ -872,7 +872,7 @@ pub struct KeysMetadataRepresentation {
     pub keys: Option<TypeVec<KeyMetadataRepresentation>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum Logic {
@@ -1025,7 +1025,7 @@ pub struct Permission {
     pub scopes: Option<TypeVec<String>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum PolicyEnforcementMode {
@@ -1437,7 +1437,7 @@ pub struct RolesRepresentation {
     pub realm: Option<TypeVec<RoleRepresentation>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "UPPERCASE")]
 pub enum ScopeEnforcementMode {
@@ -1543,7 +1543,7 @@ pub struct UPGroup {
     pub name: Option<TypeString>,
 }
 
-#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub enum UnmanagedAttributePolicy {
     Enabled,

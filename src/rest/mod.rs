@@ -18,7 +18,7 @@ pub trait KeycloakTokenSupplier {
     async fn get(&self, url: &str) -> Result<String, KeycloakError>;
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub struct KeycloakServiceAccountAdminTokenRetriever {
     client_id: String,
     client_secret: String,
