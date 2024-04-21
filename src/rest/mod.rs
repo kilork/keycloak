@@ -40,6 +40,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
     ///                  3. `Service Accounts` option is enabled
     /// * `client_secret` - The secret credential assigned to the given `client_id`
     /// * `client` - A reqwest Client to perform the token retrieval call
+    #[must_use]
     pub fn create(client_id: &str, client_secret: &str, client: reqwest::Client) -> Self {
         Self {
             client_id: client_id.into(),
@@ -49,6 +50,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         }
     }
 
+    #[must_use]
     pub fn create_with_custom_realm(
         client_id: &str,
         client_secret: &str,

@@ -1,5 +1,5 @@
 use keycloak::{
-    types::*,
+    types::{RealmRepresentation, UserRepresentation},
     {KeycloakAdmin, KeycloakAdminToken},
 };
 
@@ -14,7 +14,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
     let admin_token = KeycloakAdminToken::acquire(&url, &user, &password, &client).await?;
 
-    eprintln!("{:?}", admin_token);
+    eprintln!("{admin_token:?}");
 
     let admin = KeycloakAdmin::new(&url, admin_token, client);
 
@@ -42,7 +42,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         )
         .await?;
 
-    eprintln!("{:?}", users);
+    eprintln!("{users:?}");
 
     let id = users
         .iter()

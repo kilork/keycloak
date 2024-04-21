@@ -21,6 +21,7 @@ mod openapi {
     use heck::{ToLowerCamelCase, ToSnakeCase, ToUpperCamelCase};
     use indexmap::IndexMap;
     use serde::Deserialize;
+    use std::fmt::Write;
 
     use crate::RESERVED_WORDS;
 
@@ -289,13 +290,13 @@ mod openapi {
             method_name = (method_name + &method_string).to_snake_case();
 
             let (method_string_lc, comments) =
-                self.comments(&parameters, method_string, path, &path_snake_case);
+                self.comments(&parameters, &method_string, path, &path_snake_case);
 
             let mut output = vec![];
 
             output.extend(comments);
 
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 use heck::ToKebabCase;
                 let tag = tag.to_kebab_case();
                 output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
@@ -332,7 +333,7 @@ mod openapi {
                     let param_type = if let Some(desc) = desc.as_ref() {
                         let from_type = desc.from_type.as_str();
                         if from_type != param_type {
-                            let redundant = &param_type == &desc.rust_type;
+                            let redundant = param_type == desc.rust_type;
                             let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
                             if redundant {
                                 delete_mapping(&full_header);
@@ -364,16 +365,13 @@ mod openapi {
 
             let mut result_type = self.responses.to_rust_return_type_and_parse_calls();
 
-            let mut result_type_value = result_type
-                .as_ref()
-                .map(|rt| rt.value.as_ref())
-                .unwrap_or("()");
+            let mut result_type_value = result_type.as_ref().map_or("()", |rt| rt.value.as_ref());
 
             let desc = Toml::desc::<_, _, String>(path, &method_string_lc, None);
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
-                    let redundant = result_type_value == &desc.rust_type;
+                    let redundant = result_type_value == desc.rust_type;
                     let full_header = format!(r#"[path."{path}:{method_string_lc}:"]"#);
                     if redundant {
                         delete_mapping(&full_header);
@@ -448,7 +446,7 @@ mod openapi {
             ));
 
             if let Some(ReturnType { body, convert, .. }) = result_type.as_ref() {
-                let body = body.as_deref().unwrap_or_else(|| "json".into());
+                let body = body.as_deref().unwrap_or("json");
                 output.push("    let response = builder.send().await?;".into());
                 output.push(format!(
                     "    Ok(error_check(response).await?.{body}().await{}?)",
@@ -472,10 +470,10 @@ mod openapi {
 
         fn comments(
             &self,
-            parameters: &Vec<(&Parameter, String)>,
-            method_string: String,
+            parameters: &[(&Parameter, String)],
+            method_string: &str,
             path: &str,
-            path_snake_case: &String,
+            path_snake_case: &str,
         ) -> (String, Vec<String>) {
             let mut comments: Vec<Vec<Cow<str>>> = vec![];
 
@@ -511,7 +509,7 @@ mod openapi {
                         .collect(),
                 );
             }
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
             }
             comments.push(vec![format!(
@@ -540,7 +538,7 @@ mod openapi {
             )
             .into()]);
 
-            if *path_snake_case != path {
+            if path_snake_case != path {
                 comments.push(vec![format!(
                     "REST method: `{} {path}`",
                     method_string.to_ascii_uppercase()
@@ -551,10 +549,10 @@ mod openapi {
             let comments: Vec<_> = comments
                 .into_iter()
                 .map(|c| {
-                    c.into_iter()
-                        .map(|l| format!("/// {}\n", l))
-                        .collect::<Vec<_>>()
-                        .join("")
+                    c.iter().fold(String::new(), |mut output, l| {
+                        _ = writeln!(output, "/// {l}");
+                        output
+                    })
                 })
                 .collect::<Vec<_>>()
                 .join("///\n")
@@ -579,11 +577,9 @@ mod openapi {
                         } else {
                             acc.push(x);
                         }
-                    } else {
-                        if x.starts_with("[path.") {
-                            in_header = false;
-                            acc.push(x);
-                        }
+                    } else if x.starts_with("[path.") {
+                        in_header = false;
+                        acc.push(x);
                     }
                     acc
                 })
@@ -762,8 +758,8 @@ mod openapi {
             let (rename_to_camel_case, type_prefix) = if count_camel_case > count_snake_case {
                 (
                     true,
-                    r##"
-#[serde(rename_all = "camelCase")]"##,
+                    r#"
+#[serde(rename_all = "camelCase")]"#,
                 )
             } else {
                 (false, "")
@@ -787,18 +783,18 @@ pub struct {name} {{
                             FieldCase::SnakeCase => rename_to_camel_case,
                         };
 
-                        let field_desc = if !is_rename {
-                            format!(r##"    pub {field_name}: {field_type},"##)
-                        } else {
+                        let field_desc = if is_rename {
                             format!(
                                 r##"    #[serde(rename = "{field}")]
     pub {field_name}: {field_type},"##,
                             )
-                        };
-                        if !deprecated {
-                            field_desc
                         } else {
+                            format!(r##"    pub {field_name}: {field_type},"##)
+                        };
+                        if deprecated {
                             format!("    #[deprecated]\n{field_desc}")
+                        } else {
+                            field_desc
                         }
                     })
                     .collect::<Vec<_>>()
@@ -865,7 +861,7 @@ pub struct {name} {{
                 StringSchema::Enum(variants) => {
                     let is_uppercase = variants
                         .iter()
-                        .all(|variant| variant.chars().all(|c| c.is_uppercase()));
+                        .all(|variant| variant.chars().all(char::is_uppercase));
                     format!(
                         r##"#[derive(Clone, Debug, Deserialize, Eq, PartialEq, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]{}
@@ -1168,5 +1164,7 @@ fn list_tags(spec: &openapi::Spec) {
             .collect::<Vec<_>>()
             .join(", ")
     );
-    tags.iter().for_each(|line| println!("{line} = []"));
+    for line in &tags {
+        println!("{line} = []");
+    }
 }
