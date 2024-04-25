@@ -435,16 +435,16 @@ mod openapi {
 
             output.extend(query_parameters.into_iter().flat_map(
                 |(query_parameter, query_parameter_name)| {
-                    let value = match &query_parameter.schema {
-                        Kind::Generic(Generic::Array { .. }) => r#"v.join(",")"#,
-                        _ => "v",
+                    let value = match query_parameter.schema {
+                        Kind::Generic(Generic::Array { .. }) => format!(
+                            r#"v.into_iter().map(|e| ("{}", e)).collect::<Vec<_>>()"#,
+                            query_parameter.name
+                        ),
+                        _ => format!(r#"[("{}", v)]"#, query_parameter.name),
                     };
                     [
                         format!("if let Some(v) = {query_parameter_name} {{"),
-                        format!(
-                            r#"    builder = builder.query(&[("{}", {value})]);"#,
-                            query_parameter.name
-                        ),
+                        format!(r#"    builder = builder.query(&{value});"#,),
                         "}".into(),
                     ]
                     .map(|line| format!("    {line}"))
