@@ -435,15 +435,30 @@ mod openapi {
 
             output.extend(query_parameters.into_iter().flat_map(
                 |(query_parameter, query_parameter_name)| {
+                    let stringify = match &query_parameter.schema {
+                        Kind::Generic(v) => match v {
+                            Generic::Array { .. } => r#"    let v = v.join(",");"#,
+                            _ => "",
+                        },
+                        _ => "",
+                    };
                     [
                         format!("if let Some(v) = {query_parameter_name} {{"),
+                        stringify.to_string(),
                         format!(
                             r#"    builder = builder.query(&[("{}", v)]);"#,
                             query_parameter.name
                         ),
                         "}".into(),
                     ]
-                    .map(|line| format!("    {line}"))
+                    .into_iter()
+                    .filter_map(|line| {
+                        if line.is_empty() {
+                            None
+                        } else {
+                            Some(format!("    {line}"))
+                        }
+                    })
                 },
             ));
 
