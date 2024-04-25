@@ -1,6 +1,5 @@
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
-use serde_json::json;
 
 use crate::{types::*, KeycloakError};
 
@@ -71,11 +70,11 @@ impl KeycloakServiceAccountAdminTokenRetriever {
             .post(&format!(
                 "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
-            .form(&json!({
-                "client_id": &self.client_id,
-                "client_secret":  &self.client_secret,
-                "grant_type": "client_credentials"
-            }))
+            .form(&[
+                ("client_id", self.client_id.as_str()),
+                ("client_secret", self.client_secret.as_str()),
+                ("grant_type", "client_credentials"),
+            ])
             .send()
             .await?;
         Ok(error_check(response).await?.json().await?)
@@ -134,12 +133,12 @@ impl KeycloakAdminToken {
             .post(&format!(
                 "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
-            .form(&json!({
-                "username": username,
-                "password": password,
-                "client_id": client_id,
-                "grant_type": grant_type
-            }))
+            .form(&[
+                ("username", username),
+                ("password", password),
+                ("client_id", client_id),
+                ("grant_type", grant_type),
+            ])
             .send()
             .await?;
         Ok(error_check(response).await?.json().await?)
