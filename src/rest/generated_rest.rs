@@ -5405,15 +5405,13 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = operation_types {
-            let v = v.join(",");
-            builder = builder.query(&[("operationTypes", v)]);
+            builder = builder.query(&[("operationTypes", v.join(","))]);
         }
         if let Some(v) = resource_path {
             builder = builder.query(&[("resourcePath", v)]);
         }
         if let Some(v) = resource_types {
-            let v = v.join(",");
-            builder = builder.query(&[("resourceTypes", v)]);
+            builder = builder.query(&[("resourceTypes", v.join(","))]);
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5953,8 +5951,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = type_ {
-            let v = v.join(",");
-            builder = builder.query(&[("type", v)]);
+            builder = builder.query(&[("type", v.join(","))]);
         }
         if let Some(v) = user {
             builder = builder.query(&[("user", v)]);
