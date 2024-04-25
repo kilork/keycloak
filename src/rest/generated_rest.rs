@@ -5405,13 +5405,21 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = operation_types {
-            builder = builder.query(&[("operationTypes", v)]);
+            builder = builder.query(
+                &v.into_iter()
+                    .map(|e| ("operationTypes", e))
+                    .collect::<Vec<_>>(),
+            );
         }
         if let Some(v) = resource_path {
             builder = builder.query(&[("resourcePath", v)]);
         }
         if let Some(v) = resource_types {
-            builder = builder.query(&[("resourceTypes", v)]);
+            builder = builder.query(
+                &v.into_iter()
+                    .map(|e| ("resourceTypes", e))
+                    .collect::<Vec<_>>(),
+            );
         }
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5951,7 +5959,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("max", v)]);
         }
         if let Some(v) = type_ {
-            builder = builder.query(&[("type", v)]);
+            builder = builder.query(&v.into_iter().map(|e| ("type", e)).collect::<Vec<_>>());
         }
         if let Some(v) = user {
             builder = builder.query(&[("user", v)]);
