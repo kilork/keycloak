@@ -54,7 +54,6 @@ schemars = { version = "0.8.11", default-features = false, features = [
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-scraper = "0.19"
 heck = "0.5"
 clap = { version = "4", features = ["derive", "std"], default-features = false }
 toml = "0.8"
