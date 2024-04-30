@@ -159,12 +159,13 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
-fn get_id_from_location_header(response: reqwest::Response) -> Option<TypeString> {
-    response.headers().get(reqwest::header::LOCATION)
+fn to_id(response: reqwest::Response) -> Option<TypeString> {
+    response
+        .headers()
+        .get(reqwest::header::LOCATION)
         .and_then(|v| v.to_str().ok())
         .and_then(|v| v.split('/').last())
-        .map(|s| s.to_string())
-        .map(|s| s.into())
+        .map(From::from)
 }
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
