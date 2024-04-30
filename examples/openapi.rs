@@ -394,6 +394,11 @@ mod openapi {
                 eprintln!(r#"warn: Value as result in [path."{path}:{method_string_lc}:"]"#);
             }
 
+            // post method with empty body returns id extracted from location header
+            if matches!(method, Method::Post) && result_type_value == "()" {
+                result_type_value = "Option<TypeString>";
+            }
+
             output.push(format!(
                 ") -> Result<{result_type_value}, KeycloakError> {{"
             ));
@@ -459,9 +464,14 @@ mod openapi {
                     convert.as_deref().unwrap_or_default()
                 ));
             } else {
-                output.push("    let response = builder.send().await?;".into());
-                output.push("    error_check(response).await?;".into());
-                output.push("    Ok(())".into());
+                if matches!(method, Method::Post) {
+                    output.push("    let response = builder.send().await?;".into());
+                    output.push("    Ok(get_id_from_location_header(error_check(response).await?))".into());
+                } else {
+                    output.push("    let response = builder.send().await?;".into());
+                    output.push("    error_check(response).await?;".into());
+                    output.push("    Ok(())".into());
+                }
             }
 
             output.push("}".into());
