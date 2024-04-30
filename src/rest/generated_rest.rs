@@ -1900,15 +1900,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: ClientScopeRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get representation of the client scope
@@ -2239,15 +2238,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: ClientRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/clients", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get representation of the client
@@ -3388,15 +3386,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: ComponentRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/components", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Parameters:
@@ -3598,15 +3595,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: GroupRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/groups", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Returns the groups counts.
@@ -3804,7 +3800,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
         body: GroupRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -3814,8 +3810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -6982,7 +6977,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         body: RoleRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!(
@@ -6992,8 +6987,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get a role by name
@@ -7494,15 +7488,14 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: RoleRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/roles", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get a role by name
@@ -9515,15 +9508,15 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: UserRepresentation,
-    ) -> Result<(), KeycloakError> {
+    ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/users", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await?;
-        Ok(())
+        let response = error_check(response).await?;
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Returns the number of users that match the given criteria.
