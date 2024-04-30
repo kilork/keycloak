@@ -1907,7 +1907,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get representation of the client scope
@@ -2245,7 +2245,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get representation of the client
@@ -3393,7 +3393,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Parameters:
@@ -3602,7 +3602,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Returns the groups counts.
@@ -3810,7 +3810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
@@ -6987,7 +6987,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get a role by name
@@ -7495,7 +7495,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Get a role by name
@@ -9516,7 +9516,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         let response = error_check(response).await?;
-        Ok(get_id_from_location_header(error_check(response).await?).map(|s| s.into()))
+        Ok(get_id_from_location_header(error_check(response).await?))
     }
 
     /// Returns the number of users that match the given criteria.
