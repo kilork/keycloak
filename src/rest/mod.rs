@@ -159,6 +159,15 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     Ok(response)
 }
 
+fn to_id(response: reqwest::Response) -> Option<TypeString> {
+    response
+        .headers()
+        .get(reqwest::header::LOCATION)
+        .and_then(|v| v.to_str().ok())
+        .and_then(|v| v.split('/').last())
+        .map(From::from)
+}
+
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     pub fn new(url: &str, token_supplier: TS, client: reqwest::Client) -> Self {
         Self {

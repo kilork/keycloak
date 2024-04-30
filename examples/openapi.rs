@@ -288,8 +288,23 @@ mod openapi {
 
             method_name = (method_name + &method_string).to_snake_case();
 
+            let mut result_type = self.responses.to_rust_return_type_and_parse_calls();
+
+            let mut result_type_value = result_type
+                .as_ref()
+                .map(|rt| rt.value.as_ref())
+                .unwrap_or("()");
+
+            // post method with empty body may return id extracted from location header
+            let to_id = if matches!(method, Method::Post) && result_type_value == "()" {
+                result_type_value = "Option<TypeString>";
+                true
+            } else {
+                false
+            };
+
             let (method_string_lc, comments) =
-                self.comments(&parameters, method_string, path, &path_snake_case);
+                self.comments(&parameters, method_string, path, &path_snake_case, to_id);
 
             let mut output = vec![];
 
@@ -361,13 +376,6 @@ mod openapi {
             // fill parameters
 
             output.extend(parameters_of_method);
-
-            let mut result_type = self.responses.to_rust_return_type_and_parse_calls();
-
-            let mut result_type_value = result_type
-                .as_ref()
-                .map(|rt| rt.value.as_ref())
-                .unwrap_or("()");
 
             let desc = Toml::desc::<_, _, String>(path, &method_string_lc, None);
             if let Some(desc) = desc.as_ref() {
@@ -458,6 +466,9 @@ mod openapi {
                     "    Ok(error_check(response).await?.{body}().await{}?)",
                     convert.as_deref().unwrap_or_default()
                 ));
+            } else if to_id {
+                output.push("    let response = builder.send().await?;".into());
+                output.push("    error_check(response).await.map(to_id)".into());
             } else {
                 output.push("    let response = builder.send().await?;".into());
                 output.push("    error_check(response).await?;".into());
@@ -480,6 +491,7 @@ mod openapi {
             method_string: String,
             path: &str,
             path_snake_case: &String,
+            to_id: bool,
         ) -> (String, Vec<String>) {
             let mut comments: Vec<Vec<Cow<str>>> = vec![];
 
@@ -514,6 +526,9 @@ mod openapi {
                         })
                         .collect(),
                 );
+            }
+            if to_id {
+                comments.push(vec!["Returns id of created resource".into()]);
             }
             if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
