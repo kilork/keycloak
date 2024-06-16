@@ -63,7 +63,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         }
     }
 
-    async fn acquire(&self, url: &str) -> Result<KeycloakAdminToken, KeycloakError> {
+    pub async fn acquire(&self, url: &str) -> Result<KeycloakAdminToken, KeycloakError> {
         let realm = &self.realm;
         let response = self
             .reqwest_client
