@@ -63,9 +63,6 @@ pub struct AccessToken {
     #[serde(rename = "allowed-origins")]
     pub allowed_origins: Option<TypeVec<String>>,
     pub at_hash: Option<TypeString>,
-    #[deprecated]
-    #[serde(rename = "authTime")]
-    pub auth_time_: Option<i32>,
     pub auth_time: Option<i64>,
     pub authorization: Option<Authorization>,
     pub azp: Option<TypeString>,
@@ -99,7 +96,6 @@ pub struct AccessToken {
     pub resource_access: Option<TypeMap<String, Access>>,
     pub s_hash: Option<TypeString>,
     pub scope: Option<TypeString>,
-    pub session_state: Option<TypeString>,
     pub sid: Option<TypeString>,
     pub sub: Option<TypeString>,
     #[serde(rename = "trusted-certs")]
@@ -187,6 +183,8 @@ pub struct ApplicationRepresentation {
     pub service_accounts_enabled: Option<bool>,
     pub standard_flow_enabled: Option<bool>,
     pub surrogate_auth_required: Option<bool>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
     #[deprecated]
     pub use_template_config: Option<bool>,
     #[deprecated]
@@ -238,6 +236,7 @@ pub struct AuthenticationExecutionInfoRepresentation {
     pub id: Option<TypeString>,
     pub index: Option<i32>,
     pub level: Option<i32>,
+    pub priority: Option<i32>,
     pub provider_id: Option<TypeString>,
     pub requirement: Option<TypeString>,
     pub requirement_choices: Option<TypeVec<String>>,
@@ -361,7 +360,9 @@ pub struct ClientMappingsRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ClientPoliciesRepresentation {
+    pub global_policies: Option<TypeVec<ClientPolicyRepresentation>>,
     pub policies: Option<TypeVec<ClientPolicyRepresentation>>,
 }
 
@@ -457,6 +458,8 @@ pub struct ClientRepresentation {
     pub service_accounts_enabled: Option<bool>,
     pub standard_flow_enabled: Option<bool>,
     pub surrogate_auth_required: Option<bool>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
     #[deprecated]
     pub use_template_config: Option<bool>,
     #[deprecated]
@@ -500,6 +503,25 @@ pub struct ClientTemplateRepresentation {
     pub public_client: Option<bool>,
     pub service_accounts_enabled: Option<bool>,
     pub standard_flow_enabled: Option<bool>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct ClientTypeRepresentation {
+    pub config: Option<TypeMap<String, PropertyConfig>>,
+    pub name: Option<TypeString>,
+    pub provider: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct ClientTypesRepresentation {
+    #[serde(rename = "client-types")]
+    pub client_types: Option<TypeVec<ClientTypeRepresentation>>,
+    #[serde(rename = "global-client-types")]
+    pub global_client_types: Option<TypeVec<ClientTypeRepresentation>>,
 }
 
 #[skip_serializing_none]
@@ -709,9 +731,6 @@ pub struct IDToken {
     pub acr: Option<TypeString>,
     pub address: Option<AddressClaimSet>,
     pub at_hash: Option<TypeString>,
-    #[deprecated]
-    #[serde(rename = "authTime")]
-    pub auth_time_: Option<i32>,
     pub auth_time: Option<i64>,
     pub azp: Option<TypeString>,
     pub birthdate: Option<TypeString>,
@@ -740,7 +759,6 @@ pub struct IDToken {
     pub preferred_username: Option<TypeString>,
     pub profile: Option<TypeString>,
     pub s_hash: Option<TypeString>,
-    pub session_state: Option<TypeString>,
     pub sid: Option<TypeString>,
     pub sub: Option<TypeString>,
     pub typ: Option<TypeString>,
@@ -914,8 +932,6 @@ pub type MultivaluedHashMapStringComponentExportRepresentation =
 
 pub type MultivaluedHashMapStringString = TypeMap<String, TypeVec<String>>;
 
-pub type MultivaluedMapStringString = TypeMap<String, TypeVec<String>>;
-
 #[deprecated]
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
@@ -966,6 +982,8 @@ pub struct OAuthClientRepresentation {
     pub service_accounts_enabled: Option<bool>,
     pub standard_flow_enabled: Option<bool>,
     pub surrogate_auth_required: Option<bool>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
     #[deprecated]
     pub use_template_config: Option<bool>,
     #[deprecated]
@@ -973,6 +991,29 @@ pub struct OAuthClientRepresentation {
     #[deprecated]
     pub use_template_scope: Option<bool>,
     pub web_origins: Option<TypeVec<String>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct OrganizationDomainRepresentation {
+    pub name: Option<TypeString>,
+    pub verified: Option<bool>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OrganizationRepresentation {
+    pub attributes: Option<TypeMap<String, TypeVec<String>>>,
+    pub description: Option<TypeString>,
+    pub domains: Option<TypeVec<OrganizationDomainRepresentation>>,
+    pub enabled: Option<bool>,
+    pub id: Option<TypeString>,
+    pub identity_providers: Option<TypeVec<IdentityProviderRepresentation>>,
+    pub members: Option<TypeVec<UserRepresentation>>,
+    pub name: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1004,15 +1045,6 @@ pub struct PathConfig {
     pub static_path: Option<bool>,
     #[serde(rename = "type")]
     pub type_: Option<TypeString>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PathSegment {
-    pub matrix_parameters: Option<MultivaluedMapStringString>,
-    pub path: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1123,6 +1155,14 @@ pub struct PolicyResultRepresentation {
     pub policy: Option<PolicyRepresentation>,
     pub scopes: Option<TypeVec<String>>,
     pub status: Option<DecisionEffect>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct PropertyConfig {
+    pub applicable: Option<bool>,
+    pub value: Option<Value>,
 }
 
 #[skip_serializing_none]
@@ -1270,6 +1310,8 @@ pub struct RealmRepresentation {
     pub offline_session_idle_timeout: Option<i32>,
     pub offline_session_max_lifespan: Option<i32>,
     pub offline_session_max_lifespan_enabled: Option<bool>,
+    pub organizations: Option<TypeVec<OrganizationRepresentation>>,
+    pub organizations_enabled: Option<bool>,
     pub otp_policy_algorithm: Option<TypeString>,
     pub otp_policy_code_reusable: Option<bool>,
     pub otp_policy_digits: Option<i32>,
@@ -1347,6 +1389,20 @@ pub struct RealmRepresentation {
     pub web_authn_policy_rp_id: Option<TypeString>,
     pub web_authn_policy_signature_algorithms: Option<TypeVec<String>>,
     pub web_authn_policy_user_verification_requirement: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct RequiredActionConfigInfoRepresentation {
+    pub properties: Option<TypeVec<ConfigPropertyRepresentation>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct RequiredActionConfigRepresentation {
+    pub config: Option<TypeMap<String, TypeString>>,
 }
 
 #[skip_serializing_none]
@@ -1675,6 +1731,7 @@ pub struct UserSessionRepresentation {
     pub last_access: Option<i64>,
     pub remember_me: Option<bool>,
     pub start: Option<i64>,
+    pub transient_user: Option<bool>,
     pub user_id: Option<TypeString>,
     pub username: Option<TypeString>,
 }
