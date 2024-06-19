@@ -7,9 +7,6 @@ rust_type = "RequiredActionProviderRepresentation"
 [path."/admin/realms/{realm}/authentication/unregistered-required-actions:get:"]
 from_type = "TypeVec<TypeMap<String, String>>"
 rust_type = "TypeVec<RequiredActionProviderRepresentation>"
-[path."/admin/realms/{realm}/group-by-path/{path}:get:path"]
-from_type = "&[PathSegment]"
-rust_type = "&str"
 [path."/admin/realms/{realm}/identity-provider/providers/{provider_id}:get:"]
 from_type = "Value"
 rust_type = "IdentityProviderRepresentation"

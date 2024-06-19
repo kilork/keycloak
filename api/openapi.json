@@ -414,8 +414,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         },
         "deprecated" : true
@@ -560,8 +560,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -589,7 +589,14 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuthenticationExecutionRepresentation"
+                }
+              }
+            }
           }
         }
       },
@@ -644,8 +651,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -795,8 +802,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -836,8 +843,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -866,7 +873,17 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK"
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AuthenticationExecutionInfoRepresentation"
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -892,8 +909,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -925,16 +942,14 @@
             "application/json" : {
               "schema" : {
                 "type" : "object",
-                "additionalProperties" : {
-                  "type" : "string"
-                }
+                "additionalProperties" : { }
               }
             }
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -966,16 +981,14 @@
             "application/json" : {
               "schema" : {
                 "type" : "object",
-                "additionalProperties" : {
-                  "type" : "string"
-                }
+                "additionalProperties" : { }
               }
             }
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
           }
         }
       },
@@ -1036,8 +1049,8 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "204" : {
+            "description" : "No Content"
           }
         }
       },
@@ -1307,6 +1320,123 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/authentication/required-actions/{alias}/config" : {
+      "get" : {
+        "tags" : [ "Authentication Management" ],
+        "summary" : "Get RequiredAction configuration",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "description" : "Alias of required action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequiredActionConfigRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Authentication Management" ],
+        "summary" : "Update RequiredAction configuration",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "description" : "Alias of required action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequiredActionConfigRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Authentication Management" ],
+        "summary" : "Delete RequiredAction configuration",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "description" : "Alias of required action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/authentication/required-actions/{alias}/config-description" : {
+      "get" : {
+        "tags" : [ "Authentication Management" ],
+        "summary" : "Get RequiredAction provider configuration description",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "description" : "Alias of required action",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RequiredActionConfigInfoRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority" : {
       "post" : {
         "tags" : [ "Authentication Management" ],
@@ -1447,6 +1577,13 @@
     "/admin/realms/{realm}/client-policies/policies" : {
       "get" : {
         "tags" : [ "Realms Admin" ],
+        "parameters" : [ {
+          "name" : "include-global-policies",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -3029,6 +3166,53 @@
       }, {
         "name" : "client-scope-id",
         "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/client-types" : {
+      "get" : {
+        "tags" : [ "Realms Admin" ],
+        "summary" : "List all client types available in the current realm",
+        "description" : "This endpoint returns a list of both global and realm level client types and the attributes they set",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ClientTypesRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Realms Admin" ],
+        "summary" : "Update a client type",
+        "description" : "This endpoint allows you to update a realm level client type",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ClientTypesRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -8129,10 +8313,8 @@
           "in" : "path",
           "required" : true,
           "schema" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PathSegment"
-            }
+            "pattern" : ".*",
+            "type" : "string"
           }
         } ],
         "responses" : {
@@ -8366,13 +8548,22 @@
         "parameters" : [ {
           "name" : "briefRepresentation",
           "in" : "query",
+          "description" : "Boolean which defines whether brief groups representations are returned or not (default: false)",
           "schema" : {
             "default" : "false",
             "type" : "boolean"
           }
         }, {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the params \"search\" must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
           "name" : "first",
           "in" : "query",
+          "description" : "The position of the first result to be returned (pagination offset).",
           "schema" : {
             "format" : "int32",
             "default" : "0",
@@ -8381,10 +8572,18 @@
         }, {
           "name" : "max",
           "in" : "query",
+          "description" : "The maximum number of results that are to be returned. Defaults to 10",
           "schema" : {
             "format" : "int32",
             "default" : "10",
             "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing either an exact group name or a partial name",
+          "schema" : {
+            "type" : "string"
           }
         } ],
         "responses" : {
@@ -8593,10 +8792,10 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Get client-level role mappings for the user, and the app",
+        "summary" : "Get client-level role mappings for the user or group, and the app",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -8615,7 +8814,7 @@
       },
       "post" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Add client-level roles to the user role mapping",
+        "summary" : "Add client-level roles to the user or group role mapping",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -8636,7 +8835,7 @@
       },
       "delete" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Delete client-level roles from user role mapping",
+        "summary" : "Delete client-level roles from user or group role mapping",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -8671,18 +8870,19 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/available" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Get available client-level roles that can be mapped to the user",
+        "summary" : "Get available client-level roles that can be mapped to the user or group",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -8715,15 +8915,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/composite" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get effective client-level role mappings This recurses any composite roles",
@@ -8768,8 +8969,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -12086,10 +12288,10 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Get client-level role mappings for the user, and the app",
+        "summary" : "Get client-level role mappings for the user or group, and the app",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -12108,7 +12310,7 @@
       },
       "post" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Add client-level roles to the user role mapping",
+        "summary" : "Add client-level roles to the user or group role mapping",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -12129,7 +12331,7 @@
       },
       "delete" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Delete client-level roles from user role mapping",
+        "summary" : "Delete client-level roles from user or group role mapping",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -12164,18 +12366,19 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/available" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/available" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
-        "summary" : "Get available client-level roles that can be mapped to the user",
+        "summary" : "Get available client-level roles that can be mapped to the user or group",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -12208,15 +12411,16 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
         }
       } ]
     },
-    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client}/composite" : {
+    "/admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/composite" : {
       "get" : {
         "tags" : [ "Client Role Mappings" ],
         "summary" : "Get effective client-level role mappings This recurses any composite roles",
@@ -12261,8 +12465,9 @@
           "type" : "string"
         }
       }, {
-        "name" : "client",
+        "name" : "client-id",
         "in" : "path",
+        "description" : "client id (not clientId!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -12518,6 +12723,45 @@
           "type" : "string"
         }
       } ]
+    },
+    "/admin/realms/{realm}/users/{user-id}/unmanagedAttributes" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "array",
+                    "items" : {
+                      "type" : "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "user-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
     }
   },
   "components" : {
@@ -12639,7 +12883,7 @@
             "format" : "int64",
             "type" : "integer"
           },
-          "session_state" : {
+          "sid" : {
             "type" : "string"
           },
           "at_hash" : {
@@ -12713,15 +12957,6 @@
             "type" : "string"
           },
           "s_hash" : {
-            "type" : "string"
-          },
-          "authTime" : {
-            "format" : "int32",
-            "type" : "integer",
-            "writeOnly" : true,
-            "deprecated" : true
-          },
-          "sid" : {
             "type" : "string"
           },
           "trusted-certs" : {
@@ -12822,6 +13057,9 @@
             "type" : "string"
           },
           "description" : {
+            "type" : "string"
+          },
+          "type" : {
             "type" : "string"
           },
           "rootUrl" : {
@@ -13087,6 +13325,10 @@
           "index" : {
             "format" : "int32",
             "type" : "integer"
+          },
+          "priority" : {
+            "format" : "int32",
+            "type" : "integer"
           }
         }
       },
@@ -13318,6 +13560,12 @@
             "items" : {
               "$ref" : "#/components/schemas/ClientPolicyRepresentation"
             }
+          },
+          "globalPolicies" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ClientPolicyRepresentation"
+            }
           }
         }
       },
@@ -13416,6 +13664,9 @@
             "type" : "string"
           },
           "description" : {
+            "type" : "string"
+          },
+          "type" : {
             "type" : "string"
           },
           "rootUrl" : {
@@ -13661,6 +13912,40 @@
           }
         },
         "deprecated" : true
+      },
+      "ClientTypeRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "provider" : {
+            "type" : "string"
+          },
+          "config" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/components/schemas/PropertyConfig"
+            }
+          }
+        }
+      },
+      "ClientTypesRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "client-types" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ClientTypeRepresentation"
+            }
+          },
+          "global-client-types" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ClientTypeRepresentation"
+            }
+          }
+        }
       },
       "ComponentExportRepresentation" : {
         "type" : "object",
@@ -14090,7 +14375,7 @@
             "format" : "int64",
             "type" : "integer"
           },
-          "session_state" : {
+          "sid" : {
             "type" : "string"
           },
           "at_hash" : {
@@ -14164,15 +14449,6 @@
             "type" : "string"
           },
           "s_hash" : {
-            "type" : "string"
-          },
-          "authTime" : {
-            "format" : "int32",
-            "type" : "integer",
-            "writeOnly" : true,
-            "deprecated" : true
-          },
-          "sid" : {
             "type" : "string"
           }
         }
@@ -14475,15 +14751,6 @@
           }
         }
       },
-      "MultivaluedMapStringString" : {
-        "type" : "object",
-        "additionalProperties" : {
-          "type" : "array",
-          "items" : {
-            "type" : "string"
-          }
-        }
-      },
       "OAuthClientRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -14494,6 +14761,9 @@
             "type" : "string"
           },
           "description" : {
+            "type" : "string"
+          },
+          "type" : {
             "type" : "string"
           },
           "rootUrl" : {
@@ -14665,6 +14935,62 @@
         },
         "deprecated" : true
       },
+      "OrganizationDomainRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "verified" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "OrganizationRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "domains" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OrganizationDomainRepresentation"
+            }
+          },
+          "members" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserRepresentation"
+            }
+          },
+          "identityProviders" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IdentityProviderRepresentation"
+            }
+          }
+        }
+      },
       "PathCacheConfig" : {
         "type" : "object",
         "properties" : {
@@ -14723,17 +15049,6 @@
           },
           "static" : {
             "type" : "boolean"
-          }
-        }
-      },
-      "PathSegment" : {
-        "type" : "object",
-        "properties" : {
-          "path" : {
-            "type" : "string"
-          },
-          "matrixParameters" : {
-            "$ref" : "#/components/schemas/MultivaluedMapStringString"
           }
         }
       },
@@ -14976,6 +15291,15 @@
               "type" : "string"
             }
           }
+        }
+      },
+      "PropertyConfig" : {
+        "type" : "object",
+        "properties" : {
+          "applicable" : {
+            "type" : "boolean"
+          },
+          "value" : { }
         }
       },
       "ProtocolMapperEvaluationRepresentation" : {
@@ -15648,6 +15972,15 @@
           "userManagedAccessAllowed" : {
             "type" : "boolean"
           },
+          "organizationsEnabled" : {
+            "type" : "boolean"
+          },
+          "organizations" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OrganizationRepresentation"
+            }
+          },
           "social" : {
             "type" : "boolean",
             "deprecated" : true
@@ -15701,6 +16034,28 @@
           "oAuth2DevicePollingInterval" : {
             "format" : "int32",
             "type" : "integer"
+          }
+        }
+      },
+      "RequiredActionConfigInfoRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "properties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ConfigPropertyRepresentation"
+            }
+          }
+        }
+      },
+      "RequiredActionConfigRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "config" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -16448,6 +16803,9 @@
             "additionalProperties" : {
               "type" : "string"
             }
+          },
+          "transientUser" : {
+            "type" : "boolean"
           }
         }
       }
