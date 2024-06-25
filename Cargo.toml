@@ -51,6 +51,7 @@ async-trait = "0.1"
 schemars = { version = "0.8.11", default-features = false, features = [
     "derive",
 ], optional = true }
+percent-encoding = "2.3.1"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
