@@ -882,9 +882,9 @@ pub struct {name} {{
         fn to_rust_type_definition(&self, name: &str) -> String {
             match self {
                 StringSchema::Enum(variants) => {
-                    let is_uppercase = variants
+                    let is_uppercase = !variants
                         .iter()
-                        .all(|variant| variant.chars().all(|c| c.is_uppercase()));
+                        .any(|variant| variant.chars().any(|c| c.is_lowercase()));
                     format!(
                         r##"#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]{}
@@ -893,7 +893,7 @@ pub enum {name} {{
 }}
 "##,
                         if is_uppercase {
-                            "\n#[serde(rename_all = \"UPPERCASE\")]"
+                            "\n#[serde(rename_all = \"SCREAMING_SNAKE_CASE\")]"
                         } else {
                             ""
                         },
