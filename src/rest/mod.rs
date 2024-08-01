@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 use crate::{types::*, KeycloakError};
 
 mod generated_rest;
+mod url_enc;
 
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
