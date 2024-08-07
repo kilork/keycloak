@@ -371,14 +371,14 @@ pub struct ClientPoliciesRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct ClientPolicyConditionRepresentation {
     pub condition: Option<TypeString>,
-    pub configuration: Option<TypeVec<TypeValue>>,
+    pub configuration: Option<TypeMap<String, TypeValue>>,
 }
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct ClientPolicyExecutorRepresentation {
-    pub configuration: Option<TypeVec<TypeValue>>,
+    pub configuration: Option<TypeMap<String, TypeValue>>,
     pub executor: Option<TypeString>,
 }
 
