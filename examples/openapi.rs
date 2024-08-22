@@ -310,7 +310,7 @@ mod openapi {
 
             output.extend(comments);
 
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 use heck::ToKebabCase;
                 let tag = tag.to_kebab_case();
                 output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
@@ -347,7 +347,7 @@ mod openapi {
                     let param_type = if let Some(desc) = desc.as_ref() {
                         let from_type = desc.from_type.as_str();
                         if from_type != param_type {
-                            let redundant = &param_type == &desc.rust_type;
+                            let redundant = param_type == desc.rust_type;
                             let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
                             if redundant {
                                 delete_mapping(&full_header);
@@ -381,7 +381,7 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
-                    let redundant = result_type_value == &desc.rust_type;
+                    let redundant = result_type_value == desc.rust_type;
                     let full_header = format!(r#"[path."{path}:{method_string_lc}:"]"#);
                     if redundant {
                         delete_mapping(&full_header);
@@ -460,7 +460,7 @@ mod openapi {
             ));
 
             if let Some(ReturnType { body, convert, .. }) = result_type.as_ref() {
-                let body = body.as_deref().unwrap_or_else(|| "json".into());
+                let body = body.as_deref().unwrap_or("json");
                 output.push("    let response = builder.send().await?;".into());
                 output.push(format!(
                     "    Ok(error_check(response).await?.{body}().await{}?)",
@@ -487,7 +487,7 @@ mod openapi {
 
         fn comments(
             &self,
-            parameters: &Vec<(&Parameter, String)>,
+            parameters: &[(&Parameter, String)],
             method_string: String,
             path: &str,
             path_snake_case: &String,
@@ -530,7 +530,7 @@ mod openapi {
             if to_id {
                 comments.push(vec!["Returns id of created resource".into()]);
             }
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
             }
             comments.push(vec![format!(
@@ -598,11 +598,9 @@ mod openapi {
                         } else {
                             acc.push(x);
                         }
-                    } else {
-                        if x.starts_with("[path.") {
-                            in_header = false;
-                            acc.push(x);
-                        }
+                    } else if x.starts_with("[path.") {
+                        in_header = false;
+                        acc.push(x);
                     }
                     acc
                 })
