@@ -251,10 +251,18 @@ mod openapi {
 
             let mut path_snake_case = path.to_string();
 
-            let parameters = parameters
+            let call_parameters = parameters.into_iter().flatten().collect::<Vec<_>>();
+
+            let parameters = call_parameters
+                .clone()
                 .into_iter()
-                .chain(self.parameters.as_deref())
-                .flatten()
+                .chain(
+                    self.parameters
+                        .as_deref()
+                        .into_iter()
+                        .flatten()
+                        .filter(|p| !call_parameters.iter().any(|cp| cp.name == p.name)),
+                )
                 .map(|parameter| {
                     let mut param_name = parameter.name.to_snake_case();
                     while RESERVED_WORDS.contains(&param_name.as_str()) {
@@ -310,7 +318,7 @@ mod openapi {
 
             output.extend(comments);
 
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 use heck::ToKebabCase;
                 let tag = tag.to_kebab_case();
                 output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
@@ -347,7 +355,7 @@ mod openapi {
                     let param_type = if let Some(desc) = desc.as_ref() {
                         let from_type = desc.from_type.as_str();
                         if from_type != param_type {
-                            let redundant = &param_type == &desc.rust_type;
+                            let redundant = param_type == desc.rust_type;
                             let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
                             if redundant {
                                 delete_mapping(&full_header);
@@ -381,7 +389,7 @@ mod openapi {
             if let Some(desc) = desc.as_ref() {
                 let from_type = desc.from_type.as_str();
                 if from_type != result_type_value {
-                    let redundant = result_type_value == &desc.rust_type;
+                    let redundant = result_type_value == desc.rust_type;
                     let full_header = format!(r#"[path."{path}:{method_string_lc}:"]"#);
                     if redundant {
                         delete_mapping(&full_header);
@@ -460,7 +468,7 @@ mod openapi {
             ));
 
             if let Some(ReturnType { body, convert, .. }) = result_type.as_ref() {
-                let body = body.as_deref().unwrap_or_else(|| "json".into());
+                let body = body.as_deref().unwrap_or("json");
                 output.push("    let response = builder.send().await?;".into());
                 output.push(format!(
                     "    Ok(error_check(response).await?.{body}().await{}?)",
@@ -487,7 +495,7 @@ mod openapi {
 
         fn comments(
             &self,
-            parameters: &Vec<(&Parameter, String)>,
+            parameters: &[(&Parameter, String)],
             method_string: String,
             path: &str,
             path_snake_case: &String,
@@ -530,7 +538,7 @@ mod openapi {
             if to_id {
                 comments.push(vec!["Returns id of created resource".into()]);
             }
-            if let [tag] = self.tags.as_deref().unwrap_or_else(|| &[]) {
+            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
             }
             comments.push(vec![format!(
@@ -598,11 +606,9 @@ mod openapi {
                         } else {
                             acc.push(x);
                         }
-                    } else {
-                        if x.starts_with("[path.") {
-                            in_header = false;
-                            acc.push(x);
-                        }
+                    } else if x.starts_with("[path.") {
+                        in_header = false;
+                        acc.push(x);
                     }
                     acc
                 })
@@ -1100,6 +1106,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
 "###
     );
     let mut path_counts = spec.paths.len();
+    let default = std::borrow::Cow::from("default");
     let tag_paths = spec
         .tags
         .iter()
@@ -1118,6 +1125,20 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
                     .collect::<Vec<_>>(),
             )
         })
+        .chain([(
+            &default,
+            spec.paths
+                .iter()
+                .filter(|(_, path_spec)| {
+                    path_spec.calls.iter().all(|(_, call)| {
+                        call.tags
+                            .as_ref()
+                            .map(|tags| tags.is_empty())
+                            .unwrap_or(true)
+                    })
+                })
+                .collect(),
+        )])
         .collect::<Vec<_>>();
     for (tag, paths) in tag_paths {
         println!("    // <h4>{tag}</h4>\n");
