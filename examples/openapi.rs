@@ -251,10 +251,18 @@ mod openapi {
 
             let mut path_snake_case = path.to_string();
 
-            let parameters = parameters
+            let call_parameters = parameters.into_iter().flatten().collect::<Vec<_>>();
+
+            let parameters = call_parameters
+                .clone()
                 .into_iter()
-                .chain(self.parameters.as_deref())
-                .flatten()
+                .chain(
+                    self.parameters
+                        .as_deref()
+                        .into_iter()
+                        .flatten()
+                        .filter(|p| !call_parameters.iter().any(|cp| cp.name == p.name)),
+                )
                 .map(|parameter| {
                     let mut param_name = parameter.name.to_snake_case();
                     while RESERVED_WORDS.contains(&param_name.as_str()) {
@@ -1098,6 +1106,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
 "###
     );
     let mut path_counts = spec.paths.len();
+    let default = std::borrow::Cow::from("default");
     let tag_paths = spec
         .tags
         .iter()
@@ -1116,6 +1125,20 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
                     .collect::<Vec<_>>(),
             )
         })
+        .chain([(
+            &default,
+            spec.paths
+                .iter()
+                .filter(|(_, path_spec)| {
+                    path_spec.calls.iter().all(|(_, call)| {
+                        call.tags
+                            .as_ref()
+                            .map(|tags| tags.is_empty())
+                            .unwrap_or(true)
+                    })
+                })
+                .collect(),
+        )])
         .collect::<Vec<_>>();
     for (tag, paths) in tag_paths {
         println!("    // <h4>{tag}</h4>\n");
