@@ -23,7 +23,7 @@ impl Error for KeycloakError {}
 impl Display for KeycloakError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            KeycloakError::ReqwestFailure(e) => write!(f, "keycloak error (reqwest): {e}"),
+            KeycloakError::ReqwestFailure(e) => write!(f, "keycloak error (network): {e}"),
             KeycloakError::HttpFailure { status, body, text } => write!(
                 f,
                 "keycloak error (rest): {status} {}",
