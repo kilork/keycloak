@@ -1,5 +1,5 @@
 /*!
-{{ replace ( render ( read_to_str "templates/README.md" ) ) "```rust" "```rust#ignore" }}
+{{ replace ( render ( read_to_str "templates/README.md" ) ) "```rust" "```rust, no_run" }}
 */
 
 pub mod types;
