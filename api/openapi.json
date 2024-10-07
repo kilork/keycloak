@@ -7125,6 +7125,13 @@
             "type" : "string"
           }
         }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Boolean which defines whether brief representations are returned (default: false)",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
           "name" : "first",
           "in" : "query",
           "description" : "first result to return. Ignored if negative or {@code null}.",
@@ -9209,6 +9216,13 @@
             "type" : "integer"
           }
         }, {
+          "name" : "realmOnly",
+          "in" : "query",
+          "description" : "Boolean which defines if only realm-level IDPs (not associated with orgs) should be returned (default: false)",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
           "name" : "search",
           "in" : "query",
           "description" : "Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact (\"name\"). Default prefixed.",
@@ -10855,6 +10869,13 @@
           "required" : true,
           "schema" : {
             "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Boolean which defines whether brief representations are returned (default: false)",
+          "schema" : {
+            "type" : "boolean"
           }
         }, {
           "name" : "first",
@@ -13922,6 +13943,9 @@
           "provider" : {
             "type" : "string"
           },
+          "parent" : {
+            "type" : "string"
+          },
           "config" : {
             "type" : "object",
             "additionalProperties" : {
@@ -14536,10 +14560,16 @@
           "linkOnly" : {
             "type" : "boolean"
           },
+          "hideOnLogin" : {
+            "type" : "boolean"
+          },
           "firstBrokerLoginFlowAlias" : {
             "type" : "string"
           },
           "postBrokerLoginFlowAlias" : {
+            "type" : "string"
+          },
+          "organizationId" : {
             "type" : "string"
           },
           "config" : {
@@ -14715,6 +14745,149 @@
             }
           }
         }
+      },
+      "MemberRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "emailVerified" : {
+            "type" : "boolean"
+          },
+          "attributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "userProfileMetadata" : {
+            "$ref" : "#/components/schemas/UserProfileMetadata"
+          },
+          "self" : {
+            "type" : "string"
+          },
+          "origin" : {
+            "type" : "string"
+          },
+          "createdTimestamp" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "totp" : {
+            "type" : "boolean"
+          },
+          "federationLink" : {
+            "type" : "string"
+          },
+          "serviceAccountClientId" : {
+            "type" : "string"
+          },
+          "credentials" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/CredentialRepresentation"
+            }
+          },
+          "disableableCredentialTypes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "requiredActions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "federatedIdentities" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/FederatedIdentityRepresentation"
+            }
+          },
+          "realmRoles" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "clientRoles" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          },
+          "clientConsents" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserConsentRepresentation"
+            }
+          },
+          "notBefore" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "applicationRoles" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            },
+            "deprecated" : true
+          },
+          "socialLinks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/SocialLinkRepresentation"
+            },
+            "deprecated" : true
+          },
+          "groups" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "access" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "boolean"
+            }
+          },
+          "membershipType" : {
+            "$ref" : "#/components/schemas/MembershipType"
+          }
+        }
+      },
+      "MembershipType" : {
+        "enum" : [ "UNMANAGED", "MANAGED" ],
+        "type" : "string"
       },
       "MethodConfig" : {
         "type" : "object",
@@ -14955,10 +15128,16 @@
           "name" : {
             "type" : "string"
           },
+          "alias" : {
+            "type" : "string"
+          },
           "enabled" : {
             "type" : "boolean"
           },
           "description" : {
+            "type" : "string"
+          },
+          "redirectUrl" : {
             "type" : "string"
           },
           "attributes" : {
@@ -14980,7 +15159,7 @@
           "members" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/UserRepresentation"
+              "$ref" : "#/components/schemas/MemberRepresentation"
             }
           },
           "identityProviders" : {
