@@ -1,7 +1,7 @@
 use reqwest::header::CONTENT_LENGTH;
 use serde_json::Value;
 
-use super::*;
+use super::{url_enc::encode_url_param as p, *};
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     // <h4>Attack Detection</h4>
@@ -22,6 +22,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .delete(&format!(
@@ -54,6 +55,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeMap<String, Value>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -85,6 +88,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .delete(&format!(
@@ -115,6 +120,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -142,6 +148,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -174,6 +181,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: AuthenticatorConfigRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -206,6 +214,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         provider_id: &str,
     ) -> Result<AuthenticatorConfigInfoRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let provider_id = p(provider_id);
         let builder = self
             .client
             .get(&format!(
@@ -235,6 +245,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<AuthenticatorConfigRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -266,6 +278,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: AuthenticatorConfigRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -297,6 +311,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -329,6 +345,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: AuthenticationExecutionRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -361,6 +378,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         execution_id: &str,
     ) -> Result<AuthenticationExecutionRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
         let builder = self
             .client
             .get(&format!(
@@ -392,6 +411,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         execution_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
         let builder = self
             .client
             .delete(&format!(
@@ -428,6 +449,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         execution_id: &str,
         body: AuthenticatorConfigRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
         let builder = self
             .client
             .post(&format!(
@@ -463,6 +486,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         execution_id: &str,
         id: &str,
     ) -> Result<AuthenticatorConfigRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -496,6 +522,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         execution_id: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
         let builder = self
             .client
             .post(&format!(
@@ -529,6 +557,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         execution_id: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let execution_id = p(execution_id);
         let builder = self
             .client
             .post(&format!(
@@ -556,6 +586,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<AuthenticationFlowRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -587,6 +618,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: AuthenticationFlowRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -623,6 +655,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         flow_alias: &str,
         body: TypeMap<String, String>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let flow_alias = p(flow_alias);
         let builder = self
             .client
             .post(&format!(
@@ -655,6 +689,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         flow_alias: &str,
     ) -> Result<TypeVec<AuthenticationExecutionInfoRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let flow_alias = p(flow_alias);
         let builder = self
             .client
             .get(&format!(
@@ -688,6 +724,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         flow_alias: &str,
         body: AuthenticationExecutionInfoRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let flow_alias = p(flow_alias);
         let builder = self
             .client
             .put(&format!(
@@ -725,6 +763,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         flow_alias: &str,
         body: TypeMap<String, Value>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let flow_alias = p(flow_alias);
         let builder = self
             .client
             .post(&format!(
@@ -761,6 +801,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         flow_alias: &str,
         body: TypeMap<String, Value>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let flow_alias = p(flow_alias);
         let builder = self
             .client
             .post(&format!(
@@ -791,6 +833,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<AuthenticationFlowRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -822,6 +866,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: AuthenticationFlowRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -853,6 +899,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -881,6 +929,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -908,6 +957,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -935,6 +985,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeMap<String, TypeVec<ConfigPropertyRepresentation>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -966,6 +1017,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: RequiredActionProviderRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -994,6 +1046,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<RequiredActionProviderRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -1023,6 +1076,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<RequiredActionProviderRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -1054,6 +1109,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         body: RequiredActionProviderRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .put(&format!(
@@ -1085,6 +1142,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .delete(&format!(
@@ -1115,6 +1174,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<RequiredActionConfigRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -1146,6 +1207,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         body: RequiredActionConfigRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .put(&format!(
@@ -1177,6 +1240,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .delete(&format!(
@@ -1207,6 +1272,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<RequiredActionConfigInfoRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -1238,6 +1305,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .post(&format!(
@@ -1269,6 +1338,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .post(&format!(
@@ -1296,6 +1367,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<RequiredActionProviderRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -1331,6 +1403,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .get(&format!(
@@ -1366,6 +1441,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         attr: &str,
         body: KeyStoreConfig,
     ) -> Result<TypeString, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .post(&format!(
@@ -1400,6 +1478,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .post(&format!(
@@ -1438,6 +1519,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         attr: &str,
         body: KeyStoreConfig,
     ) -> Result<TypeString, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .post(&format!(
@@ -1472,6 +1556,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .post(&format!(
@@ -1505,6 +1592,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         attr: &str,
     ) -> Result<CertificateRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let attr = p(attr);
         let builder = self
             .client
             .post(&format!(
@@ -1532,6 +1622,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ClientInitialAccessPresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -1561,6 +1652,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientInitialAccessCreatePresentation,
     ) -> Result<ClientInitialAccessCreatePresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -1589,6 +1681,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -1619,6 +1713,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ComponentTypeRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -1654,6 +1749,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         client_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .get(&format!(
@@ -1691,6 +1789,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .post(&format!(
@@ -1727,6 +1828,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .delete(&format!(
@@ -1762,6 +1866,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         client_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .get(&format!(
@@ -1797,6 +1904,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
+        let client_id = p(client_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -1833,6 +1943,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         client_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .get(&format!(
@@ -1870,6 +1983,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .post(&format!(
@@ -1906,6 +2022,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .delete(&format!(
@@ -1941,6 +2060,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         client_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_id = p(client_id);
         let builder = self
             .client
             .get(&format!(
@@ -1976,6 +2098,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_id = p(client_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -2008,6 +2133,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
@@ -2036,6 +2162,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientScopeRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
@@ -2065,6 +2192,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<ClientScopeRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -2098,6 +2227,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -2131,6 +2262,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -2159,6 +2292,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -2190,6 +2324,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientScopeRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -2222,6 +2357,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<ClientScopeRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -2255,6 +2392,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: ClientScopeRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -2288,6 +2427,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -2331,6 +2472,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         search: Option<bool>,
         viewable_only: Option<bool>,
     ) -> Result<TypeVec<ClientRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/clients", self.url))
@@ -2377,6 +2519,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/clients", self.url))
@@ -2406,6 +2549,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<ClientRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -2439,6 +2584,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: ClientRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .put(&format!(
@@ -2472,6 +2619,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .delete(&format!(
@@ -2504,6 +2653,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -2535,6 +2686,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -2566,6 +2719,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<CredentialRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -2597,6 +2752,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .delete(&format!(
@@ -2629,6 +2786,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -2660,6 +2819,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -2693,6 +2855,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -2729,6 +2894,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<AccessToken, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -2770,6 +2937,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<IDToken, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -2811,6 +2980,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<TypeMap<String, Value>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -2850,6 +3021,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<ProtocolMapperEvaluationRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -2888,6 +3061,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_container_id: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_container_id = p(role_container_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -2926,6 +3102,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_container_id: &str,
         scope: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_container_id = p(role_container_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -2960,6 +3139,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         provider_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let provider_id = p(provider_id);
         let builder = self
             .client
             .get(&format!(
@@ -2992,6 +3174,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3025,6 +3209,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .put(&format!(
@@ -3061,6 +3247,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: TypeMap<String, String>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -3095,6 +3283,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         node: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let node = p(node);
         let builder = self
             .client
             .delete(&format!(
@@ -3127,6 +3318,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3162,6 +3355,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -3199,6 +3394,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3230,6 +3427,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -3263,6 +3463,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -3295,6 +3498,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -3326,6 +3531,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<ClientRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -3357,6 +3564,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<UserRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3388,6 +3597,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3419,6 +3630,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -3454,6 +3667,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -3493,6 +3708,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         parent: Option<String>,
         type_: Option<String>,
     ) -> Result<TypeVec<ComponentRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/components", self.url))
@@ -3528,6 +3744,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ComponentRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/components", self.url))
@@ -3553,6 +3770,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<ComponentRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -3582,6 +3801,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: ComponentRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -3611,6 +3832,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -3643,6 +3866,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         type_: Option<String>,
     ) -> Result<TypeVec<ComponentTypeRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let id = p(id);
         let mut builder = self
             .client
             .get(&format!(
@@ -3690,6 +3915,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         q: Option<String>,
         search: Option<String>,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/groups", self.url))
@@ -3739,6 +3965,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: GroupRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/groups", self.url))
@@ -3768,6 +3995,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         search: Option<String>,
         top: Option<bool>,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/groups/count", self.url))
@@ -3800,6 +4028,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<GroupRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .get(&format!(
@@ -3833,6 +4063,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         body: GroupRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .put(&format!(
@@ -3864,6 +4096,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .delete(&format!(
@@ -3907,6 +4141,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -3957,6 +4193,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         body: GroupRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .post(&format!(
@@ -3989,6 +4227,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .get(&format!(
@@ -4022,6 +4262,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .put(&format!(
@@ -4060,6 +4302,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -4100,6 +4344,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: TypeMap<String, Value>,
     ) -> Result<TypeMap<String, TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -4136,6 +4381,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<IdentityProviderRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!(
@@ -4179,6 +4425,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: IdentityProviderRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -4209,6 +4456,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<IdentityProviderRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -4240,6 +4489,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         body: IdentityProviderRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .put(&format!(
@@ -4271,6 +4522,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .delete(&format!(
@@ -4303,6 +4556,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         format: Option<String>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let mut builder = self
             .client
             .get(&format!(
@@ -4336,6 +4591,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -4367,6 +4624,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .put(&format!(
@@ -4397,6 +4656,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<TypeMap<String, IdentityProviderMapperTypeRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -4426,6 +4687,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<TypeVec<IdentityProviderMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -4459,6 +4722,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         body: IdentityProviderMapperRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .post(&format!(
@@ -4491,6 +4756,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         id: &str,
     ) -> Result<IdentityProviderMapperRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -4524,6 +4792,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: IdentityProviderMapperRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -4557,6 +4828,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         alias: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -4587,6 +4861,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         alias: &str,
     ) -> Result<bool, KeycloakError> {
+        let realm = p(realm);
+        let alias = p(alias);
         let builder = self
             .client
             .get(&format!(
@@ -4616,6 +4892,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         provider_id: &str,
     ) -> Result<IdentityProviderRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let provider_id = p(provider_id);
         let builder = self
             .client
             .get(&format!(
@@ -4643,6 +4921,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<KeysMetadataRepresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/keys", self.url))
@@ -4677,6 +4956,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -4709,6 +4990,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -4744,6 +5027,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -4778,6 +5063,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -4813,6 +5101,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -4848,6 +5139,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -4882,6 +5176,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let protocol = p(protocol);
         let builder = self
             .client
             .get(&format!(
@@ -4917,6 +5214,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -4949,6 +5248,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -4984,6 +5285,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -5018,6 +5321,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -5053,6 +5359,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -5088,6 +5397,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -5122,6 +5434,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let protocol = p(protocol);
         let builder = self
             .client
             .get(&format!(
@@ -5157,6 +5472,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: Vec<ProtocolMapperRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -5189,6 +5506,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -5224,6 +5543,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -5258,6 +5579,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         id: &str,
     ) -> Result<ProtocolMapperRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let id = p(id);
         let builder = self
             .client
             .get(&format!(
@@ -5293,6 +5617,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         id: &str,
         body: ProtocolMapperRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let id = p(id);
         let builder = self
             .client
             .put(&format!(
@@ -5328,6 +5655,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let id = p(id);
         let builder = self
             .client
             .delete(&format!(
@@ -5362,6 +5692,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         protocol: &str,
     ) -> Result<TypeVec<ProtocolMapperRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let protocol = p(protocol);
         let builder = self
             .client
             .get(&format!(
@@ -5442,6 +5775,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/25.0.4/rest-api/index.html#_get_adminrealmsrealm>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_get(&self, realm: &str) -> Result<RealmRepresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}", self.url))
@@ -5468,6 +5802,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: RealmRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!("{}/admin/realms/{realm}", self.url))
@@ -5491,6 +5826,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/25.0.4/rest-api/index.html#_delete_adminrealmsrealm>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_delete(&self, realm: &str) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .delete(&format!("{}/admin/realms/{realm}", self.url))
@@ -5539,6 +5875,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         resource_path: Option<String>,
         resource_types: Option<Vec<String>>,
     ) -> Result<TypeVec<AdminEventRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/admin-events", self.url))
@@ -5601,6 +5938,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/25.0.4/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_admin_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .delete(&format!("{}/admin/realms/{realm}/admin-events", self.url))
@@ -5628,6 +5966,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: String,
     ) -> Result<ClientRepresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -5656,6 +5995,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         include_global_policies: Option<bool>,
     ) -> Result<ClientPoliciesRepresentation, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!(
@@ -5686,6 +6026,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientPoliciesRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!(
@@ -5715,6 +6056,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         include_global_profiles: Option<bool>,
     ) -> Result<ClientProfilesRepresentation, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!(
@@ -5745,6 +6087,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientProfilesRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!(
@@ -5774,6 +6117,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<TypeMap<String, String>>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -5801,6 +6145,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<ClientTypesRepresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/client-types", self.url))
@@ -5827,6 +6172,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ClientTypesRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!("{}/admin/realms/{realm}/client-types", self.url))
@@ -5851,6 +6197,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<String>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -5878,6 +6225,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -5907,6 +6255,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -5938,6 +6288,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -5966,6 +6318,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/default-groups", self.url))
@@ -5992,6 +6345,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .put(&format!(
@@ -6023,6 +6378,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .delete(&format!(
@@ -6051,6 +6408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<ClientScopeRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -6080,6 +6438,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .put(&format!(
@@ -6111,6 +6471,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -6156,6 +6518,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         type_: Option<Vec<String>>,
         user: Option<String>,
     ) -> Result<TypeVec<EventRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/events", self.url))
@@ -6201,6 +6564,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/25.0.4/rest-api/index.html#_delete_adminrealmsrealmevents>
     #[cfg(feature = "tag-realms-admin")]
     pub async fn realm_events_delete(&self, realm: &str) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .delete(&format!("{}/admin/realms/{realm}/events", self.url))
@@ -6226,6 +6590,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<RealmEventsConfigRepresentation, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/events/config", self.url))
@@ -6250,6 +6615,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: RealmEventsConfigRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!("{}/admin/realms/{realm}/events/config", self.url))
@@ -6276,6 +6642,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         path: &str,
     ) -> Result<GroupRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let path = p(path);
         let builder = self
             .client
             .get(&format!(
@@ -6301,6 +6669,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<TypeVec<String>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/localization", self.url))
@@ -6327,6 +6696,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         locale: &str,
         use_realm_default_locale_fallback: Option<bool>,
     ) -> Result<TypeMap<String, TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let locale = p(locale);
         let mut builder = self
             .client
             .get(&format!(
@@ -6363,6 +6734,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         locale: &str,
         body: TypeMap<String, String>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let locale = p(locale);
         let builder = self
             .client
             .post(&format!(
@@ -6391,6 +6764,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         locale: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let locale = p(locale);
         let builder = self
             .client
             .delete(&format!(
@@ -6421,6 +6796,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         key: &str,
         locale: &str,
     ) -> Result<TypeString, KeycloakError> {
+        let realm = p(realm);
+        let key = p(key);
+        let locale = p(locale);
         let builder = self
             .client
             .get(&format!(
@@ -6452,6 +6830,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         locale: &str,
         body: String,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let key = p(key);
+        let locale = p(locale);
         let builder = self
             .client
             .put(&format!(
@@ -6483,6 +6864,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         key: &str,
         locale: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let key = p(key);
+        let locale = p(locale);
         let builder = self
             .client
             .delete(&format!(
@@ -6511,6 +6895,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/logout-all", self.url))
@@ -6541,6 +6926,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         export_clients: Option<bool>,
         export_groups_and_roles: Option<bool>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/partial-export", self.url))
@@ -6575,6 +6961,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: String,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/partialImport", self.url))
@@ -6600,6 +6987,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<GlobalRequestResult, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -6631,6 +7019,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         session: &str,
         is_offline: Option<bool>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let session = p(session);
         let mut builder = self
             .client
             .delete(&format!(
@@ -6667,6 +7057,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: TypeMap<String, String>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!(
@@ -6693,6 +7084,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -6720,6 +7112,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!(
@@ -6754,6 +7147,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .get(&format!(
@@ -6785,6 +7180,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .get(&format!(
@@ -6820,6 +7217,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .post(&format!(
@@ -6854,6 +7253,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .delete(&format!(
@@ -6887,6 +7288,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         group_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let builder = self
             .client
             .get(&format!(
@@ -6920,6 +7323,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         group_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let group_id = p(group_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -6954,6 +7359,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -6985,6 +7392,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -7020,6 +7429,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .post(&format!(
@@ -7054,6 +7465,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .delete(&format!(
@@ -7087,6 +7500,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -7120,6 +7535,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -7164,6 +7581,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -7211,6 +7630,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: RoleRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -7245,6 +7666,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<RoleRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7280,6 +7704,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .put(&format!(
@@ -7315,6 +7742,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .delete(&format!(
@@ -7349,6 +7779,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7386,6 +7819,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .post(&format!(
@@ -7422,6 +7858,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .delete(&format!(
@@ -7457,6 +7896,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7490,6 +7932,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7529,6 +7974,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let mut builder = self
             .client
             .get(&format!(
@@ -7571,6 +8019,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7606,6 +8057,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .put(&format!(
@@ -7644,6 +8098,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let mut builder = self
             .client
             .get(&format!(
@@ -7685,6 +8142,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/roles", self.url))
@@ -7725,6 +8183,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: RoleRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/roles", self.url))
@@ -7754,6 +8213,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_name: &str,
     ) -> Result<RoleRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7787,6 +8248,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .put(&format!(
@@ -7820,6 +8283,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_name: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .delete(&format!(
@@ -7852,6 +8317,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7887,6 +8354,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .post(&format!(
@@ -7921,6 +8390,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .delete(&format!(
@@ -7956,6 +8427,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -7987,6 +8461,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_name: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -8024,6 +8500,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let mut builder = self
             .client
             .get(&format!(
@@ -8064,6 +8542,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_name: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .get(&format!(
@@ -8097,6 +8577,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_name: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let builder = self
             .client
             .put(&format!(
@@ -8133,6 +8615,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         first: Option<i32>,
         max: Option<i32>,
     ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_name = p(role_name);
         let mut builder = self
             .client
             .get(&format!(
@@ -8172,6 +8656,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_id: &str,
     ) -> Result<RoleRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .get(&format!(
@@ -8205,6 +8691,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_id: &str,
         body: RoleRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .put(&format!(
@@ -8238,6 +8726,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .delete(&format!(
@@ -8276,6 +8766,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -8320,6 +8812,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .post(&format!(
@@ -8354,6 +8848,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .delete(&format!(
@@ -8389,6 +8885,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         role_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let role_id = p(role_id);
         let builder = self
             .client
             .get(&format!(
@@ -8420,6 +8919,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .get(&format!(
@@ -8451,6 +8952,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         role_id: &str,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .get(&format!(
@@ -8484,6 +8987,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         role_id: &str,
         body: ManagementPermissionReference,
     ) -> Result<ManagementPermissionReference, KeycloakError> {
+        let realm = p(realm);
+        let role_id = p(role_id);
         let builder = self
             .client
             .put(&format!(
@@ -8519,6 +9024,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -8552,6 +9059,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -8589,6 +9099,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .post(&format!(
@@ -8625,6 +9138,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .delete(&format!(
@@ -8660,6 +9176,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -8695,6 +9214,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let mut builder = self
             .client
             .get(&format!(
@@ -8729,6 +9251,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -8764,6 +9288,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -8798,6 +9324,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -8831,6 +9359,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -8864,6 +9394,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -8899,6 +9431,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -8932,6 +9466,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -8969,6 +9506,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .post(&format!(
@@ -9005,6 +9545,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .delete(&format!(
@@ -9040,6 +9583,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -9075,6 +9621,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
+        let client = p(client);
         let mut builder = self
             .client
             .get(&format!(
@@ -9109,6 +9658,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -9144,6 +9695,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .post(&format!(
@@ -9178,6 +9731,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .delete(&format!(
@@ -9211,6 +9766,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_scope_id: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let builder = self
             .client
             .get(&format!(
@@ -9244,6 +9801,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_scope_id: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_scope_id = p(client_scope_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -9279,6 +9838,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<MappingsRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -9312,6 +9873,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -9349,6 +9913,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client = p(client);
         let builder = self
             .client
             .post(&format!(
@@ -9385,6 +9952,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client = p(client);
         let builder = self
             .client
             .delete(&format!(
@@ -9420,6 +9990,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         client: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client = p(client);
         let builder = self
             .client
             .get(&format!(
@@ -9455,6 +10028,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
+        let client = p(client);
         let mut builder = self
             .client
             .get(&format!(
@@ -9489,6 +10065,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -9524,6 +10102,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .post(&format!(
@@ -9558,6 +10138,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         body: Vec<RoleRepresentation>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .delete(&format!(
@@ -9591,6 +10173,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -9624,6 +10208,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         brief_representation: Option<bool>,
     ) -> Result<TypeVec<RoleRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let client_uuid = p(client_uuid);
         let mut builder = self
             .client
             .get(&format!(
@@ -9685,6 +10271,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         search: Option<String>,
         username: Option<String>,
     ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/users", self.url))
@@ -9755,6 +10342,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: UserRepresentation,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .post(&format!("{}/admin/realms/{realm}/users", self.url))
@@ -9797,6 +10385,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         search: Option<String>,
         username: Option<String>,
     ) -> Result<i32, KeycloakError> {
+        let realm = p(realm);
         let mut builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/users/count", self.url))
@@ -9840,6 +10429,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/25.0.4/rest-api/index.html#_get_adminrealmsrealmusersprofile>
     #[cfg(feature = "tag-users")]
     pub async fn realm_users_profile_get(&self, realm: &str) -> Result<UPConfig, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!("{}/admin/realms/{realm}/users/profile", self.url))
@@ -9864,6 +10454,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         body: UPConfig,
     ) -> Result<UPConfig, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .put(&format!("{}/admin/realms/{realm}/users/profile", self.url))
@@ -9887,6 +10478,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
     ) -> Result<UserProfileMetadata, KeycloakError> {
+        let realm = p(realm);
         let builder = self
             .client
             .get(&format!(
@@ -9920,6 +10512,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         user_profile_metadata: Option<bool>,
     ) -> Result<UserRepresentation, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -9956,6 +10550,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         body: UserRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .put(&format!(
@@ -9989,6 +10585,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .delete(&format!(
@@ -10021,6 +10619,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<String>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -10052,6 +10652,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<TypeMap<String, Value>>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -10085,6 +10687,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         client: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client = p(client);
         let builder = self
             .client
             .delete(&format!(
@@ -10115,6 +10720,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<CredentialRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -10148,6 +10755,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         credential_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let credential_id = p(credential_id);
         let builder = self
             .client
             .delete(&format!(
@@ -10186,6 +10796,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         credential_id: &str,
         new_previous_credential_id: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let credential_id = p(credential_id);
+        let new_previous_credential_id = p(new_previous_credential_id);
         let builder = self
             .client
             .post(&format!(
@@ -10221,6 +10835,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         credential_id: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let credential_id = p(credential_id);
         let builder = self
             .client
             .post(&format!(
@@ -10256,6 +10873,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         credential_id: &str,
         body: String,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let credential_id = p(credential_id);
         let builder = self
             .client
             .put(&format!(
@@ -10291,6 +10911,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         body: Vec<String>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .put(&format!(
@@ -10332,6 +10954,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         redirect_uri: Option<String>,
         body: Vec<String>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .put(&format!(
@@ -10374,6 +10998,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<FederatedIdentityRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -10409,6 +11035,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         provider: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let provider = p(provider);
         let builder = self
             .client
             .post(&format!(
@@ -10442,6 +11071,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         provider: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let provider = p(provider);
         let builder = self
             .client
             .delete(&format!(
@@ -10480,6 +11112,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         max: Option<i32>,
         search: Option<String>,
     ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -10523,6 +11157,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         search: Option<String>,
     ) -> Result<TypeMap<String, i64>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .get(&format!(
@@ -10557,6 +11193,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let group_id = p(group_id);
         let builder = self
             .client
             .put(&format!(
@@ -10590,6 +11229,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         group_id: &str,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let group_id = p(group_id);
         let builder = self
             .client
             .delete(&format!(
@@ -10622,6 +11264,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeMap<String, Value>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .post(&format!(
@@ -10655,6 +11299,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<Option<TypeString>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .post(&format!(
@@ -10688,6 +11334,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         client_uuid: &str,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
+        let client_uuid = p(client_uuid);
         let builder = self
             .client
             .get(&format!(
@@ -10721,6 +11370,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         user_id: &str,
         body: CredentialRepresentation,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .put(&format!(
@@ -10759,6 +11410,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_id: Option<String>,
         redirect_uri: Option<String>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .put(&format!(
@@ -10804,6 +11457,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         lifespan: Option<i32>,
         redirect_uri: Option<String>,
     ) -> Result<(), KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let mut builder = self
             .client
             .put(&format!(
@@ -10846,6 +11501,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeVec<UserSessionRepresentation>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(
@@ -10875,6 +11532,8 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
     ) -> Result<TypeMap<String, TypeVec<String>>, KeycloakError> {
+        let realm = p(realm);
+        let user_id = p(user_id);
         let builder = self
             .client
             .get(&format!(

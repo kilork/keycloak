@@ -420,6 +420,12 @@ mod openapi {
                 .collect::<Vec<_>>();
             let has_query_parameters = !query_parameters.is_empty();
 
+            for (parameter, parameter_name) in &parameters {
+                if parameter.position == ParameterPosition::Path {
+                    output.push(format!("    let {parameter_name} = p({parameter_name});"));
+                }
+            }
+
             output.push(
                 if has_query_parameters {
                     "    let mut builder = self"
@@ -1100,7 +1106,7 @@ fn generate_rest(spec: &openapi::Spec) {
         r###"use reqwest::header::CONTENT_LENGTH;
 use serde_json::Value;
 
-use super::*;
+use super::{{*, url_enc::encode_url_param as p}};
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
 "###
