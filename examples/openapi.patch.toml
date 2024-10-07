@@ -10,3 +10,7 @@ rust_type = "TypeVec<RequiredActionProviderRepresentation>"
 [path."/admin/realms/{realm}/identity-provider/providers/{provider_id}:get:"]
 from_type = "Value"
 rust_type = "IdentityProviderRepresentation"
+[type."ClientPolicyExecutorRepresentation:configuration"]
+rust_type = "Option<TypeMap<String, TypeValue>>"
+[type."ClientPolicyConditionRepresentation:configuration"]
+rust_type = "Option<TypeMap<String, TypeValue>>"

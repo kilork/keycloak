@@ -68,7 +68,7 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         let realm = &self.realm;
         let response = self
             .reqwest_client
-            .post(&format!(
+            .post(format!(
                 "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
             .form(&[
@@ -131,7 +131,7 @@ impl KeycloakAdminToken {
         client: &reqwest::Client,
     ) -> Result<KeycloakAdminToken, KeycloakError> {
         let response = client
-            .post(&format!(
+            .post(format!(
                 "{url}/realms/{realm}/protocol/openid-connect/token",
             ))
             .form(&[

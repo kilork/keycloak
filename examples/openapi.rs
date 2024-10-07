@@ -811,6 +811,11 @@ pub struct {name} {{
                 fields
                     .into_iter()
                     .map(|(field, field_name, field_case, field_type, deprecated)| {
+                        let field_desc = Toml::field(name, &field_name);
+                        let fld_type = field_desc
+                            .as_ref()
+                            .map(|field_desc| Cow::Borrowed(field_desc.rust_type.as_str()))
+                            .unwrap_or(field_type);
                         let is_rename = match field_case {
                             FieldCase::Custom => true,
                             FieldCase::Unknown => false,
@@ -819,11 +824,11 @@ pub struct {name} {{
                         };
 
                         let field_desc = if !is_rename {
-                            format!(r##"    pub {field_name}: {field_type},"##)
+                            format!(r##"    pub {field_name}: {fld_type},"##)
                         } else {
                             format!(
                                 r##"    #[serde(rename = "{field}")]
-    pub {field_name}: {field_type},"##,
+    pub {field_name}: {fld_type},"##,
                             )
                         };
                         if !deprecated {
@@ -1057,9 +1062,16 @@ pub enum {name} {{
     }
 
     #[derive(Debug, Deserialize)]
+    struct FieldDesc {
+        rust_type: String,
+    }
+
+    #[derive(Debug, Deserialize)]
     struct Toml {
         #[serde(default)]
         path: IndexMap<String, Arc<PathDesc>>,
+        #[serde(default)]
+        r#type: IndexMap<String, Arc<FieldDesc>>,
     }
 
     impl Toml {
@@ -1077,6 +1089,14 @@ pub enum {name} {{
                     ))
                     .cloned()
             })
+        }
+
+        fn field<S, F>(structure: S, field: F) -> Option<Arc<FieldDesc>>
+        where
+            S: Display,
+            F: Display,
+        {
+            OPENAPI_PATCH.with(|toml| toml.r#type.get(&format!("{structure}:{field}",)).cloned())
         }
     }
 
