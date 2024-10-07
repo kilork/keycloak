@@ -1,6 +1,6 @@
 use std::fmt::Display;
 
-pub fn encode_url_param<'v>(value: &'v str) -> impl Display + 'v {
+pub fn encode_url_param(value: &str) -> impl Display + '_ {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const FRAGMENT: &AsciiSet = &CONTROLS.add(b' ').add(b'"').add(b'<').add(b'>').add(b'`');
