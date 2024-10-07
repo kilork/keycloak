@@ -511,6 +511,7 @@ pub struct ClientTemplateRepresentation {
 pub struct ClientTypeRepresentation {
     pub config: Option<TypeMap<String, PropertyConfig>>,
     pub name: Option<TypeString>,
+    pub parent: Option<TypeString>,
     pub provider: Option<TypeString>,
 }
 
@@ -803,8 +804,10 @@ pub struct IdentityProviderRepresentation {
     pub display_name: Option<TypeString>,
     pub enabled: Option<bool>,
     pub first_broker_login_flow_alias: Option<TypeString>,
+    pub hide_on_login: Option<bool>,
     pub internal_id: Option<TypeString>,
     pub link_only: Option<bool>,
+    pub organization_id: Option<TypeString>,
     pub post_broker_login_flow_alias: Option<TypeString>,
     pub provider_id: Option<TypeString>,
     pub store_token: Option<bool>,
@@ -920,6 +923,52 @@ pub struct MappingsRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct MemberRepresentation {
+    pub access: Option<TypeMap<String, bool>>,
+    #[deprecated]
+    pub application_roles: Option<TypeMap<String, TypeVec<String>>>,
+    pub attributes: Option<TypeMap<String, TypeVec<String>>>,
+    pub client_consents: Option<TypeVec<UserConsentRepresentation>>,
+    pub client_roles: Option<TypeMap<String, TypeVec<String>>>,
+    pub created_timestamp: Option<i64>,
+    pub credentials: Option<TypeVec<CredentialRepresentation>>,
+    pub disableable_credential_types: Option<TypeVec<String>>,
+    pub email: Option<TypeString>,
+    pub email_verified: Option<bool>,
+    pub enabled: Option<bool>,
+    pub federated_identities: Option<TypeVec<FederatedIdentityRepresentation>>,
+    pub federation_link: Option<TypeString>,
+    pub first_name: Option<TypeString>,
+    pub groups: Option<TypeVec<String>>,
+    pub id: Option<TypeString>,
+    pub last_name: Option<TypeString>,
+    pub membership_type: Option<MembershipType>,
+    pub not_before: Option<i32>,
+    pub origin: Option<TypeString>,
+    pub realm_roles: Option<TypeVec<String>>,
+    pub required_actions: Option<TypeVec<String>>,
+    #[serde(rename = "self")]
+    pub self_: Option<TypeString>,
+    pub service_account_client_id: Option<TypeString>,
+    #[deprecated]
+    pub social_links: Option<TypeVec<SocialLinkRepresentation>>,
+    pub totp: Option<bool>,
+    pub user_profile_metadata: Option<UserProfileMetadata>,
+    pub username: Option<TypeString>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum MembershipType {
+    Unmanaged,
+    Managed,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct MethodConfig {
     pub method: Option<TypeString>,
     pub scopes: Option<TypeVec<String>>,
@@ -1006,14 +1055,16 @@ pub struct OrganizationDomainRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct OrganizationRepresentation {
+    pub alias: Option<TypeString>,
     pub attributes: Option<TypeMap<String, TypeVec<String>>>,
     pub description: Option<TypeString>,
     pub domains: Option<TypeVec<OrganizationDomainRepresentation>>,
     pub enabled: Option<bool>,
     pub id: Option<TypeString>,
     pub identity_providers: Option<TypeVec<IdentityProviderRepresentation>>,
-    pub members: Option<TypeVec<UserRepresentation>>,
+    pub members: Option<TypeVec<MemberRepresentation>>,
     pub name: Option<TypeString>,
+    pub redirect_url: Option<TypeString>,
 }
 
 #[skip_serializing_none]
