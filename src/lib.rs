@@ -28,7 +28,7 @@ Add dependency to Cargo.toml:
 keycloak = "25.0"
 ```
 
-```rust#ignore
+```rust, no_run
 use keycloak::{
     types::*,
     {KeycloakAdmin, KeycloakAdminToken},
