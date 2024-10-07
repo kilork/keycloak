@@ -435,7 +435,7 @@ mod openapi {
                 .into(),
             );
             output.push("        .client".into());
-            output.push(format!("        .{method_string_lc}(&format!("));
+            output.push(format!("        .{method_string_lc}(format!("));
             output.push(format!(r#"            "{{}}{path_snake_case}","#));
             output.push("            self.url".into());
             output.push("        ))".into());

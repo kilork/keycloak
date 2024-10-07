@@ -25,7 +25,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users",
                 self.url
             ))
@@ -59,7 +59,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
@@ -92,7 +92,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
@@ -123,7 +123,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/authenticator-providers",
                 self.url
             ))
@@ -151,7 +151,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/client-authenticator-providers",
                 self.url
             ))
@@ -184,7 +184,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/config",
                 self.url
             ))
@@ -218,7 +218,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let provider_id = p(provider_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/config-description/{provider_id}",
                 self.url
             ))
@@ -249,7 +249,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
@@ -282,7 +282,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
@@ -315,7 +315,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
@@ -348,7 +348,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/executions",
                 self.url
             ))
@@ -382,7 +382,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let execution_id = p(execution_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
@@ -415,7 +415,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let execution_id = p(execution_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
@@ -453,7 +453,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let execution_id = p(execution_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/config",
                 self.url
             ))
@@ -491,7 +491,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/config/{id}",
                 self.url
             ))
@@ -526,7 +526,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let execution_id = p(execution_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority",
                 self.url
             ))
@@ -561,7 +561,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let execution_id = p(execution_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority",
                 self.url
             ))
@@ -589,7 +589,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/flows",
                 self.url
             ))
@@ -621,7 +621,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/flows",
                 self.url
             ))
@@ -659,7 +659,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let flow_alias = p(flow_alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/copy",
                 self.url
             ))
@@ -693,7 +693,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let flow_alias = p(flow_alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
                 self.url
             ))
@@ -728,7 +728,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let flow_alias = p(flow_alias);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
                 self.url
             ))
@@ -767,7 +767,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let flow_alias = p(flow_alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions/execution",
                 self.url
             ))
@@ -805,7 +805,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let flow_alias = p(flow_alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions/flow",
                 self.url
             ))
@@ -837,7 +837,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
@@ -870,7 +870,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
@@ -903,7 +903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
@@ -932,7 +932,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/form-action-providers",
                 self.url
             ))
@@ -960,7 +960,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/form-providers",
                 self.url
             ))
@@ -988,7 +988,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/per-client-config-description",
                 self.url
             ))
@@ -1020,7 +1020,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/register-required-action",
                 self.url
             ))
@@ -1049,7 +1049,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions",
                 self.url
             ))
@@ -1080,7 +1080,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
@@ -1113,7 +1113,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
@@ -1146,7 +1146,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
@@ -1178,7 +1178,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config",
                 self.url
             ))
@@ -1211,7 +1211,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config",
                 self.url
             ))
@@ -1244,7 +1244,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config",
                 self.url
             ))
@@ -1276,7 +1276,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config-description",
                 self.url
             ))
@@ -1309,7 +1309,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority",
                 self.url
             ))
@@ -1342,7 +1342,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority",
                 self.url
             ))
@@ -1370,7 +1370,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/authentication/unregistered-required-actions",
                 self.url
             ))
@@ -1408,7 +1408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}",
                 self.url
             ))
@@ -1446,7 +1446,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/download",
                 self.url
             ))
@@ -1483,7 +1483,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate",
                 self.url
             ))
@@ -1524,7 +1524,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate-and-download",
                 self.url
             ))
@@ -1561,7 +1561,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload",
                 self.url
             ))
@@ -1597,7 +1597,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let attr = p(attr);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate",
                 self.url
             ))
@@ -1625,7 +1625,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients-initial-access",
                 self.url
             ))
@@ -1655,7 +1655,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients-initial-access",
                 self.url
             ))
@@ -1685,7 +1685,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients-initial-access/{id}",
                 self.url
             ))
@@ -1716,7 +1716,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-registration-policy/providers",
                 self.url
             ))
@@ -1754,7 +1754,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -1794,7 +1794,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -1833,7 +1833,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -1871,7 +1871,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/available",
                 self.url
             ))
@@ -1909,7 +1909,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/composite",
                 self.url
             ))
@@ -1948,7 +1948,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -1988,7 +1988,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -2027,7 +2027,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
@@ -2065,7 +2065,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/available",
                 self.url
             ))
@@ -2103,7 +2103,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_id = p(client_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/composite",
                 self.url
             ))
@@ -2136,7 +2136,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
+            .get(format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -2165,7 +2165,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/client-scopes", self.url))
+            .post(format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2196,7 +2196,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -2231,7 +2231,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -2266,7 +2266,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -2295,7 +2295,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates",
                 self.url
             ))
@@ -2327,7 +2327,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-templates",
                 self.url
             ))
@@ -2361,7 +2361,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
@@ -2396,7 +2396,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
@@ -2431,7 +2431,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
@@ -2475,7 +2475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/clients", self.url))
+            .get(format!("{}/admin/realms/{realm}/clients", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("clientId", v)]);
@@ -2522,7 +2522,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/clients", self.url))
+            .post(format!("{}/admin/realms/{realm}/clients", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -2553,7 +2553,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}",
                 self.url
             ))
@@ -2588,7 +2588,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}",
                 self.url
             ))
@@ -2623,7 +2623,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}",
                 self.url
             ))
@@ -2657,7 +2657,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
@@ -2690,7 +2690,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
@@ -2723,7 +2723,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
@@ -2756,7 +2756,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
@@ -2790,7 +2790,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes",
                 self.url
             ))
@@ -2824,7 +2824,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -2860,7 +2860,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -2898,7 +2898,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token",
                 self.url
             ))
@@ -2941,7 +2941,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token",
                 self.url
             ))
@@ -2984,7 +2984,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo",
                 self.url
             ))
@@ -3025,7 +3025,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers",
                 self.url
             ))
@@ -3066,7 +3066,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_container_id = p(role_container_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted",
                 self.url
             ))
@@ -3107,7 +3107,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_container_id = p(role_container_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted",
                 self.url
             ))
@@ -3144,7 +3144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let provider_id = p(provider_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}",
                 self.url
             ))
@@ -3178,7 +3178,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/management/permissions",
                 self.url
             ))
@@ -3213,7 +3213,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/management/permissions",
                 self.url
             ))
@@ -3251,7 +3251,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/nodes",
                 self.url
             ))
@@ -3288,7 +3288,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let node = p(node);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/nodes/{node}",
                 self.url
             ))
@@ -3322,7 +3322,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/offline-session-count",
                 self.url
             ))
@@ -3359,7 +3359,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/offline-sessions",
                 self.url
             ))
@@ -3398,7 +3398,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes",
                 self.url
             ))
@@ -3432,7 +3432,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -3468,7 +3468,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -3502,7 +3502,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/push-revocation",
                 self.url
             ))
@@ -3535,7 +3535,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/registration-access-token",
                 self.url
             ))
@@ -3568,7 +3568,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/service-account-user",
                 self.url
             ))
@@ -3601,7 +3601,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/session-count",
                 self.url
             ))
@@ -3634,7 +3634,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/test-nodes-available",
                 self.url
             ))
@@ -3671,7 +3671,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/user-sessions",
                 self.url
             ))
@@ -3711,7 +3711,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/components", self.url))
+            .get(format!("{}/admin/realms/{realm}/components", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = name {
             builder = builder.query(&[("name", v)]);
@@ -3747,7 +3747,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/components", self.url))
+            .post(format!("{}/admin/realms/{realm}/components", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3774,10 +3774,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
-                "{}/admin/realms/{realm}/components/{id}",
-                self.url
-            ))
+            .get(format!("{}/admin/realms/{realm}/components/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -3805,10 +3802,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
-                "{}/admin/realms/{realm}/components/{id}",
-                self.url
-            ))
+            .put(format!("{}/admin/realms/{realm}/components/{id}", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3836,10 +3830,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
-                "{}/admin/realms/{realm}/components/{id}",
-                self.url
-            ))
+            .delete(format!("{}/admin/realms/{realm}/components/{id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -3870,7 +3861,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/components/{id}/sub-component-types",
                 self.url
             ))
@@ -3918,7 +3909,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/groups", self.url))
+            .get(format!("{}/admin/realms/{realm}/groups", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -3968,7 +3959,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/groups", self.url))
+            .post(format!("{}/admin/realms/{realm}/groups", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -3998,7 +3989,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/groups/count", self.url))
+            .get(format!("{}/admin/realms/{realm}/groups/count", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
@@ -4032,7 +4023,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}",
                 self.url
             ))
@@ -4067,7 +4058,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}",
                 self.url
             ))
@@ -4100,7 +4091,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}",
                 self.url
             ))
@@ -4145,7 +4136,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/children",
                 self.url
             ))
@@ -4197,7 +4188,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/children",
                 self.url
             ))
@@ -4231,7 +4222,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/management/permissions",
                 self.url
             ))
@@ -4266,7 +4257,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/management/permissions",
                 self.url
             ))
@@ -4306,7 +4297,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/members",
                 self.url
             ))
@@ -4347,7 +4338,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/identity-provider/import-config",
                 self.url
             ))
@@ -4386,7 +4377,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances",
                 self.url
             ))
@@ -4433,7 +4424,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances",
                 self.url
             ))
@@ -4465,7 +4456,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
@@ -4498,7 +4489,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
@@ -4531,7 +4522,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
@@ -4565,7 +4556,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/export",
                 self.url
             ))
@@ -4600,7 +4591,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions",
                 self.url
             ))
@@ -4633,7 +4624,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions",
                 self.url
             ))
@@ -4665,7 +4656,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types",
                 self.url
             ))
@@ -4696,7 +4687,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
                 self.url
             ))
@@ -4731,7 +4722,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
                 self.url
             ))
@@ -4766,7 +4757,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
                 self.url
             ))
@@ -4802,7 +4793,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
                 self.url
             ))
@@ -4838,7 +4829,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
                 self.url
             ))
@@ -4870,7 +4861,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let alias = p(alias);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys",
                 self.url
             ))
@@ -4901,7 +4892,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let provider_id = p(provider_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/identity-provider/providers/{provider_id}",
                 self.url
             ))
@@ -4929,7 +4920,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/keys", self.url))
+            .get(format!("{}/admin/realms/{realm}/keys", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -4965,7 +4956,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/add-models",
                 self.url
             ))
@@ -4999,7 +4990,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
@@ -5036,7 +5027,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
@@ -5073,7 +5064,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5111,7 +5102,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5149,7 +5140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5186,7 +5177,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let protocol = p(protocol);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
@@ -5223,7 +5214,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/add-models",
                 self.url
             ))
@@ -5257,7 +5248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
@@ -5294,7 +5285,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
@@ -5331,7 +5322,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5369,7 +5360,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5407,7 +5398,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5444,7 +5435,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let protocol = p(protocol);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
@@ -5481,7 +5472,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/add-models",
                 self.url
             ))
@@ -5515,7 +5506,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models",
                 self.url
             ))
@@ -5552,7 +5543,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models",
                 self.url
             ))
@@ -5589,7 +5580,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5627,7 +5618,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5665,7 +5656,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let id = p(id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
@@ -5702,7 +5693,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let protocol = p(protocol);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
@@ -5731,7 +5722,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<TypeVec<RealmRepresentation>, KeycloakError> {
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms", self.url))
+            .get(format!("{}/admin/realms", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -5760,7 +5751,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ) -> Result<Option<TypeString>, KeycloakError> {
         let builder = self
             .client
-            .post(&format!("{}/admin/realms", self.url))
+            .post(format!("{}/admin/realms", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5783,7 +5774,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}", self.url))
+            .get(format!("{}/admin/realms/{realm}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -5810,7 +5801,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}", self.url))
+            .put(format!("{}/admin/realms/{realm}", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -5834,7 +5825,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}", self.url))
+            .delete(format!("{}/admin/realms/{realm}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5883,7 +5874,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/admin-events", self.url))
+            .get(format!("{}/admin/realms/{realm}/admin-events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = auth_client {
             builder = builder.query(&[("authClient", v)]);
@@ -5946,7 +5937,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}/admin-events", self.url))
+            .delete(format!("{}/admin/realms/{realm}/admin-events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -5974,7 +5965,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-description-converter",
                 self.url
             ))
@@ -6003,7 +5994,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-policies/policies",
                 self.url
             ))
@@ -6034,7 +6025,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-policies/policies",
                 self.url
             ))
@@ -6064,7 +6055,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-policies/profiles",
                 self.url
             ))
@@ -6095,7 +6086,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/client-policies/profiles",
                 self.url
             ))
@@ -6125,7 +6116,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-session-stats",
                 self.url
             ))
@@ -6153,7 +6144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/client-types", self.url))
+            .get(format!("{}/admin/realms/{realm}/client-types", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -6180,7 +6171,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/client-types", self.url))
+            .put(format!("{}/admin/realms/{realm}/client-types", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -6205,7 +6196,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/credential-registrators",
                 self.url
             ))
@@ -6233,7 +6224,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/default-default-client-scopes",
                 self.url
             ))
@@ -6264,7 +6255,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -6297,7 +6288,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -6326,7 +6317,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/default-groups", self.url))
+            .get(format!("{}/admin/realms/{realm}/default-groups", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -6354,7 +6345,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
@@ -6387,7 +6378,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
@@ -6416,7 +6407,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/default-optional-client-scopes",
                 self.url
             ))
@@ -6447,7 +6438,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -6480,7 +6471,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
                 self.url
             ))
@@ -6526,7 +6517,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/events", self.url))
+            .get(format!("{}/admin/realms/{realm}/events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = client {
             builder = builder.query(&[("client", v)]);
@@ -6572,7 +6563,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .delete(&format!("{}/admin/realms/{realm}/events", self.url))
+            .delete(format!("{}/admin/realms/{realm}/events", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -6598,7 +6589,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/events/config", self.url))
+            .get(format!("{}/admin/realms/{realm}/events/config", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -6623,7 +6614,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/events/config", self.url))
+            .put(format!("{}/admin/realms/{realm}/events/config", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -6651,7 +6642,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let path = p(path);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/group-by-path/{path}",
                 self.url
             ))
@@ -6677,7 +6668,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/localization", self.url))
+            .get(format!("{}/admin/realms/{realm}/localization", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -6705,7 +6696,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
@@ -6743,7 +6734,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
@@ -6773,7 +6764,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
@@ -6806,7 +6797,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
@@ -6840,7 +6831,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
@@ -6874,7 +6865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let locale = p(locale);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
@@ -6903,7 +6894,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/logout-all", self.url))
+            .post(format!("{}/admin/realms/{realm}/logout-all", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -6934,7 +6925,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/partial-export", self.url))
+            .post(format!("{}/admin/realms/{realm}/partial-export", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = export_clients {
             builder = builder.query(&[("exportClients", v)]);
@@ -6969,7 +6960,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/partialImport", self.url))
+            .post(format!("{}/admin/realms/{realm}/partialImport", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -6995,10 +6986,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
-                "{}/admin/realms/{realm}/push-revocation",
-                self.url
-            ))
+            .post(format!("{}/admin/realms/{realm}/push-revocation", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -7028,7 +7016,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let session = p(session);
         let mut builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/sessions/{session}",
                 self.url
             ))
@@ -7065,7 +7053,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/testSMTPConnection",
                 self.url
             ))
@@ -7092,7 +7080,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users-management-permissions",
                 self.url
             ))
@@ -7120,7 +7108,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users-management-permissions",
                 self.url
             ))
@@ -7156,7 +7144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings",
                 self.url
             ))
@@ -7189,7 +7177,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
@@ -7226,7 +7214,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
@@ -7262,7 +7250,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
@@ -7297,7 +7285,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available",
                 self.url
             ))
@@ -7332,7 +7320,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite",
                 self.url
             ))
@@ -7368,7 +7356,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings",
                 self.url
             ))
@@ -7401,7 +7389,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
@@ -7438,7 +7426,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
@@ -7474,7 +7462,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
@@ -7509,7 +7497,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/available",
                 self.url
             ))
@@ -7544,7 +7532,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite",
                 self.url
             ))
@@ -7590,7 +7578,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles",
                 self.url
             ))
@@ -7639,7 +7627,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles",
                 self.url
             ))
@@ -7676,7 +7664,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
@@ -7714,7 +7702,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
@@ -7752,7 +7740,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
@@ -7789,7 +7777,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
@@ -7829,7 +7817,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
@@ -7868,7 +7856,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
@@ -7906,7 +7894,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}",
                 self.url
             ))
@@ -7942,7 +7930,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm",
                 self.url
             ))
@@ -7984,7 +7972,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups",
                 self.url
             ))
@@ -8029,7 +8017,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions",
                 self.url
             ))
@@ -8067,7 +8055,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions",
                 self.url
             ))
@@ -8110,7 +8098,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users",
                 self.url
             ))
@@ -8155,7 +8143,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/roles", self.url))
+            .get(format!("{}/admin/realms/{realm}/roles", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -8196,7 +8184,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/roles", self.url))
+            .post(format!("{}/admin/realms/{realm}/roles", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -8227,7 +8215,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
@@ -8262,7 +8250,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
@@ -8297,7 +8285,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
@@ -8331,7 +8319,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
@@ -8368,7 +8356,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
@@ -8404,7 +8392,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
@@ -8442,7 +8430,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}",
                 self.url
             ))
@@ -8475,7 +8463,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/composites/realm",
                 self.url
             ))
@@ -8514,7 +8502,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/groups",
                 self.url
             ))
@@ -8556,7 +8544,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/management/permissions",
                 self.url
             ))
@@ -8591,7 +8579,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/management/permissions",
                 self.url
             ))
@@ -8631,7 +8619,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_name = p(role_name);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles/{role_name}/users",
                 self.url
             ))
@@ -8675,7 +8663,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
@@ -8710,7 +8698,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
@@ -8745,7 +8733,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
@@ -8785,7 +8773,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
@@ -8831,7 +8819,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
@@ -8867,7 +8855,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
@@ -8905,7 +8893,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}",
                 self.url
             ))
@@ -8938,7 +8926,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/realm",
                 self.url
             ))
@@ -8971,7 +8959,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
                 self.url
             ))
@@ -9006,7 +8994,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let role_id = p(role_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
                 self.url
             ))
@@ -9043,7 +9031,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings",
                 self.url
             ))
@@ -9079,7 +9067,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9119,7 +9107,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9158,7 +9146,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9196,7 +9184,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
@@ -9234,7 +9222,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
@@ -9270,7 +9258,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9307,7 +9295,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9343,7 +9331,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9378,7 +9366,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
@@ -9413,7 +9401,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
@@ -9450,7 +9438,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings",
                 self.url
             ))
@@ -9486,7 +9474,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9526,7 +9514,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9565,7 +9553,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9603,7 +9591,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
@@ -9641,7 +9629,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
@@ -9677,7 +9665,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9714,7 +9702,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9750,7 +9738,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
@@ -9785,7 +9773,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
@@ -9820,7 +9808,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_scope_id = p(client_scope_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
@@ -9857,7 +9845,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings",
                 self.url
             ))
@@ -9893,7 +9881,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9933,7 +9921,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -9972,7 +9960,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
@@ -10010,7 +9998,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/available",
                 self.url
             ))
@@ -10048,7 +10036,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
@@ -10084,7 +10072,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
@@ -10121,7 +10109,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
@@ -10157,7 +10145,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
@@ -10192,7 +10180,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/available",
                 self.url
             ))
@@ -10227,7 +10215,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/composite",
                 self.url
             ))
@@ -10289,7 +10277,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/users", self.url))
+            .get(format!("{}/admin/realms/{realm}/users", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
@@ -10360,7 +10348,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .post(&format!("{}/admin/realms/{realm}/users", self.url))
+            .post(format!("{}/admin/realms/{realm}/users", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -10403,7 +10391,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let mut builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/users/count", self.url))
+            .get(format!("{}/admin/realms/{realm}/users/count", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = email {
             builder = builder.query(&[("email", v)]);
@@ -10447,7 +10435,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!("{}/admin/realms/{realm}/users/profile", self.url))
+            .get(format!("{}/admin/realms/{realm}/users/profile", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
@@ -10472,7 +10460,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .put(&format!("{}/admin/realms/{realm}/users/profile", self.url))
+            .put(format!("{}/admin/realms/{realm}/users/profile", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -10496,7 +10484,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let realm = p(realm);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/profile/metadata",
                 self.url
             ))
@@ -10531,10 +10519,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .get(&format!(
-                "{}/admin/realms/{realm}/users/{user_id}",
-                self.url
-            ))
+            .get(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         if let Some(v) = user_profile_metadata {
             builder = builder.query(&[("userProfileMetadata", v)]);
@@ -10569,10 +10554,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .put(&format!(
-                "{}/admin/realms/{realm}/users/{user_id}",
-                self.url
-            ))
+            .put(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
@@ -10604,10 +10586,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .delete(&format!(
-                "{}/admin/realms/{realm}/users/{user_id}",
-                self.url
-            ))
+            .delete(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
@@ -10638,7 +10617,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/configured-user-storage-credential-types",
                 self.url
             ))
@@ -10671,7 +10650,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/consents",
                 self.url
             ))
@@ -10707,7 +10686,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client = p(client);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/consents/{client}",
                 self.url
             ))
@@ -10739,7 +10718,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/credentials",
                 self.url
             ))
@@ -10775,7 +10754,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let credential_id = p(credential_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}",
                 self.url
             ))
@@ -10817,7 +10796,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let new_previous_credential_id = p(new_previous_credential_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}",
                 self.url
             ))
@@ -10855,7 +10834,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let credential_id = p(credential_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveToFirst",
                 self.url
             ))
@@ -10893,7 +10872,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let credential_id = p(credential_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/userLabel",
                 self.url
             ))
@@ -10930,7 +10909,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/disable-credential-types",
                 self.url
             ))
@@ -10973,7 +10952,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/execute-actions-email",
                 self.url
             ))
@@ -11017,7 +10996,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity",
                 self.url
             ))
@@ -11055,7 +11034,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let provider = p(provider);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
@@ -11091,7 +11070,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let provider = p(provider);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
@@ -11131,7 +11110,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/groups",
                 self.url
             ))
@@ -11176,7 +11155,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/groups/count",
                 self.url
             ))
@@ -11213,7 +11192,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/groups/{group_id}",
                 self.url
             ))
@@ -11249,7 +11228,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let group_id = p(group_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/groups/{group_id}",
                 self.url
             ))
@@ -11283,7 +11262,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/impersonation",
                 self.url
             ))
@@ -11318,7 +11297,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/logout",
                 self.url
             ))
@@ -11354,7 +11333,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/offline-sessions/{client_uuid}",
                 self.url
             ))
@@ -11389,7 +11368,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/reset-password",
                 self.url
             ))
@@ -11429,7 +11408,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/reset-password-email",
                 self.url
             ))
@@ -11476,7 +11455,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let mut builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/send-verify-email",
                 self.url
             ))
@@ -11520,7 +11499,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/sessions",
                 self.url
             ))
@@ -11551,7 +11530,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let user_id = p(user_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/users/{user_id}/unmanagedAttributes",
                 self.url
             ))
@@ -11581,7 +11560,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server",
                 self.url
             ))
@@ -11611,7 +11590,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server",
                 self.url
             ))
@@ -11645,7 +11624,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/import",
                 self.url
             ))
@@ -11695,7 +11674,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission",
                 self.url
             ))
@@ -11758,7 +11737,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission",
                 self.url
             ))
@@ -11791,7 +11770,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/evaluate",
                 self.url
             ))
@@ -11820,7 +11799,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/providers",
                 self.url
             ))
@@ -11852,7 +11831,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/search",
                 self.url
             ))
@@ -11908,7 +11887,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy",
                 self.url
             ))
@@ -11971,7 +11950,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy",
                 self.url
             ))
@@ -12004,7 +11983,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/evaluate",
                 self.url
             ))
@@ -12033,7 +12012,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/providers",
                 self.url
             ))
@@ -12065,7 +12044,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/search",
                 self.url
             ))
@@ -12123,7 +12102,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource",
                 self.url
             ))
@@ -12211,7 +12190,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource",
                 self.url
             ))
@@ -12296,7 +12275,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/search",
                 self.url
             ))
@@ -12384,7 +12363,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}",
                 self.url
             ))
@@ -12474,7 +12453,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}",
                 self.url
             ))
@@ -12563,7 +12542,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}",
                 self.url
             ))
@@ -12651,7 +12630,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/attributes",
                 self.url
             ))
@@ -12739,7 +12718,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/permissions",
                 self.url
             ))
@@ -12827,7 +12806,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let resource_id = p(resource_id);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/scopes",
                 self.url
             ))
@@ -12897,7 +12876,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope",
                 self.url
             ))
@@ -12941,7 +12920,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .post(&format!(
+            .post(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope",
                 self.url
             ))
@@ -12972,7 +12951,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let mut builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/search",
                 self.url
             ))
@@ -13007,7 +12986,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let scope_id = p(scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}",
                 self.url
             ))
@@ -13041,7 +13020,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let scope_id = p(scope_id);
         let builder = self
             .client
-            .put(&format!(
+            .put(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}",
                 self.url
             ))
@@ -13074,7 +13053,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let scope_id = p(scope_id);
         let builder = self
             .client
-            .delete(&format!(
+            .delete(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}",
                 self.url
             ))
@@ -13106,7 +13085,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let scope_id = p(scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/permissions",
                 self.url
             ))
@@ -13138,7 +13117,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let scope_id = p(scope_id);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/resources",
                 self.url
             ))
@@ -13167,7 +13146,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let client_uuid = p(client_uuid);
         let builder = self
             .client
-            .get(&format!(
+            .get(format!(
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/settings",
                 self.url
             ))
