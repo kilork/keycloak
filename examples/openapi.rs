@@ -16,7 +16,7 @@ enum Cli {
 const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use"];
 
 mod openapi {
-    use std::{borrow::Cow, fmt::Display, str::FromStr, sync::Arc};
+    use std::{borrow::Cow, collections::HashSet, fmt::Display, str::FromStr, sync::Arc};
 
     use heck::{ToLowerCamelCase, ToSnakeCase, ToUpperCamelCase};
     use indexmap::IndexMap;
@@ -133,12 +133,17 @@ mod openapi {
             self.0.get(&ContentType::ApplicationOctetStream)
         }
 
+        fn as_html_form(&self) -> Option<&ContentSchema> {
+            self.0.get(&ContentType::HtmlForm)
+        }
+
         fn as_any(&self) -> Option<&ContentSchema> {
             self.0.get(&ContentType::Any)
         }
 
         fn as_content_schema(&self) -> Option<&ContentSchema> {
             self.as_json()
+                .or(self.as_html_form())
                 .or(self.as_text_plain())
                 .or(self.as_binary_text())
                 .or(self.as_any())
@@ -158,6 +163,7 @@ mod openapi {
             self.as_json()
                 .map(|_| format!("json(&{body_name})"))
                 .or(self.as_text_plain().map(|_| format!("body({body_name})")))
+                .or(self.as_html_form().map(|_| format!("form(&{body_name})")))
         }
 
         fn to_rust_reqwest_parse_body_call(&self) -> Option<(Cow<'_, str>, Option<Cow<'_, str>>)> {
@@ -169,6 +175,7 @@ mod openapi {
                     .or(self.as_text_plain())
                     .map(|_| ("text", Some(".map(From::from)"))))
                 .or(self.as_binary_blob().map(|_| ("bytes", None)))
+                .or(self.as_html_form().map(|_| ("form", None)))
                 .map(|(method, conv)| (method.into(), conv.map(From::from)))
         }
     }
@@ -195,6 +202,7 @@ mod openapi {
     #[derive(Debug, Deserialize)]
     struct Responses(IndexMap<String, Response>);
 
+    #[derive(Debug)]
     struct ReturnType<'rt> {
         value: Cow<'rt, str>,
         body: Option<Cow<'rt, str>>,
@@ -701,7 +709,7 @@ mod openapi {
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(untagged)]
     pub enum ObjectSchema<P> {
         Struct(SchemaStruct<P>),
@@ -736,9 +744,15 @@ mod openapi {
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq)]
     pub struct SchemaStruct<P> {
         pub properties: IndexMap<String, P>,
+    }
+
+    impl<P: std::hash::Hash> std::hash::Hash for SchemaStruct<P> {
+        fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+            self.properties.as_slice().hash(state);
+        }
     }
 
     impl SchemaStruct<Property> {
@@ -844,12 +858,17 @@ pub struct {name} {{
     }
 
     impl SchemaStruct<Kind> {
-        fn to_rust_type(&self, _: RefMode) -> Cow<str> {
-            todo!()
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+            let property_types: HashSet<&Kind> = self.properties.values().collect();
+            let property_type = match property_types.into_iter().collect::<Vec<_>>().as_slice() {
+                &[property_type_kind] => property_type_kind.to_rust_type(ref_mode),
+                _ => "Value".into(),
+            };
+            format!("TypeMap<String, {property_type}>",).into()
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(rename_all = "camelCase")]
     pub struct SchemaMap<P> {
         pub additional_properties: P,
@@ -874,7 +893,7 @@ pub struct {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(rename_all = "camelCase")]
     pub struct SchemaAllOf<P> {
         pub all_of: Vec<P>,
@@ -932,7 +951,7 @@ pub enum {name} {{
         Std,
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(untagged)]
     pub enum Kind {
         Generic(Generic),
@@ -999,7 +1018,7 @@ pub enum {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     pub struct Property {
         #[serde(default)]
         deprecated: bool,
@@ -1024,7 +1043,7 @@ pub enum {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(rename_all = "lowercase", tag = "type")]
     pub enum Generic {
         Array {
@@ -1040,13 +1059,13 @@ pub enum {name} {{
         String,
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     pub struct Ref {
         #[serde(rename = "$ref")]
         pub reference: String,
     }
 
-    #[derive(Debug, Deserialize)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
     #[serde(rename_all = "lowercase")]
     pub enum IntegerFormat {
         Int32,
