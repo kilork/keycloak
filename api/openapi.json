@@ -30,6 +30,8 @@
   }, {
     "name" : "Key"
   }, {
+    "name" : "Organizations"
+  }, {
     "name" : "Protocol Mappers"
   }, {
     "name" : "Realms Admin"
@@ -9930,6 +9932,615 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/GlobalRequestResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns a paginated list of organizations filtered according to the specified parameters",
+        "parameters" : [ {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the param 'search' must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "The position of the first result to be processed (pagination offset)",
+          "schema" : {
+            "format" : "int32",
+            "default" : "0",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "The maximum number of results to be returned - defaults to 10",
+          "schema" : {
+            "format" : "int32",
+            "default" : "10",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "q",
+          "in" : "query",
+          "description" : "A query to search for custom attributes, in the format 'key1:value2 key2:value2'",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing either an organization name or domain",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/OrganizationRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Creates a new organization",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrganizationRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/members/{id}/organizations" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the organizations associated with the user that has the specified id",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/OrganizationRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the organization representation",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/OrganizationRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Updates the organization",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrganizationRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Deletes the organization",
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/identity-providers" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns all identity providers associated with the organization",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/IdentityProviderRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Adds the identity provider with the specified id to the organization",
+        "description" : "Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/identity-providers/{alias}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the identity provider associated with the organization that has the specified alias",
+        "description" : "Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/IdentityProviderRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Removes the identity provider with the specified alias from the organization",
+        "description" : "Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns a paginated list of organization members filtered according to the specified parameters",
+        "parameters" : [ {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the param 'search' must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "The position of the first result to be processed (pagination offset)",
+          "schema" : {
+            "format" : "int32",
+            "default" : "0",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "The maximum number of results to be returned. Defaults to 10",
+          "schema" : {
+            "format" : "int32",
+            "default" : "10",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing either a member's username, e-mail, first name, or last name.",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MemberRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Adds the user with the specified id as a member of the organization",
+        "description" : "Adds, or associates, an existing user with the organization. If no user is found, or if it is already associated with the organization, an error response is returned",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members/count" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns number of members in the organization.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "format" : "int64",
+                  "type" : "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members/invite-existing-user" : {
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Invites an existing user to the organization, using the specified user id",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "id" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members/invite-user" : {
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.",
+        "description" : "If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "firstName" : {
+                    "type" : "string"
+                  },
+                  "lastName" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members/{id}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the member of the organization with the specified id",
+        "description" : "Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MemberRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Removes the user with the specified id from the organization",
+        "description" : "Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{id}/members/{id}/organizations" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the organizations associated with the user that has the specified id",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/OrganizationRepresentation"
+                  }
                 }
               }
             }
