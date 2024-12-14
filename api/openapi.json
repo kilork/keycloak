@@ -9953,6 +9953,14 @@
         "tags" : [ "Organizations" ],
         "summary" : "Returns a paginated list of organizations filtered according to the specified parameters",
         "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "if true, return the full representation. Otherwise, only the basic fields are returned.",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        }, {
           "name" : "exact",
           "in" : "query",
           "description" : "Boolean which defines whether the param 'search' must match exactly or not",
@@ -10280,6 +10288,13 @@
             "format" : "int32",
             "default" : "10",
             "type" : "integer"
+          }
+        }, {
+          "name" : "membershipType",
+          "in" : "query",
+          "description" : "The membership type",
+          "schema" : {
+            "type" : "string"
           }
         }, {
           "name" : "search",
@@ -13676,6 +13691,12 @@
           },
           "error" : {
             "type" : "string"
+          },
+          "details" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -14074,6 +14095,10 @@
             }
           }
         }
+      },
+      "BruteForceStrategy" : {
+        "enum" : [ "LINEAR", "MULTIPLE" ],
+        "type" : "string"
       },
       "CertificateRepresentation" : {
         "type" : "object",
@@ -16356,6 +16381,9 @@
           "maxTemporaryLockouts" : {
             "format" : "int32",
             "type" : "integer"
+          },
+          "bruteForceStrategy" : {
+            "$ref" : "#/components/schemas/BruteForceStrategy"
           },
           "maxFailureWaitSeconds" : {
             "format" : "int32",

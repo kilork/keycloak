@@ -124,6 +124,7 @@ pub struct AddressClaimSet {
 #[serde(rename_all = "camelCase")]
 pub struct AdminEventRepresentation {
     pub auth_details: Option<AuthDetailsRepresentation>,
+    pub details: Option<TypeMap<String, TypeString>>,
     pub error: Option<TypeString>,
     pub operation_type: Option<TypeString>,
     pub realm_id: Option<TypeString>,
@@ -298,6 +299,14 @@ pub struct AuthenticatorConfigRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct Authorization {
     pub permissions: Option<TypeVec<Permission>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum BruteForceStrategy {
+    Linear,
+    Multiple,
 }
 
 #[skip_serializing_none]
@@ -1298,6 +1307,7 @@ pub struct RealmRepresentation {
     pub browser_flow: Option<TypeString>,
     pub browser_security_headers: Option<TypeMap<String, TypeString>>,
     pub brute_force_protected: Option<bool>,
+    pub brute_force_strategy: Option<BruteForceStrategy>,
     #[deprecated]
     pub certificate: Option<TypeString>,
     pub client_authentication_flow: Option<TypeString>,
