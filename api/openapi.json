@@ -8352,7 +8352,7 @@
     "/admin/realms/{realm}/groups" : {
       "get" : {
         "tags" : [ "Groups" ],
-        "summary" : "Get group hierarchy.  Only name and ids are returned.",
+        "summary" : "Get group hierarchy.  Only `name` and `id` are returned.  `subGroups` are only returned when using the `search` or `q` parameter. If none of these parameters is provided, the top-level groups are returned without `subGroups` being filled.",
         "parameters" : [ {
           "name" : "briefRepresentation",
           "in" : "query",
@@ -10044,12 +10044,12 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/members/{id}/organizations" : {
+    "/admin/realms/{realm}/organizations/members/{member-id}/organizations" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns the organizations associated with the user that has the specified id",
         "parameters" : [ {
-          "name" : "id",
+          "name" : "member-id",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -10082,7 +10082,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}" : {
+    "/admin/realms/{realm}/organizations/{org-id}" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns the organization representation",
@@ -10135,7 +10135,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10143,7 +10143,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/identity-providers" : {
+    "/admin/realms/{realm}/organizations/{org-id}/identity-providers" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns all identity providers associated with the organization",
@@ -10191,7 +10191,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10199,7 +10199,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/identity-providers/{alias}" : {
+    "/admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns the identity provider associated with the organization that has the specified alias",
@@ -10252,7 +10252,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10260,7 +10260,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns a paginated list of organization members filtered according to the specified parameters",
@@ -10348,7 +10348,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10356,7 +10356,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members/count" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members/count" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns number of members in the organization.",
@@ -10383,7 +10383,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10391,7 +10391,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members/invite-existing-user" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members/invite-existing-user" : {
       "post" : {
         "tags" : [ "Organizations" ],
         "summary" : "Invites an existing user to the organization, using the specified user id",
@@ -10424,7 +10424,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10432,7 +10432,7 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members/invite-user" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members/invite-user" : {
       "post" : {
         "tags" : [ "Organizations" ],
         "summary" : "Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.",
@@ -10472,7 +10472,7 @@
           "type" : "string"
         }
       }, {
-        "name" : "id",
+        "name" : "org-id",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -10480,13 +10480,13 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members/{id}" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members/{member-id}" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns the member of the organization with the specified id",
         "description" : "Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned",
         "parameters" : [ {
-          "name" : "id",
+          "name" : "member-id",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -10511,7 +10511,7 @@
         "summary" : "Removes the user with the specified id from the organization",
         "description" : "Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned",
         "parameters" : [ {
-          "name" : "id",
+          "name" : "member-id",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -10532,14 +10532,21 @@
         "schema" : {
           "type" : "string"
         }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
       } ]
     },
-    "/admin/realms/{realm}/organizations/{id}/members/{id}/organizations" : {
+    "/admin/realms/{realm}/organizations/{org-id}/members/{member-id}/organizations" : {
       "get" : {
         "tags" : [ "Organizations" ],
         "summary" : "Returns the organizations associated with the user that has the specified id",
         "parameters" : [ {
-          "name" : "id",
+          "name" : "member-id",
           "in" : "path",
           "required" : true,
           "schema" : {
@@ -10566,6 +10573,13 @@
         "name" : "realm",
         "in" : "path",
         "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -13458,6 +13472,9 @@
           "owner" : {
             "type" : "string"
           },
+          "resourceType" : {
+            "type" : "string"
+          },
           "resourcesData" : {
             "uniqueItems" : true,
             "type" : "array",
@@ -14092,6 +14109,17 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/Permission"
+            }
+          }
+        }
+      },
+      "AuthorizationSchema" : {
+        "type" : "object",
+        "properties" : {
+          "resourceTypes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/components/schemas/ResourceType"
             }
           }
         }
@@ -16062,6 +16090,9 @@
           "owner" : {
             "type" : "string"
           },
+          "resourceType" : {
+            "type" : "string"
+          },
           "resourcesData" : {
             "uniqueItems" : true,
             "type" : "array",
@@ -16444,6 +16475,9 @@
           "defaultRole" : {
             "$ref" : "#/components/schemas/RoleRepresentation"
           },
+          "adminPermissionsClient" : {
+            "$ref" : "#/components/schemas/ClientRepresentation"
+          },
           "defaultGroups" : {
             "type" : "array",
             "items" : {
@@ -16799,6 +16833,12 @@
               "$ref" : "#/components/schemas/OrganizationRepresentation"
             }
           },
+          "verifiableCredentialsEnabled" : {
+            "type" : "boolean"
+          },
+          "adminPermissionsEnabled" : {
+            "type" : "boolean"
+          },
           "social" : {
             "type" : "boolean",
             "deprecated" : true
@@ -17021,6 +17061,24 @@
           },
           "decisionStrategy" : {
             "$ref" : "#/components/schemas/DecisionStrategy"
+          },
+          "authorizationSchema" : {
+            "$ref" : "#/components/schemas/AuthorizationSchema"
+          }
+        }
+      },
+      "ResourceType" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "scopes" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           }
         }
       },
