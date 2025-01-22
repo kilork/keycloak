@@ -872,16 +872,8 @@ class Updater {
       });
     }
 
-    if (options.gitTag) {
-      await this.git.tag({
-        code: `v${milestoneVersion.toString()}`,
-        message: `Keycloak Admin REST API v${milestoneVersion.toString()}`,
-      });
-    }
-
     if (options.gitPush) {
       await this.git.push();
-      await this.git.push(["--tag"]);
     }
 
     if (options.createReleasePullRequest) {
@@ -920,6 +912,16 @@ class Updater {
 
     if (options.mergeReleasePullRequest) {
       await this.mergePullRequest();
+    }
+
+    if (options.gitTag) {
+      await this.git.tag({
+        code: `v${milestoneVersion.toString()}`,
+        message: `Keycloak Admin REST API v${milestoneVersion.toString()}`,
+      });
+      if (options.gitPush) {
+        await this.git.push(["--tag"]);
+      }
     }
 
     if (options.gitRelease) {
