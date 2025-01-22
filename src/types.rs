@@ -38,6 +38,7 @@ pub struct AbstractPolicyRepresentation {
     pub name: Option<TypeString>,
     pub owner: Option<TypeString>,
     pub policies: Option<TypeVec<String>>,
+    pub resource_type: Option<TypeString>,
     pub resources: Option<TypeVec<String>>,
     pub resources_data: Option<TypeVec<ResourceRepresentation>>,
     pub scopes: Option<TypeVec<String>>,
@@ -299,6 +300,14 @@ pub struct AuthenticatorConfigRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct Authorization {
     pub permissions: Option<TypeVec<Permission>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AuthorizationSchema {
+    pub resource_types: Option<TypeMap<String, ResourceType>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
@@ -1198,6 +1207,7 @@ pub struct PolicyRepresentation {
     pub name: Option<TypeString>,
     pub owner: Option<TypeString>,
     pub policies: Option<TypeVec<String>>,
+    pub resource_type: Option<TypeString>,
     pub resources: Option<TypeVec<String>>,
     pub resources_data: Option<TypeVec<ResourceRepresentation>>,
     pub scopes: Option<TypeVec<String>>,
@@ -1296,6 +1306,8 @@ pub struct RealmRepresentation {
     pub action_token_generated_by_user_lifespan: Option<i32>,
     pub admin_events_details_enabled: Option<bool>,
     pub admin_events_enabled: Option<bool>,
+    pub admin_permissions_client: Option<ClientRepresentation>,
+    pub admin_permissions_enabled: Option<bool>,
     pub admin_theme: Option<TypeString>,
     #[deprecated]
     pub application_scope_mappings: Option<TypeMap<String, TypeVec<ScopeMappingRepresentation>>>,
@@ -1426,6 +1438,7 @@ pub struct RealmRepresentation {
     pub user_federation_providers: Option<TypeVec<UserFederationProviderRepresentation>>,
     pub user_managed_access_allowed: Option<bool>,
     pub users: Option<TypeVec<UserRepresentation>>,
+    pub verifiable_credentials_enabled: Option<bool>,
     pub verify_email: Option<bool>,
     pub wait_increment_seconds: Option<i32>,
     pub web_authn_policy_acceptable_aaguids: Option<TypeVec<String>>,
@@ -1517,6 +1530,7 @@ pub struct ResourceRepresentation {
 #[serde(rename_all = "camelCase")]
 pub struct ResourceServerRepresentation {
     pub allow_remote_resource_management: Option<bool>,
+    pub authorization_schema: Option<AuthorizationSchema>,
     pub client_id: Option<TypeString>,
     pub decision_strategy: Option<DecisionStrategy>,
     pub id: Option<TypeString>,
@@ -1525,6 +1539,15 @@ pub struct ResourceServerRepresentation {
     pub policy_enforcement_mode: Option<PolicyEnforcementMode>,
     pub resources: Option<TypeVec<ResourceRepresentation>>,
     pub scopes: Option<TypeVec<ScopeRepresentation>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct ResourceType {
+    pub scopes: Option<TypeVec<String>>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
 }
 
 #[skip_serializing_none]
