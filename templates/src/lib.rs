@@ -9,6 +9,6 @@ mod rest;
 
 pub use error::KeycloakError;
 pub use rest::{
-    KeycloakAdmin, KeycloakAdminToken, KeycloakServiceAccountAdminTokenRetriever,
+    DefaultResponse, KeycloakAdmin, KeycloakAdminToken, KeycloakServiceAccountAdminTokenRetriever,
     KeycloakTokenSupplier,
 };
