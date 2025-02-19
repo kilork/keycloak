@@ -1,5 +1,6 @@
 use reqwest::Response;
 
+/// Default adapter around [Response].
 pub struct DefaultResponse(Response);
 
 impl DefaultResponse {
