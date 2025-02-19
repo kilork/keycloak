@@ -3,8 +3,11 @@ use serde::{Deserialize, Serialize};
 
 use crate::{types::*, KeycloakError};
 
+mod default_response;
 mod generated_rest;
 mod url_enc;
+
+pub use default_response::DefaultResponse;
 
 pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
     url: String,
@@ -158,15 +161,6 @@ async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, K
     }
 
     Ok(response)
-}
-
-fn to_id(response: reqwest::Response) -> Option<TypeString> {
-    response
-        .headers()
-        .get(reqwest::header::LOCATION)
-        .and_then(|v| v.to_str().ok())
-        .and_then(|v| v.split('/').last())
-        .map(From::from)
 }
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {

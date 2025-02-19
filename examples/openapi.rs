@@ -309,18 +309,17 @@ mod openapi {
             let mut result_type_value = result_type
                 .as_ref()
                 .map(|rt| rt.value.as_ref())
-                .unwrap_or("()");
+                .unwrap_or("DefaultResponse");
 
-            // post method with empty body may return id extracted from location header
-            let to_id = if matches!(method, Method::Post) && result_type_value == "()" {
-                result_type_value = "Option<TypeString>";
-                true
-            } else {
-                false
-            };
+            let use_default_response = result_type.is_none();
 
-            let (method_string_lc, comments) =
-                self.comments(&parameters, method_string, path, &path_snake_case, to_id);
+            let (method_string_lc, comments) = self.comments(
+                &parameters,
+                method_string,
+                path,
+                &path_snake_case,
+                use_default_response,
+            );
 
             let mut output = vec![];
 
@@ -488,9 +487,9 @@ mod openapi {
                     "    Ok(error_check(response).await?.{body}().await{}?)",
                     convert.as_deref().unwrap_or_default()
                 ));
-            } else if to_id {
+            } else if use_default_response {
                 output.push("    let response = builder.send().await?;".into());
-                output.push("    error_check(response).await.map(to_id)".into());
+                output.push("    error_check(response).await.map(From::from)".into());
             } else {
                 output.push("    let response = builder.send().await?;".into());
                 output.push("    error_check(response).await?;".into());
@@ -513,7 +512,7 @@ mod openapi {
             method_string: String,
             path: &str,
             path_snake_case: &String,
-            to_id: bool,
+            default_response: bool,
         ) -> (String, Vec<String>) {
             let mut comments: Vec<Vec<Cow<str>>> = vec![];
 
@@ -549,8 +548,8 @@ mod openapi {
                         .collect(),
                 );
             }
-            if to_id {
-                comments.push(vec!["Returns id of created resource".into()]);
+            if default_response {
+                comments.push(vec!["Returns response for future processing.".into()]);
             }
             if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
                 comments.push(vec![format!("Resource: `{tag}`").into()]);
