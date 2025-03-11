@@ -29,7 +29,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -63,7 +63,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -96,7 +96,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/attack-detection/brute-force/users/{user_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -127,7 +127,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/authenticator-providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -155,7 +155,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/client-authenticator-providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -189,7 +189,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -222,7 +222,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/config-description/{provider_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -253,7 +253,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -287,7 +287,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -319,7 +319,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/config/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -353,7 +353,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -386,7 +386,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -419,7 +419,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -458,7 +458,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -495,7 +495,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/config/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -530,7 +530,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -565,7 +565,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -593,7 +593,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/flows",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -626,7 +626,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -664,7 +664,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -697,7 +697,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/flows/{flow_alias}/executions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -733,7 +733,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -772,7 +772,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -810,7 +810,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -841,7 +841,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -875,7 +875,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -907,7 +907,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/flows/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -936,7 +936,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/form-action-providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -964,7 +964,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/form-providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -992,7 +992,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/per-client-config-description",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1025,7 +1025,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -1053,7 +1053,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1084,7 +1084,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1118,7 +1118,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1150,7 +1150,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1182,7 +1182,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1216,7 +1216,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1248,7 +1248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1280,7 +1280,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/config-description",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1313,7 +1313,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -1346,7 +1346,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -1374,7 +1374,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/authentication/unregistered-required-actions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1412,7 +1412,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1451,9 +1451,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.text().await.map(From::from)?)
+        Ok(error_check(response).await?.text().await?)
     }
 
     /// Generate a new certificate with new key pair
@@ -1487,7 +1487,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1529,9 +1529,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.text().await.map(From::from)?)
+        Ok(error_check(response).await?.text().await?)
     }
 
     /// Upload certificate and eventually private key
@@ -1565,7 +1565,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1601,7 +1601,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1629,7 +1629,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients-initial-access",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1660,7 +1660,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1689,7 +1689,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients-initial-access/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1720,7 +1720,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-registration-policy/providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1758,7 +1758,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1799,7 +1799,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -1838,7 +1838,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -1875,7 +1875,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1913,7 +1913,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -1952,7 +1952,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -1993,7 +1993,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -2032,7 +2032,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2069,7 +2069,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2107,7 +2107,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -2137,7 +2137,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/client-scopes", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2167,7 +2167,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/client-scopes", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -2200,7 +2200,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2236,7 +2236,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2270,7 +2270,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2299,7 +2299,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2332,7 +2332,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -2365,7 +2365,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2401,7 +2401,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2435,7 +2435,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2476,7 +2476,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/clients", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("clientId", v)]);
         }
@@ -2524,7 +2524,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/clients", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -2557,7 +2557,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2593,7 +2593,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2627,7 +2627,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2661,7 +2661,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2694,7 +2694,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2727,7 +2727,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2760,7 +2760,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2794,7 +2794,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -2829,7 +2829,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2864,7 +2864,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -2902,7 +2902,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -2945,7 +2945,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -2988,7 +2988,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -3029,7 +3029,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -3070,7 +3070,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -3111,7 +3111,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -3148,7 +3148,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3182,7 +3182,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3218,7 +3218,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3256,7 +3256,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -3292,7 +3292,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/nodes/{node}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3326,7 +3326,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/offline-session-count",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3363,7 +3363,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/offline-sessions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
         }
@@ -3402,7 +3402,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3437,7 +3437,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3472,7 +3472,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3506,7 +3506,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/push-revocation",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3539,7 +3539,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/registration-access-token",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3572,7 +3572,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/service-account-user",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3605,7 +3605,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/session-count",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3638,7 +3638,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/test-nodes-available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3675,7 +3675,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/user-sessions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
         }
@@ -3712,7 +3712,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/components", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = name {
             builder = builder.query(&[("name", v)]);
         }
@@ -3749,7 +3749,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/components", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -3775,7 +3775,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/components/{id}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -3804,7 +3804,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}/components/{id}", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3831,7 +3831,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(format!("{}/admin/realms/{realm}/components/{id}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -3865,7 +3865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/components/{id}/sub-component-types",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = type_ {
             builder = builder.query(&[("type", v)]);
         }
@@ -3910,7 +3910,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/groups", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -3961,7 +3961,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/groups", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -3990,7 +3990,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/groups/count", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
         }
@@ -4027,7 +4027,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4063,7 +4063,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4095,7 +4095,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4140,7 +4140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/children",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -4193,7 +4193,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -4226,7 +4226,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4262,7 +4262,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4301,7 +4301,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/members",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -4343,7 +4343,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4381,7 +4381,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -4429,7 +4429,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -4460,7 +4460,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4494,7 +4494,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4526,7 +4526,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4560,7 +4560,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/export",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = format {
             builder = builder.query(&[("format", v)]);
         }
@@ -4595,7 +4595,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4629,7 +4629,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4660,7 +4660,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4691,7 +4691,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4727,7 +4727,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -4761,7 +4761,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4798,7 +4798,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4833,7 +4833,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -4865,7 +4865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4896,7 +4896,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/identity-provider/providers/{provider_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4921,7 +4921,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/keys", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -4961,7 +4961,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/organizations", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -5009,7 +5009,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/organizations", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5042,7 +5042,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/members/{member_id}/organizations",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5075,7 +5075,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5111,7 +5111,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5145,7 +5145,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5179,7 +5179,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/identity-providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5217,7 +5217,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5253,7 +5253,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5289,7 +5289,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5334,7 +5334,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/members",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = exact {
             builder = builder.query(&[("exact", v)]);
         }
@@ -5387,7 +5387,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5420,7 +5420,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/members/count",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5458,7 +5458,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .form(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5496,7 +5496,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .form(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5532,7 +5532,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/members/{member_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5568,7 +5568,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/members/{member_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5605,7 +5605,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/organizations/{org_id}/members/{member_id}/organizations",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5645,7 +5645,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5678,7 +5678,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5716,7 +5716,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5752,7 +5752,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5791,7 +5791,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5828,7 +5828,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -5865,7 +5865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5903,7 +5903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -5936,7 +5936,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -5974,7 +5974,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -6010,7 +6010,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6049,7 +6049,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6086,7 +6086,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6123,7 +6123,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6161,7 +6161,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -6194,7 +6194,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6232,7 +6232,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -6268,7 +6268,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6307,7 +6307,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6344,7 +6344,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/models/{id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6381,7 +6381,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/protocol-mappers/protocol/{protocol}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6407,7 +6407,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -6437,7 +6437,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -6459,7 +6459,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6487,7 +6487,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6510,7 +6510,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(format!("{}/admin/realms/{realm}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6559,7 +6559,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/admin-events", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = auth_client {
             builder = builder.query(&[("authClient", v)]);
         }
@@ -6622,7 +6622,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(format!("{}/admin/realms/{realm}/admin-events", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6654,7 +6654,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6682,7 +6682,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-policies/policies",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = include_global_policies {
             builder = builder.query(&[("include-global-policies", v)]);
         }
@@ -6714,7 +6714,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6743,7 +6743,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-policies/profiles",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = include_global_profiles {
             builder = builder.query(&[("include-global-profiles", v)]);
         }
@@ -6775,7 +6775,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6804,7 +6804,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-session-stats",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6829,7 +6829,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/client-types", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6857,7 +6857,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}/client-types", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6884,7 +6884,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/credential-registrators",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6912,7 +6912,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-default-client-scopes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -6944,7 +6944,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -6976,7 +6976,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-default-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7002,7 +7002,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/default-groups", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7034,7 +7034,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7066,7 +7066,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-groups/{group_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7095,7 +7095,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-optional-client-scopes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7127,7 +7127,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7159,7 +7159,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7202,7 +7202,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/events", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = client {
             builder = builder.query(&[("client", v)]);
         }
@@ -7248,7 +7248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(format!("{}/admin/realms/{realm}/events", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7274,7 +7274,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/events/config", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7300,7 +7300,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}/events/config", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7330,7 +7330,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/group-by-path/{path}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7353,7 +7353,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/localization", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7384,7 +7384,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = use_realm_default_locale_fallback {
             builder = builder.query(&[("useRealmDefaultLocaleFallback", v)]);
         }
@@ -7423,7 +7423,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -7452,7 +7452,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/localization/{locale}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7485,9 +7485,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
-        Ok(error_check(response).await?.text().await.map(From::from)?)
+        Ok(error_check(response).await?.text().await?)
     }
 
     /// Parameters:
@@ -7520,7 +7520,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .body(body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7553,7 +7553,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/localization/{locale}/{key}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7579,7 +7579,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(format!("{}/admin/realms/{realm}/logout-all", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7610,7 +7610,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .post(format!("{}/admin/realms/{realm}/partial-export", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = export_clients {
             builder = builder.query(&[("exportClients", v)]);
         }
@@ -7646,7 +7646,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/partialImport", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -7671,7 +7671,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .post(format!("{}/admin/realms/{realm}/push-revocation", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7704,7 +7704,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/sessions/{session}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = is_offline {
             builder = builder.query(&[("isOffline", v)]);
         }
@@ -7742,7 +7742,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -7768,7 +7768,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users-management-permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7797,7 +7797,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7832,7 +7832,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7865,7 +7865,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -7903,7 +7903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -7939,7 +7939,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -7973,7 +7973,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8008,7 +8008,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8044,7 +8044,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8077,7 +8077,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8115,7 +8115,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -8151,7 +8151,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -8185,7 +8185,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8220,7 +8220,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8266,7 +8266,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8316,7 +8316,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -8352,7 +8352,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8391,7 +8391,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -8428,7 +8428,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -8465,7 +8465,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8506,7 +8506,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -8545,7 +8545,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -8582,7 +8582,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8618,7 +8618,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8660,7 +8660,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8705,7 +8705,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8744,7 +8744,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8786,7 +8786,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8828,7 +8828,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/roles", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -8870,7 +8870,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/roles", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -8903,7 +8903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -8939,7 +8939,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -8973,7 +8973,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9007,7 +9007,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/composites",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9045,7 +9045,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -9081,7 +9081,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9118,7 +9118,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9151,7 +9151,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/composites/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9190,7 +9190,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/groups",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -9232,7 +9232,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9268,7 +9268,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9307,7 +9307,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles/{role_name}/users",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -9351,7 +9351,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9387,7 +9387,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9421,7 +9421,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9461,7 +9461,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
         }
@@ -9508,7 +9508,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -9544,7 +9544,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9581,7 +9581,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9614,7 +9614,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/composites/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9647,7 +9647,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/roles-by-id/{role_id}/management/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9683,7 +9683,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9719,7 +9719,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9755,7 +9755,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9796,7 +9796,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -9835,7 +9835,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -9872,7 +9872,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9910,7 +9910,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -9946,7 +9946,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -9984,7 +9984,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -10020,7 +10020,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -10054,7 +10054,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10089,7 +10089,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -10126,7 +10126,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10162,7 +10162,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10203,7 +10203,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -10242,7 +10242,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -10279,7 +10279,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10317,7 +10317,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -10353,7 +10353,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10391,7 +10391,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -10427,7 +10427,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -10461,7 +10461,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10496,7 +10496,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -10533,7 +10533,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10569,7 +10569,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10610,7 +10610,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -10649,7 +10649,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -10686,7 +10686,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10724,7 +10724,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -10760,7 +10760,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10798,7 +10798,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -10834,7 +10834,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -10868,7 +10868,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/available",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -10903,7 +10903,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/composite",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -10962,7 +10962,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/users", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -11034,7 +11034,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .post(format!("{}/admin/realms/{realm}/users", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -11076,7 +11076,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/users/count", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = email {
             builder = builder.query(&[("email", v)]);
         }
@@ -11120,7 +11120,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/users/profile", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11146,7 +11146,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}/users/profile", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11172,7 +11172,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/profile/metadata",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11204,7 +11204,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let mut builder = self
             .client
             .get(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = user_profile_metadata {
             builder = builder.query(&[("userProfileMetadata", v)]);
         }
@@ -11240,7 +11240,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .client
             .put(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11271,7 +11271,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         let builder = self
             .client
             .delete(format!("{}/admin/realms/{realm}/users/{user_id}", self.url))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11305,7 +11305,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/configured-user-storage-credential-types",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11338,7 +11338,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/consents",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11374,7 +11374,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/consents/{client}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11406,7 +11406,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/credentials",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11442,7 +11442,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11484,7 +11484,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -11522,7 +11522,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveToFirst",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -11561,7 +11561,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .body(body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11598,7 +11598,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11641,7 +11641,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("client_id", v)]);
         }
@@ -11684,7 +11684,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11722,7 +11722,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -11758,7 +11758,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11798,7 +11798,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/groups",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = brief_representation {
             builder = builder.query(&[("briefRepresentation", v)]);
         }
@@ -11843,7 +11843,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/groups/count",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = search {
             builder = builder.query(&[("search", v)]);
         }
@@ -11881,7 +11881,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11916,7 +11916,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/groups/{group_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -11950,7 +11950,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/impersonation",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -11985,7 +11985,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/logout",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12021,7 +12021,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/offline-sessions/{client_uuid}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12057,7 +12057,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -12097,7 +12097,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("client_id", v)]);
         }
@@ -12144,7 +12144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .header(CONTENT_LENGTH, "0")
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = client_id {
             builder = builder.query(&[("client_id", v)]);
         }
@@ -12187,7 +12187,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/sessions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12218,7 +12218,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/unmanagedAttributes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12248,7 +12248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12279,7 +12279,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -12313,7 +12313,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12362,7 +12362,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = fields {
             builder = builder.query(&[("fields", v)]);
         }
@@ -12426,7 +12426,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12459,7 +12459,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12487,7 +12487,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12519,7 +12519,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/search",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = fields {
             builder = builder.query(&[("fields", v)]);
         }
@@ -12575,7 +12575,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = fields {
             builder = builder.query(&[("fields", v)]);
         }
@@ -12639,7 +12639,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12672,7 +12672,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -12700,7 +12700,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/providers",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }
@@ -12732,7 +12732,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/search",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = fields {
             builder = builder.query(&[("fields", v)]);
         }
@@ -12790,7 +12790,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -12879,7 +12879,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -12963,7 +12963,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/search",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13051,7 +13051,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13142,7 +13142,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13230,7 +13230,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13318,7 +13318,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/attributes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13406,7 +13406,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13494,7 +13494,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/scopes",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = id {
             builder = builder.query(&[("_id", v)]);
         }
@@ -13564,7 +13564,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
         }
@@ -13609,7 +13609,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(to_id)
     }
@@ -13639,7 +13639,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/search",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         if let Some(v) = name {
             builder = builder.query(&[("name", v)]);
         }
@@ -13674,7 +13674,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -13709,7 +13709,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .json(&body)
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -13741,7 +13741,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -13773,7 +13773,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/permissions",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -13805,7 +13805,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/resources",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await?;
         Ok(())
@@ -13834,7 +13834,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/settings",
                 self.url
             ))
-            .bearer_auth(self.token_supplier.get(&self.url).await?);
+            .bearer_auth(self.token_supplier.lock().await.get(&self.url).await?);
         let response = builder.send().await?;
         Ok(error_check(response).await?.json().await?)
     }

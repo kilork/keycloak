@@ -45,7 +45,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     eprintln!("{:?}", admin_token);
 
-    let admin = KeycloakAdmin::new(&url, admin_token, client);
+    let mut admin = KeycloakAdmin::new(&url, admin_token, client);
 
     admin
         .post(RealmRepresentation {
@@ -117,5 +117,5 @@ mod rest;
 pub use error::KeycloakError;
 pub use rest::{
     KeycloakAdmin, KeycloakAdminToken, KeycloakServiceAccountAdminTokenRetriever,
-    KeycloakTokenSupplier,
+    KeycloakTokenSupplier, KeycloakTokenWithRefresh,
 };

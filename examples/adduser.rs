@@ -1,7 +1,4 @@
-use keycloak::{
-    types::*,
-    {KeycloakAdmin, KeycloakAdminToken},
-};
+use keycloak::{types::*, KeycloakAdmin, KeycloakAdminToken};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -14,7 +11,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     eprintln!("{:?}", admin_token);
 
-    let admin = KeycloakAdmin::new(&url, admin_token, client);
+    let mut admin = KeycloakAdmin::new(&url, admin_token, client);
 
     admin
         .post(RealmRepresentation {

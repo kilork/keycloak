@@ -1,17 +1,14 @@
+use std::time::Instant;
+
 use async_trait::async_trait;
+use derivative::Derivative;
 
+use crate::{error::TokenRequestError, types::TypeString, KeycloakError};
 use serde::{Deserialize, Serialize};
-use crate::{types::TypeString, KeycloakError};
-
-pub struct KeycloakAdmin<TS: KeycloakTokenSupplier = KeycloakAdminToken> {
-    pub(crate) url: String,
-    pub(crate) client: reqwest::Client,
-    pub(crate) token_supplier: TS,
-}
 
 #[async_trait]
 pub trait KeycloakTokenSupplier {
-    async fn get(&self, url: &str) -> Result<String, KeycloakError>;
+    async fn get(&mut self, url: &str) -> Result<String, KeycloakError>;
 }
 
 #[derive(Clone)]
@@ -24,7 +21,7 @@ pub struct KeycloakServiceAccountAdminTokenRetriever {
 
 #[async_trait]
 impl KeycloakTokenSupplier for KeycloakServiceAccountAdminTokenRetriever {
-    async fn get(&self, url: &str) -> Result<String, KeycloakError> {
+    async fn get(&mut self, url: &str) -> Result<String, KeycloakError> {
         let admin_token = self.acquire(url).await?;
         Ok(admin_token.access_token)
     }
@@ -94,7 +91,7 @@ pub struct KeycloakAdminToken {
 
 #[async_trait]
 impl KeycloakTokenSupplier for KeycloakAdminToken {
-    async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
+    async fn get(&mut self, _url: &str) -> Result<String, KeycloakError> {
         Ok(self.access_token.clone())
     }
 }
@@ -143,7 +140,193 @@ impl KeycloakAdminToken {
     }
 }
 
-pub(crate) async fn error_check(response: reqwest::Response) -> Result<reqwest::Response, KeycloakError> {
+#[derive(Derivative)]
+#[derivative(Debug, Clone, PartialEq, Eq)]
+pub struct KeycloakTokenWithRefresh {
+    pub(crate) token_data: KeycloakAdminToken,
+
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) url: String,
+
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) realm: String,
+
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) username: String,
+
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) password: String,
+
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) client: reqwest::Client,
+
+    // A timestamp to track when this token was initially acquired or refreshed
+    #[derivative(PartialEq = "ignore")]
+    pub(crate) acquired_at: Instant,
+}
+
+#[async_trait]
+impl KeycloakTokenSupplier for KeycloakTokenWithRefresh {
+    async fn get(&mut self, _url: &str) -> Result<String, KeycloakError> {
+        // 1. If access token is still valid, just return it.
+        if self.is_access_token_valid() {
+            return Ok(self.token_data.access_token.clone());
+        }
+
+        // 2. Else if the refresh token is valid, refresh using it.
+        if self.is_refresh_token_valid() {
+            self.refresh_with_token().await?;
+            return Ok(self.token_data.access_token.clone());
+        }
+
+        // 3. Otherwise, neither token is valid. Do a full re-auth, then return the new access token.
+        self.refresh_with_auth().await?;
+        Ok(self.token_data.access_token.clone())
+    }
+}
+
+impl KeycloakTokenWithRefresh {
+    pub fn is_access_token_valid(&self) -> bool {
+        let access_expires_in = self.token_data.expires_in;
+        let time_since_access_token_generated = (Instant::now() - self.acquired_at).as_secs();
+
+        if let Ok(val) = usize::try_from(time_since_access_token_generated) {
+            val < access_expires_in
+        } else {
+            false
+        }
+    }
+
+    pub fn is_refresh_token_valid(&self) -> bool {
+        let refresh_expires_in = match self
+            .token_data
+            .refresh_expires_in
+            .as_ref()
+            .ok_or(TokenRequestError::get_illegal_state(
+            "Called KeycloakAdminToken::refresh_with_token without configured refresh_expires_in",
+        )) {
+            Ok(refresh_expires_in) => refresh_expires_in,
+            Err(_) => return false,
+        };
+
+        let time_since_request_token_generated = (Instant::now() - self.acquired_at).as_secs();
+
+        if let Ok(val) = usize::try_from(time_since_request_token_generated) {
+            val < *refresh_expires_in
+        } else {
+            false
+        }
+    }
+
+    pub async fn refresh_with_token(&mut self) -> Result<(), KeycloakError> {
+        // Get optional information from token. If missing we can't refresh with refresh token
+        let refresh_token =
+            self.token_data
+                .refresh_token
+                .as_ref()
+                .ok_or(TokenRequestError::get_illegal_state(
+                "Called KeycloakAdminToken::refresh_with_token without configured refresh_token",
+            ))?;
+
+        if !self.is_refresh_token_valid() {
+            return Err(TokenRequestError::RefreshTokenInvalid.into());
+        }
+
+        // Requests via refresh_token a new auth token
+        let response = self
+            .client
+            .post(format!(
+                "{}/realms/{}/protocol/openid-connect/token",
+                &self.url, &self.realm
+            ))
+            .form(&[
+                ("grant_type", "refresh_token"),
+                ("client_id", "admin-cli"),
+                ("refresh_token", refresh_token),
+            ])
+            .send()
+            .await
+            .map_err(KeycloakError::from)?;
+
+        let responded_token: KeycloakAdminToken = error_check(response)
+            .await?
+            .json()
+            .await
+            .map_err(KeycloakError::from)?;
+
+        // Sets token data
+        self.token_data = responded_token;
+        self.acquired_at = Instant::now();
+
+        Ok(())
+    }
+
+    pub async fn refresh_with_auth(&mut self) -> Result<(), KeycloakError> {
+        let responded_token: KeycloakAdminToken = KeycloakAdminToken::acquire_custom_realm(
+            &self.url,
+            &self.username,
+            &self.password,
+            &self.realm,
+            "admin-cli",
+            "password",
+            &self.client,
+        )
+        .await?;
+
+        // Sets token data
+        self.token_data = responded_token;
+        self.acquired_at = Instant::now();
+
+        Ok(())
+    }
+
+    pub async fn acquire(
+        url: &str,
+        username: &str,
+        password: &str,
+        client: &reqwest::Client,
+    ) -> Result<KeycloakTokenWithRefresh, KeycloakError> {
+        Self::acquire_custom_realm(
+            url,
+            username,
+            password,
+            "master",
+            "admin-cli",
+            "password",
+            client,
+        )
+        .await
+    }
+
+    pub async fn acquire_custom_realm(
+        url: &str,
+        username: &str,
+        password: &str,
+        realm: &str,
+        client_id: &str,
+        grant_type: &str,
+        client: &reqwest::Client,
+    ) -> Result<KeycloakTokenWithRefresh, KeycloakError> {
+        let token_data: KeycloakAdminToken = KeycloakAdminToken::acquire_custom_realm(
+            url, username, password, realm, client_id, grant_type, client,
+        )
+        .await?;
+
+        Ok(Self {
+            token_data,
+            url: url.to_string(),
+            realm: realm.to_string(),
+            username: username.to_string(),
+            password: password.to_string(),
+            client: client.clone(),
+            acquired_at: Instant::now(),
+        })
+    }
+}
+
+pub(crate) async fn error_check(
+    response: reqwest::Response,
+) -> Result<reqwest::Response, KeycloakError> {
     if !response.status().is_success() {
         let status = response.status().into();
         let text = response.text().await?;
@@ -164,14 +347,4 @@ pub(crate) fn to_id(response: reqwest::Response) -> Option<TypeString> {
         .and_then(|v| v.to_str().ok())
         .and_then(|v| v.split('/').last())
         .map(From::from)
-}
-
-impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
-    pub fn new(url: &str, token_supplier: TS, client: reqwest::Client) -> Self {
-        Self {
-            url: url.into(),
-            client,
-            token_supplier,
-        }
-    }
 }
