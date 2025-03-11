@@ -53,6 +53,9 @@ schemars = { version = "0.8.11", default-features = false, features = [
     "derive",
 ], optional = true }
 percent-encoding = "2.3.1"
+thiserror = "2.0.12"
+derivative = "2.2.0"
+tokio = { version = "1", features = ["sync"] }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
