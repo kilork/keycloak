@@ -160,7 +160,6 @@ pub struct KeycloakTokenWithRefresh {
     #[derivative(PartialEq = "ignore")]
     pub(crate) client: reqwest::Client,
 
-    // A timestamp to track when this token was initially acquired or refreshed
     #[derivative(PartialEq = "ignore")]
     pub(crate) acquired_at: Instant,
 }
@@ -168,18 +167,15 @@ pub struct KeycloakTokenWithRefresh {
 #[async_trait]
 impl KeycloakTokenSupplier for KeycloakTokenWithRefresh {
     async fn get(&mut self, _url: &str) -> Result<String, KeycloakError> {
-        // 1. If access token is still valid, just return it.
         if self.is_access_token_valid() {
             return Ok(self.token_data.access_token.clone());
         }
 
-        // 2. Else if the refresh token is valid, refresh using it.
         if self.is_refresh_token_valid() {
             self.refresh_with_token().await?;
             return Ok(self.token_data.access_token.clone());
         }
 
-        // 3. Otherwise, neither token is valid. Do a full re-auth, then return the new access token.
         self.refresh_with_auth().await?;
         Ok(self.token_data.access_token.clone())
     }
@@ -219,7 +215,6 @@ impl KeycloakTokenWithRefresh {
     }
 
     pub async fn refresh_with_token(&mut self) -> Result<(), KeycloakError> {
-        // Get optional information from token. If missing we can't refresh with refresh token
         let refresh_token =
             self.token_data
                 .refresh_token
@@ -232,7 +227,6 @@ impl KeycloakTokenWithRefresh {
             return Err(TokenRequestError::RefreshTokenInvalid.into());
         }
 
-        // Requests via refresh_token a new auth token
         let response = self
             .client
             .post(format!(
@@ -254,7 +248,6 @@ impl KeycloakTokenWithRefresh {
             .await
             .map_err(KeycloakError::from)?;
 
-        // Sets token data
         self.token_data = responded_token;
         self.acquired_at = Instant::now();
 
@@ -273,7 +266,6 @@ impl KeycloakTokenWithRefresh {
         )
         .await?;
 
-        // Sets token data
         self.token_data = responded_token;
         self.acquired_at = Instant::now();
 
