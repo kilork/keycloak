@@ -2900,6 +2900,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `client_uuid`: id of client (not client-id!)
+    /// - `audience`
     /// - `scope`
     /// - `user_id`
     ///
@@ -2915,6 +2916,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         client_uuid: &str,
+        audience: Option<String>,
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<AccessToken, KeycloakError> {
@@ -2927,6 +2929,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
+        if let Some(v) = audience {
+            builder = builder.query(&[("audience", v)]);
+        }
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -2943,6 +2948,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `client_uuid`: id of client (not client-id!)
+    /// - `audience`
     /// - `scope`
     /// - `user_id`
     ///
@@ -2958,6 +2964,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         client_uuid: &str,
+        audience: Option<String>,
         scope: Option<String>,
         user_id: Option<String>,
     ) -> Result<IDToken, KeycloakError> {
@@ -2970,6 +2977,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
+        if let Some(v) = audience {
+            builder = builder.query(&[("audience", v)]);
+        }
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -3003,7 +3013,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         scope: Option<String>,
         user_id: Option<String>,
-    ) -> Result<TypeMap<String, Value>, KeycloakError> {
+    ) -> Result<Value, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -4970,7 +4980,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `brief_representation`: if true, return the full representation. Otherwise, only the basic fields are returned.
+    /// - `brief_representation`: if false, return the full representation. Otherwise, only the basic fields are returned.
     /// - `exact`: Boolean which defines whether the param 'search' must match exactly or not
     /// - `first`: The position of the first result to be processed (pagination offset)
     /// - `max`: The maximum number of results to be returned - defaults to 10
@@ -6571,8 +6581,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `auth_ip_address`
     /// - `auth_realm`
     /// - `auth_user`: user id
-    /// - `date_from`
-    /// - `date_to`
+    /// - `date_from`: From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+    /// - `date_to`: To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+    /// - `direction`: The direction to sort events by (asc or desc)
     /// - `first`
     /// - `max`: Maximum results size (defaults to 100)
     /// - `operation_types`
@@ -6595,6 +6606,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         auth_user: Option<String>,
         date_from: Option<String>,
         date_to: Option<String>,
+        direction: Option<String>,
         first: Option<i32>,
         max: Option<i32>,
         operation_types: Option<Vec<String>>,
@@ -6623,6 +6635,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         }
         if let Some(v) = date_to {
             builder = builder.query(&[("dateTo", v)]);
+        }
+        if let Some(v) = direction {
+            builder = builder.query(&[("direction", v)]);
         }
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
@@ -6942,7 +6957,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get realm default client scopes.  Only name and ids are returned.
+    /// Get realm default client scopes. Only name and ids are returned.
     ///
     /// Parameters:
     ///
@@ -7129,7 +7144,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         error_check(response).await.map(From::from)
     }
 
-    /// Get realm optional client scopes.  Only name and ids are returned.
+    /// Get realm optional client scopes. Only name and ids are returned.
     ///
     /// Parameters:
     ///
@@ -7230,8 +7245,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `client`: App or oauth client name
-    /// - `date_from`: From date
-    /// - `date_to`: To date
+    /// - `date_from`: From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+    /// - `date_to`: To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+    /// - `direction`: The direction to sort events by (asc or desc)
     /// - `first`: Paging offset
     /// - `ip_address`: IP Address
     /// - `max`: Maximum results size (defaults to 100)
@@ -7251,6 +7267,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client: Option<String>,
         date_from: Option<String>,
         date_to: Option<String>,
+        direction: Option<String>,
         first: Option<i32>,
         ip_address: Option<String>,
         max: Option<i32>,
@@ -7270,6 +7287,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         }
         if let Some(v) = date_to {
             builder = builder.query(&[("dateTo", v)]);
+        }
+        if let Some(v) = direction {
+            builder = builder.query(&[("direction", v)]);
         }
         if let Some(v) = first {
             builder = builder.query(&[("first", v)]);
@@ -7656,8 +7676,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `export_clients`
     /// - `export_groups_and_roles`
     ///
-    /// Returns response for future processing.
-    ///
     /// Resource: `Realms Admin`
     ///
     /// `POST /admin/realms/{realm}/partial-export`
@@ -7669,7 +7687,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         export_clients: Option<bool>,
         export_groups_and_roles: Option<bool>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<RealmRepresentation, KeycloakError> {
         let realm = p(realm);
         let mut builder = self
             .client
@@ -7682,7 +7700,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("exportGroupsAndRoles", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Partial import from a JSON file to an existing realm.
@@ -7691,8 +7709,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `body`
-    ///
-    /// Returns response for future processing.
     ///
     /// Resource: `Realms Admin`
     ///
@@ -7704,7 +7720,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         body: String,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<Value, KeycloakError> {
         let realm = p(realm);
         let builder = self
             .client
@@ -7712,7 +7728,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Push the realm's revocation policy to any client that has an admin url associated with it.
@@ -8720,7 +8736,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+    ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let role_name = p(role_name);
@@ -9254,7 +9270,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         brief_representation: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
-    ) -> Result<TypeVec<GroupRepresentation>, KeycloakError> {
+    ) -> Result<TypeVec<UserRepresentation>, KeycloakError> {
         let realm = p(realm);
         let role_name = p(role_name);
         let mut builder = self
@@ -12426,10 +12442,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `permission`
     /// - `policy_id`
     /// - `resource`
+    /// - `resource_type`
     /// - `scope`
     /// - `type_`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission`
     ///
@@ -12449,9 +12464,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         permission: Option<bool>,
         policy_id: Option<String>,
         resource: Option<String>,
+        resource_type: Option<String>,
         scope: Option<String>,
         type_: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<AbstractPolicyRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -12485,6 +12501,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         if let Some(v) = resource {
             builder = builder.query(&[("resource", v)]);
         }
+        if let Some(v) = resource_type {
+            builder = builder.query(&[("resourceType", v)]);
+        }
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -12492,7 +12511,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("type", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12534,8 +12553,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
-    /// Returns response for future processing.
-    ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/evaluate`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
@@ -12546,7 +12563,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         body: PolicyEvaluationRequest,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<PolicyEvaluationResponse, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let builder = self
@@ -12558,7 +12575,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12596,8 +12613,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `fields`
     /// - `name`
     ///
-    /// Returns response for future processing.
-    ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/search`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
@@ -12609,7 +12624,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         fields: Option<String>,
         name: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<AbstractPolicyRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -12626,7 +12641,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("name", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12641,10 +12656,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `permission`
     /// - `policy_id`
     /// - `resource`
+    /// - `resource_type`
     /// - `scope`
     /// - `type_`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy`
     ///
@@ -12664,9 +12678,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         permission: Option<bool>,
         policy_id: Option<String>,
         resource: Option<String>,
+        resource_type: Option<String>,
         scope: Option<String>,
         type_: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<AbstractPolicyRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -12700,6 +12715,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         if let Some(v) = resource {
             builder = builder.query(&[("resource", v)]);
         }
+        if let Some(v) = resource_type {
+            builder = builder.query(&[("resourceType", v)]);
+        }
         if let Some(v) = scope {
             builder = builder.query(&[("scope", v)]);
         }
@@ -12707,7 +12725,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("type", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12749,8 +12767,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `client_uuid`: id of client (not client-id!)
     /// - `body`
     ///
-    /// Returns response for future processing.
-    ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/evaluate`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
@@ -12761,7 +12777,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         body: PolicyEvaluationRequest,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<PolicyEvaluationResponse, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let builder = self
@@ -12773,7 +12789,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12811,8 +12827,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `fields`
     /// - `name`
     ///
-    /// Returns response for future processing.
-    ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/search`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
@@ -12824,7 +12838,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         client_uuid: &str,
         fields: Option<String>,
         name: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<AbstractPolicyRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -12841,7 +12855,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("name", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -12945,8 +12959,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `uri`
     /// - `body`
     ///
-    /// Returns response for future processing.
-    ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
@@ -12969,7 +12981,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         type_: Option<String>,
         uri: Option<String>,
         body: ResourceRepresentation,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<ResourceRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -13014,7 +13026,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("uri", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13032,8 +13044,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `scope`
     /// - `type_`
     /// - `uri`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/search`
     ///
@@ -13056,7 +13066,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         scope: Option<String>,
         type_: Option<String>,
         uri: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<ResourceRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -13100,7 +13110,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("uri", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13119,8 +13129,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `type_`
     /// - `uri`
     /// - `resource_id`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
@@ -13144,7 +13152,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         type_: Option<String>,
         uri: Option<String>,
         resource_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<ResourceRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let resource_id = p(resource_id);
@@ -13189,7 +13197,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("uri", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13479,8 +13487,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `uri`
     /// - `resource_id`
     ///
-    /// Returns response for future processing.
-    ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/permissions`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
@@ -13503,7 +13509,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         type_: Option<String>,
         uri: Option<String>,
         resource_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<PolicyRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let resource_id = p(resource_id);
@@ -13548,7 +13554,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("uri", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13567,8 +13573,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `type_`
     /// - `uri`
     /// - `resource_id`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/scopes`
     ///
@@ -13592,7 +13596,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         type_: Option<String>,
         uri: Option<String>,
         resource_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<ScopeRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let resource_id = p(resource_id);
@@ -13637,7 +13641,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("uri", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13727,8 +13731,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `client_uuid`: id of client (not client-id!)
     /// - `name`
     ///
-    /// Returns response for future processing.
-    ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/search`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
@@ -13739,7 +13741,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         name: Option<String>,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<ScopeRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let mut builder = self
@@ -13753,7 +13755,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             builder = builder.query(&[("name", v)]);
         }
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13761,8 +13763,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `realm`: realm name (not id!)
     /// - `client_uuid`: id of client (not client-id!)
     /// - `scope_id`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
@@ -13774,7 +13774,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         scope_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<ScopeRepresentation, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let scope_id = p(scope_id);
@@ -13786,7 +13786,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13864,8 +13864,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `client_uuid`: id of client (not client-id!)
     /// - `scope_id`
     ///
-    /// Returns response for future processing.
-    ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/permissions`
     ///
     /// Documentation: <https://www.keycloak.org/docs-api/26.1.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
@@ -13876,7 +13874,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         scope_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<PolicyRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let scope_id = p(scope_id);
@@ -13888,7 +13886,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:
@@ -13896,8 +13894,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `realm`: realm name (not id!)
     /// - `client_uuid`: id of client (not client-id!)
     /// - `scope_id`
-    ///
-    /// Returns response for future processing.
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/resources`
     ///
@@ -13909,7 +13905,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         client_uuid: &str,
         scope_id: &str,
-    ) -> Result<DefaultResponse, KeycloakError> {
+    ) -> Result<TypeVec<ResourceRepresentation>, KeycloakError> {
         let realm = p(realm);
         let client_uuid = p(client_uuid);
         let scope_id = p(scope_id);
@@ -13921,7 +13917,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
-        error_check(response).await.map(From::from)
+        Ok(error_check(response).await?.json().await?)
     }
 
     /// Parameters:

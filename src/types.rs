@@ -127,6 +127,7 @@ pub struct AdminEventRepresentation {
     pub auth_details: Option<AuthDetailsRepresentation>,
     pub details: Option<TypeMap<String, TypeString>>,
     pub error: Option<TypeString>,
+    pub id: Option<TypeString>,
     pub operation_type: Option<TypeString>,
     pub realm_id: Option<TypeString>,
     pub representation: Option<TypeString>,
@@ -634,6 +635,7 @@ pub struct CredentialRepresentation {
     pub device: Option<TypeString>,
     #[deprecated]
     pub digits: Option<i32>,
+    pub federation_link: Option<TypeString>,
     #[deprecated]
     pub hash_iterations: Option<i32>,
     #[deprecated]
@@ -682,8 +684,20 @@ pub enum EnforcementMode {
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct ErrorRepresentation {
+    pub error_message: Option<TypeString>,
+    pub errors: Option<TypeVec<ErrorRepresentation>>,
+    pub field: Option<TypeString>,
+    pub params: Option<TypeVec<Value>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct EvaluationResultRepresentation {
     pub allowed_scopes: Option<TypeVec<ScopeRepresentation>>,
+    pub denied_scopes: Option<TypeVec<ScopeRepresentation>>,
     pub policies: Option<TypeVec<PolicyResultRepresentation>>,
     pub resource: Option<ResourceRepresentation>,
     pub scopes: Option<TypeVec<ScopeRepresentation>>,
@@ -698,6 +712,7 @@ pub struct EventRepresentation {
     pub client_id: Option<TypeString>,
     pub details: Option<TypeMap<String, TypeString>>,
     pub error: Option<TypeString>,
+    pub id: Option<TypeString>,
     pub ip_address: Option<TypeString>,
     pub realm_id: Option<TypeString>,
     pub session_id: Option<TypeString>,
@@ -1169,6 +1184,7 @@ pub struct PolicyEvaluationRequest {
     pub client_id: Option<TypeString>,
     pub context: Option<TypeMap<String, TypeMap<String, TypeString>>>,
     pub entitlements: Option<bool>,
+    pub resource_type: Option<TypeString>,
     pub resources: Option<TypeVec<ResourceRepresentation>>,
     pub role_ids: Option<TypeVec<String>>,
     pub user_id: Option<TypeString>,
@@ -1223,6 +1239,7 @@ pub struct PolicyRepresentation {
 pub struct PolicyResultRepresentation {
     pub associated_policies: Option<TypeVec<PolicyResultRepresentation>>,
     pub policy: Option<PolicyRepresentation>,
+    pub resource_type: Option<TypeString>,
     pub scopes: Option<TypeVec<String>>,
     pub status: Option<DecisionEffect>,
 }
@@ -1544,7 +1561,10 @@ pub struct ResourceServerRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ResourceType {
+    pub group_type: Option<TypeString>,
+    pub scope_aliases: Option<TypeMap<String, TypeVec<String>>>,
     pub scopes: Option<TypeVec<String>>,
     #[serde(rename = "type")]
     pub type_: Option<TypeString>,

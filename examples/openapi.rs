@@ -211,12 +211,14 @@ mod openapi {
 
     impl Responses {
         fn to_reqwest_status_response(&self) -> Option<(reqwest::StatusCode, &Response)> {
-            if self.0.len() != 1 {
-                return None;
-            }
-            let (status, response) = self.0.first()?;
-            let status = reqwest::StatusCode::from_str(status).ok()?;
-            Some((status, response))
+            self.0
+                .iter()
+                .find(|(status, _)| *status == "200")
+                .or_else(|| self.0.iter().find(|(status, _)| status.starts_with("2")))
+                .and_then(|(status, response)| {
+                    let status = reqwest::StatusCode::from_str(status.as_str()).ok()?;
+                    Some((status, response))
+                })
         }
 
         fn to_rust_return_type_and_parse_calls(&self) -> Option<ReturnType<'_>> {
