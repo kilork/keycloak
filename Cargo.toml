@@ -11,7 +11,7 @@ homepage = "https://github.com/kilork/keycloak"
 keywords = ["api", "async", "keycloak", "rest"]
 license = "Unlicense OR MIT"
 repository = "https://github.com/kilork/keycloak"
-rust-version = "1.74"
+rust-version = "1.84"
 
 [features]
 default = ["tags-all"]
