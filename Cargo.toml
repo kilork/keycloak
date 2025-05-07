@@ -16,6 +16,7 @@ rust-version = "1.74"
 [features]
 default = ["tags-all"]
 schemars = ["dep:schemars"]
+multipart = ["reqwest/multipart"]
 rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
 rc-map = ["serde/rc"]
 rc-str = ["serde/rc"]

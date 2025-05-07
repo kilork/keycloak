@@ -23,7 +23,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
 
-    admin
+    let response = admin
         .realm_users_post(
             "test",
             UserRepresentation {
@@ -32,6 +32,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             },
         )
         .await?;
+
+    eprintln!("{:?}", response.to_id());
 
     let users = admin
         .realm_users_get(
