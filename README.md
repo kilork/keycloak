@@ -25,7 +25,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "26.2"
+keycloak = "~26.2"
 ```
 
 ```rust

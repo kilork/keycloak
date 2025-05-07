@@ -25,7 +25,7 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
+keycloak = "~{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
 ```
 
 {{ codeblock "rust" ( read_to_str "examples/adduser.rs" ) }}
