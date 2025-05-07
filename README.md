@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 26.2.0](https://www.keycloak.org/docs-api/26.2.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version 26.2.3](https://www.keycloak.org/docs-api/26.2.3/rest-api/index.html).
 
 ### Feature flags
 
@@ -14,6 +14,7 @@ Default flags: `tags-all`.
 
 - `rc`: use `Arc` for deserialization.
 - `schemars`: add [schemars](https://crates.io/crates/schemars) support.
+- `multipart`: add multipart support to reqwest, enabling extra methods in API.
 - `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
 
 ## Usage
@@ -53,7 +54,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
 
-    admin
+    let response = admin
         .realm_users_post(
             "test",
             UserRepresentation {
@@ -62,6 +63,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             },
         )
         .await?;
+
+    eprintln!("{:?}", response.to_id());
 
     let users = admin
         .realm_users_get(
