@@ -31,4 +31,4 @@ jobs:
         docker run -p 8080:8080 --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password -e KC_FEATURES=admin-api quay.io/keycloak/keycloak:${KEYCLOAK_VERSION} start-dev &
         sleep 40
         cargo run --example=adduser
-        cargo run --example=adduser --features=rc,schemars
+        cargo run --example=adduser --features=rc,schemars,multipart
