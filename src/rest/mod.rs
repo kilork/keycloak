@@ -5,6 +5,7 @@ use crate::{types::*, KeycloakError};
 
 mod default_response;
 mod generated_rest;
+mod manual_rest;
 mod url_enc;
 
 pub use default_response::DefaultResponse;
@@ -39,9 +40,9 @@ impl KeycloakTokenSupplier for KeycloakServiceAccountAdminTokenRetriever {
 impl KeycloakServiceAccountAdminTokenRetriever {
     /// Creates a token retriever for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticating-with-a-service-account)
     /// * `client_id` - The client id of a client with the following characteristics:
-    ///                  1. Exists in the **master** realm
-    ///                  2. `confidential` access type
-    ///                  3. `Service Accounts` option is enabled
+    ///   1. Exists in the **master** realm
+    ///   2. `confidential` access type
+    ///   3. `Service Accounts` option is enabled
     /// * `client_secret` - The secret credential assigned to the given `client_id`
     /// * `client` - A reqwest Client to perform the token retrieval call
     pub fn create(client_id: &str, client_secret: &str, client: reqwest::Client) -> Self {

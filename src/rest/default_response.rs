@@ -12,7 +12,7 @@ impl DefaultResponse {
             .headers()
             .get(reqwest::header::LOCATION)
             .and_then(|v| v.to_str().ok())
-            .and_then(|v| v.split('/').last())
+            .and_then(|v| v.split('/').next_back())
     }
 
     pub fn into_response(self) -> Response {
