@@ -225,14 +225,14 @@
         }, {
           "name" : "dateFrom",
           "in" : "query",
-          "description" : "From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp",
+          "description" : "From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "dateTo",
           "in" : "query",
-          "description" : "To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp",
+          "description" : "To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)",
           "schema" : {
             "type" : "string"
           }
@@ -8499,14 +8499,14 @@
         }, {
           "name" : "dateFrom",
           "in" : "query",
-          "description" : "From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp",
+          "description" : "From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "dateTo",
           "in" : "query",
-          "description" : "To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp",
+          "description" : "To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)",
           "schema" : {
             "type" : "string"
           }
