@@ -8745,6 +8745,14 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "Boolean which defines whether to return the count of subgroups for each group (default: true",
+          "schema" : {
+            "default" : "true",
+            "type" : "boolean"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -8941,6 +8949,14 @@
           "description" : "A String representing either an exact group name or a partial name",
           "schema" : {
             "type" : "string"
+          }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true",
+          "schema" : {
+            "default" : "true",
+            "type" : "boolean"
           }
         } ],
         "responses" : {
@@ -10479,6 +10495,56 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/organizations/count" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the organizations counts.",
+        "parameters" : [ {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the param 'search' must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "q",
+          "in" : "query",
+          "description" : "A query to search for custom attributes, in the format 'key1:value2 key2:value2'",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing either an organization name or domain",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "format" : "int64",
+                  "type" : "integer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/organizations/members/{member-id}/organizations" : {
       "get" : {
         "tags" : [ "Organizations" ],
@@ -10489,6 +10555,14 @@
           "required" : true,
           "schema" : {
             "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "if false, return the full representation. Otherwise, only the basic fields are returned.",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
           }
         } ],
         "responses" : {
@@ -10555,6 +10629,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -11044,6 +11121,14 @@
           "required" : true,
           "schema" : {
             "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "if false, return the full representation. Otherwise, only the basic fields are returned.",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
           }
         } ],
         "responses" : {
@@ -15181,7 +15266,9 @@
             "type" : "string"
           },
           "configuration" : {
-            "type" : "array"
+            "description" : "Configuration settings as a JSON object",
+            "type" : "object",
+            "additionalProperties" : true
           }
         }
       },
@@ -15192,7 +15279,9 @@
             "type" : "string"
           },
           "configuration" : {
-            "type" : "array"
+            "description" : "Configuration settings as a JSON object",
+            "type" : "object",
+            "additionalProperties" : true
           }
         }
       },
@@ -15930,6 +16019,9 @@
           "name" : {
             "type" : "string"
           },
+          "description" : {
+            "type" : "string"
+          },
           "path" : {
             "type" : "string"
           },
@@ -16304,6 +16396,14 @@
           },
           "format" : {
             "type" : "string"
+          },
+          "keySize" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "validity" : {
+            "format" : "int32",
+            "type" : "integer"
           }
         }
       },
@@ -16399,6 +16499,9 @@
           "userProfileMetadata" : {
             "$ref" : "#/components/schemas/UserProfileMetadata"
           },
+          "enabled" : {
+            "type" : "boolean"
+          },
           "self" : {
             "type" : "string"
           },
@@ -16408,9 +16511,6 @@
           "createdTimestamp" : {
             "format" : "int64",
             "type" : "integer"
-          },
-          "enabled" : {
-            "type" : "boolean"
           },
           "totp" : {
             "type" : "boolean"
@@ -17583,6 +17683,9 @@
               "type" : "string"
             }
           },
+          "webAuthnPolicyPasswordlessPasskeysEnabled" : {
+            "type" : "boolean"
+          },
           "clientProfiles" : {
             "$ref" : "#/components/schemas/ClientProfilesRepresentation"
           },
@@ -18520,6 +18623,9 @@
           "userProfileMetadata" : {
             "$ref" : "#/components/schemas/UserProfileMetadata"
           },
+          "enabled" : {
+            "type" : "boolean"
+          },
           "self" : {
             "type" : "string"
           },
@@ -18529,9 +18635,6 @@
           "createdTimestamp" : {
             "format" : "int64",
             "type" : "integer"
-          },
-          "enabled" : {
-            "type" : "boolean"
           },
           "totp" : {
             "type" : "boolean"
