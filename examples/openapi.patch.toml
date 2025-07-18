@@ -1,6 +1,9 @@
 [path."/admin/realms:post:body"]
 from_type = "String"
 rust_type = "RealmRepresentation"
+[path."/admin/realms/{realm}/partialImport:post:body"]
+from_type = "String"
+rust_type = "RealmRepresentation"
 [path."/admin/realms/{realm}/authentication/register-required-action:post:body"]
 from_type = "TypeMap<String, String>"
 rust_type = "RequiredActionProviderRepresentation"
