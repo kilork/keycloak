@@ -749,6 +749,7 @@ pub struct GroupRepresentation {
     pub access: Option<TypeMap<String, bool>>,
     pub attributes: Option<TypeMap<String, TypeVec<String>>>,
     pub client_roles: Option<TypeMap<String, TypeVec<String>>>,
+    pub description: Option<TypeString>,
     pub id: Option<TypeString>,
     pub name: Option<TypeString>,
     pub parent_id: Option<TypeString>,
@@ -905,9 +906,11 @@ pub struct KeyStoreConfig {
     pub format: Option<TypeString>,
     pub key_alias: Option<TypeString>,
     pub key_password: Option<TypeString>,
+    pub key_size: Option<i32>,
     pub realm_alias: Option<TypeString>,
     pub realm_certificate: Option<bool>,
     pub store_password: Option<TypeString>,
+    pub validity: Option<i32>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
@@ -1470,6 +1473,7 @@ pub struct RealmRepresentation {
     pub web_authn_policy_passwordless_avoid_same_authenticator_register: Option<bool>,
     pub web_authn_policy_passwordless_create_timeout: Option<i32>,
     pub web_authn_policy_passwordless_extra_origins: Option<TypeVec<String>>,
+    pub web_authn_policy_passwordless_passkeys_enabled: Option<bool>,
     pub web_authn_policy_passwordless_require_resident_key: Option<TypeString>,
     pub web_authn_policy_passwordless_rp_entity_name: Option<TypeString>,
     pub web_authn_policy_passwordless_rp_id: Option<TypeString>,
