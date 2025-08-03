@@ -418,13 +418,10 @@ class User {
 }
 
 class Command {
-  static async spawn(
-    cmd: string,
-    args: string[],
-  ): Promise<void> {
+  static async spawn(cmd: string, args: string[]): Promise<void> {
     const command = new Deno.Command(cmd, { args });
 
-    const child = await command.spawn();
+    const child = command.spawn();
     const code = (await child.status).code;
     if (code !== 0) {
       throw new CommandError(`Error ${code}`);
@@ -524,11 +521,7 @@ class Git {
     ]);
   }
 
-  async issues(
-    search:
-      | string
-      | undefined = undefined,
-  ): Promise<Issue[]> {
+  async issues(search: string | undefined = undefined): Promise<Issue[]> {
     return await this.ghCommandJson([
       "issue",
       "list",
@@ -545,9 +538,11 @@ class Git {
     return await this.issues("no:milestone");
   }
 
-  async createIssue(
-    options: { title: string; body: string; milestone: Milestone },
-  ): Promise<Issue> {
+  async createIssue(options: {
+    title: string;
+    body: string;
+    milestone: Milestone;
+  }): Promise<Issue> {
     const issueUrl: string = await this.ghCommand([
       "issue",
       "create",
@@ -616,9 +611,10 @@ class Git {
     ]);
   }
 
-  async createPullRequest(
-    options: { title: string; milestone: Milestone },
-  ): Promise<PullRequest> {
+  async createPullRequest(options: {
+    title: string;
+    milestone: Milestone;
+  }): Promise<PullRequest> {
     const pullRequestUrl: string = await this.ghCommand([
       "pr",
       "create",
@@ -637,13 +633,7 @@ class Git {
   }
 
   async mergePullRequest() {
-    await this.ghCommand([
-      "pr",
-      "merge",
-      "-s",
-      "-d",
-      "--admin",
-    ]);
+    await this.ghCommand(["pr", "merge", "-s", "-d", "--admin"]);
   }
 
   async pullRequest(number: string): Promise<PullRequest> {
@@ -657,9 +647,7 @@ class Git {
   }
 
   async pullRequests(
-    search:
-      | string
-      | undefined = undefined,
+    search: string | undefined = undefined,
   ): Promise<PullRequest[]> {
     return await this.ghCommandJson([
       "pr",
@@ -883,8 +871,9 @@ class Updater {
         if (number) {
           this.options.versions.issue = await this.git.issue(number);
           issueExists = true;
-          const pullRequest =
-            (await this.git.pullRequests(`head:${currentBranch}`)).pop();
+          const pullRequest = (
+            await this.git.pullRequests(`head:${currentBranch}`)
+          ).pop();
           if (
             pullRequest !== undefined &&
             pullRequest.milestone !== milestoneVersion.toString()
