@@ -676,7 +676,7 @@ mod openapi {
             super::RealmMethod {
                 name: real_fn_name
                     .strip_prefix("realm_")
-                    .unwrap_or_else(|| real_fn_name.as_str())
+                    .unwrap_or(real_fn_name.as_str())
                     .to_string(),
                 real_fn_name,
                 tags: self
@@ -686,7 +686,7 @@ mod openapi {
                 deprecated: self.deprecated,
                 has_optional_parameters: parameters
                     .iter()
-                    .any(|(parameter, _)| parameter.required == false),
+                    .any(|(parameter, _)| !parameter.required),
                 parameters: parameters_of_method,
                 returns: result_type_value.into(),
             }
@@ -1525,8 +1525,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
                 tag,
                 paths
                     .into_iter()
-                    .map(|(path, path_spec)| path_spec.to_rust_realm_methods(path))
-                    .flatten()
+                    .flat_map(|(path, path_spec)| path_spec.to_rust_realm_methods(path))
                     .collect::<Vec<_>>(),
             )
         })
@@ -1633,10 +1632,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
                 println!("#[cfg(feature = \"tag-{tag_str}\")]",);
             }
             println!("pub struct {struct_name}<'a, TS: KeycloakTokenSupplier> {{");
-            println!("    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,");
+            println!("    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,");
             for parameter in &required_parameters {
                 println!(
-                    "    {}: {},",
+                    "    pub {}: {},",
                     parameter.name,
                     parameter.rust_type.replace("&", "&'a ")
                 );
@@ -1648,7 +1647,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             println!("#[derive(Default)]");
             println!("pub struct {struct_name}Args {{");
             for parameter in &optional_parameters {
-                println!("    {}: {},", parameter.name, parameter.rust_type);
+                println!("    pub {}: {},", parameter.name, parameter.rust_type);
             }
             println!("}}\n");
             if add_cfg {

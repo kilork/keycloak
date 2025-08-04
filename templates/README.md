@@ -28,7 +28,7 @@ Add dependency to Cargo.toml:
 keycloak = "~{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
 ```
 
-{{ codeblock "rust" ( read_to_str "examples/adduser.rs" ) }}
+{{ codeblock "rust" ( from "#[tokio::main]" ( read_to_str "examples/resource_adduser.rs" ) ) }}
 
 ## Version agreement
 

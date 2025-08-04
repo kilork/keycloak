@@ -1,11 +1,12 @@
+#[cfg(feature = "resource")]
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     use keycloak::{
-        types::*,
-        {KeycloakAdmin, KeycloakAdminToken},
+        resource::all::RealmUsersGetArgs, types::*, KeycloakAdmin, KeycloakAdminToken,
+        KeycloakRealmAdminMethod as _,
     };
 
-    const REALM: &str = "test";
+    const REALM: &str = "resource";
 
     let url = std::env::var("KEYCLOAK_ADDR").unwrap_or_else(|_| "http://localhost:8080".into());
     let user = std::env::var("KEYCLOAK_USER").unwrap_or_else(|_| "admin".into());
@@ -25,23 +26,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         })
         .await?;
 
-    let response = admin
-        .realm_users_post(
-            REALM,
-            UserRepresentation {
-                username: Some("user".into()),
-                ..Default::default()
-            },
-        )
+    let realm = admin.realm(REALM);
+
+    let response = realm
+        .users_post(UserRepresentation {
+            username: Some("user".into()),
+            ..Default::default()
+        })
         .await?;
 
     eprintln!("{:?}", response.to_id());
 
-    let users = admin
-        .realm_users_get(
-            REALM, None, None, None, None, None, None, None, None, None, None, None, None, None,
-            None,
-        )
+    let users = realm
+        .users_get()
+        .opts(RealmUsersGetArgs {
+            username: Some("user".into()),
+            ..Default::default()
+        })
         .await?;
 
     eprintln!("{users:?}");
@@ -55,11 +56,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin
-        .realm_users_with_user_id_delete(REALM, id.as_str())
-        .await?;
+    realm.users_with_user_id_delete(id.as_str()).await?;
 
-    admin.realm_delete(REALM).await?;
+    realm.delete().await?;
 
     Ok(())
 }

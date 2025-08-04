@@ -22,14 +22,16 @@ jobs:
     - name: Run unit tests
       run: cargo test
     - name: Build with features
-      run: cargo build --features=rc,schemars
+      run: cargo build --features=rc,schemars,resource
     - name: Run unit tests with features
-      run: cargo test --features=rc,schemars
+      run: cargo test --features=rc,schemars,resource
     - name: Run integration tests
       run: |
         export KEYCLOAK_VERSION=`cargo metadata --no-deps --format-version 1 | jq '.packages[0].version | split(".") | map(tonumber) | .[:-1] + [.[2] / 100] | map(floor) | join(".")' | tr -d '"'`
         docker run -p 8080:8080 --name keycloak -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=password -e KC_FEATURES=admin-api quay.io/keycloak/keycloak:${KEYCLOAK_VERSION} start-dev &
         sleep 40
         cargo run --example=adduser
+        cargo run --example=resource_adduser --features=resource
         cargo run --example=importconfig --features=multipart
-        cargo run --example=adduser --features=rc,schemars,multipart
+        cargo run --example=adduser --features=rc,schemars,multipart,resource
+        cargo run --example=resource_adduser --features=rc,schemars,multipart,resource

@@ -4115,15 +4115,15 @@ pub struct RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    group_id: &'a str,
-    client_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub group_id: &'a str,
+    pub client_id: &'a str,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
@@ -4168,15 +4168,15 @@ pub struct RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
-    client_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
+    pub client_id: &'a str,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
@@ -4220,18 +4220,18 @@ where
 // <h4>Clients</h4>
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsGetArgs {
-    client_id: Option<String>,
-    first: Option<i32>,
-    max: Option<i32>,
-    q: Option<String>,
-    search: Option<bool>,
-    viewable_only: Option<bool>,
+    pub client_id: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub q: Option<String>,
+    pub search: Option<bool>,
+    pub viewable_only: Option<bool>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4279,16 +4279,16 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGetArgs {
-    audience: Option<String>,
-    scope: Option<String>,
-    user_id: Option<String>,
+    pub audience: Option<String>,
+    pub scope: Option<String>,
+    pub user_id: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4336,16 +4336,16 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGetArgs {
-    audience: Option<String>,
-    scope: Option<String>,
-    user_id: Option<String>,
+    pub audience: Option<String>,
+    pub scope: Option<String>,
+    pub user_id: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4393,15 +4393,15 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGetArgs {
-    scope: Option<String>,
-    user_id: Option<String>,
+    pub scope: Option<String>,
+    pub user_id: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4442,14 +4442,14 @@ where
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS: KeycloakTokenSupplier>
 {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGetArgs {
-    scope: Option<String>,
+    pub scope: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4490,15 +4490,15 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    role_container_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub role_container_id: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGetArgs {
-    scope: Option<String>,
+    pub scope: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4542,16 +4542,16 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    role_container_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub role_container_id: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGetArgs
 {
-    scope: Option<String>,
+    pub scope: Option<String>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4598,15 +4598,15 @@ where
 
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidOfflineSessionsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidOfflineSessionsGetArgs {
-    first: Option<i32>,
-    max: Option<i32>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4645,15 +4645,15 @@ where
 
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidUserSessionsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidUserSessionsGetArgs {
-    first: Option<i32>,
-    max: Option<i32>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-clients")]
@@ -4693,15 +4693,15 @@ where
 // <h4>Component</h4>
 #[cfg(feature = "tag-component")]
 pub struct RealmComponentsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-component")]
 #[derive(Default)]
 pub struct RealmComponentsGetArgs {
-    name: Option<String>,
-    parent: Option<String>,
-    type_: Option<String>,
+    pub name: Option<String>,
+    pub parent: Option<String>,
+    pub type_: Option<String>,
 }
 
 #[cfg(feature = "tag-component")]
@@ -4737,14 +4737,14 @@ where
 
 #[cfg(feature = "tag-component")]
 pub struct RealmComponentsWithIdSubComponentTypesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub id: &'a str,
 }
 
 #[cfg(feature = "tag-component")]
 #[derive(Default)]
 pub struct RealmComponentsWithIdSubComponentTypesGetArgs {
-    type_: Option<String>,
+    pub type_: Option<String>,
 }
 
 #[cfg(feature = "tag-component")]
@@ -4783,20 +4783,20 @@ where
 // <h4>Groups</h4>
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsGetArgs {
-    brief_representation: Option<bool>,
-    exact: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    populate_hierarchy: Option<bool>,
-    q: Option<String>,
-    search: Option<String>,
-    sub_groups_count: Option<bool>,
+    pub brief_representation: Option<bool>,
+    pub exact: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub populate_hierarchy: Option<bool>,
+    pub q: Option<String>,
+    pub search: Option<String>,
+    pub sub_groups_count: Option<bool>,
 }
 
 #[cfg(feature = "tag-groups")]
@@ -4845,14 +4845,14 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsCountGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsCountGetArgs {
-    search: Option<String>,
-    top: Option<bool>,
+    pub search: Option<String>,
+    pub top: Option<bool>,
 }
 
 #[cfg(feature = "tag-groups")]
@@ -4884,19 +4884,19 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsWithGroupIdChildrenGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    group_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub group_id: &'a str,
 }
 
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdChildrenGetArgs {
-    brief_representation: Option<bool>,
-    exact: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    search: Option<String>,
-    sub_groups_count: Option<bool>,
+    pub brief_representation: Option<bool>,
+    pub exact: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub search: Option<String>,
+    pub sub_groups_count: Option<bool>,
 }
 
 #[cfg(feature = "tag-groups")]
@@ -4946,16 +4946,16 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsWithGroupIdMembersGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    group_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub group_id: &'a str,
 }
 
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdMembersGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-groups")]
@@ -5000,17 +5000,17 @@ where
 // <h4>Identity Providers</h4>
 #[cfg(feature = "tag-identity-providers")]
 pub struct RealmIdentityProviderInstancesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-identity-providers")]
 #[derive(Default)]
 pub struct RealmIdentityProviderInstancesGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    realm_only: Option<bool>,
-    search: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub realm_only: Option<bool>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-identity-providers")]
@@ -5057,14 +5057,14 @@ where
 
 #[cfg(feature = "tag-identity-providers")]
 pub struct RealmIdentityProviderInstancesWithAliasExportGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    alias: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub alias: &'a str,
 }
 
 #[cfg(feature = "tag-identity-providers")]
 #[derive(Default)]
 pub struct RealmIdentityProviderInstancesWithAliasExportGetArgs {
-    format: Option<String>,
+    pub format: Option<String>,
 }
 
 #[cfg(feature = "tag-identity-providers")]
@@ -5105,18 +5105,18 @@ where
 // <h4>Organizations</h4>
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsGetArgs {
-    brief_representation: Option<bool>,
-    exact: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    q: Option<String>,
-    search: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub exact: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub q: Option<String>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-organizations")]
@@ -5161,15 +5161,15 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsCountGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsCountGetArgs {
-    exact: Option<bool>,
-    q: Option<String>,
-    search: Option<String>,
+    pub exact: Option<bool>,
+    pub q: Option<String>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-organizations")]
@@ -5206,14 +5206,14 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    member_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub member_id: &'a str,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-organizations")]
@@ -5253,18 +5253,18 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsWithOrgIdMembersGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    org_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub org_id: &'a str,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsWithOrgIdMembersGetArgs {
-    exact: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    membership_type: Option<String>,
-    search: Option<String>,
+    pub exact: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub membership_type: Option<String>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-organizations")]
@@ -5315,15 +5315,15 @@ pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    org_id: &'a str,
-    member_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub org_id: &'a str,
+    pub member_id: &'a str,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-organizations")]
@@ -5367,24 +5367,24 @@ where
 // <h4>Realms Admin</h4>
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmAdminEventsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmAdminEventsGetArgs {
-    auth_client: Option<String>,
-    auth_ip_address: Option<String>,
-    auth_realm: Option<String>,
-    auth_user: Option<String>,
-    date_from: Option<String>,
-    date_to: Option<String>,
-    direction: Option<String>,
-    first: Option<i32>,
-    max: Option<i32>,
-    operation_types: Option<Vec<String>>,
-    resource_path: Option<String>,
-    resource_types: Option<Vec<String>>,
+    pub auth_client: Option<String>,
+    pub auth_ip_address: Option<String>,
+    pub auth_realm: Option<String>,
+    pub auth_user: Option<String>,
+    pub date_from: Option<String>,
+    pub date_to: Option<String>,
+    pub direction: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub operation_types: Option<Vec<String>>,
+    pub resource_path: Option<String>,
+    pub resource_types: Option<Vec<String>>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5441,13 +5441,13 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmClientPoliciesPoliciesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmClientPoliciesPoliciesGetArgs {
-    include_global_policies: Option<bool>,
+    pub include_global_policies: Option<bool>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5483,13 +5483,13 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmClientPoliciesProfilesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmClientPoliciesProfilesGetArgs {
-    include_global_profiles: Option<bool>,
+    pub include_global_profiles: Option<bool>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5525,21 +5525,21 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmEventsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmEventsGetArgs {
-    client: Option<String>,
-    date_from: Option<String>,
-    date_to: Option<String>,
-    direction: Option<String>,
-    first: Option<i32>,
-    ip_address: Option<String>,
-    max: Option<i32>,
-    type_: Option<Vec<String>>,
-    user: Option<String>,
+    pub client: Option<String>,
+    pub date_from: Option<String>,
+    pub date_to: Option<String>,
+    pub direction: Option<String>,
+    pub first: Option<i32>,
+    pub ip_address: Option<String>,
+    pub max: Option<i32>,
+    pub type_: Option<Vec<String>>,
+    pub user: Option<String>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5590,14 +5590,14 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmLocalizationWithLocaleGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    locale: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub locale: &'a str,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmLocalizationWithLocaleGetArgs {
-    use_realm_default_locale_fallback: Option<bool>,
+    pub use_realm_default_locale_fallback: Option<bool>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5635,14 +5635,14 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmPartialExportPost<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmPartialExportPostArgs {
-    export_clients: Option<bool>,
-    export_groups_and_roles: Option<bool>,
+    pub export_clients: Option<bool>,
+    pub export_groups_and_roles: Option<bool>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5679,14 +5679,14 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmSessionsWithSessionDelete<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    session: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub session: &'a str,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmSessionsWithSessionDeleteArgs {
-    is_offline: Option<bool>,
+    pub is_offline: Option<bool>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
@@ -5723,14 +5723,14 @@ where
 // <h4>Role Mapper</h4>
 #[cfg(feature = "tag-role-mapper")]
 pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    group_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub group_id: &'a str,
 }
 
 #[cfg(feature = "tag-role-mapper")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-role-mapper")]
@@ -5770,14 +5770,14 @@ where
 
 #[cfg(feature = "tag-role-mapper")]
 pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-role-mapper")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-role-mapper")]
@@ -5818,17 +5818,17 @@ where
 // <h4>Roles</h4>
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidRolesGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    search: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -5874,17 +5874,17 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    role_name: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameGroupsGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -5929,17 +5929,17 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    role_name: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameUsersGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -5984,16 +5984,16 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmRolesGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    search: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -6034,16 +6034,16 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesWithRoleNameGroupsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    role_name: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmRolesWithRoleNameGroupsGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -6087,16 +6087,16 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesWithRoleNameUsersGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    role_name: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmRolesWithRoleNameUsersGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
 }
 
 #[cfg(feature = "tag-roles")]
@@ -6139,16 +6139,16 @@ where
 // <h4>Roles (by ID)</h4>
 #[cfg(feature = "tag-roles-by-id")]
 pub struct RealmRolesByIdWithRoleIdCompositesGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    role_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub role_id: &'a str,
 }
 
 #[cfg(feature = "tag-roles-by-id")]
 #[derive(Default)]
 pub struct RealmRolesByIdWithRoleIdCompositesGetArgs {
-    first: Option<i32>,
-    max: Option<i32>,
-    search: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-roles-by-id")]
@@ -6192,15 +6192,15 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsClientsWithClientCompo
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_scope_id: &'a str,
-    client: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_scope_id: &'a str,
+    pub client: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientScopesWithClientScopeIdScopeMappingsClientsWithClientCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6245,14 +6245,14 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsRealmCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_scope_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_scope_id: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientScopesWithClientScopeIdScopeMappingsRealmCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6295,15 +6295,15 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsClientsWithClientCo
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_scope_id: &'a str,
-    client: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_scope_id: &'a str,
+    pub client: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsClientsWithClientCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6348,14 +6348,14 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsRealmCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_scope_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_scope_id: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsRealmCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6399,15 +6399,15 @@ pub struct RealmClientsWithClientUuidScopeMappingsClientsWithClientCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    client: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub client: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidScopeMappingsClientsWithClientCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6449,14 +6449,14 @@ where
 
 #[cfg(feature = "tag-scope-mappings")]
 pub struct RealmClientsWithClientUuidScopeMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidScopeMappingsRealmCompositeGetArgs {
-    brief_representation: Option<bool>,
+    pub brief_representation: Option<bool>,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
@@ -6497,26 +6497,26 @@ where
 // <h4>Users</h4>
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersGetArgs {
-    brief_representation: Option<bool>,
-    email: Option<String>,
-    email_verified: Option<bool>,
-    enabled: Option<bool>,
-    exact: Option<bool>,
-    first: Option<i32>,
-    first_name: Option<String>,
-    idp_alias: Option<String>,
-    idp_user_id: Option<String>,
-    last_name: Option<String>,
-    max: Option<i32>,
-    q: Option<String>,
-    search: Option<String>,
-    username: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub email: Option<String>,
+    pub email_verified: Option<bool>,
+    pub enabled: Option<bool>,
+    pub exact: Option<bool>,
+    pub first: Option<i32>,
+    pub first_name: Option<String>,
+    pub idp_alias: Option<String>,
+    pub idp_user_id: Option<String>,
+    pub last_name: Option<String>,
+    pub max: Option<i32>,
+    pub q: Option<String>,
+    pub search: Option<String>,
+    pub username: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6577,20 +6577,20 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersCountGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersCountGetArgs {
-    email: Option<String>,
-    email_verified: Option<bool>,
-    enabled: Option<bool>,
-    first_name: Option<String>,
-    last_name: Option<String>,
-    q: Option<String>,
-    search: Option<String>,
-    username: Option<String>,
+    pub email: Option<String>,
+    pub email_verified: Option<bool>,
+    pub enabled: Option<bool>,
+    pub first_name: Option<String>,
+    pub last_name: Option<String>,
+    pub q: Option<String>,
+    pub search: Option<String>,
+    pub username: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6639,14 +6639,14 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdGetArgs {
-    user_profile_metadata: Option<bool>,
+    pub user_profile_metadata: Option<bool>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6682,17 +6682,17 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
-    body: Vec<String>,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
+    pub body: Vec<String>,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdExecuteActionsEmailPutArgs {
-    client_id: Option<String>,
-    lifespan: Option<i32>,
-    redirect_uri: Option<String>,
+    pub client_id: Option<String>,
+    pub lifespan: Option<i32>,
+    pub redirect_uri: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6737,17 +6737,17 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGroupsGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdGroupsGetArgs {
-    brief_representation: Option<bool>,
-    first: Option<i32>,
-    max: Option<i32>,
-    search: Option<String>,
+    pub brief_representation: Option<bool>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6791,14 +6791,14 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGroupsCountGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdGroupsCountGetArgs {
-    search: Option<String>,
+    pub search: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6832,15 +6832,15 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdResetPasswordEmailPut<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdResetPasswordEmailPutArgs {
-    client_id: Option<String>,
-    redirect_uri: Option<String>,
+    pub client_id: Option<String>,
+    pub redirect_uri: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6882,16 +6882,16 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdSendVerifyEmailPut<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    user_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub user_id: &'a str,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdSendVerifyEmailPutArgs {
-    client_id: Option<String>,
-    lifespan: Option<i32>,
-    redirect_uri: Option<String>,
+    pub client_id: Option<String>,
+    pub lifespan: Option<i32>,
+    pub redirect_uri: Option<String>,
 }
 
 #[cfg(feature = "tag-users")]
@@ -6937,24 +6937,24 @@ where
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS: KeycloakTokenSupplier>
 {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionGetArgs {
-    fields: Option<String>,
-    first: Option<i32>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    permission: Option<bool>,
-    policy_id: Option<String>,
-    resource: Option<String>,
-    resource_type: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
+    pub fields: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub permission: Option<bool>,
+    pub policy_id: Option<String>,
+    pub resource: Option<String>,
+    pub resource_type: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7017,15 +7017,15 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGetArgs {
-    fields: Option<String>,
-    name: Option<String>,
+    pub fields: Option<String>,
+    pub name: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7064,24 +7064,24 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPolicyGetArgs {
-    fields: Option<String>,
-    first: Option<i32>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    permission: Option<bool>,
-    policy_id: Option<String>,
-    resource: Option<String>,
-    resource_type: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
+    pub fields: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub permission: Option<bool>,
+    pub policy_id: Option<String>,
+    pub resource: Option<String>,
+    pub resource_type: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7144,15 +7144,15 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPolicySearchGetArgs {
-    fields: Option<String>,
-    name: Option<String>,
+    pub fields: Option<String>,
+    pub name: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7191,24 +7191,24 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7269,25 +7269,25 @@ where
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS: KeycloakTokenSupplier>
 {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    body: ResourceRepresentation,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub body: ResourceRepresentation,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourcePostArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7351,24 +7351,24 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceSearchGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7431,25 +7431,25 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGe
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7514,26 +7514,26 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPu
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
-    body: ResourceRepresentation,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
+    pub body: ResourceRepresentation,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPutArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7599,25 +7599,25 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDe
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDeleteArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7682,25 +7682,25 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAt
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7766,25 +7766,25 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPe
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7850,25 +7850,25 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdSc
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
-    resource_id: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
+    pub resource_id: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGetArgs {
-    id: Option<String>,
-    deep: Option<bool>,
-    exact_name: Option<bool>,
-    first: Option<i32>,
-    matching_uri: Option<bool>,
-    max: Option<i32>,
-    name: Option<String>,
-    owner: Option<String>,
-    scope: Option<String>,
-    type_: Option<String>,
-    uri: Option<String>,
+    pub id: Option<String>,
+    pub deep: Option<bool>,
+    pub exact_name: Option<bool>,
+    pub first: Option<i32>,
+    pub matching_uri: Option<bool>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub owner: Option<String>,
+    pub scope: Option<String>,
+    pub type_: Option<String>,
+    pub uri: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7930,17 +7930,17 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerScopeGet<'a, TS: KeycloakTokenSupplier> {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerScopeGetArgs {
-    first: Option<i32>,
-    max: Option<i32>,
-    name: Option<String>,
-    scope_id: Option<String>,
+    pub first: Option<i32>,
+    pub max: Option<i32>,
+    pub name: Option<String>,
+    pub scope_id: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]
@@ -7989,14 +7989,14 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
-    realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
-    client_uuid: &'a str,
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-none")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidAuthzResourceServerScopeSearchGetArgs {
-    name: Option<String>,
+    pub name: Option<String>,
 }
 
 #[cfg(feature = "tag-none")]

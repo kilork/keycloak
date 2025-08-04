@@ -181,7 +181,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
 }
 
 pub struct KeycloakRealmAdmin<'a, TS: KeycloakTokenSupplier> {
-    pub(crate) realm: &'a str,
+    pub realm: &'a str,
     pub(crate) admin: &'a KeycloakAdmin<TS>,
 }
 
