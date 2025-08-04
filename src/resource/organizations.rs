@@ -1,0 +1,470 @@
+use super::*;
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
+    // <h4>Organizations</h4>
+    /// Returns a paginated list of organizations filtered according to the specified parameters
+    pub fn organizations_get(&'a self) -> RealmOrganizationsGet<'a, TS> {
+        RealmOrganizationsGet { realm_admin: self }
+    }
+
+    /// Creates a new organization
+    pub fn organizations_post(
+        &'a self,
+        body: OrganizationRepresentation,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin.realm_organizations_post(self.realm, body)
+    }
+
+    /// Returns the organizations counts.
+    pub fn organizations_count_get(&'a self) -> RealmOrganizationsCountGet<'a, TS> {
+        RealmOrganizationsCountGet { realm_admin: self }
+    }
+
+    /// Returns the organizations associated with the user that has the specified id
+    pub fn organizations_members_with_member_id_organizations_get(
+        &'a self,
+        member_id: &'a str,
+    ) -> RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS> {
+        RealmOrganizationsMembersWithMemberIdOrganizationsGet {
+            realm_admin: self,
+            member_id,
+        }
+    }
+
+    /// Returns the organization representation
+    pub fn organizations_with_org_id_get(
+        &'a self,
+        org_id: &'a str,
+    ) -> impl Future<Output = Result<OrganizationRepresentation, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_get(self.realm, org_id)
+    }
+
+    /// Updates the organization
+    pub fn organizations_with_org_id_put(
+        &'a self,
+        org_id: &'a str,
+        body: OrganizationRepresentation,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_put(self.realm, org_id, body)
+    }
+
+    /// Deletes the organization
+    pub fn organizations_with_org_id_delete(
+        &'a self,
+        org_id: &'a str,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_delete(self.realm, org_id)
+    }
+
+    /// Returns all identity providers associated with the organization
+    pub fn organizations_with_org_id_identity_providers_get(
+        &'a self,
+        org_id: &'a str,
+    ) -> impl Future<Output = Result<TypeVec<IdentityProviderRepresentation>, KeycloakError>> + use<'a, TS>
+    {
+        self.admin
+            .realm_organizations_with_org_id_identity_providers_get(self.realm, org_id)
+    }
+
+    /// Adds the identity provider with the specified id to the organization
+    ///
+    /// Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned
+    pub fn organizations_with_org_id_identity_providers_post(
+        &'a self,
+        org_id: &'a str,
+        body: String,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_identity_providers_post(self.realm, org_id, body)
+    }
+
+    /// Returns the identity provider associated with the organization that has the specified alias
+    ///
+    /// Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
+    pub fn organizations_with_org_id_identity_providers_with_alias_get(
+        &'a self,
+        org_id: &'a str,
+        alias: &'a str,
+    ) -> impl Future<Output = Result<IdentityProviderRepresentation, KeycloakError>> + use<'a, TS>
+    {
+        self.admin
+            .realm_organizations_with_org_id_identity_providers_with_alias_get(
+                self.realm, org_id, alias,
+            )
+    }
+
+    /// Removes the identity provider with the specified alias from the organization
+    ///
+    /// Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned
+    pub fn organizations_with_org_id_identity_providers_with_alias_delete(
+        &'a self,
+        org_id: &'a str,
+        alias: &'a str,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_identity_providers_with_alias_delete(
+                self.realm, org_id, alias,
+            )
+    }
+
+    /// Returns a paginated list of organization members filtered according to the specified parameters
+    pub fn organizations_with_org_id_members_get(
+        &'a self,
+        org_id: &'a str,
+    ) -> RealmOrganizationsWithOrgIdMembersGet<'a, TS> {
+        RealmOrganizationsWithOrgIdMembersGet {
+            realm_admin: self,
+            org_id,
+        }
+    }
+
+    /// Adds the user with the specified id as a member of the organization
+    ///
+    /// Adds, or associates, an existing user with the organization. If no user is found, or if it is already associated with the organization, an error response is returned
+    pub fn organizations_with_org_id_members_post(
+        &'a self,
+        org_id: &'a str,
+        body: String,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_post(self.realm, org_id, body)
+    }
+
+    /// Returns number of members in the organization.
+    pub fn organizations_with_org_id_members_count_get(
+        &'a self,
+        org_id: &'a str,
+    ) -> impl Future<Output = Result<i64, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_count_get(self.realm, org_id)
+    }
+
+    /// Invites an existing user to the organization, using the specified user id
+    pub fn organizations_with_org_id_members_invite_existing_user_post(
+        &'a self,
+        org_id: &'a str,
+        body: TypeMap<String, String>,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_invite_existing_user_post(
+                self.realm, org_id, body,
+            )
+    }
+
+    /// Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.
+    ///
+    /// If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.
+    pub fn organizations_with_org_id_members_invite_user_post(
+        &'a self,
+        org_id: &'a str,
+        body: TypeMap<String, String>,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_invite_user_post(self.realm, org_id, body)
+    }
+
+    /// Returns the member of the organization with the specified id
+    ///
+    /// Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned
+    pub fn organizations_with_org_id_members_with_member_id_get(
+        &'a self,
+        org_id: &'a str,
+        member_id: &'a str,
+    ) -> impl Future<Output = Result<MemberRepresentation, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_with_member_id_get(
+                self.realm, org_id, member_id,
+            )
+    }
+
+    /// Removes the user with the specified id from the organization
+    ///
+    /// Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned
+    pub fn organizations_with_org_id_members_with_member_id_delete(
+        &'a self,
+        org_id: &'a str,
+        member_id: &'a str,
+    ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
+        self.admin
+            .realm_organizations_with_org_id_members_with_member_id_delete(
+                self.realm, org_id, member_id,
+            )
+    }
+
+    /// Returns the organizations associated with the user that has the specified id
+    pub fn organizations_with_org_id_members_with_member_id_organizations_get(
+        &'a self,
+        org_id: &'a str,
+        member_id: &'a str,
+    ) -> RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<'a, TS> {
+        RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet {
+            realm_admin: self,
+            org_id,
+            member_id,
+        }
+    }
+}
+
+// <h4>Organizations</h4>
+pub struct RealmOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+}
+
+#[derive(Default)]
+pub struct RealmOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
+    pub brief_representation: Option<bool>,
+    /// Boolean which defines whether the param 'search' must match exactly or not
+    pub exact: Option<bool>,
+    /// The position of the first result to be processed (pagination offset)
+    pub first: Option<i32>,
+    /// The maximum number of results to be returned - defaults to 10
+    pub max: Option<i32>,
+    /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+    pub q: Option<String>,
+    /// A String representing either an organization name or domain
+    pub search: Option<String>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmOrganizationsGet<'a, TS> {
+    type Output = TypeVec<OrganizationRepresentation>;
+    type Args = RealmOrganizationsGetArgs;
+
+    fn opts(
+        self,
+        Self::Args {
+            brief_representation,
+            exact,
+            first,
+            max,
+            q,
+            search,
+        }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin.admin.realm_organizations_get(
+            self.realm_admin.realm,
+            brief_representation,
+            exact,
+            first,
+            max,
+            q,
+            search,
+        )
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmOrganizationsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier,
+{
+    type Output = Result<TypeVec<OrganizationRepresentation>, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}
+
+pub struct RealmOrganizationsCountGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+}
+
+#[derive(Default)]
+pub struct RealmOrganizationsCountGetArgs {
+    /// Boolean which defines whether the param 'search' must match exactly or not
+    pub exact: Option<bool>,
+    /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+    pub q: Option<String>,
+    /// A String representing either an organization name or domain
+    pub search: Option<String>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+    for RealmOrganizationsCountGet<'a, TS>
+{
+    type Output = i64;
+    type Args = RealmOrganizationsCountGetArgs;
+
+    fn opts(
+        self,
+        Self::Args { exact, q, search }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin.admin.realm_organizations_count_get(
+            self.realm_admin.realm,
+            exact,
+            q,
+            search,
+        )
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmOrganizationsCountGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier,
+{
+    type Output = Result<i64, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}
+
+pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub member_id: &'a str,
+}
+
+#[derive(Default)]
+pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
+    pub brief_representation: Option<bool>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+    for RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS>
+{
+    type Output = TypeVec<OrganizationRepresentation>;
+    type Args = RealmOrganizationsMembersWithMemberIdOrganizationsGetArgs;
+
+    fn opts(
+        self,
+        Self::Args {
+            brief_representation,
+        }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin
+            .admin
+            .realm_organizations_members_with_member_id_organizations_get(
+                self.realm_admin.realm,
+                self.member_id,
+                brief_representation,
+            )
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier,
+{
+    type Output = Result<TypeVec<OrganizationRepresentation>, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}
+
+pub struct RealmOrganizationsWithOrgIdMembersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub org_id: &'a str,
+}
+
+#[derive(Default)]
+pub struct RealmOrganizationsWithOrgIdMembersGetArgs {
+    /// Boolean which defines whether the param 'search' must match exactly or not
+    pub exact: Option<bool>,
+    /// The position of the first result to be processed (pagination offset)
+    pub first: Option<i32>,
+    /// The maximum number of results to be returned. Defaults to 10
+    pub max: Option<i32>,
+    /// The membership type
+    pub membership_type: Option<String>,
+    /// A String representing either a member's username, e-mail, first name, or last name.
+    pub search: Option<String>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+    for RealmOrganizationsWithOrgIdMembersGet<'a, TS>
+{
+    type Output = TypeVec<MemberRepresentation>;
+    type Args = RealmOrganizationsWithOrgIdMembersGetArgs;
+
+    fn opts(
+        self,
+        Self::Args {
+            exact,
+            first,
+            max,
+            membership_type,
+            search,
+        }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin
+            .admin
+            .realm_organizations_with_org_id_members_get(
+                self.realm_admin.realm,
+                self.org_id,
+                exact,
+                first,
+                max,
+                membership_type,
+                search,
+            )
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmOrganizationsWithOrgIdMembersGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier,
+{
+    type Output = Result<TypeVec<MemberRepresentation>, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}
+
+pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<
+    'a,
+    TS: KeycloakTokenSupplier,
+> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    pub org_id: &'a str,
+    pub member_id: &'a str,
+}
+
+#[derive(Default)]
+pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
+    pub brief_representation: Option<bool>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+    for RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<'a, TS>
+{
+    type Output = TypeVec<OrganizationRepresentation>;
+    type Args = RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGetArgs;
+
+    fn opts(
+        self,
+        Self::Args {
+            brief_representation,
+        }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin
+            .admin
+            .realm_organizations_with_org_id_members_with_member_id_organizations_get(
+                self.realm_admin.realm,
+                self.org_id,
+                self.member_id,
+                brief_representation,
+            )
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<'a, TS>
+where
+    TS: KeycloakTokenSupplier,
+{
+    type Output = Result<TypeVec<OrganizationRepresentation>, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}

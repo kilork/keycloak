@@ -12409,6 +12409,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_get(
         &self,
         realm: &str,
@@ -12440,6 +12441,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_put(
         &self,
         realm: &str,
@@ -12473,6 +12475,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverimport>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/import`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_import_post(
         &self,
         realm: &str,
@@ -12514,6 +12517,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_permission_get(
         &self,
@@ -12590,6 +12594,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_permission_post(
         &self,
         realm: &str,
@@ -12621,6 +12626,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/evaluate`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_permission_evaluate_post(
         &self,
         realm: &str,
@@ -12651,6 +12657,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/providers`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_permission_providers_get(
         &self,
         realm: &str,
@@ -12681,6 +12688,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/search`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_permission_search_get(
         &self,
         realm: &str,
@@ -12728,6 +12736,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_policy_get(
         &self,
@@ -12804,6 +12813,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_policy_post(
         &self,
         realm: &str,
@@ -12835,6 +12845,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/evaluate`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_policy_evaluate_post(
         &self,
         realm: &str,
@@ -12865,6 +12876,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/providers`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_policy_providers_get(
         &self,
         realm: &str,
@@ -12895,6 +12907,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/search`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_policy_search_get(
         &self,
         realm: &str,
@@ -12942,6 +12955,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_get(
         &self,
@@ -13027,6 +13041,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_post(
         &self,
@@ -13113,6 +13128,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourcesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/search`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_search_get(
         &self,
@@ -13198,6 +13214,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_get(
         &self,
@@ -13288,6 +13305,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_put(
         &self,
@@ -13379,6 +13397,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_delete(
         &self,
@@ -13468,6 +13487,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idattributes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/attributes`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_attributes_get(
         &self,
@@ -13555,6 +13575,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/permissions`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_permissions_get(
         &self,
@@ -13642,6 +13663,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idscopes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/scopes`
+    #[cfg(feature = "tag-none")]
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_resource_with_resource_id_scopes_get(
         &self,
@@ -13721,6 +13743,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_get(
         &self,
         realm: &str,
@@ -13768,6 +13791,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_post(
         &self,
         realm: &str,
@@ -13799,6 +13823,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/search`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_search_get(
         &self,
         realm: &str,
@@ -13832,6 +13857,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_get(
         &self,
         realm: &str,
@@ -13866,6 +13892,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_put(
         &self,
         realm: &str,
@@ -13901,6 +13928,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_delete(
         &self,
         realm: &str,
@@ -13932,6 +13960,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/permissions`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_permissions_get(
         &self,
         realm: &str,
@@ -13963,6 +13992,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idresources>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/resources`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_scope_with_scope_id_resources_get(
         &self,
         realm: &str,
@@ -13993,6 +14023,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serversettings>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/settings`
+    #[cfg(feature = "tag-none")]
     pub async fn realm_clients_with_client_uuid_authz_resource_server_settings_get(
         &self,
         realm: &str,
