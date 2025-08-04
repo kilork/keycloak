@@ -48,6 +48,8 @@ struct RealmMethod {
     deprecated: bool,
     has_optional_parameters: bool,
     parameters: Vec<RealmMethodParameter>,
+    summary: Option<String>,
+    description: Option<String>,
     returns: String,
 }
 
@@ -308,6 +310,7 @@ mod openapi {
     pub struct Call<'c> {
         pub tags: Option<Vec<Cow<'c, str>>>,
         summary: Option<String>,
+        description: Option<String>,
         #[serde(default)]
         deprecated: bool,
         parameters: Option<Vec<Parameter>>,
@@ -688,6 +691,8 @@ mod openapi {
                     .iter()
                     .any(|(parameter, _)| !parameter.required),
                 parameters: parameters_of_method,
+                summary: self.summary.clone(),
+                description: self.description.clone(),
                 returns: result_type_value.into(),
             }
         }
@@ -1364,7 +1369,13 @@ fn main() {
         Command::Tags { format } => match format.unwrap_or_default() {
             TagsFormat::Cargo => list_tags_for_cargo(&specs),
             TagsFormat::Kebab => list_tags_as_kebab(&specs),
-            TagsFormat::Mod => list_tags_for_mod(&specs),
+            TagsFormat::Mod => list_tags_for_mod(
+                &specs,
+                std::env::var("OTHER_METHODS_MOD")
+                    .ok()
+                    .as_deref()
+                    .unwrap_or("other_methods"),
+            ),
         },
         Command::Specs => {
             println!("{specs:#?}");
@@ -1541,12 +1552,29 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             deprecated,
             has_optional_parameters,
             parameters,
+            summary,
+            description,
             returns,
         } in realm_methods
         {
             let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
             if no_realm_parameter {
                 continue;
+            }
+            if let Some(summary) = summary
+                .as_ref()
+                .map(|desc| desc.replace('\n', "\n    /// "))
+            {
+                println!("    /// {summary}");
+            }
+            if let Some(description) = description
+                .as_ref()
+                .map(|desc| desc.replace("\n", "\n    /// "))
+            {
+                if summary.is_some() {
+                    println!("    ///");
+                }
+                println!("    /// {description}");
             }
             if add_cfg {
                 let tag = tags
@@ -1632,8 +1660,12 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
                 println!("#[cfg(feature = \"tag-{tag_str}\")]",);
             }
             println!("pub struct {struct_name}<'a, TS: KeycloakTokenSupplier> {{");
+            println!("    /// Realm admin client");
             println!("    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,");
             for parameter in &required_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
                 println!(
                     "    pub {}: {},",
                     parameter.name,
@@ -1647,6 +1679,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             println!("#[derive(Default)]");
             println!("pub struct {struct_name}Args {{");
             for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
                 println!("    pub {}: {},", parameter.name, parameter.rust_type);
             }
             println!("}}\n");
@@ -1724,8 +1759,22 @@ fn list_tags_as_kebab(spec: &openapi::Spec) {
     }
 }
 
-fn list_tags_for_mod(spec: &openapi::Spec) {
+fn list_tags_for_mod(spec: &openapi::Spec, other_methods: &str) {
     use heck::{ToKebabCase, ToSnakeCase};
+    println!(
+        "use std::{{
+    future::{{Future, IntoFuture}},
+    pin::Pin,
+}};
+
+use serde_json::Value;
+
+use crate::{{
+    types::*, DefaultResponse, KeycloakError, KeycloakRealmAdmin, KeycloakRealmAdminMethod,
+    KeycloakTokenSupplier,
+}};
+"
+    );
     for tag in &spec.tags {
         println!("/// {}", tag.name);
         println!("#[cfg(feature = \"tag-{}\")]", tag.name.to_kebab_case());
@@ -1733,5 +1782,5 @@ fn list_tags_for_mod(spec: &openapi::Spec) {
     }
     println!("/// Other (non tagged) methods");
     println!("#[cfg(feature = \"{TAG_NONE}\")]");
-    println!("mod other_methods;");
+    println!("mod {other_methods};");
 }

@@ -2,6 +2,7 @@ use super::*;
 
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Attack Detection</h4>
+    /// Clear any user login failures for all users This can release temporary disabled users
     #[cfg(feature = "tag-attack-detection")]
     pub fn attack_detection_brute_force_users_delete(
         &'a self,
@@ -10,6 +11,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_attack_detection_brute_force_users_delete(self.realm)
     }
 
+    /// Get status of a username in brute force detection
     #[cfg(feature = "tag-attack-detection")]
     pub fn attack_detection_brute_force_users_with_user_id_get(
         &'a self,
@@ -19,6 +21,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_attack_detection_brute_force_users_with_user_id_get(self.realm, user_id)
     }
 
+    /// Clear any user login failures for the user This can release temporary disabled user
     #[cfg(feature = "tag-attack-detection")]
     pub fn attack_detection_brute_force_users_with_user_id_delete(
         &'a self,
@@ -29,6 +32,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Authentication Management</h4>
+    /// Get authenticator providers Returns a stream of authenticator providers.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_authenticator_providers_get(
         &'a self,
@@ -38,6 +42,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_authenticator_providers_get(self.realm)
     }
 
+    /// Get client authenticator providers Returns a stream of client authenticator providers.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_client_authenticator_providers_get(
         &'a self,
@@ -47,6 +52,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_client_authenticator_providers_get(self.realm)
     }
 
+    /// Create new authenticator configuration
     #[cfg(feature = "tag-authentication-management")]
     #[deprecated]
     pub fn authentication_config_post(
@@ -57,6 +63,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_config_post(self.realm, body)
     }
 
+    /// Get authenticator provider's configuration description
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_config_description_with_provider_id_get(
         &'a self,
@@ -67,6 +74,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_config_description_with_provider_id_get(self.realm, provider_id)
     }
 
+    /// Get authenticator configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_config_with_id_get(
         &'a self,
@@ -77,6 +85,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_config_with_id_get(self.realm, id)
     }
 
+    /// Update authenticator configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_config_with_id_put(
         &'a self,
@@ -87,6 +96,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_config_with_id_put(self.realm, id, body)
     }
 
+    /// Delete authenticator configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_config_with_id_delete(
         &'a self,
@@ -96,6 +106,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_config_with_id_delete(self.realm, id)
     }
 
+    /// Add new authentication execution
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_post(
         &'a self,
@@ -105,6 +116,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_executions_post(self.realm, body)
     }
 
+    /// Get Single Execution
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_with_execution_id_get(
         &'a self,
@@ -115,6 +127,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_executions_with_execution_id_get(self.realm, execution_id)
     }
 
+    /// Delete execution
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_with_execution_id_delete(
         &'a self,
@@ -124,6 +137,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_executions_with_execution_id_delete(self.realm, execution_id)
     }
 
+    /// Update execution with new configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_with_execution_id_config_post(
         &'a self,
@@ -138,6 +152,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get execution's configuration
     #[cfg(feature = "tag-authentication-management")]
     #[deprecated]
     pub fn authentication_executions_with_execution_id_config_with_id_get(
@@ -154,6 +169,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Lower execution's priority
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_with_execution_id_lower_priority_post(
         &'a self,
@@ -166,6 +182,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Raise execution's priority
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_executions_with_execution_id_raise_priority_post(
         &'a self,
@@ -178,6 +195,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get authentication flows Returns a stream of authentication flows.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_get(
         &'a self,
@@ -186,6 +204,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_authentication_flows_get(self.realm)
     }
 
+    /// Create a new authentication flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_post(
         &'a self,
@@ -194,6 +213,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_authentication_flows_post(self.realm, body)
     }
 
+    /// Copy existing authentication flow under a new name The new name is given as 'newName' attribute of the passed JSON object
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_flow_alias_copy_post(
         &'a self,
@@ -204,6 +224,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_flow_alias_copy_post(self.realm, flow_alias, body)
     }
 
+    /// Get authentication executions for a flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_flow_alias_executions_get(
         &'a self,
@@ -215,6 +236,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_flow_alias_executions_get(self.realm, flow_alias)
     }
 
+    /// Update authentication executions of a Flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_flow_alias_executions_put(
         &'a self,
@@ -225,6 +247,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_flow_alias_executions_put(self.realm, flow_alias, body)
     }
 
+    /// Add new authentication execution to a flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_flow_alias_executions_execution_post(
         &'a self,
@@ -237,6 +260,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add new flow with new execution to existing flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_flow_alias_executions_flow_post(
         &'a self,
@@ -249,6 +273,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get authentication flow for id
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_id_get(
         &'a self,
@@ -259,6 +284,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_id_get(self.realm, id)
     }
 
+    /// Update an authentication flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_id_put(
         &'a self,
@@ -269,6 +295,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_id_put(self.realm, id, body)
     }
 
+    /// Delete an authentication flow
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_flows_with_id_delete(
         &'a self,
@@ -278,6 +305,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_flows_with_id_delete(self.realm, id)
     }
 
+    /// Get form action providers Returns a stream of form action providers.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_form_action_providers_get(
         &'a self,
@@ -287,6 +315,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_form_action_providers_get(self.realm)
     }
 
+    /// Get form providers Returns a stream of form providers.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_form_providers_get(
         &'a self,
@@ -296,6 +325,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_form_providers_get(self.realm)
     }
 
+    /// Get configuration descriptions for all clients
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_per_client_config_description_get(
         &'a self,
@@ -306,6 +336,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_per_client_config_description_get(self.realm)
     }
 
+    /// Register a new required actions
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_register_required_action_post(
         &'a self,
@@ -315,6 +346,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_register_required_action_post(self.realm, body)
     }
 
+    /// Get required actions Returns a stream of required actions.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_get(
         &'a self,
@@ -324,6 +356,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_get(self.realm)
     }
 
+    /// Get required action for alias
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_get(
         &'a self,
@@ -334,6 +367,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_get(self.realm, alias)
     }
 
+    /// Update required action
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_put(
         &'a self,
@@ -344,6 +378,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_put(self.realm, alias, body)
     }
 
+    /// Delete required action
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_delete(
         &'a self,
@@ -353,6 +388,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_delete(self.realm, alias)
     }
 
+    /// Get RequiredAction configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_config_get(
         &'a self,
@@ -363,6 +399,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_config_get(self.realm, alias)
     }
 
+    /// Update RequiredAction configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_config_put(
         &'a self,
@@ -373,6 +410,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_config_put(self.realm, alias, body)
     }
 
+    /// Delete RequiredAction configuration
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_config_delete(
         &'a self,
@@ -382,6 +420,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_config_delete(self.realm, alias)
     }
 
+    /// Get RequiredAction provider configuration description
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_config_description_get(
         &'a self,
@@ -394,6 +433,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Lower required action's priority
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_lower_priority_post(
         &'a self,
@@ -403,6 +443,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_lower_priority_post(self.realm, alias)
     }
 
+    /// Raise required action's priority
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_required_actions_with_alias_raise_priority_post(
         &'a self,
@@ -412,6 +453,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_authentication_required_actions_with_alias_raise_priority_post(self.realm, alias)
     }
 
+    /// Get unregistered required actions Returns a stream of unregistered required actions.
     #[cfg(feature = "tag-authentication-management")]
     pub fn authentication_unregistered_required_actions_get(
         &'a self,
@@ -422,6 +464,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Client Attribute Certificate</h4>
+    /// Get key info
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_get(
         &'a self,
@@ -436,6 +479,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get a keystore file for the client, containing private key and public certificate
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_download_post(
         &'a self,
@@ -452,6 +496,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Generate a new certificate with new key pair
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_generate_post(
         &'a self,
@@ -466,6 +511,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Generate a new keypair and certificate, and get the private key file
+    ///
+    /// Generates a keypair and certificate and serves the private key in a specified keystore format.
+    /// Only generated public certificate is saved in Keycloak DB - the private key is not.
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_generate_and_download_post(
         &'a self,
@@ -482,6 +531,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Upload certificate and eventually private key
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_upload_post(
         &'a self,
@@ -496,6 +546,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Upload only certificate, not private key
     #[cfg(feature = "tag-client-attribute-certificate")]
     pub fn clients_with_client_uuid_certificates_with_attr_upload_certificate_post(
         &'a self,
@@ -519,6 +570,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_clients_initial_access_get(self.realm)
     }
 
+    /// Create a new initial access token.
     #[cfg(feature = "tag-client-initial-access")]
     pub fn clients_initial_access_post(
         &'a self,
@@ -539,6 +591,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Client Registration Policy</h4>
+    /// Base path for retrieve providers with the configProperties properly filled
     #[cfg(feature = "tag-client-registration-policy")]
     pub fn client_registration_policy_providers_get(
         &'a self,
@@ -549,6 +602,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Client Role Mappings</h4>
+    /// Get client-level role mappings for the user or group, and the app
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_get(
         &'a self,
@@ -562,6 +616,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add client-level roles to the user or group role mapping
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_post(
         &'a self,
@@ -575,6 +630,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete client-level roles from user or group role mapping
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_delete(
         &'a self,
@@ -588,6 +644,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get available client-level roles that can be mapped to the user or group
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_available_get(
         &'a self,
@@ -601,6 +658,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective client-level role mappings This recurses any composite roles
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_composite_get(
         &'a self,
@@ -614,6 +672,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get client-level role mappings for the user or group, and the app
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn users_with_user_id_role_mappings_clients_with_client_id_get(
         &'a self,
@@ -627,6 +686,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add client-level roles to the user or group role mapping
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn users_with_user_id_role_mappings_clients_with_client_id_post(
         &'a self,
@@ -640,6 +700,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete client-level roles from user or group role mapping
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn users_with_user_id_role_mappings_clients_with_client_id_delete(
         &'a self,
@@ -653,6 +714,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get available client-level roles that can be mapped to the user or group
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn users_with_user_id_role_mappings_clients_with_client_id_available_get(
         &'a self,
@@ -666,6 +728,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective client-level role mappings This recurses any composite roles
     #[cfg(feature = "tag-client-role-mappings")]
     pub fn users_with_user_id_role_mappings_clients_with_client_id_composite_get(
         &'a self,
@@ -680,6 +743,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Client Scopes</h4>
+    /// Get client scopes belonging to the realm Returns a list of client scopes belonging to the realm
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_scopes_get(
         &'a self,
@@ -688,6 +752,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_scopes_get(self.realm)
     }
 
+    /// Create a new client scope Client Scope’s name must be unique!
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_scopes_post(
         &'a self,
@@ -696,6 +761,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_scopes_post(self.realm, body)
     }
 
+    /// Get representation of the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_scopes_with_client_scope_id_get(
         &'a self,
@@ -705,6 +771,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_scopes_with_client_scope_id_get(self.realm, client_scope_id)
     }
 
+    /// Update the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_scopes_with_client_scope_id_put(
         &'a self,
@@ -715,6 +782,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_scopes_with_client_scope_id_put(self.realm, client_scope_id, body)
     }
 
+    /// Delete the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_scopes_with_client_scope_id_delete(
         &'a self,
@@ -724,6 +792,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_scopes_with_client_scope_id_delete(self.realm, client_scope_id)
     }
 
+    /// Get client scopes belonging to the realm Returns a list of client scopes belonging to the realm
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_templates_get(
         &'a self,
@@ -732,6 +801,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_templates_get(self.realm)
     }
 
+    /// Create a new client scope Client Scope’s name must be unique!
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_templates_post(
         &'a self,
@@ -740,6 +810,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_templates_post(self.realm, body)
     }
 
+    /// Get representation of the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_templates_with_client_scope_id_get(
         &'a self,
@@ -749,6 +820,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_templates_with_client_scope_id_get(self.realm, client_scope_id)
     }
 
+    /// Update the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_templates_with_client_scope_id_put(
         &'a self,
@@ -762,6 +834,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         )
     }
 
+    /// Delete the client scope
     #[cfg(feature = "tag-client-scopes")]
     pub fn client_templates_with_client_scope_id_delete(
         &'a self,
@@ -772,11 +845,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Clients</h4>
+    /// Get clients belonging to the realm.
+    ///
+    /// If a client can’t be retrieved from the storage due to a problem with the underlying storage, it is silently removed from the returned list. This ensures that concurrent modifications to the list don’t prevent callers from retrieving this list.
     #[cfg(feature = "tag-clients")]
     pub fn clients_get(&'a self) -> RealmClientsGet<'a, TS> {
         RealmClientsGet { realm_admin: self }
     }
 
+    /// Create a new client Client’s client_id must be unique!
     #[cfg(feature = "tag-clients")]
     pub fn clients_post(
         &'a self,
@@ -785,6 +862,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_clients_post(self.realm, body)
     }
 
+    /// Get representation of the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_get(
         &'a self,
@@ -794,6 +872,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_get(self.realm, client_uuid)
     }
 
+    /// Update the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_put(
         &'a self,
@@ -804,6 +883,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_put(self.realm, client_uuid, body)
     }
 
+    /// Delete the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_delete(
         &'a self,
@@ -813,6 +893,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_delete(self.realm, client_uuid)
     }
 
+    /// Get the client secret
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_client_secret_get(
         &'a self,
@@ -822,6 +903,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_client_secret_get(self.realm, client_uuid)
     }
 
+    /// Generate a new secret for the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_client_secret_post(
         &'a self,
@@ -831,6 +913,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_client_secret_post(self.realm, client_uuid)
     }
 
+    /// Get the rotated client secret
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_client_secret_rotated_get(
         &'a self,
@@ -840,6 +923,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_client_secret_rotated_get(self.realm, client_uuid)
     }
 
+    /// Invalidate the rotated secret for the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_client_secret_rotated_delete(
         &'a self,
@@ -849,6 +933,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_client_secret_rotated_delete(self.realm, client_uuid)
     }
 
+    /// Get default client scopes.  Only name and ids are returned.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_default_client_scopes_get(
         &'a self,
@@ -887,6 +972,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Create JSON with payload of example access token
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_access_token_get(
         &'a self,
@@ -898,6 +984,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Create JSON with payload of example id token
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_id_token_get(
         &'a self,
@@ -909,6 +996,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Create JSON with payload of example user info
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_userinfo_get(
         &'a self,
@@ -920,6 +1008,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Return list of all protocol mappers, which will be used when generating tokens issued for particular client.
+    ///
+    /// This means protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_protocol_mappers_get(
         &'a self,
@@ -931,6 +1022,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get effective scope mapping of all roles of particular role container, which this client is defacto allowed to have in the accessToken issued for him.
+    ///
+    /// This contains scope mappings, which this client has directly, as well as scope mappings, which are granted to all client scopes, which are linked with this client.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
         &'a self,
@@ -945,6 +1039,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get roles, which this client doesn't have scope for and can't have them in the accessToken issued for him.
+    ///
+    /// Defacto all the other roles of particular role container, which are not in {@link #getGrantedScopeMappings()}
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
         &'a self,
@@ -973,6 +1070,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_management_permissions_get(
         &'a self,
@@ -983,6 +1081,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_management_permissions_get(self.realm, client_uuid)
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_management_permissions_put(
         &'a self,
@@ -998,6 +1097,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Register a cluster node with the client Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle by sending registration request to Keycloak
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_nodes_post(
         &'a self,
@@ -1008,6 +1108,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_nodes_post(self.realm, client_uuid, body)
     }
 
+    /// Unregister a cluster node from the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_nodes_with_node_delete(
         &'a self,
@@ -1018,6 +1119,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_nodes_with_node_delete(self.realm, client_uuid, node)
     }
 
+    /// Get application offline session count Returns a number of offline user sessions associated with this client { "count": number }
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_offline_session_count_get(
         &'a self,
@@ -1027,6 +1129,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_offline_session_count_get(self.realm, client_uuid)
     }
 
+    /// Get offline sessions for client Returns a list of offline user sessions associated with this client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_offline_sessions_get(
         &'a self,
@@ -1038,6 +1141,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get optional client scopes.  Only name and ids are returned.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_optional_client_scopes_get(
         &'a self,
@@ -1076,6 +1180,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Push the client's revocation policy to its admin URL If the client has an admin URL, push revocation policy to it.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_push_revocation_post(
         &'a self,
@@ -1085,6 +1190,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_push_revocation_post(self.realm, client_uuid)
     }
 
+    /// Generate a new registration access token for the client
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_registration_access_token_post(
         &'a self,
@@ -1094,6 +1200,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_registration_access_token_post(self.realm, client_uuid)
     }
 
+    /// Get a user dedicated to the service account
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_service_account_user_get(
         &'a self,
@@ -1103,6 +1210,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_service_account_user_get(self.realm, client_uuid)
     }
 
+    /// Get application session count Returns a number of user sessions associated with this client { "count": number }
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_session_count_get(
         &'a self,
@@ -1112,6 +1220,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_session_count_get(self.realm, client_uuid)
     }
 
+    /// Test if registered cluster nodes are available Tests availability by sending 'ping' request to all cluster nodes.
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_test_nodes_available_get(
         &'a self,
@@ -1121,6 +1230,8 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_test_nodes_available_get(self.realm, client_uuid)
     }
 
+    /// Get user sessions for client Returns a list of user sessions associated with this client
+    ///
     #[cfg(feature = "tag-clients")]
     pub fn clients_with_client_uuid_user_sessions_get(
         &'a self,
@@ -1172,6 +1283,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_components_with_id_delete(self.realm, id)
     }
 
+    /// List of subcomponent types that are available to configure for a particular parent component.
     #[cfg(feature = "tag-component")]
     pub fn components_with_id_sub_component_types_get(
         &'a self,
@@ -1184,11 +1296,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Groups</h4>
+    /// Get group hierarchy.  Only `name` and `id` are returned.  `subGroups` are only returned when using the `search` or `q` parameter. If none of these parameters is provided, the top-level groups are returned without `subGroups` being filled.
     #[cfg(feature = "tag-groups")]
     pub fn groups_get(&'a self) -> RealmGroupsGet<'a, TS> {
         RealmGroupsGet { realm_admin: self }
     }
 
+    /// create or add a top level realm groupSet or create child.
+    ///
+    /// This will update the group and set the parent if it exists. Create it and set the parent if the group doesn’t exist.
     #[cfg(feature = "tag-groups")]
     pub fn groups_post(
         &'a self,
@@ -1197,6 +1313,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_groups_post(self.realm, body)
     }
 
+    /// Returns the groups counts.
     #[cfg(feature = "tag-groups")]
     pub fn groups_count_get(&'a self) -> RealmGroupsCountGet<'a, TS> {
         RealmGroupsCountGet { realm_admin: self }
@@ -1211,6 +1328,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_get(self.realm, group_id)
     }
 
+    /// Update group, ignores subgroups.
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_put(
         &'a self,
@@ -1230,6 +1348,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_delete(self.realm, group_id)
     }
 
+    /// Return a paginated list of subgroups that have a parent group corresponding to the group on the URL
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_children_get(
         &'a self,
@@ -1241,6 +1360,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Set or create child.
+    ///
+    /// This will just set the parent if it exists. Create it and set the parent if the group doesn’t exist.
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_children_post(
         &'a self,
@@ -1251,6 +1373,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_children_post(self.realm, group_id, body)
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_management_permissions_get(
         &'a self,
@@ -1261,6 +1384,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_management_permissions_get(self.realm, group_id)
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_management_permissions_put(
         &'a self,
@@ -1272,6 +1396,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_management_permissions_put(self.realm, group_id, body)
     }
 
+    /// Get users Returns a stream of users, filtered according to query parameters
     #[cfg(feature = "tag-groups")]
     pub fn groups_with_group_id_members_get(
         &'a self,
@@ -1284,6 +1409,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Identity Providers</h4>
+    /// Import identity provider from JSON body
+    ///
+    /// Import identity provider from uploaded JSON file
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_import_config_post(
         &'a self,
@@ -1294,11 +1422,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_import_config_post(self.realm, body)
     }
 
+    /// List identity providers
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_get(&'a self) -> RealmIdentityProviderInstancesGet<'a, TS> {
         RealmIdentityProviderInstancesGet { realm_admin: self }
     }
 
+    /// Create a new identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_post(
         &'a self,
@@ -1308,6 +1438,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_post(self.realm, body)
     }
 
+    /// Get the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_get(
         &'a self,
@@ -1318,6 +1449,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_get(self.realm, alias)
     }
 
+    /// Update the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_put(
         &'a self,
@@ -1328,6 +1460,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_put(self.realm, alias, body)
     }
 
+    /// Delete the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_delete(
         &'a self,
@@ -1337,6 +1470,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_delete(self.realm, alias)
     }
 
+    /// Export public broker configuration for identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_export_get(
         &'a self,
@@ -1348,6 +1482,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_management_permissions_get(
         &'a self,
@@ -1360,6 +1495,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Return object stating whether client Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_management_permissions_put(
         &'a self,
@@ -1373,6 +1509,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mapper types for identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mapper_types_get(
         &'a self,
@@ -1384,6 +1521,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_mapper_types_get(self.realm, alias)
     }
 
+    /// Get mappers for identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mappers_get(
         &'a self,
@@ -1394,6 +1532,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_mappers_get(self.realm, alias)
     }
 
+    /// Add a mapper to identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mappers_post(
         &'a self,
@@ -1404,6 +1543,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_mappers_post(self.realm, alias, body)
     }
 
+    /// Get mapper by id for the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mappers_with_id_get(
         &'a self,
@@ -1415,6 +1555,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_mappers_with_id_get(self.realm, alias, id)
     }
 
+    /// Update a mapper for the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mappers_with_id_put(
         &'a self,
@@ -1428,6 +1569,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete a mapper for the identity provider
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_mappers_with_id_delete(
         &'a self,
@@ -1440,6 +1582,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Reaload keys for the identity provider if the provider supports it, "true" is returned if reload was performed, "false" if not.
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_instances_with_alias_reload_keys_get(
         &'a self,
@@ -1449,6 +1592,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_identity_provider_instances_with_alias_reload_keys_get(self.realm, alias)
     }
 
+    /// Get the identity provider factory for that provider id
     #[cfg(feature = "tag-identity-providers")]
     pub fn identity_provider_providers_with_provider_id_get(
         &'a self,
@@ -1468,11 +1612,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Organizations</h4>
+    /// Returns a paginated list of organizations filtered according to the specified parameters
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_get(&'a self) -> RealmOrganizationsGet<'a, TS> {
         RealmOrganizationsGet { realm_admin: self }
     }
 
+    /// Creates a new organization
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_post(
         &'a self,
@@ -1481,11 +1627,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_organizations_post(self.realm, body)
     }
 
+    /// Returns the organizations counts.
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_count_get(&'a self) -> RealmOrganizationsCountGet<'a, TS> {
         RealmOrganizationsCountGet { realm_admin: self }
     }
 
+    /// Returns the organizations associated with the user that has the specified id
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_members_with_member_id_organizations_get(
         &'a self,
@@ -1497,6 +1645,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Returns the organization representation
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_get(
         &'a self,
@@ -1506,6 +1655,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_get(self.realm, org_id)
     }
 
+    /// Updates the organization
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_put(
         &'a self,
@@ -1516,6 +1666,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_put(self.realm, org_id, body)
     }
 
+    /// Deletes the organization
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_delete(
         &'a self,
@@ -1525,6 +1676,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_delete(self.realm, org_id)
     }
 
+    /// Returns all identity providers associated with the organization
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_identity_providers_get(
         &'a self,
@@ -1535,6 +1687,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_identity_providers_get(self.realm, org_id)
     }
 
+    /// Adds the identity provider with the specified id to the organization
+    ///
+    /// Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_identity_providers_post(
         &'a self,
@@ -1545,6 +1700,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_identity_providers_post(self.realm, org_id, body)
     }
 
+    /// Returns the identity provider associated with the organization that has the specified alias
+    ///
+    /// Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_identity_providers_with_alias_get(
         &'a self,
@@ -1558,6 +1716,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Removes the identity provider with the specified alias from the organization
+    ///
+    /// Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_identity_providers_with_alias_delete(
         &'a self,
@@ -1570,6 +1731,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Returns a paginated list of organization members filtered according to the specified parameters
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_get(
         &'a self,
@@ -1581,6 +1743,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Adds the user with the specified id as a member of the organization
+    ///
+    /// Adds, or associates, an existing user with the organization. If no user is found, or if it is already associated with the organization, an error response is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_post(
         &'a self,
@@ -1591,6 +1756,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_members_post(self.realm, org_id, body)
     }
 
+    /// Returns number of members in the organization.
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_count_get(
         &'a self,
@@ -1600,6 +1766,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_members_count_get(self.realm, org_id)
     }
 
+    /// Invites an existing user to the organization, using the specified user id
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_invite_existing_user_post(
         &'a self,
@@ -1612,6 +1779,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.
+    ///
+    /// If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_invite_user_post(
         &'a self,
@@ -1622,6 +1792,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_organizations_with_org_id_members_invite_user_post(self.realm, org_id, body)
     }
 
+    /// Returns the member of the organization with the specified id
+    ///
+    /// Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_with_member_id_get(
         &'a self,
@@ -1634,6 +1807,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Removes the user with the specified id from the organization
+    ///
+    /// Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_with_member_id_delete(
         &'a self,
@@ -1646,6 +1822,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Returns the organizations associated with the user that has the specified id
     #[cfg(feature = "tag-organizations")]
     pub fn organizations_with_org_id_members_with_member_id_organizations_get(
         &'a self,
@@ -1660,6 +1837,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Protocol Mappers</h4>
+    /// Create multiple mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_add_models_post(
         &'a self,
@@ -1674,6 +1852,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_models_get(
         &'a self,
@@ -1687,6 +1866,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Create a mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_models_post(
         &'a self,
@@ -1701,6 +1881,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mapper by id
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_models_with_id_get(
         &'a self,
@@ -1716,6 +1897,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Update the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_models_with_id_put(
         &'a self,
@@ -1732,6 +1914,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_models_with_id_delete(
         &'a self,
@@ -1746,6 +1929,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers by name for a specific protocol
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_scopes_with_client_scope_id_protocol_mappers_protocol_with_protocol_get(
         &'a self,
@@ -1761,6 +1945,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Create multiple mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_add_models_post(
         &'a self,
@@ -1775,6 +1960,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_models_get(
         &'a self,
@@ -1788,6 +1974,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Create a mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_models_post(
         &'a self,
@@ -1802,6 +1989,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mapper by id
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_models_with_id_get(
         &'a self,
@@ -1817,6 +2005,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Update the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_models_with_id_put(
         &'a self,
@@ -1833,6 +2022,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_models_with_id_delete(
         &'a self,
@@ -1847,6 +2037,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers by name for a specific protocol
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn client_templates_with_client_scope_id_protocol_mappers_protocol_with_protocol_get(
         &'a self,
@@ -1862,6 +2053,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Create multiple mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_add_models_post(
         &'a self,
@@ -1876,6 +2068,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_models_get(
         &'a self,
@@ -1886,6 +2079,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_protocol_mappers_models_get(self.realm, client_uuid)
     }
 
+    /// Create a mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_models_post(
         &'a self,
@@ -1900,6 +2094,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mapper by id
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_models_with_id_get(
         &'a self,
@@ -1915,6 +2110,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Update the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_models_with_id_put(
         &'a self,
@@ -1931,6 +2127,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete the mapper
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_models_with_id_delete(
         &'a self,
@@ -1945,6 +2142,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get mappers by name for a specific protocol
     #[cfg(feature = "tag-protocol-mappers")]
     pub fn clients_with_client_uuid_protocol_mappers_protocol_with_protocol_get(
         &'a self,
@@ -1961,6 +2159,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Realms Admin</h4>
+    /// Get the top-level representation of the realm It will not include nested information like User and Client representations.
     #[cfg(feature = "tag-realms-admin")]
     pub fn get(
         &'a self,
@@ -1968,6 +2167,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_get(self.realm)
     }
 
+    /// Update the top-level information of the realm Any user, roles or client information in the representation will be ignored.
+    ///
+    /// This will only update top-level attributes of the realm.
     #[cfg(feature = "tag-realms-admin")]
     pub fn put(
         &'a self,
@@ -1976,6 +2178,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_put(self.realm, body)
     }
 
+    /// Delete the realm
     #[cfg(feature = "tag-realms-admin")]
     pub fn delete(
         &'a self,
@@ -1983,11 +2186,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_delete(self.realm)
     }
 
+    /// Get admin events Returns all admin events, or filters events based on URL query parameters listed here
     #[cfg(feature = "tag-realms-admin")]
     pub fn admin_events_get(&'a self) -> RealmAdminEventsGet<'a, TS> {
         RealmAdminEventsGet { realm_admin: self }
     }
 
+    /// Delete all admin events
     #[cfg(feature = "tag-realms-admin")]
     pub fn admin_events_delete(
         &'a self,
@@ -1995,6 +2200,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_admin_events_delete(self.realm)
     }
 
+    /// Base path for importing clients under this realm.
     #[cfg(feature = "tag-realms-admin")]
     pub fn client_description_converter_post(
         &'a self,
@@ -2032,6 +2238,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_policies_profiles_put(self.realm, body)
     }
 
+    /// Get client session stats Returns a JSON map.
+    ///
+    /// The key is the client id, the value is the number of sessions that currently are active with that client. Only clients that actually have a session associated with them will be in this map.
     #[cfg(feature = "tag-realms-admin")]
     pub fn client_session_stats_get(
         &'a self,
@@ -2040,6 +2249,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_session_stats_get(self.realm)
     }
 
+    /// List all client types available in the current realm
+    ///
+    /// This endpoint returns a list of both global and realm level client types and the attributes they set
     #[cfg(feature = "tag-realms-admin")]
     pub fn client_types_get(
         &'a self,
@@ -2047,6 +2259,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_types_get(self.realm)
     }
 
+    /// Update a client type
+    ///
+    /// This endpoint allows you to update a realm level client type
     #[cfg(feature = "tag-realms-admin")]
     pub fn client_types_put(
         &'a self,
@@ -2062,6 +2277,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_credential_registrators_get(self.realm)
     }
 
+    /// Get realm default client scopes. Only name and ids are returned.
     #[cfg(feature = "tag-realms-admin")]
     pub fn default_default_client_scopes_get(
         &'a self,
@@ -2095,6 +2311,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get group hierarchy.  Only name and ids are returned.
     #[cfg(feature = "tag-realms-admin")]
     pub fn default_groups_get(
         &'a self,
@@ -2121,6 +2338,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_default_groups_with_group_id_delete(self.realm, group_id)
     }
 
+    /// Get realm optional client scopes. Only name and ids are returned.
     #[cfg(feature = "tag-realms-admin")]
     pub fn default_optional_client_scopes_get(
         &'a self,
@@ -2154,11 +2372,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get events Returns all events, or filters them based on URL query parameters listed here
     #[cfg(feature = "tag-realms-admin")]
     pub fn events_get(&'a self) -> RealmEventsGet<'a, TS> {
         RealmEventsGet { realm_admin: self }
     }
 
+    /// Delete all events
     #[cfg(feature = "tag-realms-admin")]
     pub fn events_delete(
         &'a self,
@@ -2166,6 +2386,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_events_delete(self.realm)
     }
 
+    /// Get the events provider configuration Returns JSON object with events provider configuration
     #[cfg(feature = "tag-realms-admin")]
     pub fn events_config_get(
         &'a self,
@@ -2174,6 +2395,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_events_config_get(self.realm)
     }
 
+    /// Update the events provider Change the events provider and/or its configuration
     #[cfg(feature = "tag-realms-admin")]
     pub fn events_config_put(
         &'a self,
@@ -2209,6 +2431,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Import localization from uploaded JSON file
     #[cfg(feature = "tag-realms-admin")]
     pub fn localization_with_locale_post(
         &'a self,
@@ -2259,6 +2482,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_localization_with_locale_with_key_delete(self.realm, key, locale)
     }
 
+    /// Removes all user sessions.
+    ///
+    /// Any client that has an admin url will also be told to invalidate any sessions they have.
     #[cfg(feature = "tag-realms-admin")]
     pub fn logout_all_post(
         &'a self,
@@ -2266,11 +2492,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_logout_all_post(self.realm)
     }
 
+    /// Partial export of existing realm into a JSON file.
     #[cfg(feature = "tag-realms-admin")]
     pub fn partial_export_post(&'a self) -> RealmPartialExportPost<'a, TS> {
         RealmPartialExportPost { realm_admin: self }
     }
 
+    /// Partial import from a JSON file to an existing realm.
     #[cfg(feature = "tag-realms-admin")]
     pub fn partial_import_post(
         &'a self,
@@ -2279,6 +2507,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_partial_import_post(self.realm, body)
     }
 
+    /// Push the realm's revocation policy to any client that has an admin url associated with it.
     #[cfg(feature = "tag-realms-admin")]
     pub fn push_revocation_post(
         &'a self,
@@ -2286,6 +2515,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_push_revocation_post(self.realm)
     }
 
+    /// Remove a specific user session.
+    ///
+    /// Any client that has an admin url will also be told to invalidate this particular session.
     #[cfg(feature = "tag-realms-admin")]
     pub fn sessions_with_session_delete(
         &'a self,
@@ -2297,6 +2529,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Test SMTP connection with current logged in user
     #[cfg(feature = "tag-realms-admin")]
     #[deprecated]
     pub fn test_smtp_connection_post(
@@ -2326,6 +2559,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Role Mapper</h4>
+    /// Get role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_get(
         &'a self,
@@ -2335,6 +2569,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_role_mappings_get(self.realm, group_id)
     }
 
+    /// Get realm-level role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_realm_get(
         &'a self,
@@ -2345,6 +2580,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_role_mappings_realm_get(self.realm, group_id)
     }
 
+    /// Add realm-level role mappings to the user
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_realm_post(
         &'a self,
@@ -2355,6 +2591,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_role_mappings_realm_post(self.realm, group_id, body)
     }
 
+    /// Delete realm-level role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_realm_delete(
         &'a self,
@@ -2365,6 +2602,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_role_mappings_realm_delete(self.realm, group_id, body)
     }
 
+    /// Get realm-level roles that can be mapped
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_realm_available_get(
         &'a self,
@@ -2375,6 +2613,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_role_mappings_realm_available_get(self.realm, group_id)
     }
 
+    /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
     #[cfg(feature = "tag-role-mapper")]
     pub fn groups_with_group_id_role_mappings_realm_composite_get(
         &'a self,
@@ -2386,6 +2625,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_get(
         &'a self,
@@ -2395,6 +2635,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_role_mappings_get(self.realm, user_id)
     }
 
+    /// Get realm-level role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_realm_get(
         &'a self,
@@ -2405,6 +2646,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_role_mappings_realm_get(self.realm, user_id)
     }
 
+    /// Add realm-level role mappings to the user
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_realm_post(
         &'a self,
@@ -2415,6 +2657,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_role_mappings_realm_post(self.realm, user_id, body)
     }
 
+    /// Delete realm-level role mappings
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_realm_delete(
         &'a self,
@@ -2425,6 +2668,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_role_mappings_realm_delete(self.realm, user_id, body)
     }
 
+    /// Get realm-level roles that can be mapped
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_realm_available_get(
         &'a self,
@@ -2435,6 +2679,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_role_mappings_realm_available_get(self.realm, user_id)
     }
 
+    /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
     #[cfg(feature = "tag-role-mapper")]
     pub fn users_with_user_id_role_mappings_realm_composite_get(
         &'a self,
@@ -2447,6 +2692,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Roles</h4>
+    /// Get all roles for the realm or client
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_get(
         &'a self,
@@ -2458,6 +2704,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Create a new role for the realm or client
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_post(
         &'a self,
@@ -2468,6 +2715,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_roles_post(self.realm, client_uuid, body)
     }
 
+    /// Get a role by name
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_get(
         &'a self,
@@ -2482,6 +2730,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Update a role by name
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_put(
         &'a self,
@@ -2498,6 +2747,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Delete a role by name
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_delete(
         &'a self,
@@ -2512,6 +2762,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get composites of the role
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_composites_get(
         &'a self,
@@ -2527,6 +2778,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add a composite to the role
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_composites_post(
         &'a self,
@@ -2543,6 +2795,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove roles from the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_composites_delete(
         &'a self,
@@ -2559,6 +2812,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get client-level roles for the client that are in the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_composites_clients_with_client_uuid_get(
         &'a self,
@@ -2574,6 +2828,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles of the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_composites_realm_get(
         &'a self,
@@ -2589,6 +2844,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Returns a stream of groups that have the specified role name
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_groups_get(
         &'a self,
@@ -2602,6 +2858,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_get(
         &'a self,
@@ -2617,6 +2874,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_put(
         &'a self,
@@ -2634,6 +2892,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Returns a stream of users that have the specified role name.
     #[cfg(feature = "tag-roles")]
     pub fn clients_with_client_uuid_roles_with_role_name_users_get(
         &'a self,
@@ -2647,11 +2906,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get all roles for the realm or client
     #[cfg(feature = "tag-roles")]
     pub fn roles_get(&'a self) -> RealmRolesGet<'a, TS> {
         RealmRolesGet { realm_admin: self }
     }
 
+    /// Create a new role for the realm or client
     #[cfg(feature = "tag-roles")]
     pub fn roles_post(
         &'a self,
@@ -2660,6 +2921,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_roles_post(self.realm, body)
     }
 
+    /// Get a role by name
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_get(
         &'a self,
@@ -2669,6 +2931,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_get(self.realm, role_name)
     }
 
+    /// Update a role by name
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_put(
         &'a self,
@@ -2679,6 +2942,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_put(self.realm, role_name, body)
     }
 
+    /// Delete a role by name
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_delete(
         &'a self,
@@ -2688,6 +2952,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_delete(self.realm, role_name)
     }
 
+    /// Get composites of the role
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_composites_get(
         &'a self,
@@ -2698,6 +2963,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_composites_get(self.realm, role_name)
     }
 
+    /// Add a composite to the role
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_composites_post(
         &'a self,
@@ -2708,6 +2974,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_composites_post(self.realm, role_name, body)
     }
 
+    /// Remove roles from the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_composites_delete(
         &'a self,
@@ -2718,6 +2985,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_composites_delete(self.realm, role_name, body)
     }
 
+    /// Get client-level roles for the client that are in the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_composites_clients_with_client_uuid_get(
         &'a self,
@@ -2733,6 +3001,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles of the role's composite
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_composites_realm_get(
         &'a self,
@@ -2743,6 +3012,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_composites_realm_get(self.realm, role_name)
     }
 
+    /// Returns a stream of groups that have the specified role name
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_groups_get(
         &'a self,
@@ -2754,6 +3024,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_management_permissions_get(
         &'a self,
@@ -2764,6 +3035,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_management_permissions_get(self.realm, role_name)
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_management_permissions_put(
         &'a self,
@@ -2775,6 +3047,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_with_role_name_management_permissions_put(self.realm, role_name, body)
     }
 
+    /// Returns a stream of users that have the specified role name.
     #[cfg(feature = "tag-roles")]
     pub fn roles_with_role_name_users_get(
         &'a self,
@@ -2787,6 +3060,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Roles (by ID)</h4>
+    /// Get a specific role's representation
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_get(
         &'a self,
@@ -2796,6 +3070,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_get(self.realm, role_id)
     }
 
+    /// Update the role
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_put(
         &'a self,
@@ -2806,6 +3081,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_put(self.realm, role_id, body)
     }
 
+    /// Delete the role
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_delete(
         &'a self,
@@ -2815,6 +3091,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_delete(self.realm, role_id)
     }
 
+    /// Get role's children Returns a set of role's children provided the role is a composite.
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_composites_get(
         &'a self,
@@ -2826,6 +3103,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Make the role a composite role by associating some child roles
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_composites_post(
         &'a self,
@@ -2836,6 +3114,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_composites_post(self.realm, role_id, body)
     }
 
+    /// Remove a set of roles from the role's composite
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_composites_delete(
         &'a self,
@@ -2846,6 +3125,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_composites_delete(self.realm, role_id, body)
     }
 
+    /// Get client-level roles for the client that are in the role's composite
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_composites_clients_with_client_uuid_get(
         &'a self,
@@ -2861,6 +3141,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles that are in the role's composite
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_composites_realm_get(
         &'a self,
@@ -2871,6 +3152,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_composites_realm_get(self.realm, role_id)
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_management_permissions_get(
         &'a self,
@@ -2881,6 +3163,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_roles_by_id_with_role_id_management_permissions_get(self.realm, role_id)
     }
 
+    /// Return object stating whether role Authorization permissions have been initialized or not and a reference
     #[cfg(feature = "tag-roles-by-id")]
     pub fn roles_by_id_with_role_id_management_permissions_put(
         &'a self,
@@ -2893,6 +3176,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Scope Mappings</h4>
+    /// Get all scope mappings for the client
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
     pub fn client_scopes_with_client_scope_id_scope_mappings_get(
@@ -2906,6 +3190,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get the roles associated with a client's scope Returns roles for the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_get(
         &'a self,
@@ -2921,6 +3206,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add client-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_post(
         &'a self,
@@ -2937,6 +3223,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove client-level roles from the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &'a self,
@@ -2953,6 +3240,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &'a self,
@@ -2968,6 +3256,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &'a self,
@@ -2981,6 +3270,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get realm-level roles associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_get(
         &'a self,
@@ -2994,6 +3284,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add a set of realm-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_post(
         &'a self,
@@ -3008,6 +3299,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove a set of realm-level roles from the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_delete(
         &'a self,
@@ -3022,6 +3314,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles that are available to attach to this client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_available_get(
         &'a self,
@@ -3035,6 +3328,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
+    ///
+    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_composite_get(
         &'a self,
@@ -3046,6 +3342,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get all scope mappings for the client
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
     pub fn client_templates_with_client_scope_id_scope_mappings_get(
@@ -3059,6 +3356,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get the roles associated with a client's scope Returns roles for the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_get(
         &'a self,
@@ -3074,6 +3372,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add client-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_post(
         &'a self,
@@ -3090,6 +3389,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove client-level roles from the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &'a self,
@@ -3106,6 +3406,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &'a self,
@@ -3121,6 +3422,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &'a self,
@@ -3135,6 +3437,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get realm-level roles associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_get(
         &'a self,
@@ -3148,6 +3451,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add a set of realm-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_post(
         &'a self,
@@ -3162,6 +3466,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove a set of realm-level roles from the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_delete(
         &'a self,
@@ -3176,6 +3481,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles that are available to attach to this client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_available_get(
         &'a self,
@@ -3189,6 +3495,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
+    ///
+    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_composite_get(
         &'a self,
@@ -3200,6 +3509,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get all scope mappings for the client
     #[cfg(feature = "tag-scope-mappings")]
     #[deprecated]
     pub fn clients_with_client_uuid_scope_mappings_get(
@@ -3210,6 +3520,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_scope_mappings_get(self.realm, client_uuid)
     }
 
+    /// Get the roles associated with a client's scope Returns roles for the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_get(
         &'a self,
@@ -3225,6 +3536,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Add client-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_post(
         &'a self,
@@ -3241,6 +3553,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove client-level roles from the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_delete(
         &'a self,
@@ -3257,6 +3570,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_available_get(
         &'a self,
@@ -3272,6 +3586,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_composite_get(
         &'a self,
@@ -3285,6 +3600,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get realm-level roles associated with the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_realm_get(
         &'a self,
@@ -3295,6 +3611,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_scope_mappings_realm_get(self.realm, client_uuid)
     }
 
+    /// Add a set of realm-level roles to the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_realm_post(
         &'a self,
@@ -3305,6 +3622,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_scope_mappings_realm_post(self.realm, client_uuid, body)
     }
 
+    /// Remove a set of realm-level roles from the client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_realm_delete(
         &'a self,
@@ -3319,6 +3637,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get realm-level roles that are available to attach to this client's scope
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_realm_available_get(
         &'a self,
@@ -3332,6 +3651,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
+    ///
+    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
     #[cfg(feature = "tag-scope-mappings")]
     pub fn clients_with_client_uuid_scope_mappings_realm_composite_get(
         &'a self,
@@ -3344,11 +3666,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     // <h4>Users</h4>
+    /// Get users Returns a stream of users, filtered according to query parameters.
     #[cfg(feature = "tag-users")]
     pub fn users_get(&'a self) -> RealmUsersGet<'a, TS> {
         RealmUsersGet { realm_admin: self }
     }
 
+    /// Create a new user Username must be unique.
     #[cfg(feature = "tag-users")]
     pub fn users_post(
         &'a self,
@@ -3357,11 +3681,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_users_post(self.realm, body)
     }
 
+    /// Returns the number of users that match the given criteria.
+    ///
+    /// It can be called in three different ways. 1. Don’t specify any criteria and pass {@code null}. The number of all users within that realm will be returned. <p> 2. If {@code search} is specified other criteria such as {@code last} will be ignored even though you set them. The {@code search} string will be matched against the first and last name, the username and the email of a user. <p> 3. If {@code search} is unspecified but any of {@code last}, {@code first}, {@code email} or {@code username} those criteria are matched against their respective fields on a user entity. Combined with a logical and.
     #[cfg(feature = "tag-users")]
     pub fn users_count_get(&'a self) -> RealmUsersCountGet<'a, TS> {
         RealmUsersCountGet { realm_admin: self }
     }
 
+    /// Get the configuration for the user profile
     #[cfg(feature = "tag-users")]
     pub fn users_profile_get(
         &'a self,
@@ -3369,6 +3697,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_users_profile_get(self.realm)
     }
 
+    /// Set the configuration for the user profile
     #[cfg(feature = "tag-users")]
     pub fn users_profile_put(
         &'a self,
@@ -3377,6 +3706,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_users_profile_put(self.realm, body)
     }
 
+    /// Get the UserProfileMetadata from the configuration
     #[cfg(feature = "tag-users")]
     pub fn users_profile_metadata_get(
         &'a self,
@@ -3384,6 +3714,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_users_profile_metadata_get(self.realm)
     }
 
+    /// Get representation of the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_get(&'a self, user_id: &'a str) -> RealmUsersWithUserIdGet<'a, TS> {
         RealmUsersWithUserIdGet {
@@ -3392,6 +3723,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Update the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_put(
         &'a self,
@@ -3402,6 +3734,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_put(self.realm, user_id, body)
     }
 
+    /// Delete the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_delete(
         &'a self,
@@ -3411,6 +3744,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_delete(self.realm, user_id)
     }
 
+    /// Return credential types, which are provided by the user storage where user is stored.
+    ///
+    /// Returned values can contain for example "password", "otp" etc. This will always return empty list for "local" users, which are not backed by any user storage
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_configured_user_storage_credential_types_get(
         &'a self,
@@ -3422,6 +3758,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Get consents granted by the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_consents_get(
         &'a self,
@@ -3432,6 +3769,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_consents_get(self.realm, user_id)
     }
 
+    /// Revoke consent and offline tokens for particular client from user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_consents_with_client_delete(
         &'a self,
@@ -3452,6 +3790,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_credentials_get(self.realm, user_id)
     }
 
+    /// Remove a credential for a user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_credentials_with_credential_id_delete(
         &'a self,
@@ -3466,6 +3805,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Move a credential to a position behind another credential
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_credentials_with_credential_id_move_after_with_new_previous_credential_id_post(
         &'a self,
@@ -3482,6 +3822,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Move a credential to a first position in the credentials list of the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_credentials_with_credential_id_move_to_first_post(
         &'a self,
@@ -3496,6 +3837,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Update a credential label for a user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_credentials_with_credential_id_user_label_put(
         &'a self,
@@ -3512,6 +3854,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Disable all credentials for a user of a specific type
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_disable_credential_types_put(
         &'a self,
@@ -3522,6 +3865,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_disable_credential_types_put(self.realm, user_id, body)
     }
 
+    /// Send an email to the user with a link they can click to execute particular actions.
+    ///
+    /// An email contains a link the user can click to perform a set of required actions. The redirectUri and clientId parameters are optional. If no redirect is given, then there will be no link back to click after actions have completed. Redirect uri must be a valid uri for the particular clientId.
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_execute_actions_email_put(
         &'a self,
@@ -3535,6 +3881,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get social logins associated with the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_federated_identity_get(
         &'a self,
@@ -3545,6 +3892,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_federated_identity_get(self.realm, user_id)
     }
 
+    /// Add a social login provider to the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_federated_identity_with_provider_post(
         &'a self,
@@ -3557,6 +3905,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Remove a social login provider from user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_federated_identity_with_provider_delete(
         &'a self,
@@ -3611,6 +3960,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_groups_with_group_id_delete(self.realm, user_id, group_id)
     }
 
+    /// Impersonate the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_impersonation_post(
         &'a self,
@@ -3620,6 +3970,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_impersonation_post(self.realm, user_id)
     }
 
+    /// Remove all user sessions associated with the user Also send notification to all clients that have an admin URL to invalidate the sessions for the particular user.
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_logout_post(
         &'a self,
@@ -3629,6 +3980,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_logout_post(self.realm, user_id)
     }
 
+    /// Get offline sessions associated with the user and client
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_offline_sessions_with_client_uuid_get(
         &'a self,
@@ -3644,6 +3996,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Set up a new password for the user.
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_reset_password_put(
         &'a self,
@@ -3654,6 +4007,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_with_user_id_reset_password_put(self.realm, user_id, body)
     }
 
+    /// Send an email to the user with a link they can click to reset their password.
+    ///
+    /// The redirectUri and clientId parameters are optional. The default for the redirect is the account client. This endpoint has been deprecated.  Please use the execute-actions-email passing a list with UPDATE_PASSWORD within it.
     #[cfg(feature = "tag-users")]
     #[deprecated]
     pub fn users_with_user_id_reset_password_email_put(
@@ -3666,6 +4022,9 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Send an email-verification email to the user An email contains a link the user can click to verify their email address.
+    ///
+    /// The redirectUri, clientId and lifespan parameters are optional. The default for the redirect is the account client. The default for the lifespan is 12 hours
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_send_verify_email_put(
         &'a self,
@@ -3677,6 +4036,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Get sessions associated with the user
     #[cfg(feature = "tag-users")]
     pub fn users_with_user_id_sessions_get(
         &'a self,
@@ -4115,14 +4475,17 @@ pub struct RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub group_id: &'a str,
+    /// client id (not clientId!)
     pub client_id: &'a str,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -4168,14 +4531,17 @@ pub struct RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
+    /// client id (not clientId!)
     pub client_id: &'a str,
 }
 
 #[cfg(feature = "tag-client-role-mappings")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -4220,17 +4586,23 @@ where
 // <h4>Clients</h4>
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsGetArgs {
+    /// filter by clientId
     pub client_id: Option<String>,
+    /// the first result
     pub first: Option<i32>,
+    /// the max results to return
     pub max: Option<i32>,
     pub q: Option<String>,
+    /// whether this is a search query or a getClientById query
     pub search: Option<bool>,
+    /// filter clients that cannot be viewed in full by admin
     pub viewable_only: Option<bool>,
 }
 
@@ -4279,7 +4651,9 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -4336,7 +4710,9 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -4393,7 +4769,9 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -4442,7 +4820,9 @@ where
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS: KeycloakTokenSupplier>
 {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -4490,8 +4870,11 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
+    /// either realm name OR client UUID
     pub role_container_id: &'a str,
 }
 
@@ -4542,8 +4925,11 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
+    /// either realm name OR client UUID
     pub role_container_id: &'a str,
 }
 
@@ -4598,14 +4984,18 @@ where
 
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidOfflineSessionsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidOfflineSessionsGetArgs {
+    /// Paging offset
     pub first: Option<i32>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
 }
 
@@ -4645,14 +5035,18 @@ where
 
 #[cfg(feature = "tag-clients")]
 pub struct RealmClientsWithClientUuidUserSessionsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-clients")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidUserSessionsGetArgs {
+    /// Paging offset
     pub first: Option<i32>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
 }
 
@@ -4693,6 +5087,7 @@ where
 // <h4>Component</h4>
 #[cfg(feature = "tag-component")]
 pub struct RealmComponentsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -4737,6 +5132,7 @@ where
 
 #[cfg(feature = "tag-component")]
 pub struct RealmComponentsWithIdSubComponentTypesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub id: &'a str,
 }
@@ -4783,6 +5179,7 @@ where
 // <h4>Groups</h4>
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -4796,6 +5193,7 @@ pub struct RealmGroupsGetArgs {
     pub populate_hierarchy: Option<bool>,
     pub q: Option<String>,
     pub search: Option<String>,
+    /// Boolean which defines whether to return the count of subgroups for each group (default: true
     pub sub_groups_count: Option<bool>,
 }
 
@@ -4845,6 +5243,7 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsCountGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -4884,6 +5283,7 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsWithGroupIdChildrenGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub group_id: &'a str,
 }
@@ -4891,11 +5291,17 @@ pub struct RealmGroupsWithGroupIdChildrenGet<'a, TS: KeycloakTokenSupplier> {
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdChildrenGetArgs {
+    /// Boolean which defines whether brief groups representations are returned or not (default: false)
     pub brief_representation: Option<bool>,
+    /// Boolean which defines whether the params "search" must match exactly or not
     pub exact: Option<bool>,
+    /// The position of the first result to be returned (pagination offset).
     pub first: Option<i32>,
+    /// The maximum number of results that are to be returned. Defaults to 10
     pub max: Option<i32>,
+    /// A String representing either an exact group name or a partial name
     pub search: Option<String>,
+    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
     pub sub_groups_count: Option<bool>,
 }
 
@@ -4946,6 +5352,7 @@ where
 
 #[cfg(feature = "tag-groups")]
 pub struct RealmGroupsWithGroupIdMembersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub group_id: &'a str,
 }
@@ -4953,8 +5360,11 @@ pub struct RealmGroupsWithGroupIdMembersGet<'a, TS: KeycloakTokenSupplier> {
 #[cfg(feature = "tag-groups")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdMembersGetArgs {
+    /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
     pub brief_representation: Option<bool>,
+    /// Pagination offset
     pub first: Option<i32>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
 }
 
@@ -5000,16 +5410,22 @@ where
 // <h4>Identity Providers</h4>
 #[cfg(feature = "tag-identity-providers")]
 pub struct RealmIdentityProviderInstancesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-identity-providers")]
 #[derive(Default)]
 pub struct RealmIdentityProviderInstancesGetArgs {
+    /// Boolean which defines whether brief representations are returned (default: false)
     pub brief_representation: Option<bool>,
+    /// Pagination offset
     pub first: Option<i32>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
+    /// Boolean which defines if only realm-level IDPs (not associated with orgs) should be returned (default: false)
     pub realm_only: Option<bool>,
+    /// Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact ("name"). Default prefixed.
     pub search: Option<String>,
 }
 
@@ -5057,6 +5473,7 @@ where
 
 #[cfg(feature = "tag-identity-providers")]
 pub struct RealmIdentityProviderInstancesWithAliasExportGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub alias: &'a str,
 }
@@ -5064,6 +5481,7 @@ pub struct RealmIdentityProviderInstancesWithAliasExportGet<'a, TS: KeycloakToke
 #[cfg(feature = "tag-identity-providers")]
 #[derive(Default)]
 pub struct RealmIdentityProviderInstancesWithAliasExportGetArgs {
+    /// Format to use
     pub format: Option<String>,
 }
 
@@ -5105,17 +5523,24 @@ where
 // <h4>Organizations</h4>
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
     pub brief_representation: Option<bool>,
+    /// Boolean which defines whether the param 'search' must match exactly or not
     pub exact: Option<bool>,
+    /// The position of the first result to be processed (pagination offset)
     pub first: Option<i32>,
+    /// The maximum number of results to be returned - defaults to 10
     pub max: Option<i32>,
+    /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
     pub q: Option<String>,
+    /// A String representing either an organization name or domain
     pub search: Option<String>,
 }
 
@@ -5161,14 +5586,18 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsCountGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsCountGetArgs {
+    /// Boolean which defines whether the param 'search' must match exactly or not
     pub exact: Option<bool>,
+    /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
     pub q: Option<String>,
+    /// A String representing either an organization name or domain
     pub search: Option<String>,
 }
 
@@ -5206,6 +5635,7 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub member_id: &'a str,
 }
@@ -5213,6 +5643,7 @@ pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS: Keycloa
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsMembersWithMemberIdOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
     pub brief_representation: Option<bool>,
 }
 
@@ -5253,6 +5684,7 @@ where
 
 #[cfg(feature = "tag-organizations")]
 pub struct RealmOrganizationsWithOrgIdMembersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub org_id: &'a str,
 }
@@ -5260,10 +5692,15 @@ pub struct RealmOrganizationsWithOrgIdMembersGet<'a, TS: KeycloakTokenSupplier> 
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsWithOrgIdMembersGetArgs {
+    /// Boolean which defines whether the param 'search' must match exactly or not
     pub exact: Option<bool>,
+    /// The position of the first result to be processed (pagination offset)
     pub first: Option<i32>,
+    /// The maximum number of results to be returned. Defaults to 10
     pub max: Option<i32>,
+    /// The membership type
     pub membership_type: Option<String>,
+    /// A String representing either a member's username, e-mail, first name, or last name.
     pub search: Option<String>,
 }
 
@@ -5315,6 +5752,7 @@ pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub org_id: &'a str,
     pub member_id: &'a str,
@@ -5323,6 +5761,7 @@ pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<
 #[cfg(feature = "tag-organizations")]
 #[derive(Default)]
 pub struct RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGetArgs {
+    /// if false, return the full representation. Otherwise, only the basic fields are returned.
     pub brief_representation: Option<bool>,
 }
 
@@ -5367,6 +5806,7 @@ where
 // <h4>Realms Admin</h4>
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmAdminEventsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -5376,11 +5816,16 @@ pub struct RealmAdminEventsGetArgs {
     pub auth_client: Option<String>,
     pub auth_ip_address: Option<String>,
     pub auth_realm: Option<String>,
+    /// user id
     pub auth_user: Option<String>,
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
     pub date_from: Option<String>,
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
     pub date_to: Option<String>,
+    /// The direction to sort events by (asc or desc)
     pub direction: Option<String>,
     pub first: Option<i32>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
     pub operation_types: Option<Vec<String>>,
     pub resource_path: Option<String>,
@@ -5441,6 +5886,7 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmClientPoliciesPoliciesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -5483,6 +5929,7 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmClientPoliciesProfilesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -5525,20 +5972,30 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmEventsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-realms-admin")]
 #[derive(Default)]
 pub struct RealmEventsGetArgs {
+    /// App or oauth client name
     pub client: Option<String>,
+    /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
     pub date_from: Option<String>,
+    /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
     pub date_to: Option<String>,
+    /// The direction to sort events by (asc or desc)
     pub direction: Option<String>,
+    /// Paging offset
     pub first: Option<i32>,
+    /// IP Address
     pub ip_address: Option<String>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
+    /// The types of events to return
     pub type_: Option<Vec<String>>,
+    /// User id
     pub user: Option<String>,
 }
 
@@ -5590,6 +6047,7 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmLocalizationWithLocaleGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub locale: &'a str,
 }
@@ -5635,6 +6093,7 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmPartialExportPost<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -5679,6 +6138,7 @@ where
 
 #[cfg(feature = "tag-realms-admin")]
 pub struct RealmSessionsWithSessionDelete<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub session: &'a str,
 }
@@ -5723,6 +6183,7 @@ where
 // <h4>Role Mapper</h4>
 #[cfg(feature = "tag-role-mapper")]
 pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub group_id: &'a str,
 }
@@ -5730,6 +6191,7 @@ pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakT
 #[cfg(feature = "tag-role-mapper")]
 #[derive(Default)]
 pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -5770,6 +6232,7 @@ where
 
 #[cfg(feature = "tag-role-mapper")]
 pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -5777,6 +6240,7 @@ pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS: KeycloakTok
 #[cfg(feature = "tag-role-mapper")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -5818,7 +6282,9 @@ where
 // <h4>Roles</h4>
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -5874,16 +6340,22 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
+    /// the role name.
     pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameGroupsGetArgs {
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
     pub brief_representation: Option<bool>,
+    /// first result to return. Ignored if negative or {@code null}.
     pub first: Option<i32>,
+    /// maximum number of results to return. Ignored if negative or {@code null}.
     pub max: Option<i32>,
 }
 
@@ -5929,16 +6401,22 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
+    /// the role name.
     pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidRolesWithRoleNameUsersGetArgs {
+    /// Boolean which defines whether brief representations are returned (default: false)
     pub brief_representation: Option<bool>,
+    /// first result to return. Ignored if negative or {@code null}.
     pub first: Option<i32>,
+    /// maximum number of results to return. Ignored if negative or {@code null}.
     pub max: Option<i32>,
 }
 
@@ -5984,6 +6462,7 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
@@ -6034,15 +6513,20 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesWithRoleNameGroupsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// the role name.
     pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmRolesWithRoleNameGroupsGetArgs {
+    /// if false, return a full representation of the {@code GroupRepresentation} objects.
     pub brief_representation: Option<bool>,
+    /// first result to return. Ignored if negative or {@code null}.
     pub first: Option<i32>,
+    /// maximum number of results to return. Ignored if negative or {@code null}.
     pub max: Option<i32>,
 }
 
@@ -6087,15 +6571,20 @@ where
 
 #[cfg(feature = "tag-roles")]
 pub struct RealmRolesWithRoleNameUsersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// the role name.
     pub role_name: &'a str,
 }
 
 #[cfg(feature = "tag-roles")]
 #[derive(Default)]
 pub struct RealmRolesWithRoleNameUsersGetArgs {
+    /// Boolean which defines whether brief representations are returned (default: false)
     pub brief_representation: Option<bool>,
+    /// first result to return. Ignored if negative or {@code null}.
     pub first: Option<i32>,
+    /// maximum number of results to return. Ignored if negative or {@code null}.
     pub max: Option<i32>,
 }
 
@@ -6139,6 +6628,7 @@ where
 // <h4>Roles (by ID)</h4>
 #[cfg(feature = "tag-roles-by-id")]
 pub struct RealmRolesByIdWithRoleIdCompositesGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub role_id: &'a str,
 }
@@ -6192,6 +6682,7 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsClientsWithClientCompo
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub client_scope_id: &'a str,
     pub client: &'a str,
@@ -6200,6 +6691,7 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsClientsWithClientCompo
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientScopesWithClientScopeIdScopeMappingsClientsWithClientCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6245,6 +6737,7 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsRealmCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub client_scope_id: &'a str,
 }
@@ -6252,6 +6745,7 @@ pub struct RealmClientScopesWithClientScopeIdScopeMappingsRealmCompositeGet<
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientScopesWithClientScopeIdScopeMappingsRealmCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6295,6 +6789,7 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsClientsWithClientCo
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub client_scope_id: &'a str,
     pub client: &'a str,
@@ -6303,6 +6798,7 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsClientsWithClientCo
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsClientsWithClientCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6348,6 +6844,7 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsRealmCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub client_scope_id: &'a str,
 }
@@ -6355,6 +6852,7 @@ pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsRealmCompositeGet<
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientTemplatesWithClientScopeIdScopeMappingsRealmCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6399,7 +6897,9 @@ pub struct RealmClientsWithClientUuidScopeMappingsClientsWithClientCompositeGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub client: &'a str,
 }
@@ -6407,6 +6907,7 @@ pub struct RealmClientsWithClientUuidScopeMappingsClientsWithClientCompositeGet<
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidScopeMappingsClientsWithClientCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6449,13 +6950,16 @@ where
 
 #[cfg(feature = "tag-scope-mappings")]
 pub struct RealmClientsWithClientUuidScopeMappingsRealmCompositeGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
 #[cfg(feature = "tag-scope-mappings")]
 #[derive(Default)]
 pub struct RealmClientsWithClientUuidScopeMappingsRealmCompositeGetArgs {
+    /// if false, return roles with their attributes
     pub brief_representation: Option<bool>,
 }
 
@@ -6497,25 +7001,40 @@ where
 // <h4>Users</h4>
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersGetArgs {
+    /// Boolean which defines whether brief representations are returned (default: false)
     pub brief_representation: Option<bool>,
+    /// A String contained in email, or the complete email, if param "exact" is true
     pub email: Option<String>,
+    /// whether the email has been verified
     pub email_verified: Option<bool>,
+    /// Boolean representing if user is enabled or not
     pub enabled: Option<bool>,
+    /// Boolean which defines whether the params "last", "first", "email" and "username" must match exactly
     pub exact: Option<bool>,
+    /// Pagination offset
     pub first: Option<i32>,
+    /// A String contained in firstName, or the complete firstName, if param "exact" is true
     pub first_name: Option<String>,
+    /// The alias of an Identity Provider linked to the user
     pub idp_alias: Option<String>,
+    /// The userId at an Identity Provider linked to the user
     pub idp_user_id: Option<String>,
+    /// A String contained in lastName, or the complete lastName, if param "exact" is true
     pub last_name: Option<String>,
+    /// Maximum results size (defaults to 100)
     pub max: Option<i32>,
+    /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
     pub q: Option<String>,
+    /// A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
     pub search: Option<String>,
+    /// A String contained in username, or the complete username, if param "exact" is true
     pub username: Option<String>,
 }
 
@@ -6577,19 +7096,26 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersCountGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
 }
 
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersCountGetArgs {
+    /// email filter
     pub email: Option<String>,
     pub email_verified: Option<bool>,
+    /// Boolean representing if user is enabled or not
     pub enabled: Option<bool>,
+    /// first name filter
     pub first_name: Option<String>,
+    /// last name filter
     pub last_name: Option<String>,
     pub q: Option<String>,
+    /// arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
     pub search: Option<String>,
+    /// username filter
     pub username: Option<String>,
 }
 
@@ -6639,6 +7165,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -6646,6 +7173,7 @@ pub struct RealmUsersWithUserIdGet<'a, TS: KeycloakTokenSupplier> {
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdGetArgs {
+    /// Indicates if the user profile metadata should be added to the response
     pub user_profile_metadata: Option<bool>,
 }
 
@@ -6682,6 +7210,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
     pub body: Vec<String>,
@@ -6690,8 +7219,11 @@ pub struct RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS: KeycloakTokenSuppl
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdExecuteActionsEmailPutArgs {
+    /// Client id
     pub client_id: Option<String>,
+    /// Number of seconds after which the generated token expires
     pub lifespan: Option<i32>,
+    /// Redirect uri
     pub redirect_uri: Option<String>,
 }
 
@@ -6737,6 +7269,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGroupsGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -6791,6 +7324,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdGroupsCountGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -6832,6 +7366,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdResetPasswordEmailPut<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -6839,7 +7374,9 @@ pub struct RealmUsersWithUserIdResetPasswordEmailPut<'a, TS: KeycloakTokenSuppli
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdResetPasswordEmailPutArgs {
+    /// client id
     pub client_id: Option<String>,
+    /// redirect uri
     pub redirect_uri: Option<String>,
 }
 
@@ -6882,6 +7419,7 @@ where
 
 #[cfg(feature = "tag-users")]
 pub struct RealmUsersWithUserIdSendVerifyEmailPut<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
     pub user_id: &'a str,
 }
@@ -6889,8 +7427,11 @@ pub struct RealmUsersWithUserIdSendVerifyEmailPut<'a, TS: KeycloakTokenSupplier>
 #[cfg(feature = "tag-users")]
 #[derive(Default)]
 pub struct RealmUsersWithUserIdSendVerifyEmailPutArgs {
+    /// Client id
     pub client_id: Option<String>,
+    /// Number of seconds after which the generated token expires
     pub lifespan: Option<i32>,
+    /// Redirect uri
     pub redirect_uri: Option<String>,
 }
 
@@ -6937,7 +7478,9 @@ where
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS: KeycloakTokenSupplier>
 {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7017,7 +7560,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7064,7 +7609,9 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7144,7 +7691,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7191,7 +7740,9 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourceGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7269,7 +7820,9 @@ where
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS: KeycloakTokenSupplier>
 {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub body: ResourceRepresentation,
 }
@@ -7351,7 +7904,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7431,7 +7986,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGe
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
 }
@@ -7514,7 +8071,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPu
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
     pub body: ResourceRepresentation,
@@ -7599,7 +8158,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDe
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
 }
@@ -7682,7 +8243,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAt
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
 }
@@ -7766,7 +8329,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPe
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
 }
@@ -7850,7 +8415,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdSc
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
     pub resource_id: &'a str,
 }
@@ -7930,7 +8497,9 @@ where
 
 #[cfg(feature = "tag-none")]
 pub struct RealmClientsWithClientUuidAuthzResourceServerScopeGet<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
@@ -7989,7 +8558,9 @@ pub struct RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<
     'a,
     TS: KeycloakTokenSupplier,
 > {
+    /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+    /// id of client (not client-id!)
     pub client_uuid: &'a str,
 }
 
