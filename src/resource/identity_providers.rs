@@ -282,3 +282,89 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Identity Providers</h4>
+    impl<'a, TS> RealmIdentityProviderInstancesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether brief representations are returned (default: false)
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+        /// Pagination offset
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        /// Boolean which defines if only realm-level IDPs (not associated with orgs) should be returned (default: false)
+        pub fn realm_only(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().realm_only(value)
+        }
+        /// Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact ("name"). Default prefixed.
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmIdentityProviderInstancesGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether brief representations are returned (default: false)
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+        /// Pagination offset
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        /// Boolean which defines if only realm-level IDPs (not associated with orgs) should be returned (default: false)
+        pub fn realm_only(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.realm_only = value.into();
+            self
+        }
+        /// Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact ("name"). Default prefixed.
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmIdentityProviderInstancesWithAliasExportGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Format to use
+        pub fn format(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().format(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmIdentityProviderInstancesWithAliasExportGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Format to use
+        pub fn format(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.format = value.into();
+            self
+        }
+    }
+}

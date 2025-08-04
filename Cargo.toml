@@ -14,7 +14,7 @@ repository = "https://github.com/kilork/keycloak"
 rust-version = "1.87"
 
 [features]
-default = ["tags-all", "resource"]
+default = ["tags-all", "builder", "resource"]
 schemars = ["dep:schemars"]
 multipart = ["reqwest/multipart"]
 rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
@@ -45,6 +45,7 @@ tag-scope-mappings = []
 tag-users = []
 tag-none = []
 resource = []
+builder = []
 
 [dependencies]
 reqwest = { version = "0.12", default-features = false, features = ["json"] }

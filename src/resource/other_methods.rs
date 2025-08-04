@@ -1440,3 +1440,1125 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>default</h4>
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().fields(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().permission(value)
+        }
+        pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().policy_id(value)
+        }
+        pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().resource(value)
+        }
+        pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().resource_type(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.fields = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.permission = value.into();
+            self
+        }
+        pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.policy_id = value.into();
+            self
+        }
+        pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.resource = value.into();
+            self
+        }
+        pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.resource_type = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().fields(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPermissionSearchGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.fields = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().fields(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn permission(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().permission(value)
+        }
+        pub fn policy_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().policy_id(value)
+        }
+        pub fn resource(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().resource(value)
+        }
+        pub fn resource_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().resource_type(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicyGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.fields = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn permission(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.permission = value.into();
+            self
+        }
+        pub fn policy_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.policy_id = value.into();
+            self
+        }
+        pub fn resource(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.resource = value.into();
+            self
+        }
+        pub fn resource_type(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.resource_type = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().fields(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerPolicySearchGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn fields(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.fields = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourcePost<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourcePost<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceSearchGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPut<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdDelete<'_, TS>,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS>
+        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdAttributesGet<
+                '_,
+                TS,
+            >,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS>
+        RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdPermissionsGet<
+                '_,
+                TS,
+            >,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().id(value)
+        }
+        pub fn deep(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().deep(value)
+        }
+        pub fn exact_name(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact_name(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn matching_uri(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().matching_uri(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn owner(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().owner(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        pub fn uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().uri(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidAuthzResourceServerResourceWithResourceIdScopesGet<'_, TS>,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.id = value.into();
+            self
+        }
+        pub fn deep(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.deep = value.into();
+            self
+        }
+        pub fn exact_name(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact_name = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn matching_uri(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.matching_uri = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn owner(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.owner = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        pub fn uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn scope_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope_id(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn scope_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope_id = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidAuthzResourceServerScopeSearchGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+    }
+}

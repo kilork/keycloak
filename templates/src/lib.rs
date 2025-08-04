@@ -2,6 +2,8 @@
 {{ replace ( render ( read_to_str "templates/README.md" ) ) "```rust" "```rust, no_run" }}
 */
 
+#[cfg(feature = "builder")]
+pub mod builder;
 #[cfg(feature = "resource")]
 pub mod resource;
 pub mod types;

@@ -154,3 +154,44 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Roles (by ID)</h4>
+    impl<'a, TS> RealmRolesByIdWithRoleIdCompositesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmRolesByIdWithRoleIdCompositesGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+}

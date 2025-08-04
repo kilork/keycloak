@@ -304,3 +304,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 }
 
 // <h4>Protocol Mappers</h4>
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Protocol Mappers</h4>
+}

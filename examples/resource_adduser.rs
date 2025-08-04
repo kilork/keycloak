@@ -1,10 +1,7 @@
-#[cfg(feature = "resource")]
+#[cfg(all(feature = "builder", feature = "resource"))]
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use keycloak::{
-        resource::users::RealmUsersGetArgs, types::*, KeycloakAdmin, KeycloakAdminToken,
-        KeycloakRealmAdminMethod as _,
-    };
+    use keycloak::{types::*, KeycloakAdmin, KeycloakAdminToken};
 
     const REALM: &str = "resource";
 
@@ -37,13 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     eprintln!("{:?}", response.to_id());
 
-    let users = realm
-        .users_get()
-        .opts(RealmUsersGetArgs {
-            username: Some("user".into()),
-            ..Default::default()
-        })
-        .await?;
+    let users = realm.users_get().username("user".to_string()).await?;
 
     eprintln!("{users:?}");
 

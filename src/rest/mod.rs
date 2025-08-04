@@ -187,7 +187,7 @@ pub struct KeycloakRealmAdmin<'a, TS: KeycloakTokenSupplier> {
 
 pub trait KeycloakRealmAdminMethod {
     type Output;
-    type Args;
+    type Args: Default;
 
     fn opts(self, args: Self::Args) -> impl Future<Output = Result<Self::Output, KeycloakError>>;
 
@@ -198,5 +198,13 @@ pub trait KeycloakRealmAdminMethod {
         F: FnOnce(Self::Args) -> Self::Args,
     {
         self.opts(f(Default::default()))
+    }
+
+    #[cfg(feature = "builder")]
+    fn builder<'m>(self) -> crate::builder::Builder<'m, Self>
+    where
+        Self: 'm + Sized,
+    {
+        From::from(self)
     }
 }

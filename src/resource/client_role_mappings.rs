@@ -236,3 +236,53 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Client Role Mappings</h4>
+    impl<'a, TS> RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return roles with their attributes
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmGroupsWithGroupIdRoleMappingsClientsWithClientIdCompositeGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return roles with their attributes
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return roles with their attributes
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdRoleMappingsClientsWithClientIdCompositeGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return roles with their attributes
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+    }
+}

@@ -468,3 +468,215 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Organizations</h4>
+    impl<'a, TS> RealmOrganizationsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact(value)
+        }
+        /// The position of the first result to be processed (pagination offset)
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// The maximum number of results to be returned - defaults to 10
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().q(value)
+        }
+        /// A String representing either an organization name or domain
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmOrganizationsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact = value.into();
+            self
+        }
+        /// The position of the first result to be processed (pagination offset)
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// The maximum number of results to be returned - defaults to 10
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.q = value.into();
+            self
+        }
+        /// A String representing either an organization name or domain
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmOrganizationsCountGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact(value)
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().q(value)
+        }
+        /// A String representing either an organization name or domain
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmOrganizationsCountGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact = value.into();
+            self
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.q = value.into();
+            self
+        }
+        /// A String representing either an organization name or domain
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmOrganizationsMembersWithMemberIdOrganizationsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmOrganizationsMembersWithMemberIdOrganizationsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmOrganizationsWithOrgIdMembersGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact(value)
+        }
+        /// The position of the first result to be processed (pagination offset)
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// The maximum number of results to be returned. Defaults to 10
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        /// The membership type
+        pub fn membership_type(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().membership_type(value)
+        }
+        /// A String representing either a member's username, e-mail, first name, or last name.
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmOrganizationsWithOrgIdMembersGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether the param 'search' must match exactly or not
+        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact = value.into();
+            self
+        }
+        /// The position of the first result to be processed (pagination offset)
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// The maximum number of results to be returned. Defaults to 10
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        /// The membership type
+        pub fn membership_type(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.membership_type = value.into();
+            self
+        }
+        /// A String representing either a member's username, e-mail, first name, or last name.
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmOrganizationsWithOrgIdMembersWithMemberIdOrganizationsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// if false, return the full representation. Otherwise, only the basic fields are returned.
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+    }
+}

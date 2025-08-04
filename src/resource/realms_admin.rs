@@ -707,3 +707,315 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Realms Admin</h4>
+    impl<'a, TS> RealmAdminEventsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn auth_client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().auth_client(value)
+        }
+        pub fn auth_ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().auth_ip_address(value)
+        }
+        pub fn auth_realm(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().auth_realm(value)
+        }
+        /// user id
+        pub fn auth_user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().auth_user(value)
+        }
+        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().date_from(value)
+        }
+        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().date_to(value)
+        }
+        /// The direction to sort events by (asc or desc)
+        pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().direction(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn operation_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+            self.builder().operation_types(value)
+        }
+        pub fn resource_path(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().resource_path(value)
+        }
+        pub fn resource_types(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+            self.builder().resource_types(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmAdminEventsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn auth_client(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.auth_client = value.into();
+            self
+        }
+        pub fn auth_ip_address(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.auth_ip_address = value.into();
+            self
+        }
+        pub fn auth_realm(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.auth_realm = value.into();
+            self
+        }
+        /// user id
+        pub fn auth_user(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.auth_user = value.into();
+            self
+        }
+        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.date_from = value.into();
+            self
+        }
+        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.date_to = value.into();
+            self
+        }
+        /// The direction to sort events by (asc or desc)
+        pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.direction = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn operation_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+            self.args.operation_types = value.into();
+            self
+        }
+        pub fn resource_path(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.resource_path = value.into();
+            self
+        }
+        pub fn resource_types(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+            self.args.resource_types = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientPoliciesPoliciesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn include_global_policies(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().include_global_policies(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientPoliciesPoliciesGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn include_global_policies(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.include_global_policies = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientPoliciesProfilesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn include_global_profiles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().include_global_profiles(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientPoliciesProfilesGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn include_global_profiles(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.include_global_profiles = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmEventsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// App or oauth client name
+        pub fn client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().client(value)
+        }
+        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().date_from(value)
+        }
+        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().date_to(value)
+        }
+        /// The direction to sort events by (asc or desc)
+        pub fn direction(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().direction(value)
+        }
+        /// Paging offset
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// IP Address
+        pub fn ip_address(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().ip_address(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        /// The types of events to return
+        pub fn type_(self, value: impl Into<Option<Vec<String>>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+        /// User id
+        pub fn user(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().user(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmEventsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// App or oauth client name
+        pub fn client(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.client = value.into();
+            self
+        }
+        /// From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_from(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.date_from = value.into();
+            self
+        }
+        /// To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+        pub fn date_to(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.date_to = value.into();
+            self
+        }
+        /// The direction to sort events by (asc or desc)
+        pub fn direction(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.direction = value.into();
+            self
+        }
+        /// Paging offset
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// IP Address
+        pub fn ip_address(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.ip_address = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        /// The types of events to return
+        pub fn type_(mut self, value: impl Into<Option<Vec<String>>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+        /// User id
+        pub fn user(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.user = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmLocalizationWithLocaleGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn use_realm_default_locale_fallback(
+            self,
+            value: impl Into<Option<bool>>,
+        ) -> Builder<'a, Self> {
+            self.builder().use_realm_default_locale_fallback(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmLocalizationWithLocaleGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn use_realm_default_locale_fallback(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.use_realm_default_locale_fallback = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmPartialExportPost<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn export_clients(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().export_clients(value)
+        }
+        pub fn export_groups_and_roles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().export_groups_and_roles(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmPartialExportPost<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn export_clients(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.export_clients = value.into();
+            self
+        }
+        pub fn export_groups_and_roles(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.export_groups_and_roles = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmSessionsWithSessionDelete<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn is_offline(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().is_offline(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmSessionsWithSessionDelete<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn is_offline(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.is_offline = value.into();
+            self
+        }
+    }
+}

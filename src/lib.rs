@@ -112,6 +112,8 @@ deno run --allow-env=KEYCLOAK_RUST_VERSION,KEYCLOAK_VERSION,KEYCLOAK_RUST_MAJOR_
 
 */
 
+#[cfg(feature = "builder")]
+pub mod builder;
 #[cfg(feature = "resource")]
 pub mod resource;
 pub mod types;

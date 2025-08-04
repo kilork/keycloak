@@ -13,3 +13,11 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 }
 
 // <h4>Client Registration Policy</h4>
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Client Registration Policy</h4>
+}

@@ -131,3 +131,63 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Component</h4>
+    impl<'a, TS> RealmComponentsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().name(value)
+        }
+        pub fn parent(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().parent(value)
+        }
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmComponentsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.name = value.into();
+            self
+        }
+        pub fn parent(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.parent = value.into();
+            self
+        }
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmComponentsWithIdSubComponentTypesGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().type_(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmComponentsWithIdSubComponentTypesGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.type_ = value.into();
+            self
+        }
+    }
+}

@@ -831,3 +831,303 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Clients</h4>
+    impl<'a, TS> RealmClientsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// filter by clientId
+        pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().client_id(value)
+        }
+        /// the first result
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// the max results to return
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().q(value)
+        }
+        /// whether this is a search query or a getClientById query
+        pub fn search(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+        /// filter clients that cannot be viewed in full by admin
+        pub fn viewable_only(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().viewable_only(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// filter by clientId
+        pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.client_id = value.into();
+            self
+        }
+        /// the first result
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// the max results to return
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.q = value.into();
+            self
+        }
+        /// whether this is a search query or a getClientById query
+        pub fn search(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+        /// filter clients that cannot be viewed in full by admin
+        pub fn viewable_only(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.viewable_only = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().audience(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().user_id(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.audience = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.user_id = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().audience(value)
+        }
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().user_id(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.audience = value.into();
+            self
+        }
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.user_id = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+        pub fn user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().user_id(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+        pub fn user_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.user_id = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS>
+        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<
+                '_,
+                TS,
+            >,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS>
+        RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
+            'a,
+            TS,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().scope(value)
+        }
+    }
+
+    impl<TS>
+        Builder<
+            '_,
+            RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
+                '_,
+                TS,
+            >,
+        >
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.scope = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Paging offset
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidOfflineSessionsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Paging offset
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmClientsWithClientUuidUserSessionsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Paging offset
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmClientsWithClientUuidUserSessionsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Paging offset
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+    }
+}

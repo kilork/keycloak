@@ -803,3 +803,417 @@ where
         Box::pin(self.opts(Default::default()))
     }
 }
+
+#[cfg(feature = "builder")]
+mod builder {
+    use crate::builder::Builder;
+
+    use super::*;
+
+    // <h4>Users</h4>
+    impl<'a, TS> RealmUsersGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether brief representations are returned (default: false)
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+        /// A String contained in email, or the complete email, if param "exact" is true
+        pub fn email(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().email(value)
+        }
+        /// whether the email has been verified
+        pub fn email_verified(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().email_verified(value)
+        }
+        /// Boolean representing if user is enabled or not
+        pub fn enabled(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().enabled(value)
+        }
+        /// Boolean which defines whether the params "last", "first", "email" and "username" must match exactly
+        pub fn exact(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().exact(value)
+        }
+        /// Pagination offset
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        /// A String contained in firstName, or the complete firstName, if param "exact" is true
+        pub fn first_name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().first_name(value)
+        }
+        /// The alias of an Identity Provider linked to the user
+        pub fn idp_alias(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().idp_alias(value)
+        }
+        /// The userId at an Identity Provider linked to the user
+        pub fn idp_user_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().idp_user_id(value)
+        }
+        /// A String contained in lastName, or the complete lastName, if param "exact" is true
+        pub fn last_name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().last_name(value)
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().q(value)
+        }
+        /// A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+        /// A String contained in username, or the complete username, if param "exact" is true
+        pub fn username(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().username(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Boolean which defines whether brief representations are returned (default: false)
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+        /// A String contained in email, or the complete email, if param "exact" is true
+        pub fn email(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.email = value.into();
+            self
+        }
+        /// whether the email has been verified
+        pub fn email_verified(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.email_verified = value.into();
+            self
+        }
+        /// Boolean representing if user is enabled or not
+        pub fn enabled(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.enabled = value.into();
+            self
+        }
+        /// Boolean which defines whether the params "last", "first", "email" and "username" must match exactly
+        pub fn exact(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.exact = value.into();
+            self
+        }
+        /// Pagination offset
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        /// A String contained in firstName, or the complete firstName, if param "exact" is true
+        pub fn first_name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.first_name = value.into();
+            self
+        }
+        /// The alias of an Identity Provider linked to the user
+        pub fn idp_alias(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.idp_alias = value.into();
+            self
+        }
+        /// The userId at an Identity Provider linked to the user
+        pub fn idp_user_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.idp_user_id = value.into();
+            self
+        }
+        /// A String contained in lastName, or the complete lastName, if param "exact" is true
+        pub fn last_name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.last_name = value.into();
+            self
+        }
+        /// Maximum results size (defaults to 100)
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        /// A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.q = value.into();
+            self
+        }
+        /// A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+        /// A String contained in username, or the complete username, if param "exact" is true
+        pub fn username(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.username = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersCountGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// email filter
+        pub fn email(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().email(value)
+        }
+        pub fn email_verified(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().email_verified(value)
+        }
+        /// Boolean representing if user is enabled or not
+        pub fn enabled(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().enabled(value)
+        }
+        /// first name filter
+        pub fn first_name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().first_name(value)
+        }
+        /// last name filter
+        pub fn last_name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().last_name(value)
+        }
+        pub fn q(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().q(value)
+        }
+        /// arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+        /// username filter
+        pub fn username(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().username(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersCountGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// email filter
+        pub fn email(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.email = value.into();
+            self
+        }
+        pub fn email_verified(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.email_verified = value.into();
+            self
+        }
+        /// Boolean representing if user is enabled or not
+        pub fn enabled(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.enabled = value.into();
+            self
+        }
+        /// first name filter
+        pub fn first_name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.first_name = value.into();
+            self
+        }
+        /// last name filter
+        pub fn last_name(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.last_name = value.into();
+            self
+        }
+        pub fn q(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.q = value.into();
+            self
+        }
+        /// arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+        /// username filter
+        pub fn username(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.username = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Indicates if the user profile metadata should be added to the response
+        pub fn user_profile_metadata(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().user_profile_metadata(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Indicates if the user profile metadata should be added to the response
+        pub fn user_profile_metadata(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.user_profile_metadata = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Client id
+        pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().client_id(value)
+        }
+        /// Number of seconds after which the generated token expires
+        pub fn lifespan(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().lifespan(value)
+        }
+        /// Redirect uri
+        pub fn redirect_uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().redirect_uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdExecuteActionsEmailPut<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Client id
+        pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.client_id = value.into();
+            self
+        }
+        /// Number of seconds after which the generated token expires
+        pub fn lifespan(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.lifespan = value.into();
+            self
+        }
+        /// Redirect uri
+        pub fn redirect_uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.redirect_uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdGroupsGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
+            self.builder().brief_representation(value)
+        }
+        pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().first(value)
+        }
+        pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().max(value)
+        }
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdGroupsGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
+            self.args.brief_representation = value.into();
+            self
+        }
+        pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.first = value.into();
+            self
+        }
+        pub fn max(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.max = value.into();
+            self
+        }
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdGroupsCountGet<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().search(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdGroupsCountGet<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.search = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdResetPasswordEmailPut<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// client id
+        pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().client_id(value)
+        }
+        /// redirect uri
+        pub fn redirect_uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().redirect_uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdResetPasswordEmailPut<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// client id
+        pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.client_id = value.into();
+            self
+        }
+        /// redirect uri
+        pub fn redirect_uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.redirect_uri = value.into();
+            self
+        }
+    }
+
+    impl<'a, TS> RealmUsersWithUserIdSendVerifyEmailPut<'a, TS>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Client id
+        pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().client_id(value)
+        }
+        /// Number of seconds after which the generated token expires
+        pub fn lifespan(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
+            self.builder().lifespan(value)
+        }
+        /// Redirect uri
+        pub fn redirect_uri(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().redirect_uri(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmUsersWithUserIdSendVerifyEmailPut<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier,
+    {
+        /// Client id
+        pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.client_id = value.into();
+            self
+        }
+        /// Number of seconds after which the generated token expires
+        pub fn lifespan(mut self, value: impl Into<Option<i32>>) -> Self {
+            self.args.lifespan = value.into();
+            self
+        }
+        /// Redirect uri
+        pub fn redirect_uri(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.redirect_uri = value.into();
+            self
+        }
+    }
+}
