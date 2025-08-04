@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@1.88.0
+    - uses: dtolnay/rust-toolchain@1.87.0
     - run: mkdir .cargo && cp .cargo-config.toml .cargo/config.toml
     - name: Build
       run: cargo build
