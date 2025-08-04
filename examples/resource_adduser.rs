@@ -2,7 +2,7 @@
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     use keycloak::{
-        resource::all::RealmUsersGetArgs, types::*, KeycloakAdmin, KeycloakAdminToken,
+        resource::users::RealmUsersGetArgs, types::*, KeycloakAdmin, KeycloakAdminToken,
         KeycloakRealmAdminMethod as _,
     };
 

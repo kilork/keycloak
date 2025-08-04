@@ -885,6 +885,7 @@ class Updater {
 
       Deno.writeTextFileSync("src/types.rs", codeTypes);
       Deno.writeTextFileSync("src/rest/generated_rest.rs", codeRest);
+
       for (const tag of codeTags.concat(otherMethodsMod)) {
         const codeTagMod = tagModules[tag];
         Deno.writeTextFileSync(

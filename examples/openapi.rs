@@ -1778,9 +1778,9 @@ use crate::{{
     for tag in &spec.tags {
         println!("/// {}", tag.name);
         println!("#[cfg(feature = \"tag-{}\")]", tag.name.to_kebab_case());
-        println!("mod {};", tag.name.to_snake_case());
+        println!("pub mod {};", tag.name.to_snake_case());
     }
     println!("/// Other (non tagged) methods");
     println!("#[cfg(feature = \"{TAG_NONE}\")]");
-    println!("mod {other_methods};");
+    println!("pub mod {other_methods};");
 }
