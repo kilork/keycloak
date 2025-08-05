@@ -10,7 +10,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/keys`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmkeys>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmkeys>
     pub fn keys_get(
         &'a self,
     ) -> impl Future<Output = Result<KeysMetadataRepresentation, KeycloakError>> + use<'a, TS> {

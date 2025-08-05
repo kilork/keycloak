@@ -109,29 +109,51 @@ class Cargo {
     return await this.generate("types");
   }
 
-  async generateRest(): Promise<string> {
-    return await this.generate("rest");
+  async generateRestByTag(tag: string): Promise<string> {
+    return await this.generateRest(false, tag);
+  }
+
+  async generateRestWithoutTag(): Promise<string> {
+    return await this.generateRest(true);
+  }
+
+  private async generateRest(noTag: boolean, tag?: string): Promise<string> {
+    return await this.generate("rest", [
+      ...tag ? ["--tag", tag] : [],
+      ...noTag ? ["--no-tag"] : [],
+    ]);
   }
 
   async generateTags(): Promise<string[]> {
     return (await this.generate("tags")).trim().split("\n");
   }
 
-  async generateTagsMod(otherMethodsMod: string): Promise<string> {
-    return await this.generate("tags", ["mod"], {
+  async generateTagsModResource(otherMethodsMod: string): Promise<string> {
+    return await this.generateTagsMod(otherMethodsMod, "mod-resource");
+  }
+
+  async generateTagsModRest(otherMethodsMod: string): Promise<string> {
+    return await this.generateTagsMod(otherMethodsMod, "mod-rest");
+  }
+
+  private async generateTagsMod(
+    otherMethodsMod: string,
+    modType: "mod-resource" | "mod-rest",
+  ): Promise<string> {
+    return await this.generate("tags", [modType], {
       OTHER_METHODS_MOD: otherMethodsMod,
     });
   }
 
   async generateMethodsByTag(tag: string): Promise<string> {
-    return await this.generateMethods(tag);
+    return await this.generateMethods(false, tag);
   }
 
   async generateMethodsWithoutTag(): Promise<string> {
-    return await this.generateMethods(undefined, true);
+    return await this.generateMethods(true);
   }
 
-  async generateMethods(tag?: string, noTag: boolean = false): Promise<string> {
+  private async generateMethods(noTag: boolean, tag?: string): Promise<string> {
     return await this.generate("methods", [
       ...tag ? ["--tag", tag] : [],
       ...noTag ? ["--no-tag"] : [],
@@ -862,37 +884,50 @@ class Updater {
       await this.git.checkout([
         "--",
         "src/types.rs",
-        "src/rest/generated_rest.rs",
+        "src/rest/generated_rest",
         "src/resource",
       ]);
 
       this.info("Generating new...");
 
       const codeTypes = await this.cargo.generateTypes();
-      const codeRest = await this.cargo.generateRest();
 
       const codeTags = await this.cargo.generateTags();
 
       const otherMethodsMod = "other_methods";
-      const codeResourceMod = await this.cargo.generateTagsMod(otherMethodsMod);
+      const codeResourceMod = await this.cargo.generateTagsModResource(
+        otherMethodsMod,
+      );
+      const codeRestMod = await this.cargo.generateTagsModRest(otherMethodsMod);
 
-      const tagModules: Record<string, string> = {};
-      tagModules[otherMethodsMod] = await this.cargo.generateMethodsWithoutTag();
+      const tagResourceModules: Record<string, string> = {};
+      tagResourceModules[otherMethodsMod] = await this.cargo
+        .generateMethodsWithoutTag();
+      const tagRestModules: Record<string, string> = {};
+      tagRestModules[otherMethodsMod] = await this.cargo
+        .generateRestWithoutTag();
       for (const tag of codeTags) {
-        const codeTagMod = await this.cargo.generateMethodsByTag(tag);
-        tagModules[tag] = codeTagMod;
+        const codeTagResourceMod = await this.cargo.generateMethodsByTag(tag);
+        tagResourceModules[tag] = codeTagResourceMod;
+        const codeTagRestMod = await this.cargo.generateRestByTag(tag);
+        tagRestModules[tag] = codeTagRestMod;
       }
 
       Deno.writeTextFileSync("src/types.rs", codeTypes);
-      Deno.writeTextFileSync("src/rest/generated_rest.rs", codeRest);
 
       for (const tag of codeTags.concat(otherMethodsMod)) {
-        const codeTagMod = tagModules[tag];
+        const codeTagResourceMod = tagResourceModules[tag];
         Deno.writeTextFileSync(
           `src/resource/${tag.replaceAll("-", "_")}.rs`,
-          codeTagMod,
+          codeTagResourceMod,
+        );
+        const codeTagRestMod = tagRestModules[tag];
+        Deno.writeTextFileSync(
+          `src/rest/generated_rest/${tag.replaceAll("-", "_")}.rs`,
+          codeTagRestMod,
         );
       }
+      Deno.writeTextFileSync("src/rest/generated_rest/mod.rs", codeRestMod);
       Deno.writeTextFileSync("src/resource/mod.rs", codeResourceMod);
 
       this.info("Formatting...");

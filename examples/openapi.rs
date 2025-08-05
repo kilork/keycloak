@@ -15,8 +15,15 @@ struct Cli {
 enum Command {
     /// Generate types
     Types,
-    /// Generate method callers
-    Rest,
+    /// Generate low level REST method callers
+    Rest {
+        /// Generate REST methods without tags
+        #[arg(short, long, default_value_t = false)]
+        no_tag: bool,
+        /// Generate REST methods with specific tag (kebab variant of tag name)
+        #[arg(short, long)]
+        tag: Option<String>,
+    },
     /// Specs
     Specs,
     /// Tags
@@ -37,7 +44,8 @@ enum TagsFormat {
     Cargo,
     #[default]
     Kebab,
-    Mod,
+    ModResource,
+    ModRest,
 }
 
 #[derive(Debug)]
@@ -112,10 +120,12 @@ mod openapi {
     }
 
     impl<'s> SpecPath<'s> {
-        pub fn to_rust_rest_client_method(&self, path: &str) -> String {
+        pub fn to_rust_rest_client_method(&self, path: &str, add_cfg: bool) -> String {
             self.calls
                 .iter()
-                .map(|(method, call)| call.to_rust_method(path, method, self.parameters.as_deref()))
+                .map(|(method, call)| {
+                    call.to_rust_method(path, method, self.parameters.as_deref(), add_cfg)
+                })
                 .collect::<Vec<_>>()
                 .join("\n")
         }
@@ -325,6 +335,7 @@ mod openapi {
             path: &str,
             method: &Method,
             parameters: Option<&[Parameter]>,
+            add_cfg: bool,
         ) -> String {
             let mut method_name = path
                 .strip_prefix("/admin/realms")
@@ -406,7 +417,9 @@ mod openapi {
                 .map(|tag| "tag-".to_string() + &tag.as_ref().to_kebab_case())
                 .unwrap_or_else(|| TAG_NONE.to_string());
 
-            output.push(format!(r#"#[cfg(feature = "{tag}")]"#));
+            if add_cfg {
+                output.push(format!(r#"#[cfg(feature = "{tag}")]"#));
+            }
 
             if self.deprecated {
                 output.push("#[deprecated]".into());
@@ -1366,12 +1379,19 @@ fn main() {
 
     match cli.command {
         Command::Types => generate_types(&specs),
-        Command::Rest => generate_rest(&specs),
+        Command::Rest { no_tag, tag } => generate_rest(&specs, no_tag, tag),
         Command::Methods { no_tag, tag } => generate_methods(&specs, no_tag, tag),
         Command::Tags { format } => match format.unwrap_or_default() {
             TagsFormat::Cargo => list_tags_for_cargo(&specs),
             TagsFormat::Kebab => list_tags_as_kebab(&specs),
-            TagsFormat::Mod => list_tags_for_mod(
+            TagsFormat::ModResource => list_tags_for_mod_resource(
+                &specs,
+                std::env::var("OTHER_METHODS_MOD")
+                    .ok()
+                    .as_deref()
+                    .unwrap_or("other_methods"),
+            ),
+            TagsFormat::ModRest => list_tags_for_mod_rest(
                 &specs,
                 std::env::var("OTHER_METHODS_MOD")
                     .ok()
@@ -1385,24 +1405,20 @@ fn main() {
     }
 }
 
-fn generate_rest(spec: &openapi::Spec) {
+fn generate_rest(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<String>) {
+    let (add_cfg, tag_paths) = collect_tag_paths(spec, no_tag, tag_as_kebab);
     print!(
-        r###"use reqwest::header::CONTENT_LENGTH;
-use serde_json::Value;
-
-use super::{{*, url_enc::encode_url_param as p}};
+        r###"use super::*;
 
 impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
 "###
     );
     let mut path_counts = spec.paths.len();
-    let default = std::borrow::Cow::from("default");
-    let tag_paths = tags_spec_paths(spec, &default);
     for (tag, paths) in tag_paths {
         println!("    // <h4>{tag}</h4>\n");
 
         for (path, path_spec) in paths {
-            println!("{}", path_spec.to_rust_rest_client_method(path));
+            println!("{}", path_spec.to_rust_rest_client_method(path, add_cfg));
             path_counts -= 1;
         }
     }
@@ -1411,21 +1427,6 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
         println!("// not all paths processed");
         println!("// left {path_counts}");
     }
-}
-
-fn tags_spec_paths<'s>(
-    spec: &'s openapi::Spec<'s>,
-    default: &'s std::borrow::Cow<'s, str>,
-) -> impl Iterator<
-    Item = (
-        &'s std::borrow::Cow<'s, str>,
-        Vec<(&'s String, &'s openapi::SpecPath<'s>)>,
-    ),
-> {
-    spec.tags
-        .iter()
-        .map(|tag| (&tag.name, spec_paths_by_tag(spec, &tag.name)))
-        .chain([(default, spec_paths_without_tag(spec))])
 }
 
 fn spec_paths_without_tag<'s>(
@@ -1499,9 +1500,42 @@ pub type TypeVec<I> = Arc<[I]>;"###
     }
 }
 
-fn generate_methods(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<String>) {
-    let default = Cow::from("default");
+const DEFAULT: Cow<'static, str> = Cow::Borrowed("default");
 
+fn generate_methods(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<String>) {
+    let (add_cfg, tag_paths) = collect_tag_paths(spec, no_tag, tag_as_kebab);
+
+    let tag_realm_methods: Vec<_> = tag_paths
+        .into_iter()
+        .map(|(tag, paths)| {
+            (
+                tag,
+                paths
+                    .into_iter()
+                    .flat_map(|(path, path_spec)| path_spec.to_rust_realm_methods(path))
+                    .collect::<Vec<_>>(),
+            )
+        })
+        .collect();
+
+    generate_method_impl(add_cfg, &tag_realm_methods);
+
+    generate_method_structs(add_cfg, &tag_realm_methods);
+
+    generate_method_builder(add_cfg, &tag_realm_methods);
+}
+
+fn collect_tag_paths<'s>(
+    spec: &'s openapi::Spec<'s>,
+    no_tag: bool,
+    tag_as_kebab: Option<String>,
+) -> (
+    bool,
+    Vec<(
+        &'s Cow<'s, str>,
+        Vec<(&'s String, &'s openapi::SpecPath<'s>)>,
+    )>,
+) {
     let tags_iter = spec.tags.iter();
     let (tags, add_cfg): (Vec<_>, _) = if let Some(tag) = tag_as_kebab.as_deref() {
         (
@@ -1522,27 +1556,9 @@ fn generate_methods(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<Str
         .collect();
 
     if no_tag || tag_as_kebab.is_none() {
-        tag_paths.extend([(&default, spec_paths_without_tag(spec))]);
+        tag_paths.extend([(&DEFAULT, spec_paths_without_tag(spec))]);
     }
-
-    let tag_realm_methods: Vec<_> = tag_paths
-        .into_iter()
-        .map(|(tag, paths)| {
-            (
-                tag,
-                paths
-                    .into_iter()
-                    .flat_map(|(path, path_spec)| path_spec.to_rust_realm_methods(path))
-                    .collect::<Vec<_>>(),
-            )
-        })
-        .collect();
-
-    generate_method_impl(add_cfg, &tag_realm_methods);
-
-    generate_method_structs(add_cfg, &tag_realm_methods);
-
-    generate_method_builder(add_cfg, &tag_realm_methods);
+    (add_cfg, tag_paths)
 }
 
 fn generate_method_builder(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
@@ -1846,7 +1862,7 @@ fn list_tags_as_kebab(spec: &openapi::Spec) {
     }
 }
 
-fn list_tags_for_mod(spec: &openapi::Spec, other_methods: &str) {
+fn list_tags_for_mod_resource(spec: &openapi::Spec, other_methods: &str) {
     use heck::{ToKebabCase, ToSnakeCase};
     println!(
         "use std::{{
@@ -1860,6 +1876,25 @@ use crate::{{
     types::*, DefaultResponse, KeycloakError, KeycloakRealmAdmin, KeycloakRealmAdminMethod,
     KeycloakTokenSupplier,
 }};
+"
+    );
+    for tag in &spec.tags {
+        println!("/// {}", tag.name);
+        println!("#[cfg(feature = \"tag-{}\")]", tag.name.to_kebab_case());
+        println!("pub mod {};", tag.name.to_snake_case());
+    }
+    println!("/// Other (non tagged) methods");
+    println!("#[cfg(feature = \"{TAG_NONE}\")]");
+    println!("pub mod {other_methods};");
+}
+
+fn list_tags_for_mod_rest(spec: &openapi::Spec, other_methods: &str) {
+    use heck::{ToKebabCase, ToSnakeCase};
+    println!(
+        "use reqwest::header::CONTENT_LENGTH;
+use serde_json::Value;
+
+use super::{{url_enc::encode_url_param as p, *}};
 "
     );
     for tag in &spec.tags {
