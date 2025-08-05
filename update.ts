@@ -113,18 +113,51 @@ class Cargo {
     return await this.generate("rest");
   }
 
-  private async generate(kind: "rest" | "types"): Promise<string> {
+  async generateTags(): Promise<string[]> {
+    return (await this.generate("tags")).trim().split("\n");
+  }
+
+  async generateTagsMod(otherMethodsMod: string): Promise<string> {
+    return await this.generate("tags", ["mod"], {
+      OTHER_METHODS_MOD: otherMethodsMod,
+    });
+  }
+
+  async generateMethodsByTag(tag: string): Promise<string> {
+    return await this.generateMethods(tag);
+  }
+
+  async generateMethodsWithoutTag(): Promise<string> {
+    return await this.generateMethods(undefined, true);
+  }
+
+  async generateMethods(tag?: string, noTag: boolean = false): Promise<string> {
+    return await this.generate("methods", [
+      ...tag ? ["--tag", tag] : [],
+      ...noTag ? ["--no-tag"] : [],
+    ]);
+  }
+
+  private async generate(
+    kind: "rest" | "types" | "tags" | "methods",
+    extraArgs: string[] = [],
+    env?: Record<string, string>,
+  ): Promise<string> {
     return await this.cargoCommand([
       "run",
       "--example",
       EXAMPLE_FOR_GENERATION,
       "--",
       kind,
-    ]);
+      ...extraArgs,
+    ], env);
   }
 
-  private async cargoCommand(args: string[]): Promise<string> {
-    return await Command.execute("cargo", args, "inherit");
+  private async cargoCommand(
+    args: string[],
+    env?: Record<string, string>,
+  ): Promise<string> {
+    return await Command.execute("cargo", args, "inherit", env);
   }
 
   private async cargoCommandSpawn(args: string[]): Promise<void> {
@@ -418,13 +451,10 @@ class User {
 }
 
 class Command {
-  static async spawn(
-    cmd: string,
-    args: string[],
-  ): Promise<void> {
+  static async spawn(cmd: string, args: string[]): Promise<void> {
     const command = new Deno.Command(cmd, { args });
 
-    const child = await command.spawn();
+    const child = command.spawn();
     const code = (await child.status).code;
     if (code !== 0) {
       throw new CommandError(`Error ${code}`);
@@ -435,11 +465,13 @@ class Command {
     cmd: string,
     args: string[],
     stderr: "piped" | "inherit" = "piped",
+    env?: Record<string, string>,
   ): Promise<string> {
     const command = new Deno.Command(cmd, {
       args,
       stdout: "piped",
       stderr,
+      env,
     });
 
     const output = await command.output();
@@ -524,11 +556,7 @@ class Git {
     ]);
   }
 
-  async issues(
-    search:
-      | string
-      | undefined = undefined,
-  ): Promise<Issue[]> {
+  async issues(search: string | undefined = undefined): Promise<Issue[]> {
     return await this.ghCommandJson([
       "issue",
       "list",
@@ -545,9 +573,11 @@ class Git {
     return await this.issues("no:milestone");
   }
 
-  async createIssue(
-    options: { title: string; body: string; milestone: Milestone },
-  ): Promise<Issue> {
+  async createIssue(options: {
+    title: string;
+    body: string;
+    milestone: Milestone;
+  }): Promise<Issue> {
     const issueUrl: string = await this.ghCommand([
       "issue",
       "create",
@@ -616,9 +646,10 @@ class Git {
     ]);
   }
 
-  async createPullRequest(
-    options: { title: string; milestone: Milestone },
-  ): Promise<PullRequest> {
+  async createPullRequest(options: {
+    title: string;
+    milestone: Milestone;
+  }): Promise<PullRequest> {
     const pullRequestUrl: string = await this.ghCommand([
       "pr",
       "create",
@@ -637,13 +668,7 @@ class Git {
   }
 
   async mergePullRequest() {
-    await this.ghCommand([
-      "pr",
-      "merge",
-      "-s",
-      "-d",
-      "--admin",
-    ]);
+    await this.ghCommand(["pr", "merge", "-s", "-d", "--admin"]);
   }
 
   async pullRequest(number: string): Promise<PullRequest> {
@@ -657,9 +682,7 @@ class Git {
   }
 
   async pullRequests(
-    search:
-      | string
-      | undefined = undefined,
+    search: string | undefined = undefined,
   ): Promise<PullRequest[]> {
     return await this.ghCommandJson([
       "pr",
@@ -840,6 +863,7 @@ class Updater {
         "--",
         "src/types.rs",
         "src/rest/generated_rest.rs",
+        "src/resource",
       ]);
 
       this.info("Generating new...");
@@ -847,8 +871,29 @@ class Updater {
       const codeTypes = await this.cargo.generateTypes();
       const codeRest = await this.cargo.generateRest();
 
+      const codeTags = await this.cargo.generateTags();
+
+      const otherMethodsMod = "other_methods";
+      const codeResourceMod = await this.cargo.generateTagsMod(otherMethodsMod);
+
+      const tagModules: Record<string, string> = {};
+      tagModules[otherMethodsMod] = await this.cargo.generateMethodsWithoutTag();
+      for (const tag of codeTags) {
+        const codeTagMod = await this.cargo.generateMethodsByTag(tag);
+        tagModules[tag] = codeTagMod;
+      }
+
       Deno.writeTextFileSync("src/types.rs", codeTypes);
       Deno.writeTextFileSync("src/rest/generated_rest.rs", codeRest);
+
+      for (const tag of codeTags.concat(otherMethodsMod)) {
+        const codeTagMod = tagModules[tag];
+        Deno.writeTextFileSync(
+          `src/resource/${tag.replaceAll("-", "_")}.rs`,
+          codeTagMod,
+        );
+      }
+      Deno.writeTextFileSync("src/resource/mod.rs", codeResourceMod);
 
       this.info("Formatting...");
 
@@ -883,8 +928,9 @@ class Updater {
         if (number) {
           this.options.versions.issue = await this.git.issue(number);
           issueExists = true;
-          const pullRequest =
-            (await this.git.pullRequests(`head:${currentBranch}`)).pop();
+          const pullRequest = (
+            await this.git.pullRequests(`head:${currentBranch}`)
+          ).pop();
           if (
             pullRequest !== undefined &&
             pullRequest.milestone !== milestoneVersion.toString()

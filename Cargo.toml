@@ -11,10 +11,11 @@ homepage = "https://github.com/kilork/keycloak"
 keywords = ["api", "async", "keycloak", "rest"]
 license = "Unlicense OR MIT"
 repository = "https://github.com/kilork/keycloak"
-rust-version = "1.84"
+rust-version = "1.87"
 
 [features]
 default = ["tags-all"]
+resource-builder = ["builder", "resource"]
 schemars = ["dep:schemars"]
 multipart = ["reqwest/multipart"]
 rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
@@ -22,28 +23,7 @@ rc-map = ["serde/rc"]
 rc-str = ["serde/rc"]
 rc-val = ["serde/rc"]
 rc-vec = ["serde/rc"]
-tags-all = [
-    "tag-attack-detection",
-    "tag-authentication-management",
-    "tag-client-attribute-certificate",
-    "tag-client-initial-access",
-    "tag-client-registration-policy",
-    "tag-client-role-mappings",
-    "tag-client-scopes",
-    "tag-clients",
-    "tag-component",
-    "tag-groups",
-    "tag-identity-providers",
-    "tag-key",
-    "tag-organizations",
-    "tag-protocol-mappers",
-    "tag-realms-admin",
-    "tag-role-mapper",
-    "tag-roles",
-    "tag-roles-by-id",
-    "tag-scope-mappings",
-    "tag-users",
-]
+tags-all = ["tag-attack-detection", "tag-authentication-management", "tag-client-attribute-certificate", "tag-client-initial-access", "tag-client-registration-policy", "tag-client-role-mappings", "tag-client-scopes", "tag-clients", "tag-component", "tag-groups", "tag-identity-providers", "tag-key", "tag-organizations", "tag-protocol-mappers", "tag-realms-admin", "tag-role-mapper", "tag-roles", "tag-roles-by-id", "tag-scope-mappings", "tag-users", "tag-none"]
 tag-attack-detection = []
 tag-authentication-management = []
 tag-client-attribute-certificate = []
@@ -64,6 +44,9 @@ tag-roles = []
 tag-roles-by-id = []
 tag-scope-mappings = []
 tag-users = []
+tag-none = []
+resource = []
+builder = []
 
 [dependencies]
 reqwest = { version = "0.12", default-features = false, features = ["json"] }
@@ -79,7 +62,7 @@ percent-encoding = "2.3.1"
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
 heck = "0.5"
-clap = { version = "4", features = ["derive", "std"], default-features = false }
+clap = { version = "4", features = ["derive", "help", "std"], default-features = false }
 toml = "0.8"
 serde = { version = "1", features = ["derive", "rc"] }
 indexmap = { version = "2", features = ["serde"] }

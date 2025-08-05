@@ -1,3 +1,5 @@
+use std::future::Future;
+
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 
@@ -171,5 +173,38 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
             client,
             token_supplier,
         }
+    }
+
+    pub fn realm<'a>(&'a self, realm: &'a str) -> KeycloakRealmAdmin<'a, TS> {
+        KeycloakRealmAdmin { realm, admin: self }
+    }
+}
+
+pub struct KeycloakRealmAdmin<'a, TS: KeycloakTokenSupplier> {
+    pub realm: &'a str,
+    pub(crate) admin: &'a KeycloakAdmin<TS>,
+}
+
+pub trait KeycloakRealmAdminMethod {
+    type Output;
+    type Args: Default;
+
+    fn opts(self, args: Self::Args) -> impl Future<Output = Result<Self::Output, KeycloakError>>;
+
+    fn with_default<F>(self, f: F) -> impl Future<Output = Result<Self::Output, KeycloakError>>
+    where
+        Self: Sized,
+        Self::Args: Default,
+        F: FnOnce(Self::Args) -> Self::Args,
+    {
+        self.opts(f(Default::default()))
+    }
+
+    #[cfg(feature = "builder")]
+    fn builder<'m>(self) -> crate::builder::Builder<'m, Self>
+    where
+        Self: 'm + Sized,
+    {
+        From::from(self)
     }
 }

@@ -17,10 +17,11 @@ Default flags: `tags-all`.
 - `schemars`: add [schemars](https://crates.io/crates/schemars) support.
 - `multipart`: add multipart support to reqwest, enabling extra methods in API.
 - `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
+- `resource-builder`: add resource builder support.
 
 ## Usage
 
-Requires Rust version >= `1.84.0`.
+Requires Rust version >= `1.87.0`.
 
 Add dependency to Cargo.toml:
 
@@ -30,13 +31,12 @@ keycloak = "~26.3"
 ```
 
 ```rust, no_run
-use keycloak::{
-    types::*,
-    {KeycloakAdmin, KeycloakAdminToken},
-};
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    use keycloak::{types::*, KeycloakAdmin, KeycloakAdminToken};
+
+    const REALM: &str = "resource";
+
     let url = std::env::var("KEYCLOAK_ADDR").unwrap_or_else(|_| "http://localhost:8080".into());
     let user = std::env::var("KEYCLOAK_USER").unwrap_or_else(|_| "admin".into());
     let password = std::env::var("KEYCLOAK_PASSWORD").unwrap_or_else(|_| "password".into());
@@ -44,37 +44,31 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
     let admin_token = KeycloakAdminToken::acquire(&url, &user, &password, &client).await?;
 
-    eprintln!("{:?}", admin_token);
+    eprintln!("{admin_token:?}");
 
     let admin = KeycloakAdmin::new(&url, admin_token, client);
 
     admin
         .post(RealmRepresentation {
-            realm: Some("test".into()),
+            realm: Some(REALM.into()),
             ..Default::default()
         })
         .await?;
 
-    let response = admin
-        .realm_users_post(
-            "test",
-            UserRepresentation {
-                username: Some("user".into()),
-                ..Default::default()
-            },
-        )
+    let realm = admin.realm(REALM);
+
+    let response = realm
+        .users_post(UserRepresentation {
+            username: Some("user".into()),
+            ..Default::default()
+        })
         .await?;
 
     eprintln!("{:?}", response.to_id());
 
-    let users = admin
-        .realm_users_get(
-            "test", None, None, None, None, None, None, None, None, None, None, None, None, None,
-            None,
-        )
-        .await?;
+    let users = realm.users_get().username("user".to_string()).await?;
 
-    eprintln!("{:?}", users);
+    eprintln!("{users:?}");
 
     let id = users
         .iter()
@@ -85,12 +79,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap()
         .to_string();
 
-    admin
-        .realm_users_with_user_id_delete("test", id.as_str())
-        .await?;
+    realm.users_with_user_id_delete(id.as_str()).await?;
 
-    admin.realm_delete("test").await?;
-
+    realm.delete().await?;
     Ok(())
 }
 ```
@@ -107,11 +98,15 @@ Example: official version `13.0.1` is `13.0.100` for crate version. `13.0.102` m
 To update current version use provided [update.ts](./update.ts) `deno` script:
 
 ```sh
-deno run --allow-env=KEYCLOAK_RUST_VERSION,KEYCLOAK_VERSION,KEYCLOAK_RUST_MAJOR_VERSION --allow-read=Cargo.toml --allow-write=Cargo.toml,api/openapi.json,src/types.rs,src/rest/generated_rest.rs --allow-net=keycloak.org,www.keycloak.org --allow-run=cargo,gh,git,handlebars-magic update.ts
+deno run --allow-env=KEYCLOAK_RUST_VERSION,KEYCLOAK_VERSION,KEYCLOAK_RUST_MAJOR_VERSION --allow-read=Cargo.toml --allow-write=Cargo.toml,api/openapi.json,src/types.rs,src/rest/generated_rest.rs,src/resource --allow-net=keycloak.org,www.keycloak.org --allow-run=cargo,gh,git,handlebars-magic update.ts
 ```
 
 */
 
+#[cfg(feature = "builder")]
+pub mod builder;
+#[cfg(feature = "resource")]
+pub mod resource;
 pub mod types;
 
 mod error;
@@ -119,6 +114,6 @@ mod rest;
 
 pub use error::KeycloakError;
 pub use rest::{
-    DefaultResponse, KeycloakAdmin, KeycloakAdminToken, KeycloakServiceAccountAdminTokenRetriever,
-    KeycloakTokenSupplier,
+    DefaultResponse, KeycloakAdmin, KeycloakAdminToken, KeycloakRealmAdmin,
+    KeycloakRealmAdminMethod, KeycloakServiceAccountAdminTokenRetriever, KeycloakTokenSupplier,
 };

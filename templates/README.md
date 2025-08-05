@@ -16,10 +16,11 @@ Default flags: `tags-all`.
 - `schemars`: add [schemars](https://crates.io/crates/schemars) support.
 - `multipart`: add multipart support to reqwest, enabling extra methods in API.
 - `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
+- `resource-builder`: add resource builder support.
 
 ## Usage
 
-Requires Rust version >= `1.84.0`.
+Requires Rust version >= `1.87.0`.
 
 Add dependency to Cargo.toml:
 
@@ -28,7 +29,7 @@ Add dependency to Cargo.toml:
 keycloak = "~{{ env_var "KEYCLOAK_RUST_MAJOR_VERSION" }}"
 ```
 
-{{ codeblock "rust" ( read_to_str "examples/adduser.rs" ) }}
+{{ codeblock "rust" ( from "#[tokio::main]" ( read_to_str "examples/resource_adduser.rs" ) ) }}
 
 ## Version agreement
 
@@ -42,5 +43,5 @@ Example: official version `13.0.1` is `13.0.100` for crate version. `13.0.102` m
 To update current version use provided [update.ts](./update.ts) `deno` script:
 
 ```sh
-deno run --allow-env=KEYCLOAK_RUST_VERSION,KEYCLOAK_VERSION,KEYCLOAK_RUST_MAJOR_VERSION --allow-read=Cargo.toml --allow-write=Cargo.toml,api/openapi.json,src/types.rs,src/rest/generated_rest.rs --allow-net=keycloak.org,www.keycloak.org --allow-run=cargo,gh,git,handlebars-magic update.ts
+deno run --allow-env=KEYCLOAK_RUST_VERSION,KEYCLOAK_VERSION,KEYCLOAK_RUST_MAJOR_VERSION --allow-read=Cargo.toml --allow-write=Cargo.toml,api/openapi.json,src/types.rs,src/rest/generated_rest.rs,src/resource --allow-net=keycloak.org,www.keycloak.org --allow-run=cargo,gh,git,handlebars-magic update.ts
 ```

@@ -1,8 +1,18 @@
-use clap::Parser;
+use std::borrow::Cow;
+
+use clap::{Parser, ValueEnum};
+use heck::{ToKebabCase, ToUpperCamelCase};
 
 /// Generate Rust code from Keycloak REST Description in HTML
 #[derive(Parser)]
-enum Cli {
+#[command(author, version, about, long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Command,
+}
+
+#[derive(Parser)]
+enum Command {
     /// Generate types
     Types,
     /// Generate method callers
@@ -10,19 +20,60 @@ enum Cli {
     /// Specs
     Specs,
     /// Tags
-    Tags,
+    Tags { format: Option<TagsFormat> },
+    /// Methods
+    Methods {
+        /// Generate methods without tags
+        #[arg(short, long, default_value_t = false)]
+        no_tag: bool,
+        /// Generate methods with specific tag (kebab variant of tag name)
+        #[arg(short, long)]
+        tag: Option<String>,
+    },
+}
+
+#[derive(Clone, Default, Parser, ValueEnum)]
+enum TagsFormat {
+    Cargo,
+    #[default]
+    Kebab,
+    Mod,
+}
+
+#[derive(Debug)]
+struct RealmMethod {
+    name: String,
+    comments: Vec<String>,
+    real_fn_name: String,
+    tags: Option<Vec<String>>,
+    deprecated: bool,
+    has_optional_parameters: bool,
+    parameters: Vec<RealmMethodParameter>,
+    summary: Option<String>,
+    description: Option<String>,
+    returns: String,
+}
+
+#[derive(Debug)]
+struct RealmMethodParameter {
+    name: String,
+    rust_type: String,
+    required: bool,
+    deprecated: bool,
+    description: Option<String>,
 }
 
 const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use"];
+const TAG_NONE: &str = "tag-none";
 
 mod openapi {
     use std::{borrow::Cow, collections::HashSet, fmt::Display, str::FromStr, sync::Arc};
 
-    use heck::{ToLowerCamelCase, ToSnakeCase, ToUpperCamelCase};
+    use heck::{ToKebabCase, ToLowerCamelCase, ToSnakeCase, ToUpperCamelCase};
     use indexmap::IndexMap;
     use serde::Deserialize;
 
-    use crate::RESERVED_WORDS;
+    use crate::{RESERVED_WORDS, TAG_NONE};
 
     #[derive(Debug, PartialEq, Eq)]
     pub enum FieldCase {
@@ -61,12 +112,21 @@ mod openapi {
     }
 
     impl<'s> SpecPath<'s> {
-        pub fn to_rust_method(&self, path: &str) -> String {
+        pub fn to_rust_rest_client_method(&self, path: &str) -> String {
             self.calls
                 .iter()
                 .map(|(method, call)| call.to_rust_method(path, method, self.parameters.as_deref()))
                 .collect::<Vec<_>>()
                 .join("\n")
+        }
+
+        pub fn to_rust_realm_methods(&self, path: &str) -> Vec<super::RealmMethod> {
+            self.calls
+                .iter()
+                .map(|(method, call)| {
+                    call.to_rust_realm_method(path, method, self.parameters.as_deref())
+                })
+                .collect()
         }
     }
 
@@ -88,6 +148,17 @@ mod openapi {
                     body: Some(body.into()),
                     convert: None,
                 })
+        }
+
+        fn to_parameter(&self, name: String) -> Option<Parameter> {
+            Some(Parameter {
+                name,
+                position: ParameterPosition::Path,
+                deprecated: false,
+                required: true,
+                description: None,
+                schema: self.content.as_content_schema()?.schema.clone(),
+            })
         }
     }
 
@@ -240,6 +311,7 @@ mod openapi {
     pub struct Call<'c> {
         pub tags: Option<Vec<Cow<'c, str>>>,
         summary: Option<String>,
+        description: Option<String>,
         #[serde(default)]
         deprecated: bool,
         parameters: Option<Vec<Parameter>>,
@@ -327,11 +399,14 @@ mod openapi {
 
             output.extend(comments);
 
-            if let [tag] = self.tags.as_deref().unwrap_or(&[]) {
-                use heck::ToKebabCase;
-                let tag = tag.to_kebab_case();
-                output.push(format!(r#"#[cfg(feature = "tag-{tag}")]"#));
-            }
+            let tag = self
+                .tags
+                .as_deref()
+                .and_then(|tags| tags.first())
+                .map(|tag| "tag-".to_string() + &tag.as_ref().to_kebab_case())
+                .unwrap_or_else(|| TAG_NONE.to_string());
+
+            output.push(format!(r#"#[cfg(feature = "{tag}")]"#));
 
             if self.deprecated {
                 output.push("#[deprecated]".into());
@@ -344,44 +419,18 @@ mod openapi {
             let body_return_type = request_body.and_then(|request_body| {
                 request_body.to_rust_return_type_and_parse_calls(body_parameter_name)
             });
+            let body_parameter = request_body.and_then(|request_body| {
+                request_body.to_parameter(body_parameter_name.to_string())
+            });
 
-            let parameters_of_method = parameters
-                .iter()
-                .map(|(parameter, param_name)| {
-                    let param_type = parameter.schema.to_rust_parameter_type(parameter.required);
-
-                    (param_name.as_str(), param_type)
-                })
-                .chain(
-                    body_return_type
-                        .as_ref()
-                        .map(|body| body.value.as_ref())
-                        .map(|param_type| (body_parameter_name, param_type.into())),
-                )
-                .map(|(param_name, param_type)| {
-                    let desc = Toml::desc(path, &method_string_lc, Some(param_name));
-
-                    let param_type = if let Some(desc) = desc.as_ref() {
-                        let from_type = desc.from_type.as_str();
-                        if from_type != param_type {
-                            let redundant = param_type == desc.rust_type;
-                            let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
-                            if redundant {
-                                delete_mapping(&full_header);
-                            } else {
-                                eprintln!(
-                                    "warn: body type info changed in {full_header} : was {from_type} now {param_type} (mapped {})",
-                                    &desc.rust_type
-                                );
-                            }
-                        }
-                        desc.rust_type.clone().into()
-                    } else {
-                        param_type
-                    };
-                    format!("    {param_name}: {param_type},")
-                })
-                .collect::<Vec<_>>();
+            let parameters_of_method = prepare_method_parameters(
+                path,
+                &parameters,
+                &method_string_lc,
+                body_parameter.as_ref(),
+            )
+            .map(|(_, param_name, param_type)| format!("    {param_name}: {param_type},"))
+            .collect::<Vec<_>>();
 
             if parameters_of_method.len() > 6 {
                 output.push("#[allow(clippy::too_many_arguments)]".into());
@@ -508,6 +557,148 @@ mod openapi {
                 + "\n"
         }
 
+        fn to_rust_realm_method(
+            &self,
+            path: &str,
+            method: &Method,
+            parameters: Option<&[Parameter]>,
+        ) -> super::RealmMethod {
+            let mut method_name = path
+                .strip_prefix("/admin/realms")
+                .unwrap_or(path)
+                .to_string();
+
+            let mut path_snake_case = path.to_string();
+
+            let call_parameters = parameters.into_iter().flatten().collect::<Vec<_>>();
+
+            let parameters = call_parameters
+                .clone()
+                .into_iter()
+                .chain(
+                    self.parameters
+                        .as_deref()
+                        .into_iter()
+                        .flatten()
+                        .filter(|p| !call_parameters.iter().any(|cp| cp.name == p.name)),
+                )
+                .map(|parameter| {
+                    let mut param_name = parameter.name.to_snake_case();
+                    while RESERVED_WORDS.contains(&param_name.as_str()) {
+                        param_name += "_";
+                    }
+
+                    (parameter, param_name)
+                })
+                .collect::<Vec<_>>();
+            for (parameter, parameter_name) in &parameters {
+                if parameter.position == ParameterPosition::Path {
+                    let parameter_with = if parameter.name == "realm" {
+                        ""
+                    } else {
+                        "with_"
+                    }
+                    .to_string()
+                        + parameter_name.as_str();
+                    method_name =
+                        method_name.replace(&format!("{{{}}}", parameter.name), &parameter_with);
+                }
+                if parameter_name != &parameter.name {
+                    path_snake_case = path_snake_case.replace(
+                        &format!("{{{}}}", parameter.name),
+                        &format!("{{{parameter_name}}}"),
+                    );
+                }
+            }
+
+            let method_string = method.to_string();
+
+            let method_draft_name = method_name + &method_string;
+            let real_fn_name = method_draft_name.to_snake_case();
+            let result_type = self.responses.to_rust_return_type_and_parse_calls();
+
+            let mut result_type_value = result_type
+                .as_ref()
+                .map(|rt| rt.value.as_ref())
+                .unwrap_or("DefaultResponse");
+
+            let use_default_response = result_type.is_none();
+
+            let (method_string_lc, comments) = self.comments(
+                &parameters,
+                method_string,
+                path,
+                &path_snake_case,
+                use_default_response,
+            );
+
+            let request_body = self.request_body.as_ref();
+
+            let body_parameter_name = "body";
+
+            let body_parameter = request_body.and_then(|request_body| {
+                request_body.to_parameter(body_parameter_name.to_string())
+            });
+
+            let parameters_of_method = prepare_method_parameters(
+                path,
+                &parameters,
+                &method_string_lc,
+                body_parameter.as_ref(),
+            )
+            .map(
+                |(param, param_name, param_type)| super::RealmMethodParameter {
+                    name: param_name.into(),
+                    rust_type: param_type.into(),
+                    required: param.required,
+                    description: param.description.clone(),
+                    deprecated: param.deprecated,
+                },
+            )
+            .collect::<Vec<_>>();
+
+            let desc = Toml::desc::<_, _, String>(path, &method_string_lc, None);
+            if let Some(desc) = desc.as_ref() {
+                let from_type = desc.from_type.as_str();
+                if from_type != result_type_value {
+                    let redundant = result_type_value == desc.rust_type;
+                    let full_header = format!(r#"[path."{path}:{method_string_lc}:"]"#);
+                    if redundant {
+                        delete_mapping(&full_header);
+                    } else {
+                        eprintln!(
+                            "warn: type info changed in {full_header} : was {from_type} now {result_type_value} (mapped {})",
+                            &desc.rust_type
+                        );
+                    }
+                }
+                result_type_value = desc.rust_type.as_str();
+            } else if result_type_value == "Value" {
+                eprintln!(r#"warn: Value as result in [path."{path}:{method_string_lc}:"]"#);
+            }
+
+            super::RealmMethod {
+                name: real_fn_name
+                    .strip_prefix("realm_")
+                    .unwrap_or(real_fn_name.as_str())
+                    .to_string(),
+                comments,
+                real_fn_name,
+                tags: self
+                    .tags
+                    .as_ref()
+                    .map(|tags| tags.iter().map(|tag| tag.to_kebab_case()).collect()),
+                deprecated: self.deprecated,
+                has_optional_parameters: parameters
+                    .iter()
+                    .any(|(parameter, _)| !parameter.required),
+                parameters: parameters_of_method,
+                summary: self.summary.clone(),
+                description: self.description.clone(),
+                returns: result_type_value.into(),
+            }
+        }
+
         fn comments(
             &self,
             parameters: &[(&Parameter, String)],
@@ -594,7 +785,7 @@ mod openapi {
                 .into_iter()
                 .map(|c| {
                     c.into_iter()
-                        .map(|l| format!("/// {}\n", l))
+                        .map(|l| format!("/// {l}\n"))
                         .collect::<Vec<_>>()
                         .join("")
                 })
@@ -605,6 +796,48 @@ mod openapi {
                 .collect();
             (method_string_lc, comments)
         }
+    }
+
+    fn prepare_method_parameters<'p>(
+        path: &'p str,
+        parameters: &'p Vec<(&'p Parameter, String)>,
+        method_string_lc: &'p str,
+        body_parameter: Option<&'p Parameter>,
+    ) -> impl Iterator<Item = (&'p Parameter, Cow<'p, str>, Cow<'p, str>)> + use<'p> {
+        parameters
+            .iter()
+            .map(|(parameter, param_name)| {
+                let param_type = parameter.schema.to_rust_parameter_type(parameter.required);
+
+                (*parameter, Cow::Borrowed(param_name.as_str()), param_type)
+            })
+            .chain(
+                body_parameter
+                    .map(|param| (param, param.name.as_str().into(), param.schema.to_rust_type(RefMode::Std))),
+            )
+            .map(move |(param, param_name, param_type)| {
+                let desc = Toml::desc(path, method_string_lc, Some(param_name.as_ref()));
+
+                let param_type = if let Some(desc) = desc.as_ref() {
+                    let from_type = desc.from_type.as_str();
+                    if from_type != param_type {
+                        let redundant = param_type == desc.rust_type;
+                        let full_header = format!(r#"[path."{path}:{method_string_lc}:{param_name}"]"#);
+                        if redundant {
+                            delete_mapping(&full_header);
+                        } else {
+                            eprintln!(
+                                "warn: body type info changed in {full_header} : was {from_type} now {param_type} (mapped {})",
+                                &desc.rust_type
+                            );
+                        }
+                    }
+                    desc.rust_type.clone().into()
+                } else {
+                    param_type
+                };
+                (param, param_name, param_type)
+            })
     }
 
     fn delete_mapping(header: &str) {
@@ -710,7 +943,7 @@ mod openapi {
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(untagged)]
     pub enum ObjectSchema<P> {
         Struct(SchemaStruct<P>),
@@ -745,7 +978,7 @@ mod openapi {
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Clone)]
     pub struct SchemaStruct<P> {
         pub properties: IndexMap<String, P>,
     }
@@ -869,7 +1102,7 @@ pub struct {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(rename_all = "camelCase")]
     pub struct SchemaMap<P> {
         pub additional_properties: P,
@@ -894,7 +1127,7 @@ pub struct {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(rename_all = "camelCase")]
     pub struct SchemaAllOf<P> {
         pub all_of: Vec<P>,
@@ -952,7 +1185,7 @@ pub enum {name} {{
         Std,
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(untagged)]
     pub enum Kind {
         Generic(Generic),
@@ -1019,7 +1252,7 @@ pub enum {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     pub struct Property {
         #[serde(default)]
         deprecated: bool,
@@ -1044,7 +1277,7 @@ pub enum {name} {{
         }
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(rename_all = "lowercase", tag = "type")]
     pub enum Generic {
         Array {
@@ -1060,13 +1293,13 @@ pub enum {name} {{
         String,
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     pub struct Ref {
         #[serde(rename = "$ref")]
         pub reference: String,
     }
 
-    #[derive(Debug, Deserialize, PartialEq, Eq, Hash)]
+    #[derive(Debug, Deserialize, PartialEq, Eq, Hash, Clone)]
     #[serde(rename_all = "lowercase")]
     pub enum IntegerFormat {
         Int32,
@@ -1131,11 +1364,22 @@ fn main() {
     let specs: openapi::Spec = serde_json::from_slice(include_bytes!("../api/openapi.json"))
         .expect("valid openapi json specs");
 
-    match cli {
-        Cli::Types => generate_types(&specs),
-        Cli::Rest => generate_rest(&specs),
-        Cli::Tags => list_tags(&specs),
-        Cli::Specs => {
+    match cli.command {
+        Command::Types => generate_types(&specs),
+        Command::Rest => generate_rest(&specs),
+        Command::Methods { no_tag, tag } => generate_methods(&specs, no_tag, tag),
+        Command::Tags { format } => match format.unwrap_or_default() {
+            TagsFormat::Cargo => list_tags_for_cargo(&specs),
+            TagsFormat::Kebab => list_tags_as_kebab(&specs),
+            TagsFormat::Mod => list_tags_for_mod(
+                &specs,
+                std::env::var("OTHER_METHODS_MOD")
+                    .ok()
+                    .as_deref()
+                    .unwrap_or("other_methods"),
+            ),
+        },
+        Command::Specs => {
             println!("{specs:#?}");
         }
     }
@@ -1153,44 +1397,12 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
     );
     let mut path_counts = spec.paths.len();
     let default = std::borrow::Cow::from("default");
-    let tag_paths = spec
-        .tags
-        .iter()
-        .map(|tag| {
-            (
-                &tag.name,
-                spec.paths
-                    .iter()
-                    .filter(|(_, path_spec)| {
-                        path_spec.calls.iter().all(|(_, call)| {
-                            let call_tags = call.tags.as_deref();
-                            let call_tags_ref = call_tags.as_ref();
-                            matches!(call_tags_ref, Some(&[tag_name]) if tag_name == &tag.name)
-                        })
-                    })
-                    .collect::<Vec<_>>(),
-            )
-        })
-        .chain([(
-            &default,
-            spec.paths
-                .iter()
-                .filter(|(_, path_spec)| {
-                    path_spec.calls.iter().all(|(_, call)| {
-                        call.tags
-                            .as_ref()
-                            .map(|tags| tags.is_empty())
-                            .unwrap_or(true)
-                    })
-                })
-                .collect(),
-        )])
-        .collect::<Vec<_>>();
+    let tag_paths = tags_spec_paths(spec, &default);
     for (tag, paths) in tag_paths {
         println!("    // <h4>{tag}</h4>\n");
 
         for (path, path_spec) in paths {
-            println!("{}", path_spec.to_rust_method(path));
+            println!("{}", path_spec.to_rust_rest_client_method(path));
             path_counts -= 1;
         }
     }
@@ -1199,6 +1411,53 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {{
         println!("// not all paths processed");
         println!("// left {path_counts}");
     }
+}
+
+fn tags_spec_paths<'s>(
+    spec: &'s openapi::Spec<'s>,
+    default: &'s std::borrow::Cow<'s, str>,
+) -> impl Iterator<
+    Item = (
+        &'s std::borrow::Cow<'s, str>,
+        Vec<(&'s String, &'s openapi::SpecPath<'s>)>,
+    ),
+> {
+    spec.tags
+        .iter()
+        .map(|tag| (&tag.name, spec_paths_by_tag(spec, &tag.name)))
+        .chain([(default, spec_paths_without_tag(spec))])
+}
+
+fn spec_paths_without_tag<'s>(
+    spec: &'s openapi::Spec<'s>,
+) -> Vec<(&'s String, &'s openapi::SpecPath<'s>)> {
+    spec.paths
+        .iter()
+        .filter(|(_, path_spec)| {
+            path_spec.calls.iter().all(|(_, call)| {
+                call.tags
+                    .as_ref()
+                    .map(|tags| tags.is_empty())
+                    .unwrap_or(true)
+            })
+        })
+        .collect()
+}
+
+fn spec_paths_by_tag<'s>(
+    spec: &'s openapi::Spec<'s>,
+    tag: &str,
+) -> Vec<(&'s String, &'s openapi::SpecPath<'s>)> {
+    spec.paths
+        .iter()
+        .filter(|(_, path_spec)| {
+            path_spec.calls.iter().all(|(_, call)| {
+                let call_tags = call.tags.as_deref();
+                let call_tags_ref = call_tags.as_ref();
+                matches!(call_tags_ref, Some(&[tag_name]) if tag_name == tag)
+            })
+        })
+        .collect()
 }
 
 fn generate_types(spec: &openapi::Spec) {
@@ -1240,12 +1499,335 @@ pub type TypeVec<I> = Arc<[I]>;"###
     }
 }
 
-fn list_tags(spec: &openapi::Spec) {
+fn generate_methods(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<String>) {
+    let default = Cow::from("default");
+
+    let tags_iter = spec.tags.iter();
+    let (tags, add_cfg): (Vec<_>, _) = if let Some(tag) = tag_as_kebab.as_deref() {
+        (
+            tags_iter
+                .filter(|t| t.name.to_kebab_case() == tag)
+                .collect(),
+            no_tag,
+        )
+    } else if !no_tag {
+        (tags_iter.collect(), true)
+    } else {
+        (Vec::new(), false)
+    };
+
+    let mut tag_paths: Vec<_> = tags
+        .into_iter()
+        .map(|tag| (&tag.name, spec_paths_by_tag(spec, &tag.name)))
+        .collect();
+
+    if no_tag || tag_as_kebab.is_none() {
+        tag_paths.extend([(&default, spec_paths_without_tag(spec))]);
+    }
+
+    let tag_realm_methods: Vec<_> = tag_paths
+        .into_iter()
+        .map(|(tag, paths)| {
+            (
+                tag,
+                paths
+                    .into_iter()
+                    .flat_map(|(path, path_spec)| path_spec.to_rust_realm_methods(path))
+                    .collect::<Vec<_>>(),
+            )
+        })
+        .collect();
+
+    generate_method_impl(add_cfg, &tag_realm_methods);
+
+    generate_method_structs(add_cfg, &tag_realm_methods);
+
+    generate_method_builder(add_cfg, &tag_realm_methods);
+}
+
+fn generate_method_builder(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    if !tag_realm_methods
+        .iter()
+        .any(|(_, methods)| methods.iter().any(|method| method.has_optional_parameters))
+    {
+        return;
+    }
+    println!("#[cfg(feature = \"builder\")]");
+    println!("mod builder {{");
+    println!("use crate::builder::Builder;\n");
+    println!("use super::*;\n");
+
+    for (tag, realm_methods) in tag_realm_methods {
+        println!("\n// <h4>{tag}</h4>");
+        for RealmMethod {
+            real_fn_name,
+            tags,
+            parameters,
+            ..
+        } in realm_methods
+            .iter()
+            .filter(|method| method.has_optional_parameters)
+        {
+            let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
+            if no_realm_parameter {
+                continue;
+            }
+            let tag = tags
+                .as_ref()
+                .and_then(|tags| tags.first())
+                .map(|tag| tag.to_kebab_case());
+            let tag_str = tag.as_deref().unwrap_or("none");
+            let struct_name = real_fn_name.to_upper_camel_case();
+            let optional_parameters = parameters
+                .iter()
+                .filter(|p| !p.required && p.name != "realm")
+                .collect::<Vec<_>>();
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("impl <'a, TS> {struct_name}<'a, TS>");
+            println!("where");
+            println!("    TS: KeycloakTokenSupplier,");
+            println!("{{");
+            for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                let parameter_name = &parameter.name;
+                let rust_type = &parameter.rust_type;
+                println!("    pub fn {parameter_name}(self, value: impl Into<{rust_type}>) -> Builder<'a, Self> {{");
+                println!("        self.builder().{parameter_name}(value)");
+                println!("    }}");
+            }
+            println!("}}\n");
+
+            println!("impl<TS> Builder<'_, {struct_name}<'_, TS>>");
+            println!("where");
+            println!("    TS: KeycloakTokenSupplier,");
+            println!("{{");
+            for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                let parameter_name = &parameter.name;
+                let rust_type = &parameter.rust_type;
+                println!(
+                    "    pub fn {parameter_name}(mut self, value: impl Into<{rust_type}>) -> Self {{"
+                );
+                println!("        self.args.{parameter_name} = value.into();");
+                println!("        self");
+                println!("    }}");
+            }
+            println!("}}\n");
+        }
+    }
+    println!("}}");
+}
+
+fn generate_method_structs(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    for (tag, realm_methods) in tag_realm_methods {
+        if !realm_methods
+            .iter()
+            .any(|method| method.has_optional_parameters)
+        {
+            continue;
+        }
+        println!("\n// <h4>{tag}</h4>");
+        for RealmMethod {
+            real_fn_name,
+            tags,
+            parameters,
+            returns,
+            ..
+        } in realm_methods
+            .iter()
+            .filter(|method| method.has_optional_parameters)
+        {
+            let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
+            if no_realm_parameter {
+                continue;
+            }
+            let tag = tags
+                .as_ref()
+                .and_then(|tags| tags.first())
+                .map(|tag| tag.to_kebab_case());
+            let tag_str = tag.as_deref().unwrap_or("none");
+            let struct_name = real_fn_name.to_upper_camel_case();
+            let required_parameters = parameters
+                .iter()
+                .filter(|p| p.required && p.name != "realm")
+                .collect::<Vec<_>>();
+            let optional_parameters = parameters
+                .iter()
+                .filter(|p| !p.required && p.name != "realm")
+                .collect::<Vec<_>>();
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("pub struct {struct_name}<'a, TS: KeycloakTokenSupplier> {{");
+            println!("    /// Realm admin client");
+            println!("    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,");
+            for parameter in &required_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                println!(
+                    "    pub {}: {},",
+                    parameter.name,
+                    parameter.rust_type.replace("&", "&'a ")
+                );
+            }
+            println!("}}\n");
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("#[derive(Default)]");
+            println!("pub struct {struct_name}Args {{");
+            for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                println!("    pub {}: {},", parameter.name, parameter.rust_type);
+            }
+            println!("}}\n");
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod");
+            println!("    for {struct_name}<'a, TS>");
+            println!("{{");
+            println!("    type Output = {returns};");
+            println!("    type Args = {struct_name}Args;");
+            println!();
+            println!("    fn opts(");
+            println!("        self,");
+            println!("        Self::Args {{");
+            for parameter in &optional_parameters {
+                println!("            {},", parameter.name,);
+            }
+            println!("        }}: Self::Args,");
+            println!("    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {{");
+            println!("        self.realm_admin");
+            println!("            .admin");
+            println!("            .{real_fn_name}(");
+            println!("                self.realm_admin.realm,");
+            for parameter in parameters.iter().filter(|p| p.name != "realm") {
+                if parameter.required {
+                    println!("                self.{},", parameter.name,);
+                } else {
+                    println!("                {},", parameter.name,);
+                }
+            }
+            println!("            )");
+            println!("    }}");
+            println!("}}\n");
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("impl<'a, TS> IntoFuture for {struct_name}<'a, TS>");
+            println!("where");
+            println!("    TS: KeycloakTokenSupplier,");
+            println!("{{");
+            println!("    type Output = Result<{returns}, KeycloakError>;");
+            println!("    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;");
+
+            println!("    fn into_future(self) -> Self::IntoFuture {{");
+            println!("        Box::pin(self.opts(Default::default()))");
+            println!("    }}");
+            println!("}}\n");
+        }
+    }
+}
+
+fn generate_method_impl(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    print!(
+        r###"use super::*;
+
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
+"###
+    );
+
+    for (tag, realm_methods) in tag_realm_methods {
+        println!("    // <h4>{tag}</h4>");
+
+        for RealmMethod {
+            name,
+            comments,
+            real_fn_name,
+            tags,
+            deprecated,
+            has_optional_parameters,
+            parameters,
+            summary: _,
+            description: _,
+            returns,
+        } in realm_methods
+        {
+            let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
+            if no_realm_parameter {
+                continue;
+            }
+            for comment in comments {
+                println!("    {comment}");
+            }
+            if add_cfg {
+                let tag = tags
+                    .as_ref()
+                    .and_then(|tags| tags.first())
+                    .map(|tag| tag.to_kebab_case());
+                let tag_str = tag.as_deref().unwrap_or("none");
+                println!("    #[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            if *deprecated {
+                println!("    #[deprecated]");
+            }
+
+            let struct_name = real_fn_name.to_upper_camel_case();
+            let required_parameters = parameters
+                .iter()
+                .filter(|p| p.required && p.name != "realm")
+                .collect::<Vec<_>>();
+            println!("    pub fn {name}(");
+            println!("        &'a self,");
+            for parameter in &required_parameters {
+                println!(
+                    "        {}: {},",
+                    parameter.name,
+                    parameter.rust_type.replace("&", "&'a ")
+                );
+            }
+            if *has_optional_parameters {
+                println!("    ) -> {struct_name}<'a, TS> {{");
+                println!("        {struct_name} {{");
+                println!("            realm_admin: self,");
+                for parameter in &required_parameters {
+                    println!("            {},", parameter.name,);
+                }
+                println!("        }}");
+            } else {
+                println!("    ) -> impl Future<Output = Result<{returns}, KeycloakError>> + use<'a, TS> {{");
+                println!("        self.admin");
+                println!("            .{real_fn_name}(");
+                println!("                self.realm,");
+                for parameter in &required_parameters {
+                    println!("                {},", parameter.name,);
+                }
+                println!("            )");
+            }
+            println!("    }}\n");
+        }
+    }
+
+    println!("}}");
+}
+
+fn list_tags_for_cargo(spec: &openapi::Spec) {
     use heck::ToKebabCase;
     let tags = spec
         .tags
         .iter()
         .map(|tag| "tag-".to_string() + tag.name.to_kebab_case().as_str())
+        .chain(Some(TAG_NONE.to_string()))
         .collect::<Vec<_>>();
     println!(
         "tags-all = [{}]",
@@ -1255,4 +1837,37 @@ fn list_tags(spec: &openapi::Spec) {
             .join(", ")
     );
     tags.iter().for_each(|line| println!("{line} = []"));
+}
+
+fn list_tags_as_kebab(spec: &openapi::Spec) {
+    use heck::ToKebabCase;
+    for tag in &spec.tags {
+        println!("{}", tag.name.to_kebab_case());
+    }
+}
+
+fn list_tags_for_mod(spec: &openapi::Spec, other_methods: &str) {
+    use heck::{ToKebabCase, ToSnakeCase};
+    println!(
+        "use std::{{
+    future::{{Future, IntoFuture}},
+    pin::Pin,
+}};
+
+use serde_json::Value;
+
+use crate::{{
+    types::*, DefaultResponse, KeycloakError, KeycloakRealmAdmin, KeycloakRealmAdminMethod,
+    KeycloakTokenSupplier,
+}};
+"
+    );
+    for tag in &spec.tags {
+        println!("/// {}", tag.name);
+        println!("#[cfg(feature = \"tag-{}\")]", tag.name.to_kebab_case());
+        println!("pub mod {};", tag.name.to_snake_case());
+    }
+    println!("/// Other (non tagged) methods");
+    println!("#[cfg(feature = \"{TAG_NONE}\")]");
+    println!("pub mod {other_methods};");
 }
