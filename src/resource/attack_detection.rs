@@ -28,13 +28,3 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_attack_detection_brute_force_users_with_user_id_delete(self.realm, user_id)
     }
 }
-
-// <h4>Attack Detection</h4>
-#[cfg(feature = "builder")]
-mod builder {
-    use crate::builder::Builder;
-
-    use super::*;
-
-    // <h4>Attack Detection</h4>
-}

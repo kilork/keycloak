@@ -1625,8 +1625,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
     }
 
     println!("}}");
-
     for (tag, realm_methods) in &tag_realm_methods {
+        if !realm_methods
+            .iter()
+            .any(|method| method.has_optional_parameters)
+        {
+            continue;
+        }
         println!("\n// <h4>{tag}</h4>");
         for RealmMethod {
             real_fn_name,
@@ -1732,6 +1737,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             println!("}}\n");
         }
     }
+
+    if !tag_realm_methods
+        .iter()
+        .any(|(_, methods)| methods.iter().any(|method| method.has_optional_parameters))
+    {
+        return;
+    }
+
     println!("#[cfg(feature = \"builder\")]");
     println!("mod builder {{");
     println!("use crate::builder::Builder;\n");

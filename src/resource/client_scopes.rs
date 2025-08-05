@@ -93,13 +93,3 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_templates_with_client_scope_id_delete(self.realm, client_scope_id)
     }
 }
-
-// <h4>Client Scopes</h4>
-#[cfg(feature = "builder")]
-mod builder {
-    use crate::builder::Builder;
-
-    use super::*;
-
-    // <h4>Client Scopes</h4>
-}

@@ -27,13 +27,3 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_initial_access_with_id_delete(self.realm, id)
     }
 }
-
-// <h4>Client Initial Access</h4>
-#[cfg(feature = "builder")]
-mod builder {
-    use crate::builder::Builder;
-
-    use super::*;
-
-    // <h4>Client Initial Access</h4>
-}
