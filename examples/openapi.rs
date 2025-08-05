@@ -1498,12 +1498,6 @@ pub type TypeVec<I> = Arc<[I]>;"###
 }
 
 fn generate_methods(spec: &openapi::Spec, no_tag: bool, tag_as_kebab: Option<String>) {
-    print!(
-        r###"use super::*;
-
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
-"###
-    );
     let default = Cow::from("default");
 
     let tags_iter = spec.tags.iter();
@@ -1542,90 +1536,94 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
         })
         .collect();
 
-    for (tag, realm_methods) in &tag_realm_methods {
-        println!("    // <h4>{tag}</h4>");
+    generate_method_impl(add_cfg, &tag_realm_methods);
 
+    generate_method_structs(add_cfg, &tag_realm_methods);
+
+    generate_method_builder(add_cfg, &tag_realm_methods);
+}
+
+fn generate_method_builder(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    if !tag_realm_methods
+        .iter()
+        .any(|(_, methods)| methods.iter().any(|method| method.has_optional_parameters))
+    {
+        return;
+    }
+    println!("#[cfg(feature = \"builder\")]");
+    println!("mod builder {{");
+    println!("use crate::builder::Builder;\n");
+    println!("use super::*;\n");
+
+    for (tag, realm_methods) in tag_realm_methods {
+        println!("\n// <h4>{tag}</h4>");
         for RealmMethod {
-            name,
             real_fn_name,
             tags,
-            deprecated,
-            has_optional_parameters,
             parameters,
-            summary,
-            description,
-            returns,
+            ..
         } in realm_methods
+            .iter()
+            .filter(|method| method.has_optional_parameters)
         {
             let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
             if no_realm_parameter {
                 continue;
             }
-            if let Some(summary) = summary
+            let tag = tags
                 .as_ref()
-                .map(|desc| desc.replace('\n', "\n    /// "))
-            {
-                println!("    /// {summary}");
-            }
-            if let Some(description) = description
-                .as_ref()
-                .map(|desc| desc.replace("\n", "\n    /// "))
-            {
-                if summary.is_some() {
-                    println!("    ///");
-                }
-                println!("    /// {description}");
-            }
-            if add_cfg {
-                let tag = tags
-                    .as_ref()
-                    .and_then(|tags| tags.first())
-                    .map(|tag| tag.to_kebab_case());
-                let tag_str = tag.as_deref().unwrap_or("none");
-                println!("    #[cfg(feature = \"tag-{tag_str}\")]",);
-            }
-            if *deprecated {
-                println!("    #[deprecated]");
-            }
-
+                .and_then(|tags| tags.first())
+                .map(|tag| tag.to_kebab_case());
+            let tag_str = tag.as_deref().unwrap_or("none");
             let struct_name = real_fn_name.to_upper_camel_case();
-            let required_parameters = parameters
+            let optional_parameters = parameters
                 .iter()
-                .filter(|p| p.required && p.name != "realm")
+                .filter(|p| !p.required && p.name != "realm")
                 .collect::<Vec<_>>();
-            println!("    pub fn {name}(");
-            println!("        &'a self,");
-            for parameter in &required_parameters {
+            if add_cfg {
+                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+            }
+            println!("impl <'a, TS> {struct_name}<'a, TS>");
+            println!("where");
+            println!("    TS: KeycloakTokenSupplier,");
+            println!("{{");
+            for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                let parameter_name = &parameter.name;
+                let rust_type = &parameter.rust_type;
+                println!("    pub fn {parameter_name}(self, value: impl Into<{rust_type}>) -> Builder<'a, Self> {{");
+                println!("        self.builder().{parameter_name}(value)");
+                println!("    }}");
+            }
+            println!("}}\n");
+
+            println!("impl<TS> Builder<'_, {struct_name}<'_, TS>>");
+            println!("where");
+            println!("    TS: KeycloakTokenSupplier,");
+            println!("{{");
+            for parameter in &optional_parameters {
+                if let Some(comment) = &parameter.description {
+                    println!("    /// {comment}",);
+                }
+                let parameter_name = &parameter.name;
+                let rust_type = &parameter.rust_type;
                 println!(
-                    "        {}: {},",
-                    parameter.name,
-                    parameter.rust_type.replace("&", "&'a ")
+                    "    pub fn {parameter_name}(mut self, value: impl Into<{rust_type}>) -> Self {{"
                 );
+                println!("        self.args.{parameter_name} = value.into();");
+                println!("        self");
+                println!("    }}");
             }
-            if *has_optional_parameters {
-                println!("    ) -> {struct_name}<'a, TS> {{");
-                println!("        {struct_name} {{");
-                println!("            realm_admin: self,");
-                for parameter in &required_parameters {
-                    println!("            {},", parameter.name,);
-                }
-                println!("        }}");
-            } else {
-                println!("    ) -> impl Future<Output = Result<{returns}, KeycloakError>> + use<'a, TS> {{");
-                println!("        self.admin");
-                println!("            .{real_fn_name}(");
-                println!("                self.realm,");
-                for parameter in &required_parameters {
-                    println!("                {},", parameter.name,);
-                }
-                println!("            )");
-            }
-            println!("    }}\n");
+            println!("}}\n");
         }
     }
-
     println!("}}");
-    for (tag, realm_methods) in &tag_realm_methods {
+}
+
+fn generate_method_structs(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    for (tag, realm_methods) in tag_realm_methods {
         if !realm_methods
             .iter()
             .any(|method| method.has_optional_parameters)
@@ -1737,81 +1735,95 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             println!("}}\n");
         }
     }
+}
 
-    if !tag_realm_methods
-        .iter()
-        .any(|(_, methods)| methods.iter().any(|method| method.has_optional_parameters))
-    {
-        return;
-    }
+fn generate_method_impl(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, Vec<RealmMethod>)]) {
+    print!(
+        r###"use super::*;
 
-    println!("#[cfg(feature = \"builder\")]");
-    println!("mod builder {{");
-    println!("use crate::builder::Builder;\n");
-    println!("use super::*;\n");
+impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
+"###
+    );
 
     for (tag, realm_methods) in tag_realm_methods {
-        println!("\n// <h4>{tag}</h4>");
+        println!("    // <h4>{tag}</h4>");
+
         for RealmMethod {
+            name,
             real_fn_name,
             tags,
+            deprecated,
+            has_optional_parameters,
             parameters,
-            ..
+            summary,
+            description,
+            returns,
         } in realm_methods
-            .iter()
-            .filter(|method| method.has_optional_parameters)
         {
             let no_realm_parameter = !parameters.iter().any(|p| p.name == "realm");
             if no_realm_parameter {
                 continue;
             }
-            let tag = tags
+            if let Some(summary) = summary
                 .as_ref()
-                .and_then(|tags| tags.first())
-                .map(|tag| tag.to_kebab_case());
-            let tag_str = tag.as_deref().unwrap_or("none");
-            let struct_name = real_fn_name.to_upper_camel_case();
-            let optional_parameters = parameters
-                .iter()
-                .filter(|p| !p.required && p.name != "realm")
-                .collect::<Vec<_>>();
+                .map(|desc| desc.replace('\n', "\n    /// "))
+            {
+                println!("    /// {summary}");
+            }
+            if let Some(description) = description
+                .as_ref()
+                .map(|desc| desc.replace("\n", "\n    /// "))
+            {
+                if summary.is_some() {
+                    println!("    ///");
+                }
+                println!("    /// {description}");
+            }
             if add_cfg {
-                println!("#[cfg(feature = \"tag-{tag_str}\")]",);
+                let tag = tags
+                    .as_ref()
+                    .and_then(|tags| tags.first())
+                    .map(|tag| tag.to_kebab_case());
+                let tag_str = tag.as_deref().unwrap_or("none");
+                println!("    #[cfg(feature = \"tag-{tag_str}\")]",);
             }
-            println!("impl <'a, TS> {struct_name}<'a, TS>");
-            println!("where");
-            println!("    TS: KeycloakTokenSupplier,");
-            println!("{{");
-            for parameter in &optional_parameters {
-                if let Some(comment) = &parameter.description {
-                    println!("    /// {comment}",);
-                }
-                let parameter_name = &parameter.name;
-                let rust_type = &parameter.rust_type;
-                println!("    pub fn {parameter_name}(self, value: impl Into<{rust_type}>) -> Builder<'a, Self> {{");
-                println!("        self.builder().{parameter_name}(value)");
-                println!("    }}");
+            if *deprecated {
+                println!("    #[deprecated]");
             }
-            println!("}}\n");
 
-            println!("impl<TS> Builder<'_, {struct_name}<'_, TS>>");
-            println!("where");
-            println!("    TS: KeycloakTokenSupplier,");
-            println!("{{");
-            for parameter in &optional_parameters {
-                if let Some(comment) = &parameter.description {
-                    println!("    /// {comment}",);
-                }
-                let parameter_name = &parameter.name;
-                let rust_type = &parameter.rust_type;
+            let struct_name = real_fn_name.to_upper_camel_case();
+            let required_parameters = parameters
+                .iter()
+                .filter(|p| p.required && p.name != "realm")
+                .collect::<Vec<_>>();
+            println!("    pub fn {name}(");
+            println!("        &'a self,");
+            for parameter in &required_parameters {
                 println!(
-                    "    pub fn {parameter_name}(mut self, value: impl Into<{rust_type}>) -> Self {{"
+                    "        {}: {},",
+                    parameter.name,
+                    parameter.rust_type.replace("&", "&'a ")
                 );
-                println!("        self.args.{parameter_name} = value.into();");
-                println!("        self");
-                println!("    }}");
             }
-            println!("}}\n");
+            if *has_optional_parameters {
+                println!("    ) -> {struct_name}<'a, TS> {{");
+                println!("        {struct_name} {{");
+                println!("            realm_admin: self,");
+                for parameter in &required_parameters {
+                    println!("            {},", parameter.name,);
+                }
+                println!("        }}");
+            } else {
+                println!("    ) -> impl Future<Output = Result<{returns}, KeycloakError>> + use<'a, TS> {{");
+                println!("        self.admin");
+                println!("            .{real_fn_name}(");
+                println!("                self.realm,");
+                for parameter in &required_parameters {
+                    println!("                {},", parameter.name,);
+                }
+                println!("            )");
+            }
+            println!("    }}\n");
         }
     }
 
