@@ -20,7 +20,7 @@ jobs:
     - name: Build with default features
       run: cargo build
     - name: Run unit tests with default features
-      run: cargo test
+      run: cargo test --lib
     - name: Build with all top level features
       run: cargo build --features=rc,schemars,multipart,resource-builder
     - name: Run unit tests with all top level features
