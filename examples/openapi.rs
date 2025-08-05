@@ -43,6 +43,7 @@ enum TagsFormat {
 #[derive(Debug)]
 struct RealmMethod {
     name: String,
+    comments: Vec<String>,
     real_fn_name: String,
     tags: Option<Vec<String>>,
     deprecated: bool,
@@ -623,7 +624,7 @@ mod openapi {
 
             let use_default_response = result_type.is_none();
 
-            let (method_string_lc, _) = self.comments(
+            let (method_string_lc, comments) = self.comments(
                 &parameters,
                 method_string,
                 path,
@@ -681,6 +682,7 @@ mod openapi {
                     .strip_prefix("realm_")
                     .unwrap_or(real_fn_name.as_str())
                     .to_string(),
+                comments,
                 real_fn_name,
                 tags: self
                     .tags
@@ -1750,13 +1752,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
 
         for RealmMethod {
             name,
+            comments,
             real_fn_name,
             tags,
             deprecated,
             has_optional_parameters,
             parameters,
-            summary,
-            description,
+            summary: _,
+            description: _,
             returns,
         } in realm_methods
         {
@@ -1764,20 +1767,8 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {{
             if no_realm_parameter {
                 continue;
             }
-            if let Some(summary) = summary
-                .as_ref()
-                .map(|desc| desc.replace('\n', "\n    /// "))
-            {
-                println!("    /// {summary}");
-            }
-            if let Some(description) = description
-                .as_ref()
-                .map(|desc| desc.replace("\n", "\n    /// "))
-            {
-                if summary.is_some() {
-                    println!("    ///");
-                }
-                println!("    /// {description}");
+            for comment in comments {
+                println!("    {comment}");
             }
             if add_cfg {
                 let tag = tags

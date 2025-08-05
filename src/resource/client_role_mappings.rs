@@ -3,6 +3,20 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Client Role Mappings</h4>
     /// Get client-level role mappings for the user or group, and the app
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `client_id`: client id (not clientId!)
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_get(
         &'a self,
         group_id: &'a str,
@@ -16,6 +30,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add client-level roles to the user or group role mapping
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_post(
         &'a self,
         group_id: &'a str,
@@ -29,6 +60,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete client-level roles from user or group role mapping
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_delete(
         &'a self,
         group_id: &'a str,
@@ -42,6 +90,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get available client-level roles that can be mapped to the user or group
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `client_id`: client id (not clientId!)
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/available`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_available_get(
         &'a self,
         group_id: &'a str,
@@ -55,6 +117,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective client-level role mappings This recurses any composite roles
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/composite`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_composite_get(
         &'a self,
         group_id: &'a str,
@@ -68,6 +145,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get client-level role mappings for the user or group, and the app
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `client_id`: client id (not clientId!)
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_get(
         &'a self,
         user_id: &'a str,
@@ -81,6 +172,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add client-level roles to the user or group role mapping
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_post(
         &'a self,
         user_id: &'a str,
@@ -94,6 +202,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete client-level roles from user or group role mapping
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_delete(
         &'a self,
         user_id: &'a str,
@@ -107,6 +232,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get available client-level roles that can be mapped to the user or group
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `client_id`: client id (not clientId!)
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/available`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_available_get(
         &'a self,
         user_id: &'a str,
@@ -120,6 +259,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective client-level role mappings This recurses any composite roles
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `client_id`: client id (not clientId!)
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Client Role Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/composite`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_composite_get(
         &'a self,
         user_id: &'a str,

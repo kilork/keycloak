@@ -3,11 +3,40 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Organizations</h4>
     /// Returns a paginated list of organizations filtered according to the specified parameters
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `brief_representation`: if false, return the full representation. Otherwise, only the basic fields are returned.
+    /// - `exact`: Boolean which defines whether the param 'search' must match exactly or not
+    /// - `first`: The position of the first result to be processed (pagination offset)
+    /// - `max`: The maximum number of results to be returned - defaults to 10
+    /// - `q`: A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+    /// - `search`: A String representing either an organization name or domain
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizations>
     pub fn organizations_get(&'a self) -> RealmOrganizationsGet<'a, TS> {
         RealmOrganizationsGet { realm_admin: self }
     }
 
     /// Creates a new organization
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `POST /admin/realms/{realm}/organizations`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmorganizations>
     pub fn organizations_post(
         &'a self,
         body: OrganizationRepresentation,
@@ -16,11 +45,38 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns the organizations counts.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `exact`: Boolean which defines whether the param 'search' must match exactly or not
+    /// - `q`: A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+    /// - `search`: A String representing either an organization name or domain
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/count`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationscount>
     pub fn organizations_count_get(&'a self) -> RealmOrganizationsCountGet<'a, TS> {
         RealmOrganizationsCountGet { realm_admin: self }
     }
 
     /// Returns the organizations associated with the user that has the specified id
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `member_id`
+    /// - `brief_representation`: if false, return the full representation. Otherwise, only the basic fields are returned.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/members/{member_id}/organizations`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsmembersmember_idorganizations>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/members/{member-id}/organizations`
     pub fn organizations_members_with_member_id_organizations_get(
         &'a self,
         member_id: &'a str,
@@ -32,6 +88,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns the organization representation
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}`
     pub fn organizations_with_org_id_get(
         &'a self,
         org_id: &'a str,
@@ -41,6 +110,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Updates the organization
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `PUT /admin/realms/{realm}/organizations/{org_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/organizations/{org-id}`
     pub fn organizations_with_org_id_put(
         &'a self,
         org_id: &'a str,
@@ -51,6 +136,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Deletes the organization
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `DELETE /admin/realms/{realm}/organizations/{org_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}`
     pub fn organizations_with_org_id_delete(
         &'a self,
         org_id: &'a str,
@@ -60,6 +160,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns all identity providers associated with the organization
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/identity-providers`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/identity-providers`
     pub fn organizations_with_org_id_identity_providers_get(
         &'a self,
         org_id: &'a str,
@@ -71,7 +184,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Adds the identity provider with the specified id to the organization
     ///
-    /// Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `POST /admin/realms/{realm}/organizations/{org_id}/identity-providers`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_ididentity_providers>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/identity-providers`
     pub fn organizations_with_org_id_identity_providers_post(
         &'a self,
         org_id: &'a str,
@@ -83,7 +210,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Returns the identity provider associated with the organization that has the specified alias
     ///
-    /// Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `alias`
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providersalias>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}`
     pub fn organizations_with_org_id_identity_providers_with_alias_get(
         &'a self,
         org_id: &'a str,
@@ -98,7 +237,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Removes the identity provider with the specified alias from the organization
     ///
-    /// Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `alias`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `DELETE /admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_ididentity_providersalias>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}`
     pub fn organizations_with_org_id_identity_providers_with_alias_delete(
         &'a self,
         org_id: &'a str,
@@ -111,6 +264,24 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns a paginated list of organization members filtered according to the specified parameters
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `exact`: Boolean which defines whether the param 'search' must match exactly or not
+    /// - `first`: The position of the first result to be processed (pagination offset)
+    /// - `max`: The maximum number of results to be returned. Defaults to 10
+    /// - `membership_type`: The membership type
+    /// - `search`: A String representing either a member's username, e-mail, first name, or last name.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/members`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members`
     pub fn organizations_with_org_id_members_get(
         &'a self,
         org_id: &'a str,
@@ -123,7 +294,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Adds the user with the specified id as a member of the organization
     ///
-    /// Adds, or associates, an existing user with the organization. If no user is found, or if it is already associated with the organization, an error response is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `POST /admin/realms/{realm}/organizations/{org_id}/members`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembers>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members`
     pub fn organizations_with_org_id_members_post(
         &'a self,
         org_id: &'a str,
@@ -134,6 +319,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns number of members in the organization.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/members/count`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmemberscount>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/count`
     pub fn organizations_with_org_id_members_count_get(
         &'a self,
         org_id: &'a str,
@@ -143,6 +341,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Invites an existing user to the organization, using the specified user id
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `POST /admin/realms/{realm}/organizations/{org_id}/members/invite-existing-user`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_existing_user>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members/invite-existing-user`
     pub fn organizations_with_org_id_members_invite_existing_user_post(
         &'a self,
         org_id: &'a str,
@@ -156,7 +370,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.
     ///
-    /// If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `POST /admin/realms/{realm}/organizations/{org_id}/members/invite-user`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_user>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members/invite-user`
     pub fn organizations_with_org_id_members_invite_user_post(
         &'a self,
         org_id: &'a str,
@@ -168,7 +396,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Returns the member of the organization with the specified id
     ///
-    /// Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `member_id`
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/members/{member_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}`
     pub fn organizations_with_org_id_members_with_member_id_get(
         &'a self,
         org_id: &'a str,
@@ -182,7 +422,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Removes the user with the specified id from the organization
     ///
-    /// Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `member_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `DELETE /admin/realms/{realm}/organizations/{org_id}/members/{member_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idmembersmember_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/members/{member-id}`
     pub fn organizations_with_org_id_members_with_member_id_delete(
         &'a self,
         org_id: &'a str,
@@ -195,6 +449,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns the organizations associated with the user that has the specified id
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `org_id`
+    /// - `member_id`
+    /// - `brief_representation`: if false, return the full representation. Otherwise, only the basic fields are returned.
+    ///
+    /// Resource: `Organizations`
+    ///
+    /// `GET /admin/realms/{realm}/organizations/{org_id}/members/{member_id}/organizations`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_idorganizations>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}/organizations`
     pub fn organizations_with_org_id_members_with_member_id_organizations_get(
         &'a self,
         org_id: &'a str,

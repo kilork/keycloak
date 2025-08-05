@@ -4,7 +4,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Identity Providers</h4>
     /// Import identity provider from JSON body
     ///
-    /// Import identity provider from uploaded JSON file
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `POST /admin/realms/{realm}/identity-provider/import-config`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmidentity_providerimport_config>
     pub fn identity_provider_import_config_post(
         &'a self,
         body: TypeMap<String, Value>,
@@ -15,11 +24,39 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// List identity providers
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `brief_representation`: Boolean which defines whether brief representations are returned (default: false)
+    /// - `first`: Pagination offset
+    /// - `max`: Maximum results size (defaults to 100)
+    /// - `realm_only`: Boolean which defines if only realm-level IDPs (not associated with orgs) should be returned (default: false)
+    /// - `search`: Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact ("name"). Default prefixed.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstances>
     pub fn identity_provider_instances_get(&'a self) -> RealmIdentityProviderInstancesGet<'a, TS> {
         RealmIdentityProviderInstancesGet { realm_admin: self }
     }
 
     /// Create a new identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `POST /admin/realms/{realm}/identity-provider/instances`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstances>
     pub fn identity_provider_instances_post(
         &'a self,
         body: IdentityProviderRepresentation,
@@ -29,6 +66,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_get(
         &'a self,
         alias: &'a str,
@@ -39,6 +87,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_put(
         &'a self,
         alias: &'a str,
@@ -49,6 +111,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_delete(
         &'a self,
         alias: &'a str,
@@ -58,6 +133,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Export public broker configuration for identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `format`: Format to use
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/export`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasexport>
     pub fn identity_provider_instances_with_alias_export_get(
         &'a self,
         alias: &'a str,
@@ -69,6 +158,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     pub fn identity_provider_instances_with_alias_management_permissions_get(
         &'a self,
         alias: &'a str,
@@ -81,6 +181,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `body`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     pub fn identity_provider_instances_with_alias_management_permissions_put(
         &'a self,
         alias: &'a str,
@@ -94,6 +206,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get mapper types for identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmapper_types>
     pub fn identity_provider_instances_with_alias_mapper_types_get(
         &'a self,
         alias: &'a str,
@@ -105,6 +228,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get mappers for identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappers>
     pub fn identity_provider_instances_with_alias_mappers_get(
         &'a self,
         alias: &'a str,
@@ -115,6 +249,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a mapper to identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `POST /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstancesaliasmappers>
     pub fn identity_provider_instances_with_alias_mappers_post(
         &'a self,
         alias: &'a str,
@@ -125,6 +273,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get mapper by id for the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `id`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_get(
         &'a self,
         alias: &'a str,
@@ -136,6 +296,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update a mapper for the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `id`: Mapper id
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_put(
         &'a self,
         alias: &'a str,
@@ -149,6 +324,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete a mapper for the identity provider
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    /// - `id`: Mapper id
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_delete(
         &'a self,
         alias: &'a str,
@@ -161,6 +350,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Reaload keys for the identity provider if the provider supports it, "true" is returned if reload was performed, "false" if not.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `alias`
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasreload_keys>
     pub fn identity_provider_instances_with_alias_reload_keys_get(
         &'a self,
         alias: &'a str,
@@ -170,6 +370,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the identity provider factory for that provider id
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `provider_id`: The provider id to get the factory
+    ///
+    /// Resource: `Identity Providers`
+    ///
+    /// `GET /admin/realms/{realm}/identity-provider/providers/{provider_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmidentity_providerprovidersprovider_id>
     pub fn identity_provider_providers_with_provider_id_get(
         &'a self,
         provider_id: &'a str,

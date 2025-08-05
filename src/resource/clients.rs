@@ -4,12 +4,39 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Clients</h4>
     /// Get clients belonging to the realm.
     ///
-    /// If a client can’t be retrieved from the storage due to a problem with the underlying storage, it is silently removed from the returned list. This ensures that concurrent modifications to the list don’t prevent callers from retrieving this list.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_id`: filter by clientId
+    /// - `first`: the first result
+    /// - `max`: the max results to return
+    /// - `q`
+    /// - `search`: whether this is a search query or a getClientById query
+    /// - `viewable_only`: filter clients that cannot be viewed in full by admin
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclients>
     pub fn clients_get(&'a self) -> RealmClientsGet<'a, TS> {
         RealmClientsGet { realm_admin: self }
     }
 
     /// Create a new client Client’s client_id must be unique!
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `POST /admin/realms/{realm}/clients`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclients>
     pub fn clients_post(
         &'a self,
         body: ClientRepresentation,
@@ -18,6 +45,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get representation of the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_get(
         &'a self,
         client_uuid: &'a str,
@@ -27,6 +67,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_put(
         &'a self,
         client_uuid: &'a str,
@@ -37,6 +93,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}`
     pub fn clients_with_client_uuid_delete(
         &'a self,
         client_uuid: &'a str,
@@ -46,6 +117,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the client secret
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secret>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     pub fn clients_with_client_uuid_client_secret_get(
         &'a self,
         client_uuid: &'a str,
@@ -55,6 +139,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Generate a new secret for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/client-secret`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidclient_secret>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/client-secret`
     pub fn clients_with_client_uuid_client_secret_post(
         &'a self,
         client_uuid: &'a str,
@@ -64,6 +161,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the rotated client secret
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     pub fn clients_with_client_uuid_client_secret_rotated_get(
         &'a self,
         client_uuid: &'a str,
@@ -73,6 +183,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Invalidate the rotated secret for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/client-secret/rotated`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidclient_secretrotated>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/client-secret/rotated`
     pub fn clients_with_client_uuid_client_secret_rotated_delete(
         &'a self,
         client_uuid: &'a str,
@@ -82,6 +207,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get default client scopes.  Only name and ids are returned.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiddefault_client_scopes>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes`
     pub fn clients_with_client_uuid_default_client_scopes_get(
         &'a self,
         client_uuid: &'a str,
@@ -91,6 +229,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_default_client_scopes_get(self.realm, client_uuid)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_default_client_scopes_with_client_scope_id_put(
         &'a self,
         client_uuid: &'a str,
@@ -104,6 +257,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/default-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuiddefault_client_scopesclientscopeid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/default-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_default_client_scopes_with_client_scope_id_delete(
         &'a self,
         client_uuid: &'a str,
@@ -118,6 +286,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Create JSON with payload of example access token
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `audience`
+    /// - `scope`
+    /// - `user_id`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-access-token`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_access_token>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-access-token`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_access_token_get(
         &'a self,
         client_uuid: &'a str,
@@ -129,6 +313,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Create JSON with payload of example id token
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `audience`
+    /// - `scope`
+    /// - `user_id`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-id-token`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_id_token>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-id-token`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_id_token_get(
         &'a self,
         client_uuid: &'a str,
@@ -140,6 +340,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Create JSON with payload of example user info
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `scope`
+    /// - `user_id`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/generate-example-userinfo`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesgenerate_example_userinfo>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-userinfo`
     pub fn clients_with_client_uuid_evaluate_scopes_generate_example_userinfo_get(
         &'a self,
         client_uuid: &'a str,
@@ -152,7 +367,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Return list of all protocol mappers, which will be used when generating tokens issued for particular client.
     ///
-    /// This means protocol mappers assigned to this client directly and protocol mappers assigned to all client scopes of this client.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `scope`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/protocol-mappers`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesprotocol_mappers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/protocol-mappers`
     pub fn clients_with_client_uuid_evaluate_scopes_protocol_mappers_get(
         &'a self,
         client_uuid: &'a str,
@@ -165,7 +392,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get effective scope mapping of all roles of particular role container, which this client is defacto allowed to have in the accessToken issued for him.
     ///
-    /// This contains scope mappings, which this client has directly, as well as scope mappings, which are granted to all client scopes, which are linked with this client.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_container_id`: either realm name OR client UUID
+    /// - `scope`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/granted`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridgranted>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/granted`
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_granted_get(
         &'a self,
         client_uuid: &'a str,
@@ -181,7 +421,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get roles, which this client doesn't have scope for and can't have them in the accessToken issued for him.
     ///
-    /// Defacto all the other roles of particular role container, which are not in {@link #getGrantedScopeMappings()}
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_container_id`: either realm name OR client UUID
+    /// - `scope`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/evaluate-scopes/scope-mappings/{role_container_id}/not-granted`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidevaluate_scopesscope_mappingsrolecontaineridnot_granted>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/scope-mappings/{roleContainerId}/not-granted`
     pub fn clients_with_client_uuid_evaluate_scopes_scope_mappings_with_role_container_id_not_granted_get(
         &'a self,
         client_uuid: &'a str,
@@ -195,6 +448,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         }
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `provider_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/installation/providers/{provider_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidinstallationprovidersproviderid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/installation/providers/{providerId}`
     pub fn clients_with_client_uuid_installation_providers_with_provider_id_get(
         &'a self,
         client_uuid: &'a str,
@@ -209,6 +477,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     pub fn clients_with_client_uuid_management_permissions_get(
         &'a self,
         client_uuid: &'a str,
@@ -219,6 +500,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidmanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/management/permissions`
     pub fn clients_with_client_uuid_management_permissions_put(
         &'a self,
         client_uuid: &'a str,
@@ -234,6 +529,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Register a cluster node with the client Manually register cluster node to this client - usually it’s not needed to call this directly as adapter should handle by sending registration request to Keycloak
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/nodes`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidnodes>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/nodes`
     pub fn clients_with_client_uuid_nodes_post(
         &'a self,
         client_uuid: &'a str,
@@ -244,6 +555,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Unregister a cluster node from the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `node`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/nodes/{node}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidnodesnode>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/nodes/{node}`
     pub fn clients_with_client_uuid_nodes_with_node_delete(
         &'a self,
         client_uuid: &'a str,
@@ -254,6 +581,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get application offline session count Returns a number of offline user sessions associated with this client { "count": number }
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-session-count`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_session_count>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-session-count`
     pub fn clients_with_client_uuid_offline_session_count_get(
         &'a self,
         client_uuid: &'a str,
@@ -263,6 +603,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get offline sessions for client Returns a list of offline user sessions associated with this client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `first`: Paging offset
+    /// - `max`: Maximum results size (defaults to 100)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/offline-sessions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoffline_sessions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/offline-sessions`
     pub fn clients_with_client_uuid_offline_sessions_get(
         &'a self,
         client_uuid: &'a str,
@@ -274,6 +629,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get optional client scopes.  Only name and ids are returned.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidoptional_client_scopes>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes`
     pub fn clients_with_client_uuid_optional_client_scopes_get(
         &'a self,
         client_uuid: &'a str,
@@ -283,6 +651,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_clients_with_client_uuid_optional_client_scopes_get(self.realm, client_uuid)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_optional_client_scopes_with_client_scope_id_put(
         &'a self,
         client_uuid: &'a str,
@@ -296,6 +679,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/optional-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidoptional_client_scopesclientscopeid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/optional-client-scopes/{clientScopeId}`
     pub fn clients_with_client_uuid_optional_client_scopes_with_client_scope_id_delete(
         &'a self,
         client_uuid: &'a str,
@@ -310,6 +708,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Push the client's revocation policy to its admin URL If the client has an admin URL, push revocation policy to it.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/push-revocation`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidpush_revocation>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/push-revocation`
     pub fn clients_with_client_uuid_push_revocation_post(
         &'a self,
         client_uuid: &'a str,
@@ -319,6 +730,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Generate a new registration access token for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/registration-access-token`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidregistration_access_token>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/registration-access-token`
     pub fn clients_with_client_uuid_registration_access_token_post(
         &'a self,
         client_uuid: &'a str,
@@ -328,6 +752,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get a user dedicated to the service account
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/service-account-user`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidservice_account_user>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/service-account-user`
     pub fn clients_with_client_uuid_service_account_user_get(
         &'a self,
         client_uuid: &'a str,
@@ -337,6 +774,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get application session count Returns a number of user sessions associated with this client { "count": number }
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/session-count`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidsession_count>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/session-count`
     pub fn clients_with_client_uuid_session_count_get(
         &'a self,
         client_uuid: &'a str,
@@ -346,6 +796,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Test if registered cluster nodes are available Tests availability by sending 'ping' request to all cluster nodes.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/test-nodes-available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidtest_nodes_available>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/test-nodes-available`
     pub fn clients_with_client_uuid_test_nodes_available_get(
         &'a self,
         client_uuid: &'a str,
@@ -356,6 +819,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get user sessions for client Returns a list of user sessions associated with this client
     ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `first`: Paging offset
+    /// - `max`: Maximum results size (defaults to 100)
+    ///
+    /// Resource: `Clients`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/user-sessions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuiduser_sessions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/user-sessions`
     pub fn clients_with_client_uuid_user_sessions_get(
         &'a self,
         client_uuid: &'a str,

@@ -3,13 +3,42 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Groups</h4>
     /// Get group hierarchy.  Only `name` and `id` are returned.  `subGroups` are only returned when using the `search` or `q` parameter. If none of these parameters is provided, the top-level groups are returned without `subGroups` being filled.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `brief_representation`
+    /// - `exact`
+    /// - `first`
+    /// - `max`
+    /// - `populate_hierarchy`
+    /// - `q`
+    /// - `search`
+    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each group (default: true
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroups>
     pub fn groups_get(&'a self) -> RealmGroupsGet<'a, TS> {
         RealmGroupsGet { realm_admin: self }
     }
 
     /// create or add a top level realm groupSet or create child.
     ///
-    /// This will update the group and set the parent if it exists. Create it and set the parent if the group doesn’t exist.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `POST /admin/realms/{realm}/groups`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmgroups>
     pub fn groups_post(
         &'a self,
         body: GroupRepresentation,
@@ -18,10 +47,34 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns the groups counts.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `search`
+    /// - `top`
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups/count`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupscount>
     pub fn groups_count_get(&'a self) -> RealmGroupsCountGet<'a, TS> {
         RealmGroupsCountGet { realm_admin: self }
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_get(
         &'a self,
         group_id: &'a str,
@@ -31,6 +84,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update group, ignores subgroups.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `PUT /admin/realms/{realm}/groups/{group_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_put(
         &'a self,
         group_id: &'a str,
@@ -40,6 +109,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_groups_with_group_id_put(self.realm, group_id, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_delete(
         &'a self,
         group_id: &'a str,
@@ -49,6 +132,25 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return a paginated list of subgroups that have a parent group corresponding to the group on the URL
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `brief_representation`: Boolean which defines whether brief groups representations are returned or not (default: false)
+    /// - `exact`: Boolean which defines whether the params "search" must match exactly or not
+    /// - `first`: The position of the first result to be returned (pagination offset).
+    /// - `max`: The maximum number of results that are to be returned. Defaults to 10
+    /// - `search`: A String representing either an exact group name or a partial name
+    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/children`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_get(
         &'a self,
         group_id: &'a str,
@@ -61,7 +163,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Set or create child.
     ///
-    /// This will just set the parent if it exists. Create it and set the parent if the group doesn’t exist.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `POST /admin/realms/{realm}/groups/{group_id}/children`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_post(
         &'a self,
         group_id: &'a str,
@@ -72,6 +188,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_get(
         &'a self,
         group_id: &'a str,
@@ -82,6 +211,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether client Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `body`
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_put(
         &'a self,
         group_id: &'a str,
@@ -93,6 +236,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get users Returns a stream of users, filtered according to query parameters
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `brief_representation`: Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
+    /// - `first`: Pagination offset
+    /// - `max`: Maximum results size (defaults to 100)
+    ///
+    /// Resource: `Groups`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/members`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     pub fn groups_with_group_id_members_get(
         &'a self,
         group_id: &'a str,

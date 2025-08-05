@@ -3,6 +3,19 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Scope Mappings</h4>
     /// Get all scope mappings for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings`
     #[deprecated]
     pub fn client_scopes_with_client_scope_id_scope_mappings_get(
         &'a self,
@@ -16,6 +29,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the roles associated with a client's scope Returns roles for the client.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_get(
         &'a self,
         client_scope_id: &'a str,
@@ -31,6 +58,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add client-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_post(
         &'a self,
         client_scope_id: &'a str,
@@ -47,6 +91,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove client-level roles from the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -63,6 +124,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/available`
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &'a self,
         client_scope_id: &'a str,
@@ -78,6 +153,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/clients/{client}/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/clients/{client}/composite`
     pub fn client_scopes_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &'a self,
         client_scope_id: &'a str,
@@ -91,6 +181,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_get(
         &'a self,
         client_scope_id: &'a str,
@@ -104,6 +207,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a set of realm-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_post(
         &'a self,
         client_scope_id: &'a str,
@@ -118,6 +237,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove a set of realm-level roles from the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm`
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -132,6 +267,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles that are available to attach to this client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/available`
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_available_get(
         &'a self,
         client_scope_id: &'a str,
@@ -146,7 +294,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
     ///
-    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-scopes/{client_scope_id}/scope-mappings/realm/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_scopesclient_scope_idscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-scopes/{client-scope-id}/scope-mappings/realm/composite`
     pub fn client_scopes_with_client_scope_id_scope_mappings_realm_composite_get(
         &'a self,
         client_scope_id: &'a str,
@@ -158,6 +318,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get all scope mappings for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings`
     #[deprecated]
     pub fn client_templates_with_client_scope_id_scope_mappings_get(
         &'a self,
@@ -171,6 +344,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the roles associated with a client's scope Returns roles for the client.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_get(
         &'a self,
         client_scope_id: &'a str,
@@ -186,6 +373,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add client-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_post(
         &'a self,
         client_scope_id: &'a str,
@@ -202,6 +406,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove client-level roles from the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}`
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -218,6 +439,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/available`
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_available_get(
         &'a self,
         client_scope_id: &'a str,
@@ -233,6 +468,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `client`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/clients/{client}/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/clients/{client}/composite`
     pub fn client_templates_with_client_scope_id_scope_mappings_clients_with_client_composite_get(
         &'a self,
         client_scope_id: &'a str,
@@ -247,6 +497,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_get(
         &'a self,
         client_scope_id: &'a str,
@@ -260,6 +523,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a set of realm-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_post(
         &'a self,
         client_scope_id: &'a str,
@@ -274,6 +553,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove a set of realm-level roles from the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm`
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -288,6 +583,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles that are available to attach to this client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/available`
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_available_get(
         &'a self,
         client_scope_id: &'a str,
@@ -302,7 +610,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
     ///
-    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/client-templates/{client_scope_id}/scope-mappings/realm/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_templatesclient_scope_idscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/client-templates/{client-scope-id}/scope-mappings/realm/composite`
     pub fn client_templates_with_client_scope_id_scope_mappings_realm_composite_get(
         &'a self,
         client_scope_id: &'a str,
@@ -314,6 +634,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get all scope mappings for the client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings`
     #[deprecated]
     pub fn clients_with_client_uuid_scope_mappings_get(
         &'a self,
@@ -324,6 +657,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the roles associated with a client's scope Returns roles for the client.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_get(
         &'a self,
         client_uuid: &'a str,
@@ -339,6 +686,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add client-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_post(
         &'a self,
         client_uuid: &'a str,
@@ -355,6 +719,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove client-level roles from the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclient>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}`
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_delete(
         &'a self,
         client_uuid: &'a str,
@@ -371,6 +752,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// The available client-level roles Returns the roles for the client that can be associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client`
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclientavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/available`
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_available_get(
         &'a self,
         client_uuid: &'a str,
@@ -386,6 +781,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective client roles Returns the roles for the client that are associated with the client's scope.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `client`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/clients/{client}/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsclientsclientcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/clients/{client}/composite`
     pub fn clients_with_client_uuid_scope_mappings_clients_with_client_composite_get(
         &'a self,
         client_uuid: &'a str,
@@ -399,6 +809,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles associated with the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     pub fn clients_with_client_uuid_scope_mappings_realm_get(
         &'a self,
         client_uuid: &'a str,
@@ -409,6 +832,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a set of realm-level roles to the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     pub fn clients_with_client_uuid_scope_mappings_realm_post(
         &'a self,
         client_uuid: &'a str,
@@ -419,6 +858,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove a set of realm-level roles from the client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidscope_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm`
     pub fn clients_with_client_uuid_scope_mappings_realm_delete(
         &'a self,
         client_uuid: &'a str,
@@ -433,6 +888,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles that are available to attach to this client's scope
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/available`
     pub fn clients_with_client_uuid_scope_mappings_realm_available_get(
         &'a self,
         client_uuid: &'a str,
@@ -447,7 +915,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get effective realm-level roles associated with the client’s scope What this does is recurse any composite roles associated with the client’s scope and adds the roles to this lists.
     ///
-    /// The method is really to show a comprehensive total view of realm-level roles associated with the client.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Scope Mappings`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/scope-mappings/realm/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidscope_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/scope-mappings/realm/composite`
     pub fn clients_with_client_uuid_scope_mappings_realm_composite_get(
         &'a self,
         client_uuid: &'a str,

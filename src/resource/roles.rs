@@ -3,6 +3,23 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Roles</h4>
     /// Get all roles for the realm or client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `brief_representation`
+    /// - `first`
+    /// - `max`
+    /// - `search`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidroles>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles`
     pub fn clients_with_client_uuid_roles_get(
         &'a self,
         client_uuid: &'a str,
@@ -14,6 +31,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Create a new role for the realm or client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidroles>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles`
     pub fn clients_with_client_uuid_roles_post(
         &'a self,
         client_uuid: &'a str,
@@ -24,6 +57,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_get(
         &'a self,
         client_uuid: &'a str,
@@ -38,6 +85,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_put(
         &'a self,
         client_uuid: &'a str,
@@ -54,6 +118,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_name>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}`
     pub fn clients_with_client_uuid_roles_with_role_name_delete(
         &'a self,
         client_uuid: &'a str,
@@ -68,6 +148,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get composites of the role
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_get(
         &'a self,
         client_uuid: &'a str,
@@ -83,6 +177,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a composite to the role
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `POST /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_post(
         &'a self,
         client_uuid: &'a str,
@@ -99,6 +210,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove roles from the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidrolesrole_namecomposites>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_delete(
         &'a self,
         client_uuid: &'a str,
@@ -115,6 +243,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get client-level roles for the client that are in the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/clients/{client_uuid}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesclientsclient_uuid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{client-uuid}`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_clients_with_client_uuid_get(
         &'a self,
         client_uuid: &'a str,
@@ -130,6 +272,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles of the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/composites/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namecompositesrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/realm`
     pub fn clients_with_client_uuid_roles_with_role_name_composites_realm_get(
         &'a self,
         client_uuid: &'a str,
@@ -145,6 +301,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns a stream of groups that have the specified role name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: the role name.
+    /// - `brief_representation`: if false, return a full representation of the {@code GroupRepresentation} objects.
+    /// - `first`: first result to return. Ignored if negative or {@code null}.
+    /// - `max`: maximum number of results to return. Ignored if negative or {@code null}.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/groups`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namegroups>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/groups`
     pub fn clients_with_client_uuid_roles_with_role_name_groups_get(
         &'a self,
         client_uuid: &'a str,
@@ -158,6 +331,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_get(
         &'a self,
         client_uuid: &'a str,
@@ -173,6 +360,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`
+    /// - `body`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `PUT /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidrolesrole_namemanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/management/permissions`
     pub fn clients_with_client_uuid_roles_with_role_name_management_permissions_put(
         &'a self,
         client_uuid: &'a str,
@@ -190,6 +392,23 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns a stream of users that have the specified role name.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`: id of client (not client-id!)
+    /// - `role_name`: the role name.
+    /// - `brief_representation`: Boolean which defines whether brief representations are returned (default: false)
+    /// - `first`: first result to return. Ignored if negative or {@code null}.
+    /// - `max`: maximum number of results to return. Ignored if negative or {@code null}.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/clients/{client_uuid}/roles/{role_name}/users`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidrolesrole_nameusers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/users`
     pub fn clients_with_client_uuid_roles_with_role_name_users_get(
         &'a self,
         client_uuid: &'a str,
@@ -203,11 +422,38 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get all roles for the realm or client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `brief_representation`
+    /// - `first`
+    /// - `max`
+    /// - `search`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmroles>
     pub fn roles_get(&'a self) -> RealmRolesGet<'a, TS> {
         RealmRolesGet { realm_admin: self }
     }
 
     /// Create a new role for the realm or client
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `POST /admin/realms/{realm}/roles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmroles>
     pub fn roles_post(
         &'a self,
         body: RoleRepresentation,
@@ -216,6 +462,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_name>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_get(
         &'a self,
         role_name: &'a str,
@@ -225,6 +484,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Update a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `PUT /admin/realms/{realm}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmrolesrole_name>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_put(
         &'a self,
         role_name: &'a str,
@@ -235,6 +510,21 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete a role by name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `DELETE /admin/realms/{realm}/roles/{role_name}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmrolesrole_name>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}`
     pub fn roles_with_role_name_delete(
         &'a self,
         role_name: &'a str,
@@ -244,6 +534,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get composites of the role
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecomposites>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_get(
         &'a self,
         role_name: &'a str,
@@ -254,6 +557,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add a composite to the role
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `POST /admin/realms/{realm}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmrolesrole_namecomposites>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_post(
         &'a self,
         role_name: &'a str,
@@ -264,6 +583,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Remove roles from the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `DELETE /admin/realms/{realm}/roles/{role_name}/composites`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmrolesrole_namecomposites>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/roles/{role-name}/composites`
     pub fn roles_with_role_name_composites_delete(
         &'a self,
         role_name: &'a str,
@@ -274,6 +609,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get client-level roles for the client that are in the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_uuid`
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/composites/clients/{client_uuid}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesclientsclient_uuid>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/clients/{client-uuid}`
     pub fn roles_with_role_name_composites_clients_with_client_uuid_get(
         &'a self,
         client_uuid: &'a str,
@@ -289,6 +638,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles of the role's composite
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: role's name (not id!)
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/composites/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_namecompositesrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/composites/realm`
     pub fn roles_with_role_name_composites_realm_get(
         &'a self,
         role_name: &'a str,
@@ -299,6 +661,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns a stream of groups that have the specified role name
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: the role name.
+    /// - `brief_representation`: if false, return a full representation of the {@code GroupRepresentation} objects.
+    /// - `first`: first result to return. Ignored if negative or {@code null}.
+    /// - `max`: maximum number of results to return. Ignored if negative or {@code null}.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/groups`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_namegroups>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/groups`
     pub fn roles_with_role_name_groups_get(
         &'a self,
         role_name: &'a str,
@@ -310,6 +688,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_namemanagementpermissions>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/management/permissions`
     pub fn roles_with_role_name_management_permissions_get(
         &'a self,
         role_name: &'a str,
@@ -320,6 +711,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Return object stating whether role Authorization permissions have been initialized or not and a reference
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`
+    /// - `body`
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `PUT /admin/realms/{realm}/roles/{role_name}/management/permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmrolesrole_namemanagementpermissions>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/roles/{role-name}/management/permissions`
     pub fn roles_with_role_name_management_permissions_put(
         &'a self,
         role_name: &'a str,
@@ -331,6 +736,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Returns a stream of users that have the specified role name.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `role_name`: the role name.
+    /// - `brief_representation`: Boolean which defines whether brief representations are returned (default: false)
+    /// - `first`: first result to return. Ignored if negative or {@code null}.
+    /// - `max`: maximum number of results to return. Ignored if negative or {@code null}.
+    ///
+    /// Resource: `Roles`
+    ///
+    /// `GET /admin/realms/{realm}/roles/{role_name}/users`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmrolesrole_nameusers>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/roles/{role-name}/users`
     pub fn roles_with_role_name_users_get(
         &'a self,
         role_name: &'a str,

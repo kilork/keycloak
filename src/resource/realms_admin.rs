@@ -3,6 +3,16 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Realms Admin</h4>
     /// Get the top-level representation of the realm It will not include nested information like User and Client representations.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealm>
     pub fn get(
         &'a self,
     ) -> impl Future<Output = Result<RealmRepresentation, KeycloakError>> + use<'a, TS> {
@@ -11,7 +21,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Update the top-level information of the realm Any user, roles or client information in the representation will be ignored.
     ///
-    /// This will only update top-level attributes of the realm.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealm>
     pub fn put(
         &'a self,
         body: RealmRepresentation,
@@ -20,6 +41,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete the realm
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealm>
     pub fn delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
@@ -27,11 +60,45 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get admin events Returns all admin events, or filters events based on URL query parameters listed here
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `auth_client`
+    /// - `auth_ip_address`
+    /// - `auth_realm`
+    /// - `auth_user`: user id
+    /// - `date_from`: From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    /// - `date_to`: To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    /// - `direction`: The direction to sort events by (asc or desc)
+    /// - `first`
+    /// - `max`: Maximum results size (defaults to 100)
+    /// - `operation_types`
+    /// - `resource_path`
+    /// - `resource_types`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/admin-events`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmadmin_events>
     pub fn admin_events_get(&'a self) -> RealmAdminEventsGet<'a, TS> {
         RealmAdminEventsGet { realm_admin: self }
     }
 
     /// Delete all admin events
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/admin-events`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmadmin_events>
     pub fn admin_events_delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
@@ -39,6 +106,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Base path for importing clients under this realm.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/client-description-converter`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmclient_description_converter>
     pub fn client_description_converter_post(
         &'a self,
         body: String,
@@ -47,10 +125,32 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_description_converter_post(self.realm, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `include_global_policies`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/client-policies/policies`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_policiespolicies>
     pub fn client_policies_policies_get(&'a self) -> RealmClientPoliciesPoliciesGet<'a, TS> {
         RealmClientPoliciesPoliciesGet { realm_admin: self }
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/client-policies/policies`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclient_policiespolicies>
     pub fn client_policies_policies_put(
         &'a self,
         body: ClientPoliciesRepresentation,
@@ -59,10 +159,32 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_client_policies_policies_put(self.realm, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `include_global_profiles`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/client-policies/profiles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_policiesprofiles>
     pub fn client_policies_profiles_get(&'a self) -> RealmClientPoliciesProfilesGet<'a, TS> {
         RealmClientPoliciesProfilesGet { realm_admin: self }
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/client-policies/profiles`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclient_policiesprofiles>
     pub fn client_policies_profiles_put(
         &'a self,
         body: ClientProfilesRepresentation,
@@ -73,7 +195,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Get client session stats Returns a JSON map.
     ///
-    /// The key is the client id, the value is the number of sessions that currently are active with that client. Only clients that actually have a session associated with them will be in this map.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/client-session-stats`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_session_stats>
     pub fn client_session_stats_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<TypeMap<String, String>>, KeycloakError>> + use<'a, TS>
@@ -83,7 +213,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// List all client types available in the current realm
     ///
-    /// This endpoint returns a list of both global and realm level client types and the attributes they set
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/client-types`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmclient_types>
     pub fn client_types_get(
         &'a self,
     ) -> impl Future<Output = Result<ClientTypesRepresentation, KeycloakError>> + use<'a, TS> {
@@ -92,7 +230,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Update a client type
     ///
-    /// This endpoint allows you to update a realm level client type
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/client-types`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmclient_types>
     pub fn client_types_put(
         &'a self,
         body: ClientTypesRepresentation,
@@ -100,6 +249,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_client_types_put(self.realm, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/credential-registrators`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmcredential_registrators>
     pub fn credential_registrators_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<String>, KeycloakError>> + use<'a, TS> {
@@ -107,6 +265,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm default client scopes. Only name and ids are returned.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/default-default-client-scopes`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmdefault_default_client_scopes>
     pub fn default_default_client_scopes_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
@@ -115,6 +283,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_default_default_client_scopes_get(self.realm)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub fn default_default_client_scopes_with_client_scope_id_put(
         &'a self,
         client_scope_id: &'a str,
@@ -126,6 +308,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/default-default-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmdefault_default_client_scopesclientscopeid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/default-default-client-scopes/{clientScopeId}`
     pub fn default_default_client_scopes_with_client_scope_id_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -138,6 +334,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get group hierarchy.  Only name and ids are returned.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/default-groups`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmdefault_groups>
     pub fn default_groups_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<GroupRepresentation>, KeycloakError>> + use<'a, TS>
@@ -145,6 +351,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_default_groups_get(self.realm)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/default-groups/{group_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmdefault_groupsgroupid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/default-groups/{groupId}`
     pub fn default_groups_with_group_id_put(
         &'a self,
         group_id: &'a str,
@@ -153,6 +373,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_default_groups_with_group_id_put(self.realm, group_id)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/default-groups/{group_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmdefault_groupsgroupid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/default-groups/{groupId}`
     pub fn default_groups_with_group_id_delete(
         &'a self,
         group_id: &'a str,
@@ -162,6 +396,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm optional client scopes. Only name and ids are returned.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/default-optional-client-scopes`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmdefault_optional_client_scopes>
     pub fn default_optional_client_scopes_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<ClientScopeRepresentation>, KeycloakError>> + use<'a, TS>
@@ -170,6 +414,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_default_optional_client_scopes_get(self.realm)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    ///
+    /// REST method: `PUT /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub fn default_optional_client_scopes_with_client_scope_id_put(
         &'a self,
         client_scope_id: &'a str,
@@ -181,6 +439,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             )
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client_scope_id`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/default-optional-client-scopes/{client_scope_id}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmdefault_optional_client_scopesclientscopeid>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/default-optional-client-scopes/{clientScopeId}`
     pub fn default_optional_client_scopes_with_client_scope_id_delete(
         &'a self,
         client_scope_id: &'a str,
@@ -193,11 +465,42 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get events Returns all events, or filters them based on URL query parameters listed here
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `client`: App or oauth client name
+    /// - `date_from`: From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    /// - `date_to`: To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
+    /// - `direction`: The direction to sort events by (asc or desc)
+    /// - `first`: Paging offset
+    /// - `ip_address`: IP Address
+    /// - `max`: Maximum results size (defaults to 100)
+    /// - `type_`: The types of events to return
+    /// - `user`: User id
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/events`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmevents>
     pub fn events_get(&'a self) -> RealmEventsGet<'a, TS> {
         RealmEventsGet { realm_admin: self }
     }
 
     /// Delete all events
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/events`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmevents>
     pub fn events_delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
@@ -205,6 +508,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get the events provider configuration Returns JSON object with events provider configuration
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/events/config`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmeventsconfig>
     pub fn events_config_get(
         &'a self,
     ) -> impl Future<Output = Result<RealmEventsConfigRepresentation, KeycloakError>> + use<'a, TS>
@@ -212,7 +525,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_events_config_get(self.realm)
     }
 
-    /// Update the events provider Change the events provider and/or its configuration
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/events/config`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmeventsconfig>
     pub fn events_config_put(
         &'a self,
         body: RealmEventsConfigRepresentation,
@@ -220,6 +544,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_events_config_put(self.realm, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `path`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/group-by-path/{path}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroup_by_pathpath>
     pub fn group_by_path_with_path_get(
         &'a self,
         path: &'a str,
@@ -228,12 +562,32 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_group_by_path_with_path_get(self.realm, path)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/localization`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmlocalization>
     pub fn localization_get(
         &'a self,
     ) -> impl Future<Output = Result<TypeVec<String>, KeycloakError>> + use<'a, TS> {
         self.admin.realm_localization_get(self.realm)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `locale`
+    /// - `use_realm_default_locale_fallback`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/localization/{locale}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_get(
         &'a self,
         locale: &'a str,
@@ -245,6 +599,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Import localization from uploaded JSON file
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `locale`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/localization/{locale}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_post(
         &'a self,
         locale: &'a str,
@@ -254,6 +622,18 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_localization_with_locale_post(self.realm, locale, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `locale`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/localization/{locale}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocale>
     pub fn localization_with_locale_delete(
         &'a self,
         locale: &'a str,
@@ -262,6 +642,17 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_localization_with_locale_delete(self.realm, locale)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `key`
+    /// - `locale`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/localization/{locale}/{key}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_get(
         &'a self,
         key: &'a str,
@@ -271,6 +662,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_localization_with_locale_with_key_get(self.realm, key, locale)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `key`
+    /// - `locale`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/localization/{locale}/{key}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_put(
         &'a self,
         key: &'a str,
@@ -281,6 +686,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_localization_with_locale_with_key_put(self.realm, key, locale, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `key`
+    /// - `locale`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/localization/{locale}/{key}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmlocalizationlocalekey>
     pub fn localization_with_locale_with_key_delete(
         &'a self,
         key: &'a str,
@@ -292,7 +710,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Removes all user sessions.
     ///
-    /// Any client that has an admin url will also be told to invalidate any sessions they have.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/logout-all`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmlogout_all>
     pub fn logout_all_post(
         &'a self,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
@@ -300,11 +726,34 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Partial export of existing realm into a JSON file.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `export_clients`
+    /// - `export_groups_and_roles`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/partial-export`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmpartial_export>
     pub fn partial_export_post(&'a self) -> RealmPartialExportPost<'a, TS> {
         RealmPartialExportPost { realm_admin: self }
     }
 
     /// Partial import from a JSON file to an existing realm.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/partialImport`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmpartialimport>
     pub fn partial_import_post(
         &'a self,
         body: RealmRepresentation,
@@ -313,6 +762,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Push the realm's revocation policy to any client that has an admin url associated with it.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/push-revocation`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmpush_revocation>
     pub fn push_revocation_post(
         &'a self,
     ) -> impl Future<Output = Result<GlobalRequestResult, KeycloakError>> + use<'a, TS> {
@@ -321,7 +780,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
 
     /// Remove a specific user session.
     ///
-    /// Any client that has an admin url will also be told to invalidate this particular session.
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `session`
+    /// - `is_offline`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `DELETE /admin/realms/{realm}/sessions/{session}`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmsessionssession>
     pub fn sessions_with_session_delete(
         &'a self,
         session: &'a str,
@@ -333,6 +804,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Test SMTP connection with current logged in user
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `POST /admin/realms/{realm}/testSMTPConnection`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmtestsmtpconnection>
     #[deprecated]
     pub fn test_smtp_connection_post(
         &'a self,
@@ -341,6 +825,15 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
         self.admin.realm_test_smtp_connection_post(self.realm, body)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `GET /admin/realms/{realm}/users-management-permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusers_management_permissions>
     pub fn users_management_permissions_get(
         &'a self,
     ) -> impl Future<Output = Result<ManagementPermissionReference, KeycloakError>> + use<'a, TS>
@@ -349,6 +842,16 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
             .realm_users_management_permissions_get(self.realm)
     }
 
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `body`
+    ///
+    /// Resource: `Realms Admin`
+    ///
+    /// `PUT /admin/realms/{realm}/users-management-permissions`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_put_adminrealmsrealmusers_management_permissions>
     pub fn users_management_permissions_put(
         &'a self,
         body: ManagementPermissionReference,

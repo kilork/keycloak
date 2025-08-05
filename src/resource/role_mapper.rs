@@ -3,6 +3,19 @@ use super::*;
 impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     // <h4>Role Mapper</h4>
     /// Get role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings`
     pub fn groups_with_group_id_role_mappings_get(
         &'a self,
         group_id: &'a str,
@@ -12,6 +25,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_get(
         &'a self,
         group_id: &'a str,
@@ -22,6 +48,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add realm-level role mappings to the user
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_post(
         &'a self,
         group_id: &'a str,
@@ -32,6 +74,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete realm-level role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/realm`
     pub fn groups_with_group_id_role_mappings_realm_delete(
         &'a self,
         group_id: &'a str,
@@ -42,6 +100,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles that can be mapped
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/available`
     pub fn groups_with_group_id_role_mappings_realm_available_get(
         &'a self,
         group_id: &'a str,
@@ -52,6 +123,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `group_id`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/realm/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/realm/composite`
     pub fn groups_with_group_id_role_mappings_realm_composite_get(
         &'a self,
         group_id: &'a str,
@@ -63,6 +148,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappings>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings`
     pub fn users_with_user_id_role_mappings_get(
         &'a self,
         user_id: &'a str,
@@ -72,6 +170,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_get(
         &'a self,
         user_id: &'a str,
@@ -82,6 +193,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Add realm-level role mappings to the user
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_post(
         &'a self,
         user_id: &'a str,
@@ -92,6 +219,22 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Delete realm-level role mappings
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `body`
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/realm`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsrealm>
+    ///
+    /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/realm`
     pub fn users_with_user_id_role_mappings_realm_delete(
         &'a self,
         user_id: &'a str,
@@ -102,6 +245,19 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get realm-level roles that can be mapped
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/available`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmavailable>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/available`
     pub fn users_with_user_id_role_mappings_realm_available_get(
         &'a self,
         user_id: &'a str,
@@ -112,6 +268,20 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     }
 
     /// Get effective realm-level role mappings This will recurse all composite roles to get the result.
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `user_id`
+    /// - `brief_representation`: if false, return roles with their attributes
+    ///
+    /// Resource: `Role Mapper`
+    ///
+    /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/realm/composite`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.3.1/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsrealmcomposite>
+    ///
+    /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/realm/composite`
     pub fn users_with_user_id_role_mappings_realm_composite_get(
         &'a self,
         user_id: &'a str,
