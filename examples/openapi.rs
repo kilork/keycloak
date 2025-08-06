@@ -1603,7 +1603,7 @@ fn generate_method_builder(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, V
             }
             println!("impl <'a, TS> {struct_name}<'a, TS>");
             println!("where");
-            println!("    TS: KeycloakTokenSupplier,");
+            println!("    TS: KeycloakTokenSupplier + Send + Sync,");
             println!("{{");
             for parameter in &optional_parameters {
                 if let Some(comment) = &parameter.description {
@@ -1619,7 +1619,7 @@ fn generate_method_builder(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, V
 
             println!("impl<TS> Builder<'_, {struct_name}<'_, TS>>");
             println!("where");
-            println!("    TS: KeycloakTokenSupplier,");
+            println!("    TS: KeycloakTokenSupplier + Send + Sync,");
             println!("{{");
             for parameter in &optional_parameters {
                 if let Some(comment) = &parameter.description {
@@ -1709,7 +1709,7 @@ fn generate_method_structs(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, V
             if add_cfg {
                 println!("#[cfg(feature = \"tag-{tag_str}\")]",);
             }
-            println!("impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod");
+            println!("impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod");
             println!("    for {struct_name}<'a, TS>");
             println!("{{");
             println!("    type Output = {returns};");
@@ -1742,10 +1742,12 @@ fn generate_method_structs(add_cfg: bool, tag_realm_methods: &[(&Cow<'_, str>, V
             }
             println!("impl<'a, TS> IntoFuture for {struct_name}<'a, TS>");
             println!("where");
-            println!("    TS: KeycloakTokenSupplier,");
+            println!("    TS: KeycloakTokenSupplier + Send + Sync,");
             println!("{{");
             println!("    type Output = Result<{returns}, KeycloakError>;");
-            println!("    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;");
+            println!(
+                "    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;"
+            );
 
             println!("    fn into_future(self) -> Self::IntoFuture {{");
             println!("        Box::pin(self.opts(Default::default()))");

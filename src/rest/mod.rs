@@ -189,9 +189,15 @@ pub trait KeycloakRealmAdminMethod {
     type Output;
     type Args: Default;
 
-    fn opts(self, args: Self::Args) -> impl Future<Output = Result<Self::Output, KeycloakError>>;
+    fn opts(
+        self,
+        args: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + Send;
 
-    fn with_default<F>(self, f: F) -> impl Future<Output = Result<Self::Output, KeycloakError>>
+    fn with_default<F>(
+        self,
+        f: F,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + Send
     where
         Self: Sized,
         Self::Args: Default,

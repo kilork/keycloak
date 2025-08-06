@@ -411,7 +411,7 @@ pub struct RealmIdentityProviderInstancesGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmIdentityProviderInstancesGet<'a, TS>
 {
     type Output = TypeVec<IdentityProviderRepresentation>;
@@ -442,10 +442,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmIdentityProviderInstancesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<IdentityProviderRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -463,7 +463,7 @@ pub struct RealmIdentityProviderInstancesWithAliasExportGetArgs {
     pub format: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmIdentityProviderInstancesWithAliasExportGet<'a, TS>
 {
     type Output = DefaultResponse;
@@ -485,10 +485,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmIdentityProviderInstancesWithAliasExportGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<DefaultResponse, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -503,7 +503,7 @@ mod builder {
     // <h4>Identity Providers</h4>
     impl<'a, TS> RealmIdentityProviderInstancesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -529,7 +529,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmIdentityProviderInstancesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -560,7 +560,7 @@ mod builder {
 
     impl<'a, TS> RealmIdentityProviderInstancesWithAliasExportGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Format to use
         pub fn format(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -570,7 +570,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmIdentityProviderInstancesWithAliasExportGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Format to use
         pub fn format(mut self, value: impl Into<Option<String>>) -> Self {

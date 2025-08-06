@@ -889,7 +889,9 @@ pub struct RealmAdminEventsGetArgs {
     pub resource_types: Option<Vec<String>>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmAdminEventsGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmAdminEventsGet<'a, TS>
+{
     type Output = TypeVec<AdminEventRepresentation>;
     type Args = RealmAdminEventsGetArgs;
 
@@ -930,10 +932,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmAdminEvent
 
 impl<'a, TS> IntoFuture for RealmAdminEventsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<AdminEventRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -949,7 +951,7 @@ pub struct RealmClientPoliciesPoliciesGetArgs {
     pub include_global_policies: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientPoliciesPoliciesGet<'a, TS>
 {
     type Output = ClientPoliciesRepresentation;
@@ -969,10 +971,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientPoliciesPoliciesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<ClientPoliciesRepresentation, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -988,7 +990,7 @@ pub struct RealmClientPoliciesProfilesGetArgs {
     pub include_global_profiles: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientPoliciesProfilesGet<'a, TS>
 {
     type Output = ClientProfilesRepresentation;
@@ -1008,10 +1010,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientPoliciesProfilesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<ClientProfilesRepresentation, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1044,7 +1046,9 @@ pub struct RealmEventsGetArgs {
     pub user: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmEventsGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmEventsGet<'a, TS>
+{
     type Output = TypeVec<EventRepresentation>;
     type Args = RealmEventsGetArgs;
 
@@ -1079,10 +1083,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmEventsGet<
 
 impl<'a, TS> IntoFuture for RealmEventsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<EventRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1099,7 +1103,7 @@ pub struct RealmLocalizationWithLocaleGetArgs {
     pub use_realm_default_locale_fallback: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmLocalizationWithLocaleGet<'a, TS>
 {
     type Output = TypeMap<String, TypeString>;
@@ -1121,10 +1125,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmLocalizationWithLocaleGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeMap<String, TypeString>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1141,7 +1145,9 @@ pub struct RealmPartialExportPostArgs {
     pub export_groups_and_roles: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmPartialExportPost<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmPartialExportPost<'a, TS>
+{
     type Output = RealmRepresentation;
     type Args = RealmPartialExportPostArgs;
 
@@ -1162,10 +1168,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmPartialExp
 
 impl<'a, TS> IntoFuture for RealmPartialExportPost<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<RealmRepresentation, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1182,7 +1188,7 @@ pub struct RealmSessionsWithSessionDeleteArgs {
     pub is_offline: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmSessionsWithSessionDelete<'a, TS>
 {
     type Output = DefaultResponse;
@@ -1202,10 +1208,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmSessionsWithSessionDelete<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<DefaultResponse, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1220,7 +1226,7 @@ mod builder {
     // <h4>Realms Admin</h4>
     impl<'a, TS> RealmAdminEventsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn auth_client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().auth_client(value)
@@ -1267,7 +1273,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmAdminEventsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn auth_client(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.auth_client = value.into();
@@ -1326,7 +1332,7 @@ mod builder {
 
     impl<'a, TS> RealmClientPoliciesPoliciesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn include_global_policies(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().include_global_policies(value)
@@ -1335,7 +1341,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientPoliciesPoliciesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn include_global_policies(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.include_global_policies = value.into();
@@ -1345,7 +1351,7 @@ mod builder {
 
     impl<'a, TS> RealmClientPoliciesProfilesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn include_global_profiles(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().include_global_profiles(value)
@@ -1354,7 +1360,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientPoliciesProfilesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn include_global_profiles(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.include_global_profiles = value.into();
@@ -1364,7 +1370,7 @@ mod builder {
 
     impl<'a, TS> RealmEventsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// App or oauth client name
         pub fn client(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1406,7 +1412,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmEventsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// App or oauth client name
         pub fn client(mut self, value: impl Into<Option<String>>) -> Self {
@@ -1457,7 +1463,7 @@ mod builder {
 
     impl<'a, TS> RealmLocalizationWithLocaleGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn use_realm_default_locale_fallback(
             self,
@@ -1469,7 +1475,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmLocalizationWithLocaleGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn use_realm_default_locale_fallback(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.use_realm_default_locale_fallback = value.into();
@@ -1479,7 +1485,7 @@ mod builder {
 
     impl<'a, TS> RealmPartialExportPost<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn export_clients(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().export_clients(value)
@@ -1491,7 +1497,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmPartialExportPost<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn export_clients(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.export_clients = value.into();
@@ -1505,7 +1511,7 @@ mod builder {
 
     impl<'a, TS> RealmSessionsWithSessionDelete<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn is_offline(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().is_offline(value)
@@ -1514,7 +1520,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmSessionsWithSessionDelete<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn is_offline(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.is_offline = value.into();

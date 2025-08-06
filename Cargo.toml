@@ -14,7 +14,7 @@ repository = "https://github.com/kilork/keycloak"
 rust-version = "1.87"
 
 [features]
-default = ["tags-all"]
+default = ["tags-all", "resource-builder"]
 resource-builder = ["builder", "resource"]
 schemars = ["dep:schemars"]
 multipart = ["reqwest/multipart"]

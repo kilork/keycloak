@@ -890,7 +890,9 @@ pub struct RealmUsersGetArgs {
     pub username: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmUsersGet<'a, TS>
+{
     type Output = TypeVec<UserRepresentation>;
     type Args = RealmUsersGetArgs;
 
@@ -935,10 +937,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersGet<'
 
 impl<'a, TS> IntoFuture for RealmUsersGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -967,7 +969,9 @@ pub struct RealmUsersCountGetArgs {
     pub username: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersCountGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmUsersCountGet<'a, TS>
+{
     type Output = i32;
     type Args = RealmUsersCountGetArgs;
 
@@ -1000,10 +1004,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersCount
 
 impl<'a, TS> IntoFuture for RealmUsersCountGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<i32, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1021,7 +1025,9 @@ pub struct RealmUsersWithUserIdGetArgs {
     pub user_profile_metadata: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersWithUserIdGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmUsersWithUserIdGet<'a, TS>
+{
     type Output = UserRepresentation;
     type Args = RealmUsersWithUserIdGetArgs;
 
@@ -1041,10 +1047,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmUsersWithU
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<UserRepresentation, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1067,7 +1073,7 @@ pub struct RealmUsersWithUserIdExecuteActionsEmailPutArgs {
     pub redirect_uri: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS>
 {
     type Output = DefaultResponse;
@@ -1096,10 +1102,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<DefaultResponse, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1119,7 +1125,7 @@ pub struct RealmUsersWithUserIdGroupsGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdGroupsGet<'a, TS>
 {
     type Output = TypeVec<GroupRepresentation>;
@@ -1147,10 +1153,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdGroupsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<GroupRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1167,7 +1173,7 @@ pub struct RealmUsersWithUserIdGroupsCountGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdGroupsCountGet<'a, TS>
 {
     type Output = TypeMap<String, i64>;
@@ -1185,10 +1191,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdGroupsCountGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeMap<String, i64>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1208,7 +1214,7 @@ pub struct RealmUsersWithUserIdResetPasswordEmailPutArgs {
     pub redirect_uri: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdResetPasswordEmailPut<'a, TS>
 {
     type Output = DefaultResponse;
@@ -1234,10 +1240,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdResetPasswordEmailPut<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<DefaultResponse, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1259,7 +1265,7 @@ pub struct RealmUsersWithUserIdSendVerifyEmailPutArgs {
     pub redirect_uri: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdSendVerifyEmailPut<'a, TS>
 {
     type Output = DefaultResponse;
@@ -1287,10 +1293,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdSendVerifyEmailPut<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<DefaultResponse, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1305,7 +1311,7 @@ mod builder {
     // <h4>Users</h4>
     impl<'a, TS> RealmUsersGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1367,7 +1373,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -1443,7 +1449,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersCountGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// email filter
         pub fn email(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1479,7 +1485,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersCountGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// email filter
         pub fn email(mut self, value: impl Into<Option<String>>) -> Self {
@@ -1523,7 +1529,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Indicates if the user profile metadata should be added to the response
         pub fn user_profile_metadata(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1533,7 +1539,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Indicates if the user profile metadata should be added to the response
         pub fn user_profile_metadata(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -1544,7 +1550,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdExecuteActionsEmailPut<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Client id
         pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1562,7 +1568,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdExecuteActionsEmailPut<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Client id
         pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
@@ -1583,7 +1589,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdGroupsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().brief_representation(value)
@@ -1601,7 +1607,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdGroupsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.brief_representation = value.into();
@@ -1623,7 +1629,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdGroupsCountGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().search(value)
@@ -1632,7 +1638,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdGroupsCountGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.search = value.into();
@@ -1642,7 +1648,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdResetPasswordEmailPut<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// client id
         pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1656,7 +1662,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdResetPasswordEmailPut<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// client id
         pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
@@ -1672,7 +1678,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdSendVerifyEmailPut<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Client id
         pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1690,7 +1696,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdSendVerifyEmailPut<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Client id
         pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
