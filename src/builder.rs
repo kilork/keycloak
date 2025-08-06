@@ -23,10 +23,10 @@ impl<M: KeycloakRealmAdminMethod> From<M> for Builder<'_, M> {
 
 impl<'m, M: 'm> IntoFuture for Builder<'m, M>
 where
-    M: KeycloakRealmAdminMethod,
+    M: KeycloakRealmAdminMethod + Send + Sync,
 {
     type Output = Result<M::Output, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'm + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'm + Future<Output = Self::Output> + Send>>;
 
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.method.opts(self.args))

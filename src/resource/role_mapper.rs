@@ -306,7 +306,7 @@ pub struct RealmGroupsWithGroupIdRoleMappingsRealmCompositeGetArgs {
     pub brief_representation: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
@@ -330,10 +330,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -351,7 +351,7 @@ pub struct RealmUsersWithUserIdRoleMappingsRealmCompositeGetArgs {
     pub brief_representation: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
@@ -375,10 +375,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -393,7 +393,7 @@ mod builder {
     // <h4>Role Mapper</h4>
     impl<'a, TS> RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return roles with their attributes
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -403,7 +403,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmGroupsWithGroupIdRoleMappingsRealmCompositeGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return roles with their attributes
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -414,7 +414,7 @@ mod builder {
 
     impl<'a, TS> RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return roles with their attributes
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -424,7 +424,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmUsersWithUserIdRoleMappingsRealmCompositeGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return roles with their attributes
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {

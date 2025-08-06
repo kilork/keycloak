@@ -132,7 +132,9 @@ pub struct RealmComponentsGetArgs {
     pub type_: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmComponentsGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmComponentsGet<'a, TS>
+{
     type Output = TypeVec<ComponentRepresentation>;
     type Args = RealmComponentsGetArgs;
 
@@ -152,10 +154,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmComponents
 
 impl<'a, TS> IntoFuture for RealmComponentsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<ComponentRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -172,7 +174,7 @@ pub struct RealmComponentsWithIdSubComponentTypesGetArgs {
     pub type_: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmComponentsWithIdSubComponentTypesGet<'a, TS>
 {
     type Output = TypeVec<ComponentTypeRepresentation>;
@@ -194,10 +196,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmComponentsWithIdSubComponentTypesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<ComponentTypeRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -212,7 +214,7 @@ mod builder {
     // <h4>Component</h4>
     impl<'a, TS> RealmComponentsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn name(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().name(value)
@@ -227,7 +229,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmComponentsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn name(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.name = value.into();
@@ -245,7 +247,7 @@ mod builder {
 
     impl<'a, TS> RealmComponentsWithIdSubComponentTypesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().type_(value)
@@ -254,7 +256,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmComponentsWithIdSubComponentTypesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.type_ = value.into();

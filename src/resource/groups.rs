@@ -282,7 +282,9 @@ pub struct RealmGroupsGetArgs {
     pub sub_groups_count: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmGroupsGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmGroupsGet<'a, TS>
+{
     type Output = TypeVec<GroupRepresentation>;
     type Args = RealmGroupsGetArgs;
 
@@ -315,10 +317,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmGroupsGet<
 
 impl<'a, TS> IntoFuture for RealmGroupsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<GroupRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -335,7 +337,9 @@ pub struct RealmGroupsCountGetArgs {
     pub top: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmGroupsCountGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmGroupsCountGet<'a, TS>
+{
     type Output = TypeMap<String, i64>;
     type Args = RealmGroupsCountGetArgs;
 
@@ -351,10 +355,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmGroupsCoun
 
 impl<'a, TS> IntoFuture for RealmGroupsCountGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeMap<String, i64>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -382,7 +386,7 @@ pub struct RealmGroupsWithGroupIdChildrenGetArgs {
     pub sub_groups_count: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmGroupsWithGroupIdChildrenGet<'a, TS>
 {
     type Output = TypeVec<GroupRepresentation>;
@@ -416,10 +420,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmGroupsWithGroupIdChildrenGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<GroupRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -441,7 +445,7 @@ pub struct RealmGroupsWithGroupIdMembersGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmGroupsWithGroupIdMembersGet<'a, TS>
 {
     type Output = TypeVec<UserRepresentation>;
@@ -469,10 +473,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmGroupsWithGroupIdMembersGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -487,7 +491,7 @@ mod builder {
     // <h4>Groups</h4>
     impl<'a, TS> RealmGroupsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().brief_representation(value)
@@ -518,7 +522,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmGroupsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.brief_representation = value.into();
@@ -557,7 +561,7 @@ mod builder {
 
     impl<'a, TS> RealmGroupsCountGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().search(value)
@@ -569,7 +573,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmGroupsCountGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.search = value.into();
@@ -583,7 +587,7 @@ mod builder {
 
     impl<'a, TS> RealmGroupsWithGroupIdChildrenGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief groups representations are returned or not (default: false)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -613,7 +617,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmGroupsWithGroupIdChildrenGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief groups representations are returned or not (default: false)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -649,7 +653,7 @@ mod builder {
 
     impl<'a, TS> RealmGroupsWithGroupIdMembersGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -667,7 +671,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmGroupsWithGroupIdMembersGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {

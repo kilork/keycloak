@@ -779,7 +779,7 @@ pub struct RealmClientsWithClientUuidRolesGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidRolesGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
@@ -809,10 +809,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidRolesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -837,7 +837,7 @@ pub struct RealmClientsWithClientUuidRolesWithRoleNameGroupsGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS>
 {
     type Output = TypeVec<UserRepresentation>;
@@ -866,10 +866,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -894,7 +894,7 @@ pub struct RealmClientsWithClientUuidRolesWithRoleNameUsersGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS>
 {
     type Output = TypeVec<UserRepresentation>;
@@ -923,10 +923,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -945,7 +945,9 @@ pub struct RealmRolesGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmRolesGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmRolesGet<'a, TS>
+{
     type Output = TypeVec<RoleRepresentation>;
     type Args = RealmRolesGetArgs;
 
@@ -970,10 +972,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmRolesGet<'
 
 impl<'a, TS> IntoFuture for RealmRolesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -996,7 +998,7 @@ pub struct RealmRolesWithRoleNameGroupsGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmRolesWithRoleNameGroupsGet<'a, TS>
 {
     type Output = TypeVec<UserRepresentation>;
@@ -1024,10 +1026,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmRolesWithRoleNameGroupsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1050,7 +1052,7 @@ pub struct RealmRolesWithRoleNameUsersGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmRolesWithRoleNameUsersGet<'a, TS>
 {
     type Output = TypeVec<UserRepresentation>;
@@ -1076,10 +1078,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmRolesWithRoleNameUsersGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1094,7 +1096,7 @@ mod builder {
     // <h4>Roles</h4>
     impl<'a, TS> RealmClientsWithClientUuidRolesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().brief_representation(value)
@@ -1112,7 +1114,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidRolesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.brief_representation = value.into();
@@ -1134,7 +1136,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return a full representation of the {@code GroupRepresentation} objects.
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1152,7 +1154,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameGroupsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return a full representation of the {@code GroupRepresentation} objects.
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -1173,7 +1175,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1191,7 +1193,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidRolesWithRoleNameUsersGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -1212,7 +1214,7 @@ mod builder {
 
     impl<'a, TS> RealmRolesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().brief_representation(value)
@@ -1230,7 +1232,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmRolesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.brief_representation = value.into();
@@ -1252,7 +1254,7 @@ mod builder {
 
     impl<'a, TS> RealmRolesWithRoleNameGroupsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return a full representation of the {@code GroupRepresentation} objects.
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1270,7 +1272,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmRolesWithRoleNameGroupsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// if false, return a full representation of the {@code GroupRepresentation} objects.
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {
@@ -1291,7 +1293,7 @@ mod builder {
 
     impl<'a, TS> RealmRolesWithRoleNameUsersGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
@@ -1309,7 +1311,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmRolesWithRoleNameUsersGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Boolean which defines whether brief representations are returned (default: false)
         pub fn brief_representation(mut self, value: impl Into<Option<bool>>) -> Self {

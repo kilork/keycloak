@@ -865,7 +865,9 @@ pub struct RealmClientsGetArgs {
     pub viewable_only: Option<bool>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmClientsGet<'a, TS> {
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmClientsGet<'a, TS>
+{
     type Output = TypeVec<ClientRepresentation>;
     type Args = RealmClientsGetArgs;
 
@@ -894,10 +896,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod for RealmClientsGet
 
 impl<'a, TS> IntoFuture for RealmClientsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<ClientRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -920,7 +922,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet
     pub user_id: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
 {
     type Output = AccessToken;
@@ -949,10 +951,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 impl<'a, TS> IntoFuture
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<AccessToken, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -975,7 +977,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGetArgs
     pub user_id: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
 {
     type Output = IDToken;
@@ -1004,10 +1006,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 impl<'a, TS> IntoFuture
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<IDToken, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1029,7 +1031,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGetArg
     pub user_id: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
 {
     type Output = Value;
@@ -1053,10 +1055,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 impl<'a, TS> IntoFuture
     for RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<Value, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1075,7 +1077,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesProtocolMappersGetArgs {
     pub scope: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
 {
     type Output = TypeVec<ProtocolMapperEvaluationRepresentation>;
@@ -1097,10 +1099,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<ProtocolMapperEvaluationRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1123,7 +1125,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     pub scope: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
@@ -1148,10 +1150,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 impl<'a, TS> IntoFuture
     for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1175,7 +1177,7 @@ pub struct RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContaine
     pub scope: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdNotGrantedGet<
         'a,
         TS,
@@ -1206,10 +1208,10 @@ impl<'a, TS> IntoFuture
         TS,
     >
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1230,7 +1232,7 @@ pub struct RealmClientsWithClientUuidOfflineSessionsGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
 {
     type Output = TypeVec<UserSessionRepresentation>;
@@ -1253,10 +1255,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserSessionRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1277,7 +1279,7 @@ pub struct RealmClientsWithClientUuidUserSessionsGetArgs {
     pub max: Option<i32>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmClientsWithClientUuidUserSessionsGet<'a, TS>
 {
     type Output = TypeVec<UserSessionRepresentation>;
@@ -1300,10 +1302,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmClientsWithClientUuidUserSessionsGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<UserSessionRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -1318,7 +1320,7 @@ mod builder {
     // <h4>Clients</h4>
     impl<'a, TS> RealmClientsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// filter by clientId
         pub fn client_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
@@ -1347,7 +1349,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// filter by clientId
         pub fn client_id(mut self, value: impl Into<Option<String>>) -> Self {
@@ -1382,7 +1384,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().audience(value)
@@ -1397,7 +1399,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleAccessTokenGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.audience = value.into();
@@ -1415,7 +1417,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn audience(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().audience(value)
@@ -1430,7 +1432,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleIdTokenGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn audience(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.audience = value.into();
@@ -1448,7 +1450,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().scope(value)
@@ -1460,7 +1462,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesGenerateExampleUserinfoGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.scope = value.into();
@@ -1474,7 +1476,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().scope(value)
@@ -1483,7 +1485,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidEvaluateScopesProtocolMappersGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.scope = value.into();
@@ -1494,7 +1496,7 @@ mod builder {
     impl<'a, TS>
         RealmClientsWithClientUuidEvaluateScopesScopeMappingsWithRoleContainerIdGrantedGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().scope(value)
@@ -1510,7 +1512,7 @@ mod builder {
             >,
         >
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.scope = value.into();
@@ -1524,7 +1526,7 @@ mod builder {
             TS,
         >
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().scope(value)
@@ -1540,7 +1542,7 @@ mod builder {
             >,
         >
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn scope(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.scope = value.into();
@@ -1550,7 +1552,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidOfflineSessionsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Paging offset
         pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
@@ -1564,7 +1566,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidOfflineSessionsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Paging offset
         pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
@@ -1580,7 +1582,7 @@ mod builder {
 
     impl<'a, TS> RealmClientsWithClientUuidUserSessionsGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Paging offset
         pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
@@ -1594,7 +1596,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmClientsWithClientUuidUserSessionsGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         /// Paging offset
         pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {

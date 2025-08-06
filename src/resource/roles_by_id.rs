@@ -268,7 +268,7 @@ pub struct RealmRolesByIdWithRoleIdCompositesGetArgs {
     pub search: Option<String>,
 }
 
-impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
     for RealmRolesByIdWithRoleIdCompositesGet<'a, TS>
 {
     type Output = TypeVec<RoleRepresentation>;
@@ -292,10 +292,10 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdminMethod
 
 impl<'a, TS> IntoFuture for RealmRolesByIdWithRoleIdCompositesGet<'a, TS>
 where
-    TS: KeycloakTokenSupplier,
+    TS: KeycloakTokenSupplier + Send + Sync,
 {
     type Output = Result<TypeVec<RoleRepresentation>, KeycloakError>;
-    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output>>>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
     fn into_future(self) -> Self::IntoFuture {
         Box::pin(self.opts(Default::default()))
     }
@@ -310,7 +310,7 @@ mod builder {
     // <h4>Roles (by ID)</h4>
     impl<'a, TS> RealmRolesByIdWithRoleIdCompositesGet<'a, TS>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn first(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
             self.builder().first(value)
@@ -325,7 +325,7 @@ mod builder {
 
     impl<TS> Builder<'_, RealmRolesByIdWithRoleIdCompositesGet<'_, TS>>
     where
-        TS: KeycloakTokenSupplier,
+        TS: KeycloakTokenSupplier + Send + Sync,
     {
         pub fn first(mut self, value: impl Into<Option<i32>>) -> Self {
             self.args.first = value.into();
