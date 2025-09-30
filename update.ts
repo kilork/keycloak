@@ -46,7 +46,7 @@ class Keycloak {
     const response = await fetch("https://www.keycloak.org/documentation");
     const body = await responseBody(response);
 
-    return new Version((/Documentation [^>]+>([^<]+)/.exec(body) ?? [])[1]);
+    return new Version((/Documentation <span class="badge bg-primary">([^<]+)/.exec(body) ?? [])[1]);
   }
 
   apiUrl(version: Version): string {
