@@ -267,11 +267,11 @@ mod openapi {
     }
 
     impl ContentSchema {
-        fn to_rust_parameter_body_type(&self) -> Cow<str> {
+        fn to_rust_parameter_body_type(&self) -> Cow<'_, str> {
             self.schema.to_rust_type_ref(RefMode::Std)
         }
 
-        fn to_rust_return_type(&self) -> Cow<str> {
+        fn to_rust_return_type(&self) -> Cow<'_, str> {
             self.schema.to_rust_type_ref(RefMode::Owned)
         }
 
@@ -1105,7 +1105,7 @@ pub struct {name} {{
     }
 
     impl SchemaStruct<Kind> {
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             let property_types: HashSet<&Kind> = self.properties.values().collect();
             let property_type = match property_types.into_iter().collect::<Vec<_>>().as_slice() {
                 &[property_type_kind] => property_type_kind.to_rust_type(ref_mode),
