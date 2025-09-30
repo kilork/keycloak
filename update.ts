@@ -43,10 +43,10 @@ async function responseBody(response: Response): Promise<string> {
 
 class Keycloak {
   async latestVersion(): Promise<Version> {
-    const response = await fetch("https://keycloak.org");
+    const response = await fetch("https://www.keycloak.org/documentation");
     const body = await responseBody(response);
 
-    return new Version((/Latest release (.+)\s/.exec(body) ?? [])[1]);
+    return new Version((/Documentation [^>]+>([^<]+)/.exec(body) ?? [])[1]);
   }
 
   apiUrl(version: Version): string {
