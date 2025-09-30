@@ -71,7 +71,7 @@ struct RealmMethodParameter {
     description: Option<String>,
 }
 
-const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use"];
+const RESERVED_WORDS: &[&str] = &["type", "self", "static", "use", "if"];
 const TAG_NONE: &str = "tag-none";
 
 mod openapi {
@@ -981,7 +981,7 @@ mod openapi {
     }
 
     impl ObjectSchema<Kind> {
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             match self {
                 ObjectSchema::Struct(schema_struct) => schema_struct.to_rust_type(ref_mode),
                 ObjectSchema::Map(schema_map) => schema_map.to_rust_type(ref_mode),
@@ -1131,7 +1131,7 @@ pub struct {name} {{
     }
 
     impl SchemaMap<Kind> {
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             format!(
                 "TypeMap<String, {}>",
                 self.additional_properties.to_rust_type(ref_mode)
@@ -1147,7 +1147,7 @@ pub struct {name} {{
     }
 
     impl SchemaAllOf<Kind> {
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             match &self.all_of.as_slice() {
                 &[property] => property.to_rust_type(ref_mode),
                 _ => todo!(),
@@ -1207,11 +1207,11 @@ pub enum {name} {{
     }
 
     impl Kind {
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             self.to_rust_type_ref(ref_mode)
         }
 
-        fn to_rust_parameter_type(&self, required: bool) -> Cow<str> {
+        fn to_rust_parameter_type(&self, required: bool) -> Cow<'_, str> {
             let parameter_type = self.to_rust_type_ref(if required {
                 RefMode::Borrowed
             } else {
@@ -1224,7 +1224,7 @@ pub enum {name} {{
             }
         }
 
-        fn to_rust_type_ref(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type_ref(&self, ref_mode: RefMode) -> Cow<'_, str> {
             match self {
                 Kind::Generic(obj) => match obj {
                     Generic::Array {
@@ -1276,7 +1276,7 @@ pub enum {name} {{
     }
 
     impl Property {
-        fn to_rust_type_opt(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type_opt(&self, ref_mode: RefMode) -> Cow<'_, str> {
             let rust_type = self.to_rust_type(ref_mode);
             if self.required {
                 rust_type
@@ -1285,7 +1285,7 @@ pub enum {name} {{
             }
         }
 
-        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<str> {
+        fn to_rust_type(&self, ref_mode: RefMode) -> Cow<'_, str> {
             self.kind.to_rust_type(ref_mode)
         }
     }
