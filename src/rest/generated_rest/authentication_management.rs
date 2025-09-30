@@ -13,7 +13,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/authenticator-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationauthenticator_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationauthenticator_providers>
     pub async fn realm_authentication_authenticator_providers_get(
         &self,
         realm: &str,
@@ -40,7 +40,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/client-authenticator-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationclient_authenticator_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationclient_authenticator_providers>
     pub async fn realm_authentication_client_authenticator_providers_get(
         &self,
         realm: &str,
@@ -70,7 +70,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationconfig>
     #[deprecated]
     pub async fn realm_authentication_config_post(
         &self,
@@ -101,7 +101,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/config-description/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationconfig_descriptionproviderid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationconfig_descriptionproviderid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/config-description/{providerId}`
     pub async fn realm_authentication_config_description_with_provider_id_get(
@@ -133,7 +133,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationconfigid>
     pub async fn realm_authentication_config_with_id_get(
         &self,
         realm: &str,
@@ -166,7 +166,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmauthenticationconfigid>
     pub async fn realm_authentication_config_with_id_put(
         &self,
         realm: &str,
@@ -200,7 +200,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmauthenticationconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationconfigid>
     pub async fn realm_authentication_config_with_id_delete(
         &self,
         realm: &str,
@@ -232,7 +232,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutions>
     pub async fn realm_authentication_executions_post(
         &self,
         realm: &str,
@@ -262,7 +262,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/executions/{execution_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/executions/{executionId}`
     pub async fn realm_authentication_executions_with_execution_id_get(
@@ -296,7 +296,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/executions/{execution_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmauthenticationexecutionsexecutionid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationexecutionsexecutionid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/authentication/executions/{executionId}`
     pub async fn realm_authentication_executions_with_execution_id_delete(
@@ -331,7 +331,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidconfig>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/config`
     pub async fn realm_authentication_executions_with_execution_id_config_post(
@@ -366,7 +366,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/executions/{execution_id}/config/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionidconfigid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationexecutionsexecutionidconfigid>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/executions/{executionId}/config/{id}`
     #[deprecated]
@@ -403,7 +403,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/lower-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidlower_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidlower_priority>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/lower-priority`
     pub async fn realm_authentication_executions_with_execution_id_lower_priority_post(
@@ -437,7 +437,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/executions/{execution_id}/raise-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidraise_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationexecutionsexecutionidraise_priority>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/executions/{executionId}/raise-priority`
     pub async fn realm_authentication_executions_with_execution_id_raise_priority_post(
@@ -468,7 +468,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflows>
     pub async fn realm_authentication_flows_get(
         &self,
         realm: &str,
@@ -498,7 +498,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflows>
     pub async fn realm_authentication_flows_post(
         &self,
         realm: &str,
@@ -531,7 +531,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/copy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliascopy>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliascopy>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/copy`
     pub async fn realm_authentication_flows_with_flow_alias_copy_post(
@@ -565,7 +565,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows/{flow_alias}/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsflowaliasexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsflowaliasexecutions>
     ///
     /// REST method: `GET /admin/realms/{realm}/authentication/flows/{flowAlias}/executions`
     pub async fn realm_authentication_flows_with_flow_alias_executions_get(
@@ -600,7 +600,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/flows/{flow_alias}/executions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsflowaliasexecutions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsflowaliasexecutions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/authentication/flows/{flowAlias}/executions`
     pub async fn realm_authentication_flows_with_flow_alias_executions_put(
@@ -637,7 +637,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/executions/execution`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsexecution>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsexecution>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/executions/execution`
     pub async fn realm_authentication_flows_with_flow_alias_executions_execution_post(
@@ -674,7 +674,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/flows/{flow_alias}/executions/flow`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsflow>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationflowsflowaliasexecutionsflow>
     ///
     /// REST method: `POST /admin/realms/{realm}/authentication/flows/{flowAlias}/executions/flow`
     pub async fn realm_authentication_flows_with_flow_alias_executions_flow_post(
@@ -708,7 +708,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationflowsid>
     pub async fn realm_authentication_flows_with_id_get(
         &self,
         realm: &str,
@@ -741,7 +741,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmauthenticationflowsid>
     pub async fn realm_authentication_flows_with_id_put(
         &self,
         realm: &str,
@@ -775,7 +775,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/flows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmauthenticationflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationflowsid>
     pub async fn realm_authentication_flows_with_id_delete(
         &self,
         realm: &str,
@@ -804,7 +804,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/form-action-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationform_action_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationform_action_providers>
     pub async fn realm_authentication_form_action_providers_get(
         &self,
         realm: &str,
@@ -831,7 +831,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/form-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationform_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationform_providers>
     pub async fn realm_authentication_form_providers_get(
         &self,
         realm: &str,
@@ -858,7 +858,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/per-client-config-description`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationper_client_config_description>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationper_client_config_description>
     pub async fn realm_authentication_per_client_config_description_get(
         &self,
         realm: &str,
@@ -888,7 +888,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/register-required-action`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationregister_required_action>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationregister_required_action>
     pub async fn realm_authentication_register_required_action_post(
         &self,
         realm: &str,
@@ -917,7 +917,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actions>
     pub async fn realm_authentication_required_actions_get(
         &self,
         realm: &str,
@@ -945,7 +945,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsalias>
     pub async fn realm_authentication_required_actions_with_alias_get(
         &self,
         realm: &str,
@@ -978,7 +978,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsalias>
     pub async fn realm_authentication_required_actions_with_alias_put(
         &self,
         realm: &str,
@@ -1012,7 +1012,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/required-actions/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsalias>
     pub async fn realm_authentication_required_actions_with_alias_delete(
         &self,
         realm: &str,
@@ -1042,7 +1042,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions/{alias}/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
     pub async fn realm_authentication_required_actions_with_alias_config_get(
         &self,
         realm: &str,
@@ -1075,7 +1075,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/authentication/required-actions/{alias}/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
     pub async fn realm_authentication_required_actions_with_alias_config_put(
         &self,
         realm: &str,
@@ -1109,7 +1109,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/authentication/required-actions/{alias}/config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmauthenticationrequired_actionsaliasconfig>
     pub async fn realm_authentication_required_actions_with_alias_config_delete(
         &self,
         realm: &str,
@@ -1139,7 +1139,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/required-actions/{alias}/config-description`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsaliasconfig_description>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationrequired_actionsaliasconfig_description>
     pub async fn realm_authentication_required_actions_with_alias_config_description_get(
         &self,
         realm: &str,
@@ -1171,7 +1171,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/required-actions/{alias}/lower-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliaslower_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliaslower_priority>
     pub async fn realm_authentication_required_actions_with_alias_lower_priority_post(
         &self,
         realm: &str,
@@ -1203,7 +1203,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/authentication/required-actions/{alias}/raise-priority`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliasraise_priority>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmauthenticationrequired_actionsaliasraise_priority>
     pub async fn realm_authentication_required_actions_with_alias_raise_priority_post(
         &self,
         realm: &str,
@@ -1232,7 +1232,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/authentication/unregistered-required-actions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmauthenticationunregistered_required_actions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmauthenticationunregistered_required_actions>
     pub async fn realm_authentication_unregistered_required_actions_get(
         &self,
         realm: &str,

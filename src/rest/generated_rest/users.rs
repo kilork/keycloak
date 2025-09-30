@@ -27,7 +27,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusers>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_users_get(
         &self,
@@ -111,7 +111,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusers>
     pub async fn realm_users_post(
         &self,
         realm: &str,
@@ -132,20 +132,23 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// Parameters:
     ///
     /// - `realm`: realm name (not id!)
-    /// - `email`: email filter
-    /// - `email_verified`
+    /// - `email`: A String contained in email, or the complete email, if param "exact" is true
+    /// - `email_verified`: whether the email has been verified
     /// - `enabled`: Boolean representing if user is enabled or not
-    /// - `first_name`: first name filter
-    /// - `last_name`: last name filter
-    /// - `q`
-    /// - `search`: arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
-    /// - `username`: username filter
+    /// - `exact`: Boolean which defines whether the params "last", "first", "email" and "username" must match exactly
+    /// - `first_name`: A String contained in firstName, or the complete firstName, if param "exact" is true
+    /// - `idp_alias`: The alias of an Identity Provider linked to the user
+    /// - `idp_user_id`: The userId at an Identity Provider linked to the user
+    /// - `last_name`: A String contained in lastName, or the complete lastName, if param "exact" is true
+    /// - `q`: A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+    /// - `search`: A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and "foo" for exact search.
+    /// - `username`: A String contained in username, or the complete username, if param "exact" is true
     ///
     /// Resource: `Users`
     ///
     /// `GET /admin/realms/{realm}/users/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmuserscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmuserscount>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_users_count_get(
         &self,
@@ -153,7 +156,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         email: Option<String>,
         email_verified: Option<bool>,
         enabled: Option<bool>,
+        exact: Option<bool>,
         first_name: Option<String>,
+        idp_alias: Option<String>,
+        idp_user_id: Option<String>,
         last_name: Option<String>,
         q: Option<String>,
         search: Option<String>,
@@ -173,8 +179,17 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         if let Some(v) = enabled {
             builder = builder.query(&[("enabled", v)]);
         }
+        if let Some(v) = exact {
+            builder = builder.query(&[("exact", v)]);
+        }
         if let Some(v) = first_name {
             builder = builder.query(&[("firstName", v)]);
+        }
+        if let Some(v) = idp_alias {
+            builder = builder.query(&[("idpAlias", v)]);
+        }
+        if let Some(v) = idp_user_id {
+            builder = builder.query(&[("idpUserId", v)]);
         }
         if let Some(v) = last_name {
             builder = builder.query(&[("lastName", v)]);
@@ -200,7 +215,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/profile`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersprofile>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersprofile>
     pub async fn realm_users_profile_get(&self, realm: &str) -> Result<UPConfig, KeycloakError> {
         let realm = p(realm);
         let builder = self
@@ -220,7 +235,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/profile`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersprofile>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersprofile>
     pub async fn realm_users_profile_put(
         &self,
         realm: &str,
@@ -244,7 +259,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/profile/metadata`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersprofilemetadata>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersprofilemetadata>
     pub async fn realm_users_profile_metadata_get(
         &self,
         realm: &str,
@@ -273,7 +288,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}`
     pub async fn realm_users_with_user_id_get(
@@ -309,7 +324,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}`
     pub async fn realm_users_with_user_id_put(
@@ -342,7 +357,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}`
     pub async fn realm_users_with_user_id_delete(
@@ -371,7 +386,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/configured-user-storage-credential-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idconfigured_user_storage_credential_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idconfigured_user_storage_credential_types>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/configured-user-storage-credential-types`
     pub async fn realm_users_with_user_id_configured_user_storage_credential_types_get(
@@ -403,7 +418,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/consents`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idconsents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idconsents>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/consents`
     pub async fn realm_users_with_user_id_consents_get(
@@ -438,7 +453,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/consents/{client}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idconsentsclient>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idconsentsclient>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/consents/{client}`
     pub async fn realm_users_with_user_id_consents_with_client_delete(
@@ -470,7 +485,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/credentials`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idcredentials>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idcredentials>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/credentials`
     pub async fn realm_users_with_user_id_credentials_get(
@@ -505,7 +520,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idcredentialscredentialid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idcredentialscredentialid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}`
     pub async fn realm_users_with_user_id_credentials_with_credential_id_delete(
@@ -543,7 +558,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveAfter/{new_previous_credential_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmoveafternewpreviouscredentialid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmoveafternewpreviouscredentialid>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveAfter/{newPreviousCredentialId}`
     pub async fn realm_users_with_user_id_credentials_with_credential_id_move_after_with_new_previous_credential_id_post(
@@ -582,7 +597,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/moveToFirst`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmovetofirst>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idcredentialscredentialidmovetofirst>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/moveToFirst`
     pub async fn realm_users_with_user_id_credentials_with_credential_id_move_to_first_post(
@@ -620,7 +635,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/credentials/{credential_id}/userLabel`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idcredentialscredentialiduserlabel>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idcredentialscredentialiduserlabel>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/credentials/{credentialId}/userLabel`
     pub async fn realm_users_with_user_id_credentials_with_credential_id_user_label_put(
@@ -659,7 +674,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/disable-credential-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_iddisable_credential_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_iddisable_credential_types>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/disable-credential-types`
     pub async fn realm_users_with_user_id_disable_credential_types_put(
@@ -699,7 +714,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/execute-actions-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idexecute_actions_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idexecute_actions_email>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/execute-actions-email`
     pub async fn realm_users_with_user_id_execute_actions_email_put(
@@ -745,7 +760,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/federated-identity`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idfederated_identity>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idfederated_identity>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/federated-identity`
     pub async fn realm_users_with_user_id_federated_identity_get(
@@ -773,6 +788,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     /// - `realm`: realm name (not id!)
     /// - `user_id`
     /// - `provider`: Social login provider id
+    /// - `body`
     ///
     /// Returns response for future processing.
     ///
@@ -780,7 +796,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/federated-identity/{provider}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idfederated_identityprovider>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idfederated_identityprovider>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/federated-identity/{provider}`
     pub async fn realm_users_with_user_id_federated_identity_with_provider_post(
@@ -788,6 +804,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         realm: &str,
         user_id: &str,
         provider: &str,
+        body: FederatedIdentityRepresentation,
     ) -> Result<DefaultResponse, KeycloakError> {
         let realm = p(realm);
         let user_id = p(user_id);
@@ -798,6 +815,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 "{}/admin/realms/{realm}/users/{user_id}/federated-identity/{provider}",
                 self.url
             ))
+            .json(&body)
             .bearer_auth(self.token_supplier.get(&self.url).await?);
         let response = builder.send().await?;
         error_check(response).await.map(From::from)
@@ -817,7 +835,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/federated-identity/{provider}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idfederated_identityprovider>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idfederated_identityprovider>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/federated-identity/{provider}`
     pub async fn realm_users_with_user_id_federated_identity_with_provider_delete(
@@ -853,7 +871,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/groups`
     pub async fn realm_users_with_user_id_groups_get(
@@ -900,7 +918,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idgroupscount>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/groups/count`
     pub async fn realm_users_with_user_id_groups_count_get(
@@ -937,7 +955,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idgroupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idgroupsgroupid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/groups/{groupId}`
     pub async fn realm_users_with_user_id_groups_with_group_id_put(
@@ -973,7 +991,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idgroupsgroupid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idgroupsgroupid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/groups/{groupId}`
     pub async fn realm_users_with_user_id_groups_with_group_id_delete(
@@ -1007,7 +1025,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/impersonation`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idimpersonation>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idimpersonation>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/impersonation`
     pub async fn realm_users_with_user_id_impersonation_post(
@@ -1041,7 +1059,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/logout`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idlogout>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idlogout>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/logout`
     pub async fn realm_users_with_user_id_logout_post(
@@ -1074,7 +1092,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/offline-sessions/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idoffline_sessionsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idoffline_sessionsclientuuid>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/offline-sessions/{clientUuid}`
     pub async fn realm_users_with_user_id_offline_sessions_with_client_uuid_get(
@@ -1111,7 +1129,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/reset-password`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/reset-password`
     pub async fn realm_users_with_user_id_reset_password_put(
@@ -1149,7 +1167,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/reset-password-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idreset_password_email>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/reset-password-email`
     #[deprecated]
@@ -1196,7 +1214,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/users/{user_id}/send-verify-email`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmusersuser_idsend_verify_email>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmusersuser_idsend_verify_email>
     ///
     /// REST method: `PUT /admin/realms/{realm}/users/{user-id}/send-verify-email`
     pub async fn realm_users_with_user_id_send_verify_email_put(
@@ -1241,7 +1259,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/sessions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idsessions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idsessions>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/sessions`
     pub async fn realm_users_with_user_id_sessions_get(
@@ -1271,7 +1289,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/unmanagedAttributes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idunmanagedattributes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idunmanagedattributes>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/unmanagedAttributes`
     pub async fn realm_users_with_user_id_unmanaged_attributes_get(

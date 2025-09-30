@@ -576,6 +576,7 @@ pub struct ComponentRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentTypeRepresentation {
+    pub client_properties: Option<TypeVec<ConfigPropertyRepresentation>>,
     pub help_text: Option<TypeString>,
     pub id: Option<TypeString>,
     pub metadata: Option<TypeMap<String, Value>>,
@@ -919,6 +920,7 @@ pub struct KeyStoreConfig {
 pub enum KeyUse {
     Sig,
     Enc,
+    JwtSvid,
 }
 
 #[skip_serializing_none]
@@ -1394,8 +1396,6 @@ pub struct RealmRepresentation {
     pub max_temporary_lockouts: Option<i32>,
     pub minimum_quick_login_wait_seconds: Option<i32>,
     pub not_before: Option<i32>,
-    pub o_auth2_device_code_lifespan: Option<i32>,
-    pub o_auth2_device_polling_interval: Option<i32>,
     pub oauth2_device_code_lifespan: Option<i32>,
     pub oauth2_device_polling_interval: Option<i32>,
     #[deprecated]
@@ -1653,6 +1653,7 @@ pub struct SocialLinkRepresentation {
 #[serde(rename_all = "camelCase")]
 pub struct UPAttribute {
     pub annotations: Option<TypeMap<String, Value>>,
+    pub default_value: Option<TypeString>,
     pub display_name: Option<TypeString>,
     pub group: Option<TypeString>,
     pub multivalued: Option<bool>,
@@ -1775,6 +1776,7 @@ pub struct UserProfileAttributeGroupMetadata {
 #[serde(rename_all = "camelCase")]
 pub struct UserProfileAttributeMetadata {
     pub annotations: Option<TypeMap<String, Value>>,
+    pub default_value: Option<TypeString>,
     pub display_name: Option<TypeString>,
     pub group: Option<TypeString>,
     pub multivalued: Option<bool>,
@@ -1843,4 +1845,60 @@ pub struct UserSessionRepresentation {
     pub transient_user: Option<bool>,
     pub user_id: Option<TypeString>,
     pub username: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct WorkflowConditionRepresentation {
+    pub config: Option<MultivaluedHashMapStringString>,
+    pub id: Option<TypeString>,
+    pub uses: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct WorkflowRepresentation {
+    pub enabled: Option<bool>,
+    pub id: Option<TypeString>,
+    #[serde(rename = "if")]
+    pub if_: Option<TypeVec<WorkflowConditionRepresentation>>,
+    pub name: Option<TypeString>,
+    pub on: Option<Value>,
+    pub on_events_reset: Option<TypeVec<String>>,
+    pub on_values: Option<TypeVec<String>>,
+    pub recurring: Option<bool>,
+    #[serde(rename = "reset-on")]
+    pub reset_on: Option<Value>,
+    pub state: Option<WorkflowStateRepresentation>,
+    pub steps: Option<TypeVec<WorkflowStepRepresentation>>,
+    pub uses: Option<TypeString>,
+    pub with: Option<MultivaluedHashMapStringString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct WorkflowSetRepresentation {
+    pub workflows: Option<TypeVec<WorkflowRepresentation>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct WorkflowStateRepresentation {
+    pub errors: Option<TypeVec<String>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+pub struct WorkflowStepRepresentation {
+    pub after: Option<TypeString>,
+    pub config: Option<MultivaluedHashMapStringString>,
+    pub id: Option<TypeString>,
+    pub priority: Option<TypeString>,
+    pub uses: Option<TypeString>,
 }

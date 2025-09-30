@@ -14,7 +14,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}`
     pub async fn realm_roles_by_id_with_role_id_get(
@@ -49,7 +49,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles-by-id/{role-id}`
     pub async fn realm_roles_by_id_with_role_id_put(
@@ -85,7 +85,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles-by-id/{role_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles-by-id/{role-id}`
     pub async fn realm_roles_by_id_with_role_id_delete(
@@ -120,7 +120,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     pub async fn realm_roles_by_id_with_role_id_composites_get(
@@ -167,7 +167,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `POST /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     pub async fn realm_roles_by_id_with_role_id_composites_post(
@@ -204,7 +204,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/roles-by-id/{role_id}/composites`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_idcomposites>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmroles_by_idrole_idcomposites>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/roles-by-id/{role-id}/composites`
     pub async fn realm_roles_by_id_with_role_id_composites_delete(
@@ -239,7 +239,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites/clients/{client_uuid}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesclientsclientuuid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesclientsclientuuid>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites/clients/{clientUuid}`
     pub async fn realm_roles_by_id_with_role_id_composites_clients_with_client_uuid_get(
@@ -273,7 +273,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/composites/realm`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesrealm>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idcompositesrealm>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/composites/realm`
     pub async fn realm_roles_by_id_with_role_id_composites_realm_get(
@@ -305,7 +305,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/roles-by-id/{role_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/roles-by-id/{role-id}/management/permissions`
     pub async fn realm_roles_by_id_with_role_id_management_permissions_get(
@@ -338,7 +338,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/roles-by-id/{role_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmroles_by_idrole_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/roles-by-id/{role-id}/management/permissions`
     pub async fn realm_roles_by_id_with_role_id_management_permissions_put(

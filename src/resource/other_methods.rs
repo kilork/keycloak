@@ -9,7 +9,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_server>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
     pub fn clients_with_client_uuid_authz_resource_server_get(
@@ -31,7 +31,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_server>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_server>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server`
     pub fn clients_with_client_uuid_authz_resource_server_put(
@@ -53,7 +53,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/import`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverimport>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverimport>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/import`
     pub fn clients_with_client_uuid_authz_resource_server_import_post(
@@ -87,7 +87,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
     pub fn clients_with_client_uuid_authz_resource_server_permission_get(
@@ -110,7 +110,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermission>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission`
     pub fn clients_with_client_uuid_authz_resource_server_permission_post(
@@ -134,7 +134,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/evaluate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/evaluate`
     pub fn clients_with_client_uuid_authz_resource_server_permission_evaluate_post(
@@ -157,7 +157,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/providers`
     pub fn clients_with_client_uuid_authz_resource_server_permission_providers_get(
@@ -181,7 +181,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/permission/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpermissionsearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/permission/search`
     pub fn clients_with_client_uuid_authz_resource_server_permission_search_get(
@@ -212,7 +212,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
     pub fn clients_with_client_uuid_authz_resource_server_policy_get(
@@ -235,7 +235,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicy>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy`
     pub fn clients_with_client_uuid_authz_resource_server_policy_post(
@@ -259,7 +259,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/evaluate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyevaluate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/evaluate`
     pub fn clients_with_client_uuid_authz_resource_server_policy_evaluate_post(
@@ -282,7 +282,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicyproviders>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/providers`
     pub fn clients_with_client_uuid_authz_resource_server_policy_providers_get(
@@ -306,7 +306,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/policy/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverpolicysearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/policy/search`
     pub fn clients_with_client_uuid_authz_resource_server_policy_search_get(
@@ -337,7 +337,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
     pub fn clients_with_client_uuid_authz_resource_server_resource_get(
@@ -369,7 +369,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverresource>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource`
     pub fn clients_with_client_uuid_authz_resource_server_resource_post(
@@ -402,7 +402,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourcesearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourcesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/search`
     pub fn clients_with_client_uuid_authz_resource_server_resource_search_get(
@@ -434,7 +434,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_get(
@@ -471,7 +471,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_put(
@@ -509,7 +509,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_delete(
@@ -545,7 +545,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/attributes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idattributes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idattributes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/attributes`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_attributes_get(
@@ -580,7 +580,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/permissions`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_permissions_get(
@@ -615,7 +615,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/resource/{resource_id}/scopes`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idscopes>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverresourceresource_idscopes>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/resource/{resource-id}/scopes`
     pub fn clients_with_client_uuid_authz_resource_server_resource_with_resource_id_scopes_get(
@@ -641,7 +641,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
     pub fn clients_with_client_uuid_authz_resource_server_scope_get(
@@ -664,7 +664,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidauthzresource_serverscope>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope`
     pub fn clients_with_client_uuid_authz_resource_server_scope_post(
@@ -688,7 +688,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/search`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopesearch>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/search`
     pub fn clients_with_client_uuid_authz_resource_server_scope_search_get(
@@ -709,7 +709,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_get(
@@ -736,7 +736,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_put(
@@ -764,7 +764,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_delete(
@@ -788,7 +788,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/permissions`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_permissions_get(
@@ -813,7 +813,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/scope/{scope_id}/resources`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idresources>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serverscopescope_idresources>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/scope/{scope-id}/resources`
     pub fn clients_with_client_uuid_authz_resource_server_scope_with_scope_id_resources_get(
@@ -837,7 +837,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/authz/resource-server/settings`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serversettings>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidauthzresource_serversettings>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/authz/resource-server/settings`
     pub fn clients_with_client_uuid_authz_resource_server_settings_get(

@@ -15,7 +15,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidcertificatesattr>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidcertificatesattr>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_get(
@@ -51,7 +51,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrdownload>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrdownload>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/download`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_download_post(
@@ -88,7 +88,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_post(
@@ -127,7 +127,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate-and-download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate_and_download>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate_and_download>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate-and-download`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_and_download_post(
@@ -164,7 +164,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_post(
@@ -199,7 +199,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload_certificate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload_certificate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload-certificate`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_certificate_post(
