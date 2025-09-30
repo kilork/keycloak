@@ -21,7 +21,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroups>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_groups_get(
         &self,
@@ -81,7 +81,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmgroups>
     pub async fn realm_groups_post(
         &self,
         realm: &str,
@@ -109,7 +109,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupscount>
     pub async fn realm_groups_count_get(
         &self,
         realm: &str,
@@ -140,7 +140,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_get(
@@ -175,7 +175,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_put(
@@ -209,7 +209,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     pub async fn realm_groups_with_group_id_delete(
@@ -247,7 +247,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     #[allow(clippy::too_many_arguments)]
@@ -307,7 +307,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     pub async fn realm_groups_with_group_id_children_post(
@@ -341,7 +341,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub async fn realm_groups_with_group_id_management_permissions_get(
@@ -374,7 +374,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub async fn realm_groups_with_group_id_management_permissions_put(
@@ -411,7 +411,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     pub async fn realm_groups_with_group_id_members_get(

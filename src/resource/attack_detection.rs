@@ -14,7 +14,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/attack-detection/brute-force/users`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusers>
     pub fn attack_detection_brute_force_users_delete(
         &'a self,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
@@ -33,7 +33,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/attack-detection/brute-force/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmattack_detectionbrute_forceusersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmattack_detectionbrute_forceusersuserid>
     ///
     /// REST method: `GET /admin/realms/{realm}/attack-detection/brute-force/users/{userId}`
     pub fn attack_detection_brute_force_users_with_user_id_get(
@@ -57,7 +57,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/attack-detection/brute-force/users/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmattack_detectionbrute_forceusersuserid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/attack-detection/brute-force/users/{userId}`
     pub fn attack_detection_brute_force_users_with_user_id_delete(

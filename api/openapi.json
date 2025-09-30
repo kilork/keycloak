@@ -45,6 +45,9 @@
     "name" : "Scope Mappings"
   }, {
     "name" : "Users"
+  }, {
+    "name" : "Workflow Steps",
+    "description" : "Manage steps within workflows"
   } ],
   "paths" : {
     "/admin/realms" : {
@@ -478,6 +481,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         },
         "deprecated" : true
@@ -715,6 +721,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -866,6 +875,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -907,6 +919,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -973,6 +988,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -1051,6 +1069,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -1113,6 +1134,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -1983,8 +2007,11 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -2767,8 +2794,11 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -3432,6 +3462,9 @@
         "responses" : {
           "201" : {
             "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -3556,8 +3589,14 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -6541,8 +6580,11 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -6845,6 +6887,9 @@
           },
           "404" : {
             "description" : "Not Found"
+          },
+          "409" : {
+            "description" : "Conflict"
           },
           "500" : {
             "description" : "Internal Server Error"
@@ -8789,6 +8834,12 @@
           },
           "204" : {
             "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -8876,8 +8927,14 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -8989,8 +9046,17 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -9661,8 +9727,14 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "201" : {
+            "description" : "Created"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -9706,8 +9778,14 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "OK"
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
           }
         }
       },
@@ -11360,6 +11438,9 @@
           "404" : {
             "description" : "Not Found"
           },
+          "409" : {
+            "description" : "Conflict"
+          },
           "500" : {
             "description" : "Internal Server Error"
           }
@@ -12615,13 +12696,14 @@
         "parameters" : [ {
           "name" : "email",
           "in" : "query",
-          "description" : "email filter",
+          "description" : "A String contained in email, or the complete email, if param \"exact\" is true",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "emailVerified",
           "in" : "query",
+          "description" : "whether the email has been verified",
           "schema" : {
             "type" : "boolean"
           }
@@ -12633,36 +12715,58 @@
             "type" : "boolean"
           }
         }, {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the params \"last\", \"first\", \"email\" and \"username\" must match exactly",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
           "name" : "firstName",
           "in" : "query",
-          "description" : "first name filter",
+          "description" : "A String contained in firstName, or the complete firstName, if param \"exact\" is true",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "idpAlias",
+          "in" : "query",
+          "description" : "The alias of an Identity Provider linked to the user",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "idpUserId",
+          "in" : "query",
+          "description" : "The userId at an Identity Provider linked to the user",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "lastName",
           "in" : "query",
-          "description" : "last name filter",
+          "description" : "A String contained in lastName, or the complete lastName, if param \"exact\" is true",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "q",
           "in" : "query",
+          "description" : "A query to search for custom attributes, in the format 'key1:value2 key2:value2'",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "search",
           "in" : "query",
-          "description" : "arbitrary search string for all the fields below. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and \"foo\" for exact search.",
+          "description" : "A String contained in username, first or last name, or email. Default search behavior is prefix-based (e.g., foo or foo*). Use *foo* for infix search and \"foo\" for exact search.",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "username",
           "in" : "query",
-          "description" : "username filter",
+          "description" : "A String contained in username, or the complete username, if param \"exact\" is true",
           "schema" : {
             "type" : "string"
           }
@@ -13394,6 +13498,15 @@
             "type" : "string"
           }
         } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/FederatedIdentityRepresentation"
+              }
+            }
+          }
+        },
         "responses" : {
           "204" : {
             "description" : "No Content"
@@ -15708,6 +15821,12 @@
               "$ref" : "#/components/schemas/ConfigPropertyRepresentation"
             }
           },
+          "clientProperties" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/ConfigPropertyRepresentation"
+            }
+          },
           "metadata" : {
             "type" : "object",
             "additionalProperties" : { }
@@ -16408,7 +16527,7 @@
         }
       },
       "KeyUse" : {
-        "enum" : [ "SIG", "ENC" ],
+        "enum" : [ "SIG", "ENC", "JWT_SVID" ],
         "type" : "string"
       },
       "KeysMetadataRepresentation" : {
@@ -17949,14 +18068,6 @@
               "$ref" : "#/components/schemas/ClientTemplateRepresentation"
             },
             "deprecated" : true
-          },
-          "oAuth2DeviceCodeLifespan" : {
-            "format" : "int32",
-            "type" : "integer"
-          },
-          "oAuth2DevicePollingInterval" : {
-            "format" : "int32",
-            "type" : "integer"
           }
         }
       },
@@ -18335,6 +18446,9 @@
           },
           "multivalued" : {
             "type" : "boolean"
+          },
+          "defaultValue" : {
+            "type" : "string"
           }
         }
       },
@@ -18570,6 +18684,9 @@
           },
           "multivalued" : {
             "type" : "boolean"
+          },
+          "defaultValue" : {
+            "type" : "string"
           }
         }
       },
@@ -18760,6 +18877,114 @@
           },
           "transientUser" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "WorkflowConditionRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "uses" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "config" : {
+            "$ref" : "#/components/schemas/MultivaluedHashMapStringString"
+          }
+        }
+      },
+      "WorkflowRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "uses" : {
+            "type" : "string"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "on" : { },
+          "reset-on" : { },
+          "recurring" : {
+            "type" : "boolean"
+          },
+          "if" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/WorkflowConditionRepresentation"
+            }
+          },
+          "steps" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/WorkflowStepRepresentation"
+            }
+          },
+          "state" : {
+            "$ref" : "#/components/schemas/WorkflowStateRepresentation"
+          },
+          "with" : {
+            "$ref" : "#/components/schemas/MultivaluedHashMapStringString"
+          },
+          "onValues" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "onEventsReset" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "WorkflowSetRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "workflows" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/WorkflowRepresentation"
+            }
+          }
+        }
+      },
+      "WorkflowStateRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "WorkflowStepRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "uses" : {
+            "type" : "string"
+          },
+          "after" : {
+            "type" : "string"
+          },
+          "priority" : {
+            "type" : "string"
+          },
+          "config" : {
+            "$ref" : "#/components/schemas/MultivaluedHashMapStringString"
           }
         }
       }

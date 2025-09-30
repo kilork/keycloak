@@ -13,7 +13,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/import-config`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmidentity_providerimport_config>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerimport_config>
     pub fn identity_provider_import_config_post(
         &'a self,
         body: TypeMap<String, Value>,
@@ -38,7 +38,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstances>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstances>
     pub fn identity_provider_instances_get(&'a self) -> RealmIdentityProviderInstancesGet<'a, TS> {
         RealmIdentityProviderInstancesGet { realm_admin: self }
     }
@@ -56,7 +56,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/instances`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstances>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstances>
     pub fn identity_provider_instances_post(
         &'a self,
         body: IdentityProviderRepresentation,
@@ -76,7 +76,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_get(
         &'a self,
         alias: &'a str,
@@ -100,7 +100,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_put(
         &'a self,
         alias: &'a str,
@@ -123,7 +123,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesalias>
     pub fn identity_provider_instances_with_alias_delete(
         &'a self,
         alias: &'a str,
@@ -146,7 +146,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/export`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasexport>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasexport>
     pub fn identity_provider_instances_with_alias_export_get(
         &'a self,
         alias: &'a str,
@@ -168,7 +168,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     pub fn identity_provider_instances_with_alias_management_permissions_get(
         &'a self,
         alias: &'a str,
@@ -192,7 +192,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmanagementpermissions>
     pub fn identity_provider_instances_with_alias_management_permissions_put(
         &'a self,
         alias: &'a str,
@@ -216,7 +216,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mapper-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmapper_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmapper_types>
     pub fn identity_provider_instances_with_alias_mapper_types_get(
         &'a self,
         alias: &'a str,
@@ -238,7 +238,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappers>
     pub fn identity_provider_instances_with_alias_mappers_get(
         &'a self,
         alias: &'a str,
@@ -262,7 +262,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/instances/{alias}/mappers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstancesaliasmappers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmidentity_providerinstancesaliasmappers>
     pub fn identity_provider_instances_with_alias_mappers_post(
         &'a self,
         alias: &'a str,
@@ -284,7 +284,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_get(
         &'a self,
         alias: &'a str,
@@ -310,7 +310,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_put_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_put(
         &'a self,
         alias: &'a str,
@@ -337,7 +337,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/identity-provider/instances/{alias}/mappers/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesaliasmappersid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmidentity_providerinstancesaliasmappersid>
     pub fn identity_provider_instances_with_alias_mappers_with_id_delete(
         &'a self,
         alias: &'a str,
@@ -360,7 +360,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/instances/{alias}/reload-keys`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasreload_keys>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerinstancesaliasreload_keys>
     pub fn identity_provider_instances_with_alias_reload_keys_get(
         &'a self,
         alias: &'a str,
@@ -380,7 +380,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/identity-provider/providers/{provider_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmidentity_providerprovidersprovider_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmidentity_providerprovidersprovider_id>
     pub fn identity_provider_providers_with_provider_id_get(
         &'a self,
         provider_id: &'a str,

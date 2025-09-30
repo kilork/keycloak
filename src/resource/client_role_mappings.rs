@@ -14,7 +14,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_get(
@@ -44,7 +44,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_post(
@@ -74,7 +74,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_delete(
@@ -101,7 +101,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idavailable>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/available`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_available_get(
@@ -129,7 +129,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/role-mappings/clients/{client_id}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idrole_mappingsclientsclient_idcomposite>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/role-mappings/clients/{client-id}/composite`
     pub fn groups_with_group_id_role_mappings_clients_with_client_id_composite_get(
@@ -156,7 +156,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_get(
@@ -186,7 +186,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_post_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `POST /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_post(
@@ -216,7 +216,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_delete_adminrealmsrealmusersuser_idrole_mappingsclientsclient_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_delete(
@@ -243,7 +243,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/available`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idavailable>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idavailable>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/available`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_available_get(
@@ -271,7 +271,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/users/{user_id}/role-mappings/clients/{client_id}/composite`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.3.2/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idcomposite>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmusersuser_idrole_mappingsclientsclient_idcomposite>
     ///
     /// REST method: `GET /admin/realms/{realm}/users/{user-id}/role-mappings/clients/{client-id}/composite`
     pub fn users_with_user_id_role_mappings_clients_with_client_id_composite_get(
