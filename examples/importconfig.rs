@@ -2,7 +2,10 @@
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "multipart")]
     {
-        use keycloak::{KeycloakAdmin, KeycloakAdminToken};
+        use keycloak::{
+            prelude::reqwest,
+            {KeycloakAdmin, KeycloakAdminToken},
+        };
 
         let url = std::env::var("KEYCLOAK_ADDR").unwrap_or_else(|_| "http://localhost:8080".into());
         let user = std::env::var("KEYCLOAK_USER").unwrap_or_else(|_| "admin".into());

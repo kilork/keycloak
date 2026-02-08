@@ -2,6 +2,8 @@ use std::{borrow::Cow, error::Error, fmt::Display};
 
 use serde::{Deserialize, Serialize};
 
+use crate::prelude::reqwest;
+
 #[derive(Debug)]
 pub enum KeycloakError {
     ReqwestFailure(reqwest::Error),

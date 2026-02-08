@@ -33,7 +33,11 @@ keycloak = "~26.4"
 ```rust, no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use keycloak::{types::*, KeycloakAdmin, KeycloakAdminToken};
+    use keycloak::{
+        prelude::reqwest,
+        types::*,
+        {KeycloakAdmin, KeycloakAdminToken},
+    };
 
     const REALM: &str = "resource";
 
@@ -110,6 +114,7 @@ pub mod resource;
 pub mod types;
 
 mod error;
+pub mod prelude;
 mod rest;
 
 pub use error::KeycloakError;

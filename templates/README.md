@@ -10,13 +10,16 @@ Implements [Keycloak Admin REST API version {{ env_var "KEYCLOAK_VERSION" }}](ht
 
 ### Feature flags
 
-Default flags: `tags-all`.
+Default flags: `tags-all`, `resource-builder`, `reqwest`.
 
 - `rc`: use `Arc` for deserialization.
 - `schemars`: add [schemars](https://crates.io/crates/schemars) support.
 - `multipart`: add multipart support to reqwest, enabling extra methods in API.
 - `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
 - `resource-builder`: add resource builder support.
+- `reqwest`: use up to date [reqwest](https://crates.io/crates/reqwest) version (`reqwest 0.13.x`).
+- `reqwest12`: use `reqwest 0.12.x`.
+- `reqwest13`: use `reqwest 0.13.x`.
 
 ## Usage
 

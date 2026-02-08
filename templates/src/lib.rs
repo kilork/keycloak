@@ -9,6 +9,7 @@ pub mod resource;
 pub mod types;
 
 mod error;
+pub mod prelude;
 mod rest;
 
 pub use error::KeycloakError;

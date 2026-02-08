@@ -1,4 +1,4 @@
-use reqwest::Response;
+use crate::prelude::reqwest::{self, Response};
 
 /// Default adapter around [Response].
 pub struct DefaultResponse(Response);

@@ -14,10 +14,13 @@ repository = "https://github.com/kilork/keycloak"
 rust-version = "1.87"
 
 [features]
-default = ["tags-all", "resource-builder"]
+default = ["tags-all", "resource-builder", "reqwest"]
 resource-builder = ["builder", "resource"]
 schemars = ["dep:schemars"]
-multipart = ["reqwest/multipart"]
+multipart = ["reqwest12?/multipart", "reqwest13?/multipart"]
+reqwest = ["reqwest13"]
+reqwest12 = ["dep:reqwest12"]
+reqwest13 = ["dep:reqwest13"]
 rc = ["rc-map", "rc-str", "rc-val", "rc-vec"]
 rc-map = ["serde/rc"]
 rc-str = ["serde/rc"]
@@ -50,20 +53,29 @@ resource = []
 builder = []
 
 [dependencies]
-reqwest = { version = "0.12", default-features = false, features = ["json"] }
+reqwest12 = { package = "reqwest", version = "0.12", default-features = false, features = [
+    "json",
+], optional = true }
+reqwest13 = { package = "reqwest", version = "0.13", default-features = false, features = [
+    "form",
+    "json",
+    "query",
+], optional = true }
 serde_json = "1"
 serde = { version = "1", features = ["derive"] }
 serde_with = { version = "3", default-features = false, features = ["macros"] }
 async-trait = "0.1"
-schemars = { version = "0.8.11", default-features = false, features = [
-    "derive",
-], optional = true }
-percent-encoding = "2.3.1"
+schemars = { version = "0.8.22", optional = true, default-features = false, features = [ "derive" ] }
+percent-encoding = "2.3.2"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
 heck = "0.5"
-clap = { version = "4", features = ["derive", "help", "std"], default-features = false }
-toml = "0.8"
+clap = { version = "4", features = [
+    "derive",
+    "help",
+    "std",
+], default-features = false }
+toml = "0.9.11"
 serde = { version = "1", features = ["derive", "rc"] }
 indexmap = { version = "2", features = ["serde"] }

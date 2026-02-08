@@ -81,6 +81,8 @@ mod openapi {
     use indexmap::IndexMap;
     use serde::Deserialize;
 
+    use keycloak::prelude::reqwest;
+
     use crate::{RESERVED_WORDS, TAG_NONE};
 
     #[derive(Debug, PartialEq, Eq)]
