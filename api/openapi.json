@@ -30,7 +30,8 @@
   }, {
     "name" : "Key"
   }, {
-    "name" : "Organizations"
+    "name" : "Organizations",
+    "x-smallrye-profile-admin" : ""
   }, {
     "name" : "Protocol Mappers"
   }, {
@@ -46,8 +47,7 @@
   }, {
     "name" : "Users"
   }, {
-    "name" : "Workflow Steps",
-    "description" : "Manage steps within workflows"
+    "name" : "Workflows"
   } ],
   "paths" : {
     "/admin/realms" : {
@@ -9668,6 +9668,13 @@
             "type" : "boolean"
           }
         }, {
+          "name" : "capability",
+          "in" : "query",
+          "description" : "Filter by identity providers capability",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "first",
           "in" : "query",
           "description" : "Pagination offset",
@@ -9694,6 +9701,13 @@
           "name" : "search",
           "in" : "query",
           "description" : "Filter specific providers by name. Search can be prefix (name*), contains (*name*) or exact (\"name\"). Default prefixed.",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "description" : "Filter by identity providers type",
           "schema" : {
             "type" : "string"
           }
@@ -10142,6 +10156,33 @@
               "application/json" : {
                 "schema" : {
                   "type" : "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/identity-provider/upload-certificate" : {
+      "post" : {
+        "tags" : [ "Client Attribute Certificate" ],
+        "summary" : "Uploads a certificate, prepares the jwks or public key associated, and returns the certificate representation.",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificateRepresentation"
                 }
               }
             }
@@ -10856,6 +10897,191 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/invitations" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get invitations for the organization",
+        "parameters" : [ {
+          "name" : "email",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "firstName",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastName",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/OrganizationInvitationRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/invitations/{id}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get invitation by ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/OrganizationInvitationRepresentation"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Delete an invitation",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/invitations/{id}/resend" : {
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Resend an invitation",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
           },
           "404" : {
             "description" : "Not Found"
@@ -14538,6 +14764,339 @@
           "type" : "string"
         }
       } ]
+    },
+    "/admin/realms/{realm}/workflows" : {
+      "get" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "List workflows",
+        "description" : "List workflows filtered by name and paginated using first and max parameters.",
+        "parameters" : [ {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the param 'search' must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "The position of the first result to be processed (pagination offset)",
+          "schema" : {
+            "format" : "int32",
+            "default" : "0",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "The maximum number of results to be returned - defaults to 10",
+          "schema" : {
+            "format" : "int32",
+            "default" : "10",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing the workflow name - either partial or exact",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/yaml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkflowRepresentation"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkflowRepresentation"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Create workflow",
+        "description" : "Create a new workflow from the provided representation.",
+        "requestBody" : {
+          "content" : {
+            "application/yaml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WorkflowRepresentation"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WorkflowRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/workflows/scheduled/{resource-id}" : {
+      "get" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "List scheduled workflows for resource",
+        "description" : "Return workflows that have scheduled steps for the given resource identifier.",
+        "parameters" : [ {
+          "name" : "resource-id",
+          "in" : "path",
+          "description" : "Identifier of the resource associated with the scheduled workflows",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkflowRepresentation"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/workflows/{id}" : {
+      "get" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Get workflow",
+        "description" : "Get the workflow representation. Optionally exclude the workflow id from the response.",
+        "parameters" : [ {
+          "name" : "includeId",
+          "in" : "query",
+          "description" : "Indicates whether the workflow id should be included in the representation or not - defaults to true",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/yaml" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkflowRepresentation"
+                }
+              },
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/WorkflowRepresentation"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Update workflow",
+        "description" : "Update the workflow configuration. This method does not update the workflow steps.",
+        "requestBody" : {
+          "content" : {
+            "application/yaml" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WorkflowRepresentation"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/WorkflowRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Delete workflow",
+        "description" : "Delete the workflow and its configuration.",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "description" : "Workflow identifier",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/workflows/{id}/activate/{type}/{resourceId}" : {
+      "post" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Activate workflow for resource",
+        "description" : "Activate the workflow for the given resource type and identifier. Optionally schedule the first step using the notBefore parameter.",
+        "parameters" : [ {
+          "name" : "resourceId",
+          "in" : "path",
+          "description" : "Resource identifier",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "description" : "Resource type",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        }, {
+          "name" : "notBefore",
+          "in" : "query",
+          "description" : "Optional value representing the time to schedule the first workflow step. The value is either an integer representing the seconds from now, an integer followed by 'ms' representing milliseconds from now, or an ISO-8601 date string.",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "description" : "Workflow identifier",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/workflows/{id}/deactivate/{type}/{resourceId}" : {
+      "post" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Deactivate workflow for resource",
+        "description" : "Deactivate the workflow for the given resource type and identifier.",
+        "parameters" : [ {
+          "name" : "resourceId",
+          "in" : "path",
+          "description" : "Resource identifier",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "path",
+          "description" : "Resource type",
+          "required" : true,
+          "schema" : {
+            "type" : "object"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "id",
+        "in" : "path",
+        "description" : "Workflow identifier",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
     }
   },
   "components" : {
@@ -14722,9 +15281,6 @@
           "phone_number_verified" : {
             "type" : "boolean"
           },
-          "address" : {
-            "$ref" : "#/components/schemas/AddressClaimSet"
-          },
           "updated_at" : {
             "format" : "int64",
             "type" : "integer"
@@ -14769,29 +15325,6 @@
             "$ref" : "#/components/schemas/Confirmation"
           },
           "scope" : {
-            "type" : "string"
-          }
-        }
-      },
-      "AddressClaimSet" : {
-        "type" : "object",
-        "properties" : {
-          "formatted" : {
-            "type" : "string"
-          },
-          "street_address" : {
-            "type" : "string"
-          },
-          "locality" : {
-            "type" : "string"
-          },
-          "region" : {
-            "type" : "string"
-          },
-          "postal_code" : {
-            "type" : "string"
-          },
-          "country" : {
             "type" : "string"
           }
         }
@@ -15260,6 +15793,9 @@
           },
           "kid" : {
             "type" : "string"
+          },
+          "jwks" : {
+            "type" : "string"
           }
         }
       },
@@ -15308,6 +15844,12 @@
           "count" : {
             "format" : "int32",
             "type" : "integer"
+          },
+          "webOrigins" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
           }
         }
       },
@@ -16290,9 +16832,6 @@
           "phone_number_verified" : {
             "type" : "boolean"
           },
-          "address" : {
-            "$ref" : "#/components/schemas/AddressClaimSet"
-          },
           "updated_at" : {
             "format" : "int64",
             "type" : "integer"
@@ -16406,6 +16945,12 @@
           "config" : {
             "type" : "object",
             "additionalProperties" : {
+              "type" : "string"
+            }
+          },
+          "types" : {
+            "type" : "array",
+            "items" : {
               "type" : "string"
             }
           },
@@ -16955,6 +17500,40 @@
           },
           "verified" : {
             "type" : "boolean"
+          }
+        }
+      },
+      "OrganizationInvitationRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "organizationId" : {
+            "type" : "string"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "sentDate" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "expiresAt" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/Status"
+          },
+          "inviteLink" : {
+            "type" : "string"
           }
         }
       },
@@ -18412,6 +18991,10 @@
           }
         }
       },
+      "Status" : {
+        "enum" : [ "PENDING", "EXPIRED" ],
+        "type" : "string"
+      },
       "UPAttribute" : {
         "type" : "object",
         "properties" : {
@@ -18880,17 +19463,14 @@
           }
         }
       },
-      "WorkflowConditionRepresentation" : {
+      "WorkflowConcurrencyRepresentation" : {
         "type" : "object",
         "properties" : {
-          "uses" : {
+          "cancel-in-progress" : {
             "type" : "string"
           },
-          "id" : {
+          "restart-in-progress" : {
             "type" : "string"
-          },
-          "config" : {
-            "$ref" : "#/components/schemas/MultivaluedHashMapStringString"
           }
         }
       },
@@ -18903,22 +19483,20 @@
           "name" : {
             "type" : "string"
           },
-          "uses" : {
-            "type" : "string"
-          },
           "enabled" : {
             "type" : "boolean"
           },
-          "on" : { },
-          "reset-on" : { },
-          "recurring" : {
-            "type" : "boolean"
+          "on" : {
+            "type" : "string"
+          },
+          "schedule" : {
+            "$ref" : "#/components/schemas/WorkflowScheduleRepresentation"
+          },
+          "concurrency" : {
+            "$ref" : "#/components/schemas/WorkflowConcurrencyRepresentation"
           },
           "if" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/WorkflowConditionRepresentation"
-            }
+            "type" : "string"
           },
           "steps" : {
             "type" : "array",
@@ -18932,28 +19510,23 @@
           "with" : {
             "$ref" : "#/components/schemas/MultivaluedHashMapStringString"
           },
-          "onValues" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
+          "cancelInProgress" : {
+            "type" : "string"
           },
-          "onEventsReset" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
+          "restartInProgress" : {
+            "type" : "string"
           }
         }
       },
-      "WorkflowSetRepresentation" : {
+      "WorkflowScheduleRepresentation" : {
         "type" : "object",
         "properties" : {
-          "workflows" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/WorkflowRepresentation"
-            }
+          "after" : {
+            "type" : "string"
+          },
+          "batch-size" : {
+            "format" : "int32",
+            "type" : "integer"
           }
         }
       },
@@ -18971,17 +19544,19 @@
       "WorkflowStepRepresentation" : {
         "type" : "object",
         "properties" : {
-          "id" : {
-            "type" : "string"
-          },
           "uses" : {
             "type" : "string"
           },
           "after" : {
             "type" : "string"
           },
-          "priority" : {
-            "type" : "string"
+          "scheduled-at" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "id" : {
+            "type" : "string",
+            "writeOnly" : true
           },
           "config" : {
             "$ref" : "#/components/schemas/MultivaluedHashMapStringString"

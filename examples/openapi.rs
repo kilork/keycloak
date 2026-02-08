@@ -185,6 +185,8 @@ mod openapi {
         ApplicationJson,
         #[serde(rename = "application/octet-stream")]
         ApplicationOctetStream,
+        #[serde(rename = "application/yaml")]
+        ApplicationYaml,
         #[serde(rename = "application/xml")]
         ApplicationXml,
         #[serde(rename = "text/plain")]

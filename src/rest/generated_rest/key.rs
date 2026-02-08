@@ -11,7 +11,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/keys`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html#_get_adminrealmsrealmkeys>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmkeys>
     pub async fn realm_keys_get(
         &self,
         realm: &str,
@@ -26,4 +26,4 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 }
 // not all paths processed
-// left 246
+// left 255

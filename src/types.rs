@@ -60,7 +60,6 @@ pub struct Access {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct AccessToken {
     pub acr: Option<TypeString>,
-    pub address: Option<AddressClaimSet>,
     #[serde(rename = "allowed-origins")]
     pub allowed_origins: Option<TypeVec<String>>,
     pub at_hash: Option<TypeString>,
@@ -105,18 +104,6 @@ pub struct AccessToken {
     pub updated_at: Option<i64>,
     pub website: Option<TypeString>,
     pub zoneinfo: Option<TypeString>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct AddressClaimSet {
-    pub country: Option<TypeString>,
-    pub formatted: Option<TypeString>,
-    pub locality: Option<TypeString>,
-    pub postal_code: Option<TypeString>,
-    pub region: Option<TypeString>,
-    pub street_address: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -325,6 +312,7 @@ pub enum BruteForceStrategy {
 #[serde(rename_all = "camelCase")]
 pub struct CertificateRepresentation {
     pub certificate: Option<TypeString>,
+    pub jwks: Option<TypeString>,
     pub kid: Option<TypeString>,
     pub private_key: Option<TypeString>,
     pub public_key: Option<TypeString>,
@@ -349,9 +337,11 @@ pub struct ClaimRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct ClientInitialAccessCreatePresentation {
     pub count: Option<i32>,
     pub expiration: Option<i32>,
+    pub web_origins: Option<TypeVec<String>>,
 }
 
 #[skip_serializing_none]
@@ -765,7 +755,6 @@ pub struct GroupRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct IDToken {
     pub acr: Option<TypeString>,
-    pub address: Option<AddressClaimSet>,
     pub at_hash: Option<TypeString>,
     pub auth_time: Option<i64>,
     pub azp: Option<TypeString>,
@@ -847,6 +836,7 @@ pub struct IdentityProviderRepresentation {
     pub provider_id: Option<TypeString>,
     pub store_token: Option<bool>,
     pub trust_email: Option<bool>,
+    pub types: Option<TypeVec<String>>,
     #[deprecated]
     pub update_profile_first_login: Option<bool>,
     #[deprecated]
@@ -1086,6 +1076,22 @@ pub struct OAuthClientRepresentation {
 pub struct OrganizationDomainRepresentation {
     pub name: Option<TypeString>,
     pub verified: Option<bool>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OrganizationInvitationRepresentation {
+    pub email: Option<TypeString>,
+    pub expires_at: Option<i32>,
+    pub first_name: Option<TypeString>,
+    pub id: Option<TypeString>,
+    pub invite_link: Option<TypeString>,
+    pub last_name: Option<TypeString>,
+    pub organization_id: Option<TypeString>,
+    pub sent_date: Option<i32>,
+    pub status: Option<Status>,
 }
 
 #[skip_serializing_none]
@@ -1647,6 +1653,14 @@ pub struct SocialLinkRepresentation {
     pub social_username: Option<TypeString>,
 }
 
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum Status {
+    Pending,
+    Expired,
+}
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
@@ -1850,10 +1864,11 @@ pub struct UserSessionRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct WorkflowConditionRepresentation {
-    pub config: Option<MultivaluedHashMapStringString>,
-    pub id: Option<TypeString>,
-    pub uses: Option<TypeString>,
+pub struct WorkflowConcurrencyRepresentation {
+    #[serde(rename = "cancel-in-progress")]
+    pub cancel_in_progress: Option<TypeString>,
+    #[serde(rename = "restart-in-progress")]
+    pub restart_in_progress: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1861,28 +1876,28 @@ pub struct WorkflowConditionRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct WorkflowRepresentation {
+    pub cancel_in_progress: Option<TypeString>,
+    pub concurrency: Option<WorkflowConcurrencyRepresentation>,
     pub enabled: Option<bool>,
     pub id: Option<TypeString>,
     #[serde(rename = "if")]
-    pub if_: Option<TypeVec<WorkflowConditionRepresentation>>,
+    pub if_: Option<TypeString>,
     pub name: Option<TypeString>,
-    pub on: Option<Value>,
-    pub on_events_reset: Option<TypeVec<String>>,
-    pub on_values: Option<TypeVec<String>>,
-    pub recurring: Option<bool>,
-    #[serde(rename = "reset-on")]
-    pub reset_on: Option<Value>,
+    pub on: Option<TypeString>,
+    pub restart_in_progress: Option<TypeString>,
+    pub schedule: Option<WorkflowScheduleRepresentation>,
     pub state: Option<WorkflowStateRepresentation>,
     pub steps: Option<TypeVec<WorkflowStepRepresentation>>,
-    pub uses: Option<TypeString>,
     pub with: Option<MultivaluedHashMapStringString>,
 }
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct WorkflowSetRepresentation {
-    pub workflows: Option<TypeVec<WorkflowRepresentation>>,
+pub struct WorkflowScheduleRepresentation {
+    pub after: Option<TypeString>,
+    #[serde(rename = "batch-size")]
+    pub batch_size: Option<i32>,
 }
 
 #[skip_serializing_none]
@@ -1899,6 +1914,7 @@ pub struct WorkflowStepRepresentation {
     pub after: Option<TypeString>,
     pub config: Option<MultivaluedHashMapStringString>,
     pub id: Option<TypeString>,
-    pub priority: Option<TypeString>,
+    #[serde(rename = "scheduled-at")]
+    pub scheduled_at: Option<i64>,
     pub uses: Option<TypeString>,
 }

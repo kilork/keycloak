@@ -73,6 +73,6 @@ pub mod scope_mappings;
 /// Users
 #[cfg(feature = "tag-users")]
 pub mod users;
-/// Workflow Steps
-#[cfg(feature = "tag-workflow-steps")]
-pub mod workflow_steps;
+/// Workflows
+#[cfg(feature = "tag-workflows")]
+pub mod workflows;
