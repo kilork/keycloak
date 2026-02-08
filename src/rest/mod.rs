@@ -3,7 +3,7 @@ use std::future::Future;
 use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
 
-use crate::{types::*, KeycloakError};
+use crate::{prelude::reqwest, types::*, KeycloakError};
 
 mod default_response;
 mod generated_rest;
