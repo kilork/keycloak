@@ -1,6 +1,6 @@
 [package]
 name = "keycloak"
-version = "26.4.0"
+version = "26.5.200"
 authors = ["Alexander Korolev <alexander.korolev.germany@gmail.com>"]
 edition = "2021"
 categories = ["api-bindings", "asynchronous"]
@@ -26,7 +26,7 @@ rc-map = ["serde/rc"]
 rc-str = ["serde/rc"]
 rc-val = ["serde/rc"]
 rc-vec = ["serde/rc"]
-tags-all = ["tag-attack-detection", "tag-authentication-management", "tag-client-attribute-certificate", "tag-client-initial-access", "tag-client-registration-policy", "tag-client-role-mappings", "tag-client-scopes", "tag-clients", "tag-component", "tag-groups", "tag-identity-providers", "tag-key", "tag-organizations", "tag-protocol-mappers", "tag-realms-admin", "tag-role-mapper", "tag-roles", "tag-roles-by-id", "tag-scope-mappings", "tag-users", "tag-workflow-steps", "tag-none"]
+tags-all = ["tag-attack-detection", "tag-authentication-management", "tag-client-attribute-certificate", "tag-client-initial-access", "tag-client-registration-policy", "tag-client-role-mappings", "tag-client-scopes", "tag-clients", "tag-component", "tag-groups", "tag-identity-providers", "tag-key", "tag-organizations", "tag-protocol-mappers", "tag-realms-admin", "tag-role-mapper", "tag-roles", "tag-roles-by-id", "tag-scope-mappings", "tag-users", "tag-workflows", "tag-none"]
 tag-attack-detection = []
 tag-authentication-management = []
 tag-client-attribute-certificate = []
@@ -47,7 +47,7 @@ tag-roles = []
 tag-roles-by-id = []
 tag-scope-mappings = []
 tag-users = []
-tag-workflow-steps = []
+tag-workflows = []
 tag-none = []
 resource = []
 builder = []

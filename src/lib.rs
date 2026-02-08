@@ -7,17 +7,20 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 26.4.0](https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version 26.5.2](https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html).
 
 ### Feature flags
 
-Default flags: `tags-all`.
+Default flags: `tags-all`, `resource-builder`, `reqwest`.
 
 - `rc`: use `Arc` for deserialization.
 - `schemars`: add [schemars](https://crates.io/crates/schemars) support.
 - `multipart`: add multipart support to reqwest, enabling extra methods in API.
 - `tags-all`: activate all tags (resource groups) in REST API, it is default behavior. Disable default features and use individual `tag-xxx` features to activate only required resource groups. For a full list reference the [Cargo.toml](Cargo.toml).
 - `resource-builder`: add resource builder support.
+- `reqwest`: use up to date [reqwest](https://crates.io/crates/reqwest) version (`reqwest 0.13.x`).
+- `reqwest12`: use `reqwest 0.12.x`.
+- `reqwest13`: use `reqwest 0.13.x`.
 
 ## Usage
 
@@ -27,17 +30,13 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "~26.4"
+keycloak = "~26.5"
 ```
 
 ```rust, no_run
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use keycloak::{
-        prelude::reqwest,
-        types::*,
-        {KeycloakAdmin, KeycloakAdminToken},
-    };
+    use keycloak::{prelude::reqwest, types::*, KeycloakAdmin, KeycloakAdminToken};
 
     const REALM: &str = "resource";
 

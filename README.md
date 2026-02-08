@@ -6,7 +6,7 @@ Dual-licensed under `MIT` or the [UNLICENSE](http://unlicense.org/).
 
 ## Features
 
-Implements [Keycloak Admin REST API version 26.4.0](https://www.keycloak.org/docs-api/26.4.0/rest-api/index.html).
+Implements [Keycloak Admin REST API version 26.5.2](https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html).
 
 ### Feature flags
 
@@ -29,13 +29,13 @@ Add dependency to Cargo.toml:
 
 ```toml
 [dependencies]
-keycloak = "~26.4"
+keycloak = "~26.5"
 ```
 
 ```rust
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    use keycloak::{types::*, KeycloakAdmin, KeycloakAdminToken};
+    use keycloak::{prelude::reqwest, types::*, KeycloakAdmin, KeycloakAdminToken};
 
     const REALM: &str = "resource";
 
