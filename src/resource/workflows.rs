@@ -16,7 +16,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmworkflows>
     pub fn workflows_get(&'a self) -> RealmWorkflowsGet<'a, TS> {
         RealmWorkflowsGet { realm_admin: self }
     }
@@ -34,12 +34,31 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmworkflows>
     pub fn workflows_post(
         &'a self,
         body: WorkflowRepresentation,
     ) -> impl Future<Output = Result<DefaultResponse, KeycloakError>> + use<'a, TS> {
         self.admin.realm_workflows_post(self.realm, body)
+    }
+
+    /// Migrate scheduled resources from one step to another
+    ///
+    /// Parameters:
+    ///
+    /// - `realm`: realm name (not id!)
+    /// - `from`: A String representing the id of the step to migrate from
+    /// - `to`: A String representing the id of the step to migrate to
+    ///
+    /// Returns response for future processing.
+    ///
+    /// Resource: `Workflows`
+    ///
+    /// `POST /admin/realms/{realm}/workflows/migrate`
+    ///
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmworkflowsmigrate>
+    pub fn workflows_migrate_post(&'a self) -> RealmWorkflowsMigratePost<'a, TS> {
+        RealmWorkflowsMigratePost { realm_admin: self }
     }
 
     /// List scheduled workflows for resource
@@ -53,7 +72,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows/scheduled/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/workflows/scheduled/{resource-id}`
     pub fn workflows_scheduled_with_resource_id_get(
@@ -70,13 +89,13 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `id`: Workflow identifier
-    /// - `include_id`: Indicates whether the workflow id should be included in the representation or not - defaults to true
+    /// - `include_id`: Indicates whether the workflow and step ids should be included in the representation or not - defaults to true
     ///
     /// Resource: `Workflows`
     ///
     /// `GET /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_get(&'a self, id: &'a str) -> RealmWorkflowsWithIdGet<'a, TS> {
         RealmWorkflowsWithIdGet {
             realm_admin: self,
@@ -98,7 +117,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_put(
         &'a self,
         id: &'a str,
@@ -120,7 +139,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_delete(
         &'a self,
         id: &'a str,
@@ -144,7 +163,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/activate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/activate/{type}/{resourceId}`
     pub fn workflows_with_id_activate_with_type_with_resource_id_post(
@@ -176,7 +195,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type}/{resourceId}`
     pub fn workflows_with_id_deactivate_with_type_with_resource_id_post(
@@ -249,6 +268,46 @@ where
     }
 }
 
+pub struct RealmWorkflowsMigratePost<'a, TS: KeycloakTokenSupplier> {
+    /// Realm admin client
+    pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
+}
+
+#[derive(Default)]
+pub struct RealmWorkflowsMigratePostArgs {
+    /// A String representing the id of the step to migrate from
+    pub from: Option<String>,
+    /// A String representing the id of the step to migrate to
+    pub to: Option<String>,
+}
+
+impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
+    for RealmWorkflowsMigratePost<'a, TS>
+{
+    type Output = DefaultResponse;
+    type Args = RealmWorkflowsMigratePostArgs;
+
+    fn opts(
+        self,
+        Self::Args { from, to }: Self::Args,
+    ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
+        self.realm_admin
+            .admin
+            .realm_workflows_migrate_post(self.realm_admin.realm, from, to)
+    }
+}
+
+impl<'a, TS> IntoFuture for RealmWorkflowsMigratePost<'a, TS>
+where
+    TS: KeycloakTokenSupplier + Send + Sync,
+{
+    type Output = Result<DefaultResponse, KeycloakError>;
+    type IntoFuture = Pin<Box<dyn 'a + Future<Output = Self::Output> + Send>>;
+    fn into_future(self) -> Self::IntoFuture {
+        Box::pin(self.opts(Default::default()))
+    }
+}
+
 pub struct RealmWorkflowsWithIdGet<'a, TS: KeycloakTokenSupplier> {
     /// Realm admin client
     pub realm_admin: &'a KeycloakRealmAdmin<'a, TS>,
@@ -258,7 +317,7 @@ pub struct RealmWorkflowsWithIdGet<'a, TS: KeycloakTokenSupplier> {
 
 #[derive(Default)]
 pub struct RealmWorkflowsWithIdGetArgs {
-    /// Indicates whether the workflow id should be included in the representation or not - defaults to true
+    /// Indicates whether the workflow and step ids should be included in the representation or not - defaults to true
     pub include_id: Option<bool>,
 }
 
@@ -396,11 +455,41 @@ mod builder {
         }
     }
 
+    impl<'a, TS> RealmWorkflowsMigratePost<'a, TS>
+    where
+        TS: KeycloakTokenSupplier + Send + Sync,
+    {
+        /// A String representing the id of the step to migrate from
+        pub fn from(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().from(value)
+        }
+        /// A String representing the id of the step to migrate to
+        pub fn to(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().to(value)
+        }
+    }
+
+    impl<TS> Builder<'_, RealmWorkflowsMigratePost<'_, TS>>
+    where
+        TS: KeycloakTokenSupplier + Send + Sync,
+    {
+        /// A String representing the id of the step to migrate from
+        pub fn from(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.from = value.into();
+            self
+        }
+        /// A String representing the id of the step to migrate to
+        pub fn to(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.to = value.into();
+            self
+        }
+    }
+
     impl<'a, TS> RealmWorkflowsWithIdGet<'a, TS>
     where
         TS: KeycloakTokenSupplier + Send + Sync,
     {
-        /// Indicates whether the workflow id should be included in the representation or not - defaults to true
+        /// Indicates whether the workflow and step ids should be included in the representation or not - defaults to true
         pub fn include_id(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().include_id(value)
         }
@@ -410,7 +499,7 @@ mod builder {
     where
         TS: KeycloakTokenSupplier + Send + Sync,
     {
-        /// Indicates whether the workflow id should be included in the representation or not - defaults to true
+        /// Indicates whether the workflow and step ids should be included in the representation or not - defaults to true
         pub fn include_id(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.include_id = value.into();
             self

@@ -65,6 +65,7 @@ pub struct AccessToken {
     pub at_hash: Option<TypeString>,
     pub auth_time: Option<i64>,
     pub authorization: Option<Authorization>,
+    pub authorization_details: Option<TypeVec<AuthorizationDetailsJSONRepresentation>>,
     pub azp: Option<TypeString>,
     pub birthdate: Option<TypeString>,
     pub c_hash: Option<TypeString>,
@@ -288,6 +289,21 @@ pub struct AuthenticatorConfigRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct Authorization {
     pub permissions: Option<TypeVec<Permission>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct AuthorizationDetailsJSONRepresentation {
+    pub actions: Option<TypeVec<String>>,
+    pub custom_data: Option<TypeMap<String, Value>>,
+    pub datatypes: Option<TypeVec<String>>,
+    pub identifier: Option<TypeString>,
+    pub locations: Option<TypeVec<String>>,
+    pub privileges: Option<TypeVec<String>>,
+    #[serde(rename = "type")]
+    pub type_: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -662,15 +678,6 @@ pub enum DecisionStrategy {
     Consensus,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum EnforcementMode {
-    Permissive,
-    Enforcing,
-    Disabled,
-}
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
@@ -846,33 +853,6 @@ pub struct IdentityProviderRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct InstallationAdapterConfig {
-    #[serde(rename = "auth-server-url")]
-    pub auth_server_url: Option<TypeString>,
-    #[serde(rename = "bearer-only")]
-    pub bearer_only: Option<bool>,
-    #[serde(rename = "confidential-port")]
-    pub confidential_port: Option<i32>,
-    pub credentials: Option<TypeMap<String, Value>>,
-    #[serde(rename = "policy-enforcer")]
-    pub policy_enforcer: Option<PolicyEnforcerConfig>,
-    #[serde(rename = "public-client")]
-    pub public_client: Option<bool>,
-    pub realm: Option<TypeString>,
-    #[serde(rename = "realm-public-key")]
-    pub realm_public_key: Option<TypeString>,
-    pub resource: Option<TypeString>,
-    #[serde(rename = "ssl-required")]
-    pub ssl_required: Option<TypeString>,
-    #[serde(rename = "use-resource-role-mappings")]
-    pub use_resource_role_mappings: Option<bool>,
-    #[serde(rename = "verify-token-audience")]
-    pub verify_token_audience: Option<bool>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 pub struct KeyMetadataRepresentation {
     pub algorithm: Option<TypeString>,
@@ -994,16 +974,6 @@ pub enum MembershipType {
     Managed,
 }
 
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct MethodConfig {
-    pub method: Option<TypeString>,
-    pub scopes: Option<TypeVec<String>>,
-    #[serde(rename = "scopes-enforcement-mode")]
-    pub scopes_enforcement_mode: Option<ScopeEnforcementMode>,
-}
-
 pub type MultivaluedHashMapStringComponentExportRepresentation =
     TypeMap<String, TypeVec<ComponentExportRepresentation>>;
 
@@ -1104,42 +1074,12 @@ pub struct OrganizationRepresentation {
     pub description: Option<TypeString>,
     pub domains: Option<TypeVec<OrganizationDomainRepresentation>>,
     pub enabled: Option<bool>,
+    pub groups: Option<TypeVec<GroupRepresentation>>,
     pub id: Option<TypeString>,
     pub identity_providers: Option<TypeVec<IdentityProviderRepresentation>>,
     pub members: Option<TypeVec<MemberRepresentation>>,
     pub name: Option<TypeString>,
     pub redirect_url: Option<TypeString>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct PathCacheConfig {
-    pub lifespan: Option<i64>,
-    #[serde(rename = "max-entries")]
-    pub max_entries: Option<i32>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "camelCase")]
-pub struct PathConfig {
-    #[serde(rename = "claim-information-point")]
-    pub claim_information_point: Option<TypeMap<String, TypeMap<String, Value>>>,
-    #[serde(rename = "enforcement-mode")]
-    pub enforcement_mode: Option<EnforcementMode>,
-    pub id: Option<TypeString>,
-    pub invalidated: Option<bool>,
-    pub methods: Option<TypeVec<MethodConfig>>,
-    pub name: Option<TypeString>,
-    pub path: Option<TypeString>,
-    pub scopes: Option<TypeVec<String>>,
-    #[serde(rename = "static")]
-    pub static_: Option<bool>,
-    pub static_path: Option<bool>,
-    #[serde(rename = "type")]
-    pub type_: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1159,32 +1099,6 @@ pub enum PolicyEnforcementMode {
     Enforcing,
     Permissive,
     Disabled,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-pub struct PolicyEnforcerConfig {
-    #[serde(rename = "auth-server-url")]
-    pub auth_server_url: Option<TypeString>,
-    #[serde(rename = "claim-information-point")]
-    pub claim_information_point: Option<TypeMap<String, TypeMap<String, Value>>>,
-    pub credentials: Option<TypeMap<String, Value>>,
-    #[serde(rename = "enforcement-mode")]
-    pub enforcement_mode: Option<EnforcementMode>,
-    #[serde(rename = "http-method-as-scope")]
-    pub http_method_as_scope: Option<bool>,
-    #[serde(rename = "lazy-load-paths")]
-    pub lazy_load_paths: Option<bool>,
-    #[serde(rename = "on-deny-redirect-to")]
-    pub on_deny_redirect_to: Option<TypeString>,
-    #[serde(rename = "path-cache")]
-    pub path_cache: Option<PathCacheConfig>,
-    pub paths: Option<TypeVec<PathConfig>>,
-    pub realm: Option<TypeString>,
-    pub resource: Option<TypeString>,
-    #[serde(rename = "user-managed-access")]
-    pub user_managed_access: Option<UserManagedAccessConfig>,
 }
 
 #[skip_serializing_none]
@@ -1215,6 +1129,8 @@ pub struct PolicyEvaluationResponse {
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct PolicyProviderRepresentation {
+    pub code: Option<TypeString>,
+    pub description: Option<TypeString>,
     pub group: Option<TypeString>,
     pub name: Option<TypeString>,
     #[serde(rename = "type")]
@@ -1399,6 +1315,7 @@ pub struct RealmRepresentation {
     pub login_with_email_allowed: Option<bool>,
     pub max_delta_time_seconds: Option<i32>,
     pub max_failure_wait_seconds: Option<i32>,
+    pub max_secondary_auth_failures: Option<i32>,
     pub max_temporary_lockouts: Option<i32>,
     pub minimum_quick_login_wait_seconds: Option<i32>,
     pub not_before: Option<i32>,
@@ -1444,6 +1361,7 @@ pub struct RealmRepresentation {
     pub reset_password_allowed: Option<bool>,
     pub revoke_refresh_token: Option<bool>,
     pub roles: Option<RolesRepresentation>,
+    pub scim_api_enabled: Option<bool>,
     pub scope_mappings: Option<TypeVec<ScopeMappingRepresentation>>,
     pub smtp_server: Option<TypeMap<String, TypeString>>,
     #[deprecated]
@@ -1607,15 +1525,6 @@ pub struct RolesRepresentation {
     pub realm: Option<TypeVec<RoleRepresentation>>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
-#[cfg_attr(feature = "schemars", derive(JsonSchema))]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
-pub enum ScopeEnforcementMode {
-    All,
-    Any,
-    Disabled,
-}
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
@@ -1659,6 +1568,14 @@ pub struct SocialLinkRepresentation {
 pub enum Status {
     Pending,
     Expired,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum StepExecutionStatus {
+    Completed,
+    Pending,
 }
 
 #[skip_serializing_none]
@@ -1770,8 +1687,6 @@ pub struct UserFederationProviderRepresentation {
     pub priority: Option<i32>,
     pub provider_name: Option<TypeString>,
 }
-
-pub type UserManagedAccessConfig = TypeMap<String, TypeValue>;
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
@@ -1916,5 +1831,6 @@ pub struct WorkflowStepRepresentation {
     pub id: Option<TypeString>,
     #[serde(rename = "scheduled-at")]
     pub scheduled_at: Option<i64>,
+    pub status: Option<StepExecutionStatus>,
     pub uses: Option<TypeString>,
 }

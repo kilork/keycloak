@@ -7,13 +7,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     /// - `realm`: realm name (not id!)
     /// - `name`
     /// - `parent`
+    /// - `provider_id`
     /// - `type_`
     ///
     /// Resource: `Component`
     ///
     /// `GET /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponents>
     pub fn components_get(&'a self) -> RealmComponentsGet<'a, TS> {
         RealmComponentsGet { realm_admin: self }
     }
@@ -29,7 +30,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmcomponents>
     pub fn components_post(
         &'a self,
         body: ComponentRepresentation,
@@ -46,7 +47,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
     pub fn components_with_id_get(
         &'a self,
         id: &'a str,
@@ -66,7 +67,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
     pub fn components_with_id_put(
         &'a self,
         id: &'a str,
@@ -87,7 +88,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
     pub fn components_with_id_delete(
         &'a self,
         id: &'a str,
@@ -107,7 +108,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}/sub-component-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
     pub fn components_with_id_sub_component_types_get(
         &'a self,
         id: &'a str,
@@ -129,6 +130,7 @@ pub struct RealmComponentsGet<'a, TS: KeycloakTokenSupplier> {
 pub struct RealmComponentsGetArgs {
     pub name: Option<String>,
     pub parent: Option<String>,
+    pub provider_id: Option<String>,
     pub type_: Option<String>,
 }
 
@@ -143,12 +145,17 @@ impl<'a, TS: KeycloakTokenSupplier + Send + Sync> KeycloakRealmAdminMethod
         Self::Args {
             name,
             parent,
+            provider_id,
             type_,
         }: Self::Args,
     ) -> impl Future<Output = Result<Self::Output, KeycloakError>> + use<'a, TS> {
-        self.realm_admin
-            .admin
-            .realm_components_get(self.realm_admin.realm, name, parent, type_)
+        self.realm_admin.admin.realm_components_get(
+            self.realm_admin.realm,
+            name,
+            parent,
+            provider_id,
+            type_,
+        )
     }
 }
 
@@ -222,6 +229,9 @@ mod builder {
         pub fn parent(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().parent(value)
         }
+        pub fn provider_id(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
+            self.builder().provider_id(value)
+        }
         pub fn type_(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().type_(value)
         }
@@ -237,6 +247,10 @@ mod builder {
         }
         pub fn parent(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.parent = value.into();
+            self
+        }
+        pub fn provider_id(mut self, value: impl Into<Option<String>>) -> Self {
+            self.args.provider_id = value.into();
             self
         }
         pub fn type_(mut self, value: impl Into<Option<String>>) -> Self {
