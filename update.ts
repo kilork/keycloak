@@ -98,7 +98,7 @@ class Cargo {
   }
 
   async build() {
-    return await this.cargoCommandSpawn(["build"]);
+    return await this.cargoCommandSpawn(["build", "--examples"]);
   }
 
   async publish() {
