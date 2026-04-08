@@ -7152,21 +7152,21 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{client-uuid}" : {
+    "/admin/realms/{realm}/clients/{client-uuid}/roles/{role-name}/composites/clients/{targetClientUuid}" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get client-level roles for the client that are in the role's composite",
         "parameters" : [ {
-          "name" : "client-uuid",
+          "name" : "role-name",
           "in" : "path",
+          "description" : "role's name (not id!)",
           "required" : true,
           "schema" : {
             "type" : "string"
           }
         }, {
-          "name" : "role-name",
+          "name" : "targetClientUuid",
           "in" : "path",
-          "description" : "role's name (not id!)",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -7198,6 +7198,14 @@
         "name" : "realm",
         "in" : "path",
         "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -8061,6 +8069,12 @@
           }
         }, {
           "name" : "parent",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "providerId",
           "in" : "query",
           "schema" : {
             "type" : "string"
@@ -9003,14 +9017,14 @@
         }, {
           "name" : "search",
           "in" : "query",
-          "description" : "A String representing either an exact group name or a partial name",
+          "description" : "A String representing either an exact group name or a partial name, defaults to prefix search.",
           "schema" : {
             "type" : "string"
           }
         }, {
           "name" : "subGroupsCount",
           "in" : "query",
-          "description" : "Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true",
+          "description" : "Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)",
           "schema" : {
             "default" : "true",
             "type" : "boolean"
@@ -10783,6 +10797,546 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/organizations/{org-id}/groups" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get organization groups",
+        "description" : "Returns organization groups. When `search` parameter is provided, groups are searched by name. When `q` parameter is provided, groups are searched by attributes. If neither parameter is provided, top-level groups are returned.",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "exact",
+          "in" : "query",
+          "schema" : {
+            "default" : "false",
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "populateHierarchy",
+          "in" : "query",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "q",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Creates a new top-level group or moves an existing group to top-level",
+        "description" : "Creates a new top-level group in the organization. If the group representation includes an ID, moves the existing organization group to be a top-level group. If no ID is provided, creates a new top-level group.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GroupRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          },
+          "204" : {
+            "description" : "No Content - Group moved to top-level"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "404" : {
+            "description" : "Not Found - Group does not exist"
+          },
+          "409" : {
+            "description" : "Conflict"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/group-by-path/{path}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get organization group by path",
+        "description" : "Returns the organization group with the specified path",
+        "parameters" : [ {
+          "name" : "path",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "pattern" : ".*",
+            "type" : "string"
+          }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "Whether to return the count of subgroups (default: false)",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupRepresentation"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get organization group representation",
+        "parameters" : [ {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "Whether to return the count of subgroups (default: false)",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GroupRepresentation"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Update organization group",
+        "description" : "Updates the organization group's name, description, and attributes. Subgroups are not affected.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GroupRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "409" : {
+            "description" : "Conflict"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Delete the organization group",
+        "description" : "Deletes the organization group and all its subgroups",
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/children" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get subgroups of this organization group",
+        "description" : "Returns a paginated stream of subgroups that belong to this organization group",
+        "parameters" : [ {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "Boolean which defines whether the params \"search\" must match exactly or not",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "The position of the first result to be returned (pagination offset).",
+          "schema" : {
+            "format" : "int32",
+            "default" : "0",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "The maximum number of results that are to be returned. Defaults to 10",
+          "schema" : {
+            "format" : "int32",
+            "default" : "10",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A String representing either an exact group name or a partial name",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "Whether to return the count of subgroups (default: false)",
+          "schema" : {
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Create or move a subgroup",
+        "description" : "Creates a new subgroup under this organization group. If the group representation includes an ID, moves the existing group to be a child of this group. If no ID is provided, creates a new subgroup.",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/GroupRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created"
+          },
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "409" : {
+            "description" : "Conflict"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/members" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Get members of this organization group",
+        "description" : "Returns a paginated list of organization members that belong to this group",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Only return basic information (only guaranteed to return id, username, created, first and last name, email, enabled state, email verification state, federation link, and access. Note that it means that namely user attributes, required actions, and not before are not returned.)",
+          "schema" : {
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "Pagination offset",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "Maximum results size (defaults to 100)",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MemberRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/members/{userId}" : {
+      "put" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Add a user to this organization group",
+        "description" : "Adds an organization member to this group. The user must be a member of the organization.",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request - User is not a member of the organization"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found - User does not exist"
+          },
+          "409" : {
+            "description" : "Conflict - User is already a member of the group"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Remove a user from this organization group",
+        "description" : "Removes a user from this organization group. The user remains a member of the organization.",
+        "parameters" : [ {
+          "name" : "userId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found - User does not exist"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/organizations/{org-id}/identity-providers" : {
       "get" : {
         "tags" : [ "Organizations" ],
@@ -10897,6 +11451,110 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}/groups" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns organization groups for the identity provider",
+        "description" : "Returns organization groups that can be used in identity provider mappers. Only returns groups if the identity provider is associated with the organization.",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "description" : "The alias of the identity provider",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "If true, return brief representation; otherwise return full representation",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "exact",
+          "in" : "query",
+          "description" : "If true, perform exact match on the search parameter",
+          "schema" : {
+            "default" : "false",
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "description" : "The position of the first result (pagination offset)",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "description" : "The maximum number of results to return",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "q",
+          "in" : "query",
+          "description" : "A query to search for group attributes, in the format 'key1:value1 key2:value2'",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "description" : "A string to search for in group names",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "subGroupsCount",
+          "in" : "query",
+          "description" : "If true, include subgroups count in the response",
+          "schema" : {
+            "default" : false,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
+                }
+              }
+            }
           },
           "404" : {
             "description" : "Not Found"
@@ -11392,6 +12050,82 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/members/{member-id}/groups" : {
+      "get" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Returns the organization group memberships for a member with the specified id",
+        "description" : "Searches for auser with the given id. If one is found, and is currently a member of the organization, returns the groups from the organizationwhere the user is member of. Otherwise, an error response with status NOT_FOUND is returned",
+        "parameters" : [ {
+          "name" : "member-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        }, {
+          "name" : "first",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "max",
+          "in" : "query",
+          "schema" : {
+            "format" : "int32",
+            "type" : "integer"
+          }
+        }, {
+          "name" : "search",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/GroupRepresentation"
+                  }
+                }
+              }
+            }
           },
           "400" : {
             "description" : "Bad Request"
@@ -12289,21 +13023,21 @@
         }
       } ]
     },
-    "/admin/realms/{realm}/roles/{role-name}/composites/clients/{client-uuid}" : {
+    "/admin/realms/{realm}/roles/{role-name}/composites/clients/{targetClientUuid}" : {
       "get" : {
         "tags" : [ "Roles" ],
         "summary" : "Get client-level roles for the client that are in the role's composite",
         "parameters" : [ {
-          "name" : "client-uuid",
+          "name" : "role-name",
           "in" : "path",
+          "description" : "role's name (not id!)",
           "required" : true,
           "schema" : {
             "type" : "string"
           }
         }, {
-          "name" : "role-name",
+          "name" : "targetClientUuid",
           "in" : "path",
-          "description" : "role's name (not id!)",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -12695,12 +13429,27 @@
       "get" : {
         "tags" : [ "Users" ],
         "summary" : "Get users Returns a stream of users, filtered according to query parameters.",
+        "description" : "Returns a stream of users. Note that the 'credentials' field in the returned UserRepresentation objects is typically not populated for performance reasons. If specific credential metadata is required, use the dedicated 'GET /admin/realms/{realm}/users/{user-id}/credentials' endpoint.",
         "parameters" : [ {
           "name" : "briefRepresentation",
           "in" : "query",
           "description" : "Boolean which defines whether brief representations are returned (default: false)",
           "schema" : {
             "type" : "boolean"
+          }
+        }, {
+          "name" : "createdAfter",
+          "in" : "query",
+          "description" : "Only return users created after (inclusive) the given date, in ISO-8601 format (yyyy-MM-dd) or epoch milliseconds",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "createdBefore",
+          "in" : "query",
+          "description" : "Only return users created before (inclusive) the given date, in ISO-8601 format (yyyy-MM-dd) or epoch milliseconds",
+          "schema" : {
+            "type" : "string"
           }
         }, {
           "name" : "email",
@@ -12920,6 +13669,20 @@
         "summary" : "Returns the number of users that match the given criteria.",
         "description" : "It can be called in three different ways. 1. Don’t specify any criteria and pass {@code null}. The number of all users within that realm will be returned. <p> 2. If {@code search} is specified other criteria such as {@code last} will be ignored even though you set them. The {@code search} string will be matched against the first and last name, the username and the email of a user. <p> 3. If {@code search} is unspecified but any of {@code last}, {@code first}, {@code email} or {@code username} those criteria are matched against their respective fields on a user entity. Combined with a logical and.",
         "parameters" : [ {
+          "name" : "createdAfter",
+          "in" : "query",
+          "description" : "Only return users created after (inclusive) the given date, in ISO-8601 format (yyyy-MM-dd) or epoch milliseconds",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "createdBefore",
+          "in" : "query",
+          "description" : "Only return users created before (inclusive) the given date, in ISO-8601 format (yyyy-MM-dd) or epoch milliseconds",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "email",
           "in" : "query",
           "description" : "A String contained in email, or the complete email, if param \"exact\" is true",
@@ -14861,6 +15624,45 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/workflows/migrate" : {
+      "post" : {
+        "tags" : [ "Workflows" ],
+        "summary" : "Migrate scheduled resources from one step to another",
+        "description" : "Migrate scheduled resources from one step to another step in the same or in a different workflow.",
+        "parameters" : [ {
+          "name" : "from",
+          "in" : "query",
+          "description" : "A String representing the id of the step to migrate from",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "to",
+          "in" : "query",
+          "description" : "A String representing the id of the step to migrate to",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/workflows/scheduled/{resource-id}" : {
       "get" : {
         "tags" : [ "Workflows" ],
@@ -14909,7 +15711,7 @@
         "parameters" : [ {
           "name" : "includeId",
           "in" : "query",
-          "description" : "Indicates whether the workflow id should be included in the representation or not - defaults to true",
+          "description" : "Indicates whether the workflow and step ids should be included in the representation or not - defaults to true",
           "schema" : {
             "type" : "boolean"
           }
@@ -15326,6 +16128,12 @@
           },
           "scope" : {
             "type" : "string"
+          },
+          "authorization_details" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuthorizationDetailsJSONRepresentation"
+            }
           }
         }
       },
@@ -15761,6 +16569,45 @@
             "items" : {
               "$ref" : "#/components/schemas/Permission"
             }
+          }
+        }
+      },
+      "AuthorizationDetailsJSONRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "type" : {
+            "type" : "string"
+          },
+          "locations" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "actions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "datatypes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "identifier" : {
+            "type" : "string"
+          },
+          "privileges" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "customData" : {
+            "type" : "object",
+            "additionalProperties" : { }
           }
         }
       },
@@ -16538,10 +17385,6 @@
         "enum" : [ "AFFIRMATIVE", "UNANIMOUS", "CONSENSUS" ],
         "type" : "string"
       },
-      "EnforcementMode" : {
-        "enum" : [ "PERMISSIVE", "ENFORCING", "DISABLED" ],
-        "type" : "string"
-      },
       "ErrorRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -16960,49 +17803,6 @@
           }
         }
       },
-      "InstallationAdapterConfig" : {
-        "type" : "object",
-        "properties" : {
-          "realm" : {
-            "type" : "string"
-          },
-          "realm-public-key" : {
-            "type" : "string"
-          },
-          "auth-server-url" : {
-            "type" : "string"
-          },
-          "ssl-required" : {
-            "type" : "string"
-          },
-          "bearer-only" : {
-            "type" : "boolean"
-          },
-          "resource" : {
-            "type" : "string"
-          },
-          "public-client" : {
-            "type" : "boolean"
-          },
-          "verify-token-audience" : {
-            "type" : "boolean"
-          },
-          "credentials" : {
-            "type" : "object",
-            "additionalProperties" : { }
-          },
-          "use-resource-role-mappings" : {
-            "type" : "boolean"
-          },
-          "confidential-port" : {
-            "format" : "int32",
-            "type" : "integer"
-          },
-          "policy-enforcer" : {
-            "$ref" : "#/components/schemas/PolicyEnforcerConfig"
-          }
-        }
-      },
       "KeyMetadataRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -17272,23 +18072,6 @@
       "MembershipType" : {
         "enum" : [ "UNMANAGED", "MANAGED" ],
         "type" : "string"
-      },
-      "MethodConfig" : {
-        "type" : "object",
-        "properties" : {
-          "method" : {
-            "type" : "string"
-          },
-          "scopes" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "scopes-enforcement-mode" : {
-            "$ref" : "#/components/schemas/ScopeEnforcementMode"
-          }
-        }
       },
       "MultivaluedHashMapStringComponentExportRepresentation" : {
         "type" : "object",
@@ -17585,67 +18368,12 @@
             "items" : {
               "$ref" : "#/components/schemas/IdentityProviderRepresentation"
             }
-          }
-        }
-      },
-      "PathCacheConfig" : {
-        "type" : "object",
-        "properties" : {
-          "max-entries" : {
-            "format" : "int32",
-            "type" : "integer"
           },
-          "lifespan" : {
-            "format" : "int64",
-            "type" : "integer"
-          }
-        }
-      },
-      "PathConfig" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "string"
-          },
-          "path" : {
-            "type" : "string"
-          },
-          "methods" : {
+          "groups" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/MethodConfig"
+              "$ref" : "#/components/schemas/GroupRepresentation"
             }
-          },
-          "scopes" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          },
-          "id" : {
-            "type" : "string"
-          },
-          "enforcement-mode" : {
-            "$ref" : "#/components/schemas/EnforcementMode"
-          },
-          "claim-information-point" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "additionalProperties" : { }
-            }
-          },
-          "invalidated" : {
-            "type" : "boolean"
-          },
-          "staticPath" : {
-            "type" : "boolean"
-          },
-          "static" : {
-            "type" : "boolean"
           }
         }
       },
@@ -17680,55 +18408,6 @@
       "PolicyEnforcementMode" : {
         "enum" : [ "ENFORCING", "PERMISSIVE", "DISABLED" ],
         "type" : "string"
-      },
-      "PolicyEnforcerConfig" : {
-        "type" : "object",
-        "properties" : {
-          "enforcement-mode" : {
-            "$ref" : "#/components/schemas/EnforcementMode"
-          },
-          "paths" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/PathConfig"
-            }
-          },
-          "path-cache" : {
-            "$ref" : "#/components/schemas/PathCacheConfig"
-          },
-          "lazy-load-paths" : {
-            "type" : "boolean"
-          },
-          "on-deny-redirect-to" : {
-            "type" : "string"
-          },
-          "user-managed-access" : {
-            "$ref" : "#/components/schemas/UserManagedAccessConfig"
-          },
-          "claim-information-point" : {
-            "type" : "object",
-            "additionalProperties" : {
-              "type" : "object",
-              "additionalProperties" : { }
-            }
-          },
-          "http-method-as-scope" : {
-            "type" : "boolean"
-          },
-          "realm" : {
-            "type" : "string"
-          },
-          "auth-server-url" : {
-            "type" : "string"
-          },
-          "credentials" : {
-            "type" : "object",
-            "additionalProperties" : { }
-          },
-          "resource" : {
-            "type" : "string"
-          }
-        }
       },
       "PolicyEvaluationRequest" : {
         "type" : "object",
@@ -17798,6 +18477,12 @@
             "type" : "string"
           },
           "group" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "code" : {
             "type" : "string"
           }
         }
@@ -18197,6 +18882,10 @@
             "type" : "integer"
           },
           "failureFactor" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "maxSecondaryAuthFailures" : {
             "format" : "int32",
             "type" : "integer"
           },
@@ -18647,6 +19336,9 @@
               "$ref" : "#/components/schemas/ClientTemplateRepresentation"
             },
             "deprecated" : true
+          },
+          "scimApiEnabled" : {
+            "type" : "boolean"
           }
         }
       },
@@ -18919,10 +19611,6 @@
           }
         }
       },
-      "ScopeEnforcementMode" : {
-        "enum" : [ "ALL", "ANY", "DISABLED" ],
-        "type" : "string"
-      },
       "ScopeMappingRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -18993,6 +19681,10 @@
       },
       "Status" : {
         "enum" : [ "PENDING", "EXPIRED" ],
+        "type" : "string"
+      },
+      "StepExecutionStatus" : {
+        "enum" : [ "COMPLETED", "PENDING" ],
         "type" : "string"
       },
       "UPAttribute" : {
@@ -19214,9 +19906,6 @@
             "type" : "integer"
           }
         }
-      },
-      "UserManagedAccessConfig" : {
-        "type" : "object"
       },
       "UserProfileAttributeGroupMetadata" : {
         "type" : "object",
@@ -19554,9 +20243,11 @@
             "format" : "int64",
             "type" : "integer"
           },
+          "status" : {
+            "$ref" : "#/components/schemas/StepExecutionStatus"
+          },
           "id" : {
-            "type" : "string",
-            "writeOnly" : true
+            "type" : "string"
           },
           "config" : {
             "$ref" : "#/components/schemas/MultivaluedHashMapStringString"

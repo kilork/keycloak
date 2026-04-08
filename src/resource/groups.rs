@@ -20,7 +20,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroups>
     pub fn groups_get(&'a self) -> RealmGroupsGet<'a, TS> {
         RealmGroupsGet { realm_admin: self }
     }
@@ -38,7 +38,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmgroups>
     pub fn groups_post(
         &'a self,
         body: GroupRepresentation,
@@ -58,7 +58,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroupscount>
     pub fn groups_count_get(&'a self) -> RealmGroupsCountGet<'a, TS> {
         RealmGroupsCountGet { realm_admin: self }
     }
@@ -72,7 +72,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_get(
@@ -97,7 +97,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_put(
@@ -120,7 +120,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmgroupsgroup_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/groups/{group-id}`
     pub fn groups_with_group_id_delete(
@@ -141,14 +141,14 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     /// - `exact`: Boolean which defines whether the params "search" must match exactly or not
     /// - `first`: The position of the first result to be returned (pagination offset).
     /// - `max`: The maximum number of results that are to be returned. Defaults to 10
-    /// - `search`: A String representing either an exact group name or a partial name
-    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    /// - `search`: A String representing either an exact group name or a partial name, defaults to prefix search.
+    /// - `sub_groups_count`: Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
     ///
     /// Resource: `Groups`
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_get(
@@ -175,7 +175,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmgroupsgroup_idchildren>
     ///
     /// REST method: `POST /admin/realms/{realm}/groups/{group-id}/children`
     pub fn groups_with_group_id_children_post(
@@ -198,7 +198,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_get(
@@ -222,7 +222,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/groups/{group_id}/management/permissions`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmgroupsgroup_idmanagementpermissions>
     ///
     /// REST method: `PUT /admin/realms/{realm}/groups/{group-id}/management/permissions`
     pub fn groups_with_group_id_management_permissions_put(
@@ -249,7 +249,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.5.2/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmgroupsgroup_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/groups/{group-id}/members`
     pub fn groups_with_group_id_members_get(
@@ -380,9 +380,9 @@ pub struct RealmGroupsWithGroupIdChildrenGetArgs {
     pub first: Option<i32>,
     /// The maximum number of results that are to be returned. Defaults to 10
     pub max: Option<i32>,
-    /// A String representing either an exact group name or a partial name
+    /// A String representing either an exact group name or a partial name, defaults to prefix search.
     pub search: Option<String>,
-    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+    /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
     pub sub_groups_count: Option<bool>,
 }
 
@@ -605,11 +605,11 @@ mod builder {
         pub fn max(self, value: impl Into<Option<i32>>) -> Builder<'a, Self> {
             self.builder().max(value)
         }
-        /// A String representing either an exact group name or a partial name
+        /// A String representing either an exact group name or a partial name, defaults to prefix search.
         pub fn search(self, value: impl Into<Option<String>>) -> Builder<'a, Self> {
             self.builder().search(value)
         }
-        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
         pub fn sub_groups_count(self, value: impl Into<Option<bool>>) -> Builder<'a, Self> {
             self.builder().sub_groups_count(value)
         }
@@ -639,12 +639,12 @@ mod builder {
             self.args.max = value.into();
             self
         }
-        /// A String representing either an exact group name or a partial name
+        /// A String representing either an exact group name or a partial name, defaults to prefix search.
         pub fn search(mut self, value: impl Into<Option<String>>) -> Self {
             self.args.search = value.into();
             self
         }
-        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+        /// Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true)
         pub fn sub_groups_count(mut self, value: impl Into<Option<bool>>) -> Self {
             self.args.sub_groups_count = value.into();
             self
