@@ -101,6 +101,49 @@ pub struct KeycloakAdminToken {
     token_type: String,
 }
 
+impl KeycloakAdminToken {
+    /// Returns the access token issued by Keycloak.
+    pub fn access_token(&self) -> &str {
+        &self.access_token
+    }
+
+    /// Returns the lifetime in seconds of the access token.
+    pub fn expires_in(&self) -> usize {
+        self.expires_in
+    }
+
+    /// Returns the `not-before-policy` value, if provided by Keycloak.
+    pub fn not_before_policy(&self) -> Option<usize> {
+        self.not_before_policy
+    }
+
+    /// Returns the lifetime in seconds of the refresh token, if a refresh
+    /// token was issued.
+    pub fn refresh_expires_in(&self) -> Option<usize> {
+        self.refresh_expires_in
+    }
+
+    /// Returns the refresh token, if one was issued.
+    pub fn refresh_token(&self) -> Option<&str> {
+        self.refresh_token.as_deref()
+    }
+
+    /// Returns the OAuth scope(s) associated with the token.
+    pub fn scope(&self) -> &str {
+        &self.scope
+    }
+
+    /// Returns the session state, if provided by Keycloak.
+    pub fn session_state(&self) -> Option<&str> {
+        self.session_state.as_deref()
+    }
+
+    /// Returns the token type (typically `Bearer`).
+    pub fn token_type(&self) -> &str {
+        &self.token_type
+    }
+}
+
 #[async_trait]
 impl KeycloakTokenSupplier for KeycloakAdminToken {
     async fn get(&self, _url: &str) -> Result<String, KeycloakError> {
