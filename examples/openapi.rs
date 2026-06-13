@@ -1236,7 +1236,7 @@ pub enum {name} {{
                         unique_items: _,
                     } => {
                         let item_type = if let Some(items) = items {
-                            items.to_rust_type(RefMode::Std)
+                            items.to_rust_type_opt(RefMode::Std)
                         } else {
                             "TypeValue".into()
                         };
