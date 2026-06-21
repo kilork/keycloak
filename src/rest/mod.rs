@@ -40,13 +40,45 @@ impl KeycloakTokenSupplier for KeycloakServiceAccountAdminTokenRetriever {
 }
 
 impl KeycloakServiceAccountAdminTokenRetriever {
-    /// Creates a token retriever for a [service account](https://www.keycloak.org/docs/latest/server_development/#authenticating-with-a-service-account)
+    /// Creates a token retriever for a [service account] in the `master` realm.
+    ///
+    /// Use this when you want to authenticate against Keycloak using a
+    /// confidential client whose `Service Accounts` feature is enabled and
+    /// whose `client_id` lives in the `master` realm.
+    ///
+    /// To target a different realm, use [`KeycloakServiceAccountAdminTokenRetriever::create_with_custom_realm`].
+    ///
+    /// [service account]: https://www.keycloak.org/docs/latest/server_development/#authenticating-with-a-service-account
+    ///
+    /// # Arguments
+    ///
     /// * `client_id` - The client id of a client with the following characteristics:
-    ///   1. Exists in the **master** realm
-    ///   2. `confidential` access type
-    ///   3. `Service Accounts` option is enabled
-    /// * `client_secret` - The secret credential assigned to the given `client_id`
-    /// * `client` - A reqwest Client to perform the token retrieval call
+    ///   1. Exists in the `master` realm.
+    ///   2. `confidential` access type.
+    ///   3. `Service Accounts` option is enabled.
+    /// * `client_secret` - The secret credential assigned to the given `client_id`.
+    /// * `client` - A reqwest `Client` used to perform the token retrieval call.
+    ///
+    /// # Example
+    ///
+    /// ```no_run
+    /// # async fn doc() -> Result<(), keycloak::KeycloakError> {
+    /// use keycloak::{prelude::reqwest, KeycloakAdmin, KeycloakServiceAccountAdminTokenRetriever};
+    ///
+    /// let client = reqwest::Client::new();
+    /// let url = "https://keycloak.example.com";
+    ///
+    /// let retriever = KeycloakServiceAccountAdminTokenRetriever::create(
+    ///     "my-client",
+    ///     "my-secret",
+    ///     client.clone(),
+    /// );
+    ///
+    /// let admin = KeycloakAdmin::new(url, retriever, client);
+    /// // ... use `admin` to call the Admin REST API.
+    /// # let _ = admin;
+    /// # Ok(()) }
+    /// ```
     pub fn create(client_id: &str, client_secret: &str, client: reqwest::Client) -> Self {
         Self {
             client_id: client_id.into(),
@@ -56,6 +88,44 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         }
     }
 
+    /// Creates a token retriever for a [service account] in a caller-specified realm.
+    ///
+    /// This is the same as [`KeycloakServiceAccountAdminTokenRetriever::create`],
+    /// but the realm is supplied explicitly rather than defaulting to `master`.
+    ///
+    /// [service account]: https://www.keycloak.org/docs/latest/server_development/#authenticating-with-a-service-account
+    ///
+    /// # Arguments
+    ///
+    /// * `client_id` - The client id of a client with the following characteristics:
+    ///   1. Exists in `realm`.
+    ///   2. `confidential` access type.
+    ///   3. `Service Accounts` option is enabled.
+    /// * `client_secret` - The secret credential assigned to the given `client_id`.
+    /// * `realm` - The Keycloak realm the `client_id` lives in.
+    /// * `client` - A reqwest `Client` used to perform the token retrieval call.
+    ///
+    /// # Example
+    ///
+    /// ```no_run
+    /// # async fn doc() -> Result<(), keycloak::KeycloakError> {
+    /// use keycloak::{prelude::reqwest, KeycloakAdmin, KeycloakServiceAccountAdminTokenRetriever};
+    ///
+    /// let client = reqwest::Client::new();
+    /// let url = "https://keycloak.example.com";
+    ///
+    /// let retriever = KeycloakServiceAccountAdminTokenRetriever::create_with_custom_realm(
+    ///     "my-client",
+    ///     "my-secret",
+    ///     "my-realm",
+    ///     client.clone(),
+    /// );
+    ///
+    /// let admin = KeycloakAdmin::new(url, retriever, client);
+    /// // ... use `admin` to call the Admin REST API.
+    /// # let _ = admin;
+    /// # Ok(()) }
+    /// ```
     pub fn create_with_custom_realm(
         client_id: &str,
         client_secret: &str,
@@ -70,6 +140,17 @@ impl KeycloakServiceAccountAdminTokenRetriever {
         }
     }
 
+    /// Fetches a fresh [`KeycloakAdminToken`] for the configured service account.
+    ///
+    /// Each call performs a new HTTP request against Keycloak's token endpoint
+    /// using the `client_credentials` grant. To avoid the per-request round-trip,
+    /// cache the returned [`KeycloakAdminToken`] yourself (e.g. using its
+    /// [`KeycloakAdminToken::expires_in`] field) or implement a custom
+    /// [`KeycloakTokenSupplier`].
+    ///
+    /// # Arguments
+    ///
+    /// * `url` - Base URL of the Keycloak server (e.g. `https://keycloak.example.com`).
     pub async fn acquire(&self, url: &str) -> Result<KeycloakAdminToken, KeycloakError> {
         let realm = &self.realm;
         let response = self
