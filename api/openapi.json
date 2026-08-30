@@ -3731,6 +3731,7 @@
           "in" : "query",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         }, {
@@ -3988,6 +3989,7 @@
           "in" : "query",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         }, {
@@ -4263,6 +4265,7 @@
           "in" : "query",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         }, {
@@ -4390,6 +4393,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -4504,6 +4508,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -4661,6 +4666,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -4763,6 +4769,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -4878,6 +4885,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -4993,6 +5001,7 @@
         "in" : "query",
         "schema" : {
           "format" : "int32",
+          "default" : "100",
           "type" : "integer"
         }
       }, {
@@ -5941,6 +5950,60 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-saml-response" : {
+      "get" : {
+        "tags" : [ "Clients" ],
+        "summary" : "Create JSON with an example SAML response as payload",
+        "parameters" : [ {
+          "name" : "audience",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "scope",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userId",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/SamlExampleResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-uuid",
+        "in" : "path",
+        "description" : "id of client (not client-id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/clients/{client-uuid}/evaluate-scopes/generate-example-userinfo" : {
       "get" : {
         "tags" : [ "Clients" ],
@@ -6366,7 +6429,7 @@
     "/admin/realms/{realm}/clients/{client-uuid}/offline-sessions" : {
       "get" : {
         "tags" : [ "Clients" ],
-        "summary" : "Get offline sessions for client Returns a list of offline user sessions associated with this client",
+        "summary" : "Get offline sessions for client. Returns a list of offline user sessions associated with this client",
         "parameters" : [ {
           "name" : "first",
           "in" : "query",
@@ -6378,9 +6441,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "Maximum results size (defaults to 100)",
+          "description" : "Maximum results size.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -6971,6 +7035,9 @@
           "204" : {
             "description" : "No Content"
           },
+          "400" : {
+            "description" : "Bad Request"
+          },
           "403" : {
             "description" : "Forbidden"
           },
@@ -7280,7 +7347,7 @@
         }, {
           "name" : "briefRepresentation",
           "in" : "query",
-          "description" : "if false, return a full representation of the {@code GroupRepresentation} objects.",
+          "description" : "If false, return a full representation of the {@code GroupRepresentation} objects.",
           "schema" : {
             "default" : true,
             "type" : "boolean"
@@ -7288,7 +7355,7 @@
         }, {
           "name" : "first",
           "in" : "query",
-          "description" : "first result to return. Ignored if negative or {@code null}.",
+          "description" : "First result to return. Ignored if negative or {@code null}.",
           "schema" : {
             "format" : "int32",
             "type" : "integer"
@@ -7296,9 +7363,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "maximum number of results to return. Ignored if negative or {@code null}.",
+          "description" : "Maximum number of results to return. Unbounded if negative.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -7460,9 +7528,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "maximum number of results to return. Ignored if negative or {@code null}.",
+          "description" : "Maximum number of results to return. Unbounded if negative.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -8006,7 +8075,7 @@
     "/admin/realms/{realm}/clients/{client-uuid}/user-sessions" : {
       "get" : {
         "tags" : [ "Clients" ],
-        "summary" : "Get user sessions for client Returns a list of user sessions associated with this client\n",
+        "summary" : "Get user sessions for client. Returns a list of user sessions associated with this client.\n",
         "parameters" : [ {
           "name" : "first",
           "in" : "query",
@@ -8018,9 +8087,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "Maximum results size (defaults to 100)",
+          "description" : "Maximum results size.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -8594,9 +8664,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "Maximum results size (defaults to 100)",
+          "description" : "Maximum results size",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         }, {
@@ -10574,7 +10645,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -10665,6 +10736,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -10700,7 +10774,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -10714,6 +10788,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -10733,7 +10810,7 @@
         "summary" : "Returns the organization representation",
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -10741,6 +10818,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -10763,6 +10843,9 @@
           "400" : {
             "description" : "Bad Request"
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "409" : {
             "description" : "Conflict"
           }
@@ -10777,6 +10860,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -10870,6 +10956,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -10895,6 +10984,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "404" : {
             "description" : "Not Found - Group does not exist"
@@ -11002,6 +11094,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11025,6 +11120,9 @@
           "400" : {
             "description" : "Bad Request"
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "409" : {
             "description" : "Conflict"
           }
@@ -11037,6 +11135,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "404" : {
             "description" : "Not Found"
@@ -11125,6 +11226,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11228,6 +11332,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11337,6 +11444,473 @@
         }
       } ]
     },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings" : {
+      "get" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Get role mappings",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MappingsRepresentation"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/clients/{client-id}" : {
+      "get" : {
+        "tags" : [ "Client Role Mappings" ],
+        "summary" : "Get client-level role mappings for the user or group, and the app",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Client Role Mappings" ],
+        "summary" : "Add client-level roles to the user or group role mapping",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/RoleRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Client Role Mappings" ],
+        "summary" : "Delete client-level roles from user or group role mapping",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/RoleRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-id",
+        "in" : "path",
+        "description" : "client id (not clientId!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/clients/{client-id}/available" : {
+      "get" : {
+        "tags" : [ "Client Role Mappings" ],
+        "summary" : "Get available client-level roles that can be mapped to the user or group",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-id",
+        "in" : "path",
+        "description" : "client id (not clientId!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/clients/{client-id}/composite" : {
+      "get" : {
+        "tags" : [ "Client Role Mappings" ],
+        "summary" : "Get effective client-level role mappings This recurses any composite roles",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "if false, return roles with their attributes",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "client-id",
+        "in" : "path",
+        "description" : "client id (not clientId!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/realm" : {
+      "get" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Get realm-level role mappings",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Add realm-level role mappings to the user",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/RoleRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Delete realm-level role mappings",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/RoleRepresentation"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          },
+          "500" : {
+            "description" : "Internal Server Error"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/realm/available" : {
+      "get" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Get realm-level roles that can be mapped",
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/role-mappings/realm/composite" : {
+      "get" : {
+        "tags" : [ "Role Mapper" ],
+        "summary" : "Get effective realm-level role mappings This will recurse all composite roles to get the result.",
+        "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "if false, return roles with their attributes",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RoleRepresentation"
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Forbidden"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "group-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
     "/admin/realms/{realm}/organizations/{org-id}/identity-providers" : {
       "get" : {
         "tags" : [ "Organizations" ],
@@ -11354,6 +11928,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11428,6 +12005,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "404" : {
             "description" : "Not Found"
           }
@@ -11451,6 +12031,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "404" : {
             "description" : "Not Found"
@@ -11556,6 +12139,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "404" : {
             "description" : "Not Found"
           }
@@ -11640,6 +12226,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11683,6 +12272,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "404" : {
             "description" : "Not Found"
           }
@@ -11702,6 +12294,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "404" : {
             "description" : "Not Found"
@@ -11741,6 +12336,9 @@
           "204" : {
             "description" : "No Content"
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "404" : {
             "description" : "Not Found"
           }
@@ -11768,6 +12366,14 @@
         "tags" : [ "Organizations" ],
         "summary" : "Returns a paginated list of organization members filtered according to the specified parameters",
         "parameters" : [ {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Boolean to return either a brief or a full user representation. If not specified, the brief representation is returned by default.",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
+          }
+        }, {
           "name" : "exact",
           "in" : "query",
           "description" : "Boolean which defines whether the param 'search' must match exactly or not",
@@ -11809,7 +12415,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -11820,6 +12426,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11844,6 +12453,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "409" : {
             "description" : "Conflict"
@@ -11873,7 +12485,7 @@
         "summary" : "Returns number of members in the organization.",
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -11882,6 +12494,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -11926,6 +12541,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "500" : {
             "description" : "Internal Server Error"
@@ -11981,6 +12599,9 @@
           "400" : {
             "description" : "Bad Request"
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "409" : {
             "description" : "Conflict"
           },
@@ -12021,7 +12642,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -12032,6 +12653,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -12053,6 +12677,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -12115,7 +12742,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -12129,6 +12756,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -12171,7 +12801,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "",
+            "description" : "OK",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -12185,6 +12815,9 @@
           },
           "400" : {
             "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
           }
         }
       },
@@ -12469,6 +13102,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
           },
           "403" : {
             "description" : "Forbidden"
@@ -12858,6 +13494,9 @@
           "204" : {
             "description" : "No Content"
           },
+          "400" : {
+            "description" : "Bad Request"
+          },
           "403" : {
             "description" : "Forbidden"
           },
@@ -13135,7 +13774,7 @@
         }, {
           "name" : "briefRepresentation",
           "in" : "query",
-          "description" : "if false, return a full representation of the {@code GroupRepresentation} objects.",
+          "description" : "If false, return a full representation of the {@code GroupRepresentation} objects.",
           "schema" : {
             "default" : true,
             "type" : "boolean"
@@ -13143,7 +13782,7 @@
         }, {
           "name" : "first",
           "in" : "query",
-          "description" : "first result to return. Ignored if negative or {@code null}.",
+          "description" : "First result to return. Ignored if negative or {@code null}.",
           "schema" : {
             "format" : "int32",
             "type" : "integer"
@@ -13151,9 +13790,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "maximum number of results to return. Ignored if negative or {@code null}.",
+          "description" : "Maximum number of results to return. Unbounded if negative.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -13299,9 +13939,10 @@
         }, {
           "name" : "max",
           "in" : "query",
-          "description" : "maximum number of results to return. Ignored if negative or {@code null}.",
+          "description" : "Maximum number of results to return. Unbounded if negative.",
           "schema" : {
             "format" : "int32",
+            "default" : "100",
             "type" : "integer"
           }
         } ],
@@ -16799,6 +17440,9 @@
           "enabled" : {
             "type" : "boolean"
           },
+          "mode" : {
+            "type" : "string"
+          },
           "conditions" : {
             "type" : "array",
             "items" : {
@@ -17293,6 +17937,9 @@
             "type" : "string"
           },
           "jkt" : {
+            "type" : "string"
+          },
+          "kc-jkt-type" : {
             "type" : "string"
           }
         }
@@ -17803,6 +18450,40 @@
           }
         }
       },
+      "IssuedVerifiableCredentialRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "userId" : {
+            "type" : "string"
+          },
+          "credentialType" : {
+            "type" : "string"
+          },
+          "issuedAt" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "expiresAt" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "clientName" : {
+            "type" : "string"
+          },
+          "clientBaseUrl" : {
+            "type" : "string"
+          },
+          "revision" : {
+            "type" : "string"
+          }
+        }
+      },
       "KeyMetadataRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -18034,6 +18715,18 @@
           "notBefore" : {
             "format" : "int32",
             "type" : "integer"
+          },
+          "verifiableCredentials" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserVerifiableCredentialRepresentation"
+            }
+          },
+          "issuedVerifiableCredentials" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IssuedVerifiableCredentialRepresentation"
+            }
           },
           "applicationRoles" : {
             "type" : "object",
@@ -19005,6 +19698,9 @@
           "webAuthnPolicyRequireResidentKey" : {
             "type" : "string"
           },
+          "webAuthnPolicyResidentKey" : {
+            "type" : "string"
+          },
           "webAuthnPolicyUserVerificationRequirement" : {
             "type" : "string"
           },
@@ -19048,6 +19744,9 @@
           "webAuthnPolicyPasswordlessRequireResidentKey" : {
             "type" : "string"
           },
+          "webAuthnPolicyPasswordlessResidentKey" : {
+            "type" : "string"
+          },
           "webAuthnPolicyPasswordlessUserVerificationRequirement" : {
             "type" : "string"
           },
@@ -19072,6 +19771,9 @@
           },
           "webAuthnPolicyPasswordlessPasskeysEnabled" : {
             "type" : "boolean"
+          },
+          "webAuthnPolicyPasswordlessMediation" : {
+            "type" : "string"
           },
           "clientProfiles" : {
             "$ref" : "#/components/schemas/ClientProfilesRepresentation"
@@ -19611,6 +20313,14 @@
           }
         }
       },
+      "SamlExampleResponse" : {
+        "type" : "object",
+        "properties" : {
+          "samlResponse" : {
+            "type" : "string"
+          }
+        }
+      },
       "ScopeMappingRepresentation" : {
         "type" : "object",
         "properties" : {
@@ -20084,6 +20794,18 @@
             "format" : "int32",
             "type" : "integer"
           },
+          "verifiableCredentials" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/UserVerifiableCredentialRepresentation"
+            }
+          },
+          "issuedVerifiableCredentials" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/IssuedVerifiableCredentialRepresentation"
+            }
+          },
           "applicationRoles" : {
             "type" : "object",
             "additionalProperties" : {
@@ -20148,6 +20870,51 @@
             }
           },
           "transientUser" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "UserVerifiableCredentialRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "credentialScopeName" : {
+            "type" : "string"
+          },
+          "credentialConfigurationId" : {
+            "type" : "string"
+          },
+          "revision" : {
+            "type" : "string"
+          },
+          "createdDate" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "updatedDate" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "userAttributes" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            }
+          }
+        }
+      },
+      "VerifiableCredentialOfferActionConfig" : {
+        "type" : "object",
+        "properties" : {
+          "credentialConfigurationId" : {
+            "type" : "string"
+          },
+          "clientId" : {
+            "type" : "string"
+          },
+          "preAuthorized" : {
             "type" : "boolean"
           }
         }
