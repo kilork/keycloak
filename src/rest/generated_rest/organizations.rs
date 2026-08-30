@@ -19,7 +19,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizations>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizations>
     #[allow(clippy::too_many_arguments)]
     pub async fn realm_organizations_get(
         &self,
@@ -71,7 +71,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizations>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizations>
     pub async fn realm_organizations_post(
         &self,
         realm: &str,
@@ -100,7 +100,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationscount>
     pub async fn realm_organizations_count_get(
         &self,
         realm: &str,
@@ -141,7 +141,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/members/{member_id}/organizations`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsmembersmember_idorganizations>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsmembersmember_idorganizations>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/members/{member-id}/organizations`
     pub async fn realm_organizations_members_with_member_id_organizations_get(
@@ -177,7 +177,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}`
     pub async fn realm_organizations_with_org_id_get(
@@ -212,7 +212,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/organizations/{org_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/organizations/{org-id}`
     pub async fn realm_organizations_with_org_id_put(
@@ -248,7 +248,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}`
     pub async fn realm_organizations_with_org_id_delete(
@@ -288,7 +288,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/groups`
     #[allow(clippy::too_many_arguments)]
@@ -356,7 +356,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idgroups>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/groups`
     pub async fn realm_organizations_with_org_id_groups_post(
@@ -392,7 +392,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/groups/group-by-path/{path}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_by_pathpath>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_by_pathpath>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/groups/group-by-path/{path}`
     pub async fn realm_organizations_with_org_id_groups_group_by_path_with_path_get(
@@ -432,7 +432,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_get(
@@ -474,7 +474,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
     ///
     /// REST method: `PUT /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_put(
@@ -513,7 +513,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idgroupsgroup_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_delete(
@@ -553,7 +553,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_idchildren>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/children`
     #[allow(clippy::too_many_arguments)]
@@ -612,7 +612,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}/children`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idgroupsgroup_idchildren>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idgroupsgroup_idchildren>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/children`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_children_post(
@@ -652,7 +652,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/members`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_members_get(
@@ -702,7 +702,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `PUT /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}/members/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_put_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembersuserid>
     ///
     /// REST method: `PUT /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/members/{userId}`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_members_with_user_id_put(
@@ -743,7 +743,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}/groups/{group_id}/members/{user_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembersuserid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idgroupsgroup_idmembersuserid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/groups/{group-id}/members/{userId}`
     pub async fn realm_organizations_with_org_id_groups_with_group_id_members_with_user_id_delete(
@@ -779,7 +779,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/identity-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providers>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/identity-providers`
     pub async fn realm_organizations_with_org_id_identity_providers_get(
@@ -814,7 +814,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/identity-providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_ididentity_providers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_ididentity_providers>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/identity-providers`
     pub async fn realm_organizations_with_org_id_identity_providers_post(
@@ -849,7 +849,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providersalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providersalias>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}`
     pub async fn realm_organizations_with_org_id_identity_providers_with_alias_get(
@@ -886,7 +886,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_ididentity_providersalias>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_ididentity_providersalias>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}`
     pub async fn realm_organizations_with_org_id_identity_providers_with_alias_delete(
@@ -928,7 +928,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/identity-providers/{alias}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providersaliasgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_ididentity_providersaliasgroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}/groups`
     #[allow(clippy::too_many_arguments)]
@@ -998,7 +998,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/invitations`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idinvitations>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idinvitations>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/invitations`
     #[allow(clippy::too_many_arguments)]
@@ -1060,7 +1060,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/invitations/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idinvitationsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idinvitationsid>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/invitations/{id}`
     pub async fn realm_organizations_with_org_id_invitations_with_id_get(
@@ -1097,7 +1097,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}/invitations/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idinvitationsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idinvitationsid>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/invitations/{id}`
     pub async fn realm_organizations_with_org_id_invitations_with_id_delete(
@@ -1134,7 +1134,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/invitations/{id}/resend`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idinvitationsidresend>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idinvitationsidresend>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/invitations/{id}/resend`
     pub async fn realm_organizations_with_org_id_invitations_with_id_resend_post(
@@ -1163,6 +1163,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// - `realm`: realm name (not id!)
     /// - `org_id`
+    /// - `brief_representation`: Boolean to return either a brief or a full user representation. If not specified, the brief representation is returned by default.
     /// - `exact`: Boolean which defines whether the param 'search' must match exactly or not
     /// - `first`: The position of the first result to be processed (pagination offset)
     /// - `max`: The maximum number of results to be returned. Defaults to 10
@@ -1173,7 +1174,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembers>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members`
     #[allow(clippy::too_many_arguments)]
@@ -1181,6 +1182,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         &self,
         realm: &str,
         org_id: &str,
+        brief_representation: Option<bool>,
         exact: Option<bool>,
         first: Option<i32>,
         max: Option<i32>,
@@ -1196,6 +1198,9 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
                 self.url
             ))
             .bearer_auth(self.token_supplier.get(&self.url).await?);
+        if let Some(v) = brief_representation {
+            builder = builder.query(&[("briefRepresentation", v)]);
+        }
         if let Some(v) = exact {
             builder = builder.query(&[("exact", v)]);
         }
@@ -1229,7 +1234,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/members`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembers>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembers>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members`
     pub async fn realm_organizations_with_org_id_members_post(
@@ -1263,7 +1268,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/members/count`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmemberscount>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmemberscount>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/count`
     pub async fn realm_organizations_with_org_id_members_count_get(
@@ -1298,7 +1303,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/members/invite-existing-user`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_existing_user>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_existing_user>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members/invite-existing-user`
     pub async fn realm_organizations_with_org_id_members_invite_existing_user_post(
@@ -1335,7 +1340,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/organizations/{org_id}/members/invite-user`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_user>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmorganizationsorg_idmembersinvite_user>
     ///
     /// REST method: `POST /admin/realms/{realm}/organizations/{org-id}/members/invite-user`
     pub async fn realm_organizations_with_org_id_members_invite_user_post(
@@ -1370,7 +1375,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/members/{member_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}`
     pub async fn realm_organizations_with_org_id_members_with_member_id_get(
@@ -1407,7 +1412,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `DELETE /admin/realms/{realm}/organizations/{org_id}/members/{member_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idmembersmember_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmorganizationsorg_idmembersmember_id>
     ///
     /// REST method: `DELETE /admin/realms/{realm}/organizations/{org-id}/members/{member-id}`
     pub async fn realm_organizations_with_org_id_members_with_member_id_delete(
@@ -1446,7 +1451,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/members/{member_id}/groups`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_idgroups>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_idgroups>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}/groups`
     #[allow(clippy::too_many_arguments)]
@@ -1499,7 +1504,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/organizations/{org_id}/members/{member_id}/organizations`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_idorganizations>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmorganizationsorg_idmembersmember_idorganizations>
     ///
     /// REST method: `GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}/organizations`
     pub async fn realm_organizations_with_org_id_members_with_member_id_organizations_get(
@@ -1527,4 +1532,4 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 }
 // not all paths processed
-// left 242
+// left 250

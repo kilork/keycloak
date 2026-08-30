@@ -414,6 +414,7 @@ pub struct ClientPolicyRepresentation {
     pub conditions: Option<TypeVec<ClientPolicyConditionRepresentation>>,
     pub description: Option<TypeString>,
     pub enabled: Option<bool>,
+    pub mode: Option<TypeString>,
     pub name: Option<TypeString>,
     pub profiles: Option<TypeVec<String>>,
 }
@@ -621,6 +622,8 @@ pub struct ConfigPropertyRepresentation {
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 pub struct Confirmation {
     pub jkt: Option<TypeString>,
+    #[serde(rename = "kc-jkt-type")]
+    pub kc_jkt_type: Option<TypeString>,
     #[serde(rename = "x5t#S256")]
     pub x5t_s256: Option<TypeString>,
 }
@@ -854,6 +857,22 @@ pub struct IdentityProviderRepresentation {
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
+pub struct IssuedVerifiableCredentialRepresentation {
+    pub client_base_url: Option<TypeString>,
+    pub client_id: Option<TypeString>,
+    pub client_name: Option<TypeString>,
+    pub credential_type: Option<TypeString>,
+    pub expires_at: Option<i64>,
+    pub id: Option<TypeString>,
+    pub issued_at: Option<i64>,
+    pub revision: Option<TypeString>,
+    pub user_id: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct KeyMetadataRepresentation {
     pub algorithm: Option<TypeString>,
     pub certificate: Option<TypeString>,
@@ -950,6 +969,7 @@ pub struct MemberRepresentation {
     pub first_name: Option<TypeString>,
     pub groups: Option<TypeVec<String>>,
     pub id: Option<TypeString>,
+    pub issued_verifiable_credentials: Option<TypeVec<IssuedVerifiableCredentialRepresentation>>,
     pub last_name: Option<TypeString>,
     pub membership_type: Option<MembershipType>,
     pub not_before: Option<i32>,
@@ -964,6 +984,7 @@ pub struct MemberRepresentation {
     pub totp: Option<bool>,
     pub user_profile_metadata: Option<UserProfileMetadata>,
     pub username: Option<TypeString>,
+    pub verifiable_credentials: Option<TypeVec<UserVerifiableCredentialRepresentation>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
@@ -1397,13 +1418,16 @@ pub struct RealmRepresentation {
     pub web_authn_policy_passwordless_avoid_same_authenticator_register: Option<bool>,
     pub web_authn_policy_passwordless_create_timeout: Option<i32>,
     pub web_authn_policy_passwordless_extra_origins: Option<TypeVec<String>>,
+    pub web_authn_policy_passwordless_mediation: Option<TypeString>,
     pub web_authn_policy_passwordless_passkeys_enabled: Option<bool>,
     pub web_authn_policy_passwordless_require_resident_key: Option<TypeString>,
+    pub web_authn_policy_passwordless_resident_key: Option<TypeString>,
     pub web_authn_policy_passwordless_rp_entity_name: Option<TypeString>,
     pub web_authn_policy_passwordless_rp_id: Option<TypeString>,
     pub web_authn_policy_passwordless_signature_algorithms: Option<TypeVec<String>>,
     pub web_authn_policy_passwordless_user_verification_requirement: Option<TypeString>,
     pub web_authn_policy_require_resident_key: Option<TypeString>,
+    pub web_authn_policy_resident_key: Option<TypeString>,
     pub web_authn_policy_rp_entity_name: Option<TypeString>,
     pub web_authn_policy_rp_id: Option<TypeString>,
     pub web_authn_policy_signature_algorithms: Option<TypeVec<String>>,
@@ -1523,6 +1547,14 @@ pub struct RolesRepresentation {
     pub application: Option<TypeMap<String, TypeVec<RoleRepresentation>>>,
     pub client: Option<TypeMap<String, TypeVec<RoleRepresentation>>>,
     pub realm: Option<TypeVec<RoleRepresentation>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct SamlExampleResponse {
+    pub saml_response: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1745,6 +1777,7 @@ pub struct UserRepresentation {
     pub first_name: Option<TypeString>,
     pub groups: Option<TypeVec<String>>,
     pub id: Option<TypeString>,
+    pub issued_verifiable_credentials: Option<TypeVec<IssuedVerifiableCredentialRepresentation>>,
     pub last_name: Option<TypeString>,
     pub not_before: Option<i32>,
     pub origin: Option<TypeString>,
@@ -1758,6 +1791,7 @@ pub struct UserRepresentation {
     pub totp: Option<bool>,
     pub user_profile_metadata: Option<UserProfileMetadata>,
     pub username: Option<TypeString>,
+    pub verifiable_credentials: Option<TypeVec<UserVerifiableCredentialRepresentation>>,
 }
 
 #[skip_serializing_none]
@@ -1774,6 +1808,29 @@ pub struct UserSessionRepresentation {
     pub transient_user: Option<bool>,
     pub user_id: Option<TypeString>,
     pub username: Option<TypeString>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct UserVerifiableCredentialRepresentation {
+    pub created_date: Option<i64>,
+    pub credential_configuration_id: Option<TypeString>,
+    pub credential_scope_name: Option<TypeString>,
+    pub revision: Option<TypeString>,
+    pub updated_date: Option<i64>,
+    pub user_attributes: Option<TypeMap<String, TypeVec<String>>>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct VerifiableCredentialOfferActionConfig {
+    pub client_id: Option<TypeString>,
+    pub credential_configuration_id: Option<TypeString>,
+    pub pre_authorized: Option<bool>,
 }
 
 #[skip_serializing_none]

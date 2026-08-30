@@ -14,7 +14,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmcomponents>
     pub fn components_get(&'a self) -> RealmComponentsGet<'a, TS> {
         RealmComponentsGet { realm_admin: self }
     }
@@ -30,7 +30,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/components`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_post_adminrealmsrealmcomponents>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmcomponents>
     pub fn components_post(
         &'a self,
         body: ComponentRepresentation,
@@ -47,7 +47,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmcomponentsid>
     pub fn components_with_id_get(
         &'a self,
         id: &'a str,
@@ -67,7 +67,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_put_adminrealmsrealmcomponentsid>
     pub fn components_with_id_put(
         &'a self,
         id: &'a str,
@@ -88,7 +88,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/components/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmcomponentsid>
     pub fn components_with_id_delete(
         &'a self,
         id: &'a str,
@@ -108,7 +108,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/components/{id}/sub-component-types`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.6.0/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmcomponentsidsub_component_types>
     pub fn components_with_id_sub_component_types_get(
         &'a self,
         id: &'a str,
