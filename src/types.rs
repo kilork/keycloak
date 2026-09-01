@@ -1078,6 +1078,7 @@ pub struct OrganizationInvitationRepresentation {
     pub expires_at: Option<i32>,
     pub first_name: Option<TypeString>,
     pub id: Option<TypeString>,
+    #[deprecated]
     pub invite_link: Option<TypeString>,
     pub last_name: Option<TypeString>,
     pub organization_id: Option<TypeString>,

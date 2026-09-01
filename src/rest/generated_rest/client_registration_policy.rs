@@ -13,7 +13,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/client-registration-policy/providers`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_get_adminrealmsrealmclient_registration_policyproviders>
     pub async fn realm_client_registration_policy_providers_get(
         &self,
         realm: &str,
