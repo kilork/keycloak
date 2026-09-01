@@ -19009,7 +19009,8 @@
             "$ref" : "#/components/schemas/Status"
           },
           "inviteLink" : {
-            "type" : "string"
+            "type" : "string",
+            "deprecated" : true
           }
         }
       },

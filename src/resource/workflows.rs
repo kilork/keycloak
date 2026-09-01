@@ -16,7 +16,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_get_adminrealmsrealmworkflows>
     pub fn workflows_get(&'a self) -> RealmWorkflowsGet<'a, TS> {
         RealmWorkflowsGet { realm_admin: self }
     }
@@ -34,7 +34,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmworkflows>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmworkflows>
     pub fn workflows_post(
         &'a self,
         body: WorkflowRepresentation,
@@ -56,7 +56,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/migrate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmworkflowsmigrate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmworkflowsmigrate>
     pub fn workflows_migrate_post(&'a self) -> RealmWorkflowsMigratePost<'a, TS> {
         RealmWorkflowsMigratePost { realm_admin: self }
     }
@@ -72,7 +72,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows/scheduled/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_get_adminrealmsrealmworkflowsscheduledresource_id>
     ///
     /// REST method: `GET /admin/realms/{realm}/workflows/scheduled/{resource-id}`
     pub fn workflows_scheduled_with_resource_id_get(
@@ -95,7 +95,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `GET /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_get_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_get(&'a self, id: &'a str) -> RealmWorkflowsWithIdGet<'a, TS> {
         RealmWorkflowsWithIdGet {
             realm_admin: self,
@@ -117,7 +117,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `PUT /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_put_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_put(
         &'a self,
         id: &'a str,
@@ -139,7 +139,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `DELETE /admin/realms/{realm}/workflows/{id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_delete_adminrealmsrealmworkflowsid>
     pub fn workflows_with_id_delete(
         &'a self,
         id: &'a str,
@@ -163,7 +163,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/activate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmworkflowsidactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/activate/{type}/{resourceId}`
     pub fn workflows_with_id_activate_with_type_with_resource_id_post(
@@ -195,7 +195,7 @@ impl<'a, TS: KeycloakTokenSupplier> KeycloakRealmAdmin<'a, TS> {
     ///
     /// `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type_}/{resource_id}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.2/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmworkflowsiddeactivatetyperesourceid>
     ///
     /// REST method: `POST /admin/realms/{realm}/workflows/{id}/deactivate/{type}/{resourceId}`
     pub fn workflows_with_id_deactivate_with_type_with_resource_id_post(
