@@ -871,7 +871,7 @@ mod openapi {
                         } else {
                             acc.push(x);
                         }
-                    } else if x.starts_with("[path.") {
+                    } else if x.starts_with('[') {
                         in_header = false;
                         acc.push(x);
                     }
@@ -1260,10 +1260,15 @@ pub enum {name} {{
                     }
                     .into(),
                 },
-                Kind::Ref(Ref { reference }) => reference
-                    .strip_prefix("#/components/schemas/")
-                    .expect("#/components/schemas/ prefixed type name")
-                    .into(),
+                Kind::Ref(Ref { reference }) => {
+                    let name = reference
+                        .strip_prefix("#/components/schemas/")
+                        .expect("#/components/schemas/ prefixed type name");
+                    match Toml::schema(name) {
+                        Some(desc) => desc.rust_type.clone().into(),
+                        None => name.into(),
+                    }
+                }
                 Kind::DefaultValue {} => "Value".into(),
             }
         }
@@ -1337,11 +1342,18 @@ pub enum {name} {{
     }
 
     #[derive(Debug, Deserialize)]
+    struct SchemaDesc {
+        rust_type: String,
+    }
+
+    #[derive(Debug, Deserialize)]
     struct Toml {
         #[serde(default)]
         path: IndexMap<String, Arc<PathDesc>>,
         #[serde(default)]
         r#type: IndexMap<String, Arc<FieldDesc>>,
+        #[serde(default)]
+        schema: IndexMap<String, Arc<SchemaDesc>>,
     }
 
     impl Toml {
@@ -1368,6 +1380,22 @@ pub enum {name} {{
         {
             OPENAPI_PATCH.with(|toml| toml.r#type.get(&format!("{structure}:{field}",)).cloned())
         }
+
+        fn schema<N>(schema: N) -> Option<Arc<SchemaDesc>>
+        where
+            N: Display,
+        {
+            OPENAPI_PATCH.with(|toml| toml.schema.get(&schema.to_string()).cloned())
+        }
+    }
+
+    /// Returns the patched Rust type of a component schema, if it is patched.
+    ///
+    /// Patched schemas are not rendered as structs: every reference to them is
+    /// replaced by the configured Rust type (e.g. an arbitrary JSON schema like
+    /// `RawJsonValue` becomes `TypeValue`).
+    pub fn patched_schema_type(name: &str) -> Option<String> {
+        Toml::schema(name).map(|desc| desc.rust_type.clone())
     }
 
     thread_local! {
@@ -1497,6 +1525,13 @@ pub type TypeVec<I> = Arc<[I]>;"###
     );
 
     for (schema_name, schema_obj) in &spec.components.schemas {
+        if let Some(rust_type) = openapi::patched_schema_type(schema_name) {
+            println!(
+                "\n// {schema_name} is patched to {rust_type} (see examples/openapi.patch.toml)"
+            );
+            continue;
+        }
+
         print!(
             "\n{}",
             schema_obj.to_rust_type_definition(schema_name, openapi::RefMode::Owned)

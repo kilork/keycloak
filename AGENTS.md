@@ -63,6 +63,7 @@ The generator is compiled with `include_str!` on this file — edit it, rebuild 
 - `[path."<path>:<method>:<param>"]` — override a parameter type (`body` for the request body).
 - `[path."<path>:<method>:"]` — override the response type; optional `method` (replaces the reqwest body call) and `convert` (post-parse conversion) fields.
 - `[type."<Struct>:<field>"]` — override a struct field type.
+- `[schema."<Name>"]` — replace a whole component schema by the given `rust_type`: no struct is generated for it and every `$ref` to it resolves to that Rust type (e.g. `RawJsonValue`, which is a Jackson `@JsonValue` wrapper around an arbitrary JSON value and is therefore patched to `TypeValue`).
 
 Each `path` mapping records `from_type` = the type inferred from the spec. On every generation run the generator re-checks: if the spec changed and the freshly inferred type now equals `rust_type`, the mapping is **deleted automatically** (the file self-heals across version bumps); if the inference differs from `from_type`, it prints a `warn:` that the spec changed and the mapping may be stale. Inspect what the generator sees with `cargo run --example=openapi -- specs`.
 
