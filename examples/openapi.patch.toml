@@ -23,3 +23,10 @@ rust_type = "&str"
 rust_type = "Option<TypeMap<String, TypeValue>>"
 [type."ClientPolicyConditionRepresentation:configuration"]
 rust_type = "Option<TypeMap<String, TypeValue>>"
+# Keycloak `org.keycloak.json.RawJsonValue` is a Jackson-version-agnostic wrapper
+# around an arbitrary JSON value: it serializes as the wrapped value itself
+# (`@JsonValue getValue()` / `@JsonCreator(mode = DELEGATING)`), not as the
+# `{"value": ..., "empty": ...}` object the OpenAPI schema generator inferred
+# from its bean getters. Represent it by plain JSON.
+[schema."RawJsonValue"]
+rust_type = "TypeValue"
