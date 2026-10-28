@@ -15,7 +15,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `GET /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidcertificatesattr>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_get_adminrealmsrealmclientsclient_uuidcertificatesattr>
     ///
     /// REST method: `GET /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_get(
@@ -38,7 +38,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(error_check(response).await?.json().await?)
     }
 
-    /// Get a keystore file for the client, containing private key and public certificate
+    /// Get a keystore file for the client, containing the public certificate
     ///
     /// Parameters:
     ///
@@ -51,9 +51,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrdownload>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrdownload>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/download`
+    #[deprecated]
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_download_post(
         &self,
         realm: &str,
@@ -88,9 +89,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate`
+    #[deprecated]
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_post(
         &self,
         realm: &str,
@@ -127,9 +129,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/generate-and-download`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate_and_download>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrgenerate_and_download>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/generate-and-download`
+    #[deprecated]
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_generate_and_download_post(
         &self,
         realm: &str,
@@ -152,7 +155,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
         Ok(error_check(response).await?.text().await.map(From::from)?)
     }
 
-    /// Upload certificate and eventually private key
+    /// Upload only certificate, not private key
     ///
     /// Parameters:
     ///
@@ -164,9 +167,10 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload`
+    #[deprecated]
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_post(
         &self,
         realm: &str,
@@ -199,7 +203,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/clients/{client_uuid}/certificates/{attr}/upload-certificate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload_certificate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmclientsclient_uuidcertificatesattrupload_certificate>
     ///
     /// REST method: `POST /admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload-certificate`
     pub async fn realm_clients_with_client_uuid_certificates_with_attr_upload_certificate_post(
@@ -232,7 +236,7 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     ///
     /// `POST /admin/realms/{realm}/identity-provider/upload-certificate`
     ///
-    /// Documentation: <https://www.keycloak.org/docs-api/26.7.3/rest-api/index.html#_post_adminrealmsrealmidentity_providerupload_certificate>
+    /// Documentation: <https://www.keycloak.org/docs-api/26.8.1/rest-api/index.html#_post_adminrealmsrealmidentity_providerupload_certificate>
     pub async fn realm_identity_provider_upload_certificate_post(
         &self,
         realm: &str,
@@ -250,4 +254,4 @@ impl<TS: KeycloakTokenSupplier> KeycloakAdmin<TS> {
     }
 }
 // not all paths processed
-// left 266
+// left 267
