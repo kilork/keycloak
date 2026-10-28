@@ -41,6 +41,10 @@ Generator: `examples/openapi.rs`, a clap CLI. All subcommands print to stdout; `
 
 Untagged operations land in `other_methods.rs` (both layers). Generated files: `src/types.rs`, `src/rest/generated_rest/**`, `src/resource/**`.
 
+### Reviewing a regeneration
+
+A version bump rewrites the `/// Documentation: <https://www.keycloak.org/docs-api/<version>/rest-api/…>` link of every method and the trailing `// left <N>` counter of every generated file — ~800 changed lines that hide the real API changes. `./generated-diff.sh` runs `git diff` while ignoring those lines (`--stat`, `--with-spec` to keep `api/openapi.json`, everything else is passed to `git diff`, e.g. `HEAD` or `-- src/types.rs`). It also lists files created by generation, which a plain diff cannot show.
+
 ### Naming rules
 
 - Method name = path, `{param}` replaced by `with_<param>` (except `realm`), plus HTTP verb, all snake_case. Low-level `KeycloakAdmin` methods keep the full name: `GET /admin/realms/{realm}/users` → `realm_users_get`, `.../{user_id}/role-mappings` → `realm_users_with_user_id_role_mappings_get`.
