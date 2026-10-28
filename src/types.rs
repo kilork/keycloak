@@ -841,7 +841,9 @@ pub struct IdentityProviderRepresentation {
     pub hide_on_login: Option<bool>,
     pub internal_id: Option<TypeString>,
     pub link_only: Option<bool>,
+    #[deprecated]
     pub organization_id: Option<TypeString>,
+    pub organization_links: Option<TypeVec<OrganizationIdentityProviderLinkRepresentation>>,
     pub post_broker_login_flow_alias: Option<TypeString>,
     pub provider_id: Option<TypeString>,
     pub store_token: Option<bool>,
@@ -1064,9 +1066,22 @@ pub struct OAuthClientRepresentation {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
 #[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
 pub struct OrganizationDomainRepresentation {
+    pub auto_redirect: Option<bool>,
+    pub identity_provider_alias: Option<TypeString>,
     pub name: Option<TypeString>,
     pub verified: Option<bool>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]
+#[cfg_attr(feature = "schemars", derive(JsonSchema))]
+#[serde(rename_all = "camelCase")]
+pub struct OrganizationIdentityProviderLinkRepresentation {
+    pub auto_membership: Option<bool>,
+    pub membership_type: Option<TypeString>,
+    pub organization_id: Option<TypeString>,
 }
 
 #[skip_serializing_none]
@@ -1243,6 +1258,8 @@ pub struct PublishedRealmRepresentation {
     #[serde(rename = "tokens-not-before")]
     pub tokens_not_before: Option<i32>,
 }
+
+// RawJsonValue is patched to TypeValue (see examples/openapi.patch.toml)
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, PartialEq, Eq, Deserialize, Serialize)]

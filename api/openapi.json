@@ -3858,6 +3858,9 @@
               }
             }
           },
+          "403" : {
+            "description" : "Forbidden"
+          },
           "500" : {
             "description" : "Internal Server Error"
           }
@@ -4115,6 +4118,9 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description" : "Forbidden"
           },
           "500" : {
             "description" : "Internal Server Error"
@@ -5419,7 +5425,7 @@
     "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/download" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
-        "summary" : "Get a keystore file for the client, containing private key and public certificate",
+        "summary" : "Get a keystore file for the client, containing the public certificate",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -5441,7 +5447,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated" : true
       },
       "parameters" : [ {
         "name" : "realm",
@@ -5483,7 +5490,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated" : true
       },
       "parameters" : [ {
         "name" : "realm",
@@ -5535,7 +5543,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated" : true
       },
       "parameters" : [ {
         "name" : "realm",
@@ -5565,7 +5574,7 @@
     "/admin/realms/{realm}/clients/{client-uuid}/certificates/{attr}/upload" : {
       "post" : {
         "tags" : [ "Client Attribute Certificate" ],
-        "summary" : "Upload certificate and eventually private key",
+        "summary" : "Upload only certificate, not private key",
         "responses" : {
           "200" : {
             "description" : "OK",
@@ -5577,7 +5586,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated" : true
       },
       "parameters" : [ {
         "name" : "realm",
@@ -6330,6 +6340,9 @@
         "responses" : {
           "204" : {
             "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request - node hostname is missing, contains reserved characters, or is rejected by client policy"
           }
         }
       },
@@ -7378,7 +7391,7 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/UserRepresentation"
+                    "$ref" : "#/components/schemas/GroupRepresentation"
                   }
                 }
               }
@@ -10620,6 +10633,13 @@
             "type" : "integer"
           }
         }, {
+          "name" : "identityProvider",
+          "in" : "query",
+          "description" : "The alias of an identity provider, to only return the organizations linked to it. Cannot be combined with 'q'",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
           "name" : "max",
           "in" : "query",
           "description" : "The maximum number of results to be returned - defaults to 10",
@@ -10709,6 +10729,13 @@
           "description" : "Boolean which defines whether the param 'search' must match exactly or not",
           "schema" : {
             "type" : "boolean"
+          }
+        }, {
+          "name" : "identityProvider",
+          "in" : "query",
+          "description" : "The alias of an identity provider, to only count the organizations linked to it. Cannot be combined with 'q'",
+          "schema" : {
+            "type" : "string"
           }
         }, {
           "name" : "q",
@@ -11025,6 +11052,14 @@
           "schema" : {
             "pattern" : ".*",
             "type" : "string"
+          }
+        }, {
+          "name" : "briefRepresentation",
+          "in" : "query",
+          "description" : "Whether to return a brief representation (default: true)",
+          "schema" : {
+            "default" : true,
+            "type" : "boolean"
           }
         }, {
           "name" : "subGroupsCount",
@@ -12013,6 +12048,42 @@
           }
         }
       },
+      "put" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Updates the per-association config for the identity provider linked to the organization",
+        "description" : "Updates the autoMembership and membershipType settings for the link between the organization and the identity provider with the given alias. If the provider is not linked to the organization, a NOT_FOUND error is returned",
+        "parameters" : [ {
+          "name" : "alias",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrganizationIdentityProviderLinkRepresentation"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        }
+      },
       "delete" : {
         "tags" : [ "Organizations" ],
         "summary" : "Removes the identity provider with the specified alias from the organization",
@@ -12571,7 +12642,15 @@
       "post" : {
         "tags" : [ "Organizations" ],
         "summary" : "Invites an existing user or sends a registration link to a new user, based on the provided e-mail address.",
-        "description" : "If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.",
+        "description" : "If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link. The client_id query parameter is optional. If no client_id is provided, the account client is used. After accepting the invitation the user is redirected to the selected client's home URL; for the account client the organization redirect URL is used instead when configured.",
+        "parameters" : [ {
+          "name" : "client_id",
+          "in" : "query",
+          "description" : "Client id",
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
         "requestBody" : {
           "content" : {
             "application/x-www-form-urlencoded" : {
@@ -12759,6 +12838,59 @@
           },
           "403" : {
             "description" : "Forbidden"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "realm",
+        "in" : "path",
+        "description" : "realm name (not id!)",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      }, {
+        "name" : "org-id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    },
+    "/admin/realms/{realm}/organizations/{org-id}/members/{member-id}/membership-type" : {
+      "put" : {
+        "tags" : [ "Organizations" ],
+        "summary" : "Updates the membership type of the member with the specified id",
+        "parameters" : [ {
+          "name" : "member-id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MembershipType"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "204" : {
+            "description" : "No Content"
+          },
+          "400" : {
+            "description" : "Bad Request"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
           }
         }
       },
@@ -13805,7 +13937,7 @@
                 "schema" : {
                   "type" : "array",
                   "items" : {
-                    "$ref" : "#/components/schemas/UserRepresentation"
+                    "$ref" : "#/components/schemas/GroupRepresentation"
                   }
                 }
               }
@@ -17411,6 +17543,9 @@
           "configuration" : {
             "description" : "Configuration settings as a JSON object",
             "type" : "object",
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/RawJsonValue"
+            } ],
             "additionalProperties" : true
           }
         }
@@ -17424,6 +17559,9 @@
           "configuration" : {
             "description" : "Configuration settings as a JSON object",
             "type" : "object",
+            "allOf" : [ {
+              "$ref" : "#/components/schemas/RawJsonValue"
+            } ],
             "additionalProperties" : true
           }
         }
@@ -18429,8 +18567,11 @@
           "postBrokerLoginFlowAlias" : {
             "type" : "string"
           },
-          "organizationId" : {
-            "type" : "string"
+          "organizationLinks" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/OrganizationIdentityProviderLinkRepresentation"
+            }
           },
           "config" : {
             "type" : "object",
@@ -18446,6 +18587,11 @@
           },
           "updateProfileFirstLogin" : {
             "type" : "boolean",
+            "deprecated" : true
+          },
+          "organizationId" : {
+            "type" : "string",
+            "writeOnly" : true,
             "deprecated" : true
           }
         }
@@ -18976,6 +19122,26 @@
           },
           "verified" : {
             "type" : "boolean"
+          },
+          "identityProviderAlias" : {
+            "type" : "string"
+          },
+          "autoRedirect" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "OrganizationIdentityProviderLinkRepresentation" : {
+        "type" : "object",
+        "properties" : {
+          "organizationId" : {
+            "type" : "string"
+          },
+          "autoMembership" : {
+            "type" : "boolean"
+          },
+          "membershipType" : {
+            "type" : "string"
           }
         }
       },
@@ -19359,6 +19525,15 @@
           "tokens-not-before" : {
             "format" : "int32",
             "type" : "integer"
+          }
+        }
+      },
+      "RawJsonValue" : {
+        "type" : "object",
+        "properties" : {
+          "value" : { },
+          "empty" : {
+            "type" : "boolean"
           }
         }
       },
